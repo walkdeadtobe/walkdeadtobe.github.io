@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>authen_server | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录如何用idea 打包 maven项目‘’’用idea中maven 打开项目，点击idea 右侧的 Maven Projects，点击 LIfecycle -&amp;gt; install -&amp;gt; run maven build 即可‘’’之后 将该项目scp至服务器使用 java -jar">
+<meta name="keywords" content="oauth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="authen_server">
+<meta property="og:url" content="http://yoursite.com/2019/05/14/authen-server/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录如何用idea 打包 maven项目‘’’用idea中maven 打开项目，点击idea 右侧的 Maven Projects，点击 LIfecycle -&amp;gt; install -&amp;gt; run maven build 即可‘’’之后 将该项目scp至服务器使用 java -jar">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-19T10:12:52.275Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="authen_server">
+<meta name="twitter:description" content="2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录如何用idea 打包 maven项目‘’’用idea中maven 打开项目，点击idea 右侧的 Maven Projects，点击 LIfecycle -&amp;gt; install -&amp;gt; run maven build 即可‘’’之后 将该项目scp至服务器使用 java -jar">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-authen-server" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/14/authen-server/" class="article-date">
+  <time datetime="2019-05-14T09:11:39.000Z" itemprop="datePublished">2019-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      authen_server
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录<br>如何用idea 打包 maven项目<br>‘’’<br>用idea中maven 打开项目，点击idea 右侧的 Maven Projects，<br>点击 LIfecycle -&gt; install -&gt; run maven build 即可<br>‘’’<br>之后 将该项目scp至服务器<br>使用 java -jar *.jar 运行<br>在运行时出现一些错误，如下</p>
+<p>‘’’<br>2019-05-14 17:06:35.986 ERROR 1180706 — [ost-startStop-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.</p>
+<p>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</p>
+<p>The last packet successfully received from the server was 199 milliseconds ago.  The last packet sent successfully to the server was 192 milliseconds ago.<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_181]<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_181]<br>    ……………………………..<br>    ……………………………..<br>    … 154 common frames omitted<br>Caused by: java.security.cert.CertPathValidatorException: Path does not chain with any of the trust anchors<br>    at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:154) ~[na:1.8.0_181]<br>    at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:80) ~[na:1.8.0_181]<br>    at java.security.cert.CertPathValidator.validate(CertPathValidator.java:292) ~[na:1.8.0_181]<br>    at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(ExportControlled.java:295) ~[mysql-connector-java-5.1.46.jar!/:5.1.46]<br>    … 156 common frames omitted</p>
+<p>‘’’<br>经查询(<a href="https://www.jianshu.com/p/b3151ca89def" target="_blank" rel="noopener">https://www.jianshu.com/p/b3151ca89def</a> ）发现是因为SSL配置的原因（暂时没有细究），在源代码 application.yml 文件中将useSSL=true 改为 false即可，重新打包，scp，运行</p>
+<p>在查询过程中发现之后可能会出现的另一个问题，即在长时间未连接mysql时会报类似的 Communications link failure 错误，不过这里是因为mysql默认配置 无连接最长等待时间是8小时，可以通过修改配置文件 mysql.ini 去解决这个错误</p>
+<p>在此之前需要在服务器安装mysql<br>按照官网教程(下面的是Ubuntu下的，如果安装在redhat上，会有一些区别 ，具体参照官方教程 <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/</a>)</p>
+<ul>
+<li>wget <a href="https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</a></li>
+<li>也可以选择检查 文件传输中是否出错 md5sum mysql-apt-config_0.8.13-1_all.deb</li>
+<li>之后运行 dpkg -i mysql-apt-config_0.8.13-1_all.deb，选择你所需要安装的mysql版本，程序会将之添加到apt源中</li>
+<li>运行 sudo apt-get update （–fix-missing）</li>
+<li>自动下载之后需要配置用户名与密码，需要与你在spring程序中配置的一致</li>
+</ul>
+<p>进入数据库 mysql -u root -p ,之后输入密码</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/14/authen-server/" data-id="ck0qjew6r000gyou1vx7p3emo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oauth/">oauth</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/15/运维/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          运维
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/01/Machine_learning_course/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Machine_learning_course</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System/">Distributed System</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Distributed-System/" style="font-size: 10px;">Distributed System</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/19/centos/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/12/Paxos/">Paxos</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/22/go/">go</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

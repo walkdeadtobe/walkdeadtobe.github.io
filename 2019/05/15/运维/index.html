@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>运维 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="为了测试整个系统的稳定性，写了一个脚本，模仿整个登录过程，中间出错就报错了解到一个好工具 selenium如何在centos上安装使用selenium-1如何在centos上安装使用selenium-2 为了更为精确的监控网页，考虑使用selenium模拟打开每个页面去检查其中网络请求是否正常获得，最终的目标是获取类似chrome开发者模式中Network中的效果，但是经调查发现，selenium">
+<meta name="keywords" content="python,爬虫">
+<meta property="og:type" content="article">
+<meta property="og:title" content="运维">
+<meta property="og:url" content="http://yoursite.com/2019/05/15/运维/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="为了测试整个系统的稳定性，写了一个脚本，模仿整个登录过程，中间出错就报错了解到一个好工具 selenium如何在centos上安装使用selenium-1如何在centos上安装使用selenium-2 为了更为精确的监控网页，考虑使用selenium模拟打开每个页面去检查其中网络请求是否正常获得，最终的目标是获取类似chrome开发者模式中Network中的效果，但是经调查发现，selenium">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-19T10:12:52.303Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="运维">
+<meta name="twitter:description" content="为了测试整个系统的稳定性，写了一个脚本，模仿整个登录过程，中间出错就报错了解到一个好工具 selenium如何在centos上安装使用selenium-1如何在centos上安装使用selenium-2 为了更为精确的监控网页，考虑使用selenium模拟打开每个页面去检查其中网络请求是否正常获得，最终的目标是获取类似chrome开发者模式中Network中的效果，但是经调查发现，selenium">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-运维" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/15/运维/" class="article-date">
+  <time datetime="2019-05-15T09:03:39.000Z" itemprop="datePublished">2019-05-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      运维
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了测试整个系统的稳定性，写了一个脚本，模仿整个登录过程，中间出错就报错<br>了解到一个好工具 selenium<br><a href="https://blog.csdn.net/wkb342814892/article/details/81591394" target="_blank" rel="noopener">如何在centos上安装使用selenium-1</a><br><a href="https://www.bbsmax.com/A/A2dmRBKWze/" target="_blank" rel="noopener">如何在centos上安装使用selenium-2</a></p>
+<p>为了更为精确的监控网页，考虑使用selenium模拟打开每个页面去检查其中网络请求是否正常获得，最终的目标是获取类似chrome开发者模式中Network中的效果，但是经调查发现，selenium中没有对这部分进行实现(或者与其最初目标无关，不考虑实现)，找到的可行的方案是使用 selenium + browsermob-proxy,<br><a href="https://browsermob-proxy-py.readthedocs.io/en/latest/" target="_blank" rel="noopener">browsermob-proxy 官方文档</a><br><a href="https://github.com/webmetrics/browsermob-proxy/downloads" target="_blank" rel="noopener">browsermob-proxy 下载</a></p>
+<p><a href="https://stackoverflow.com/questions/48979520/chrome-headless-proxy-server" target="_blank" rel="noopener">示例代码</a></p>
+<p>记录下中间遇到的问题：</p>
+<blockquote>
+<ol>
+<li>端口冲突，报错</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 160, in &lt;module&gt;</span><br><span class="line">    selenium_example()</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 81, in selenium_example</span><br><span class="line">    proxy=server.create_proxy()</span><br><span class="line">  File &quot;/root/anaconda3/lib/python3.7/site-packages/browsermobproxy/server.py&quot;, line 40, in create_proxy</span><br><span class="line">    client = Client(self.url[7:], params)</span><br><span class="line">  File &quot;/root/anaconda3/lib/python3.7/site-packages/browsermobproxy/client.py&quot;, line 38, in __init__</span><br><span class="line">    self.port = jcontent[&apos;port&apos;]</span><br><span class="line">KeyError: &apos;port&apos;</span><br></pre></td></tr></table></figure>
+
+<p>经过查看源码，大约猜测是网络端口的问题(后来发现在产生的server.log 中把问题说的很清楚 ( ╯□╰ ))，查看相关文档确定 browsermob-proxy 启动的端口默认是8080 <a href="https://cloud.tencent.com/developer/news/365789" target="_blank" rel="noopener">相关文档</a> ,而服务器中已经使用的端口包括这个，考虑更改其启动的配置参数，按照上述文档的方法下修改，无效报错，经过查看与browsermob-proxy 版本对应 的官方文档<a href="https://browsermob-proxy-py.readthedocs.io/en/latest/server.html" target="_blank" rel="noopener">Server 初始化</a> 以及相应解析源码，重新修改配置<br>为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server=Server(&quot;/root/download/browsermob-proxy-2.0-beta-6/bin/browsermob-proxy&quot;,&#123;&quot;host&quot;:&quot;localhost&quot;,&quot;port&quot;:9000&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>成功</p>
+<blockquote>
+<ol start="2">
+<li>文件引用问题</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 159, in &lt;module&gt;</span><br><span class="line">    selenium_example()</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 79, in selenium_example</span><br><span class="line">    server.start()</span><br><span class="line">  File &quot;/root/anaconda3/lib/python3.7/site-packages/browsermobproxy/server.py&quot;, line 122, in start</span><br><span class="line">    raise ProxyServerError(message)</span><br><span class="line">browsermobproxy.exceptions.ProxyServerError: The Browsermob-Proxy server process failed to start. Check &lt;_io.TextIOWrapper name=&apos;/root/py_auto/Gateway_auto/server.log&apos; mode=&apos;w&apos; encoding=&apos;UTF-8&apos;&gt;for a helpful error message.</span><br><span class="line"># server.log</span><br><span class="line">错误: 找不到或无法加载主类 org.browsermob.proxy.Main</span><br></pre></td></tr></table></figure>
+
+<p>原因：我将browsermob-proxy解压后，将其中bin目录下browsermobproxy专门提取出来，放在一个专门目录下(以为是可执行文件)，引用之，后来发现它和windows下使用的browsermobproxy.bat 一样都是个脚本文件，需要在项目的固定位置<br>解决：将引用目录指向目录文件下的browsermobproxy</p>
+<blockquote>
+<ol start="3">
+<li>工具版本适配问题</li>
+</ol>
+</blockquote>
+<p>问题：使用browsermob-proxy +selenium 时候，出现网络请求异常，在查看browsermob-proxy 产生的har记录文件时发现某些网路请求异常，返回-999(no response)或者0,不是正常的返回，但是单独用requests 模块去做请求时，又没有问题，于是考虑是因为webdriver结束过早，考虑过强制sleep,以及 driver.implict_wait(),但是都起不到作用，或者不够明显。<br>后来思考了下，我想要做的事情是判断页面是否加载正常，静态数据大多没有太多问题，主要是动态数据，即我所关注或者担心的大部属分请求都是ajax异步请求，前面那些方法可能没有太多作用，于是查找是否有有相关手段使selenium 等待所有ajax请求结束，其中提到了selenium的三种等待方式：强制等待(sleep等方法)，隐式等待(driver.implict_wait(),全局效果)，显式等待(在一定时间内等待某一元素的出现)<br>最终采取的是第三种方法，</p>
+<blockquote>
+<p>WebDriverWait(driver, 30).until(lambda s: s.execute_script(“return jQuery.active == 0”))</p>
+</blockquote>
+<p>参考<a href="https://www.cnblogs.com/aoyede/articles/5804184.html" target="_blank" rel="noopener">博客</a></p>
+<p>但是在centos服务器上加上这行代码会出现<br>jQuery/$(如果使用 $.active)  no defined<br>最开始考虑类似与之前的方法，是因为这段脚本在jQuery加载之前执行引起的错误，后来尝试过强制等待后添加这行代码，无论等待多长时间都没有效果 ,开始怀疑是因为服务器环境的特殊性，于是在window笔记本,ubuntu台式机上尝试都没有异常，然后开始怀疑是环境配置的问题，其中包含的环境配置主要有selenium ,chromdriver,google-chrome,browsermob-proxy<br>由于selenium都是用pip安装的最新的，不考虑<br>然后发现centos服务器上的google-chrome是最新版76.0.3809.12   ,而windows上是75.0.3770.8，ubuntu上chromium是 v74.0.3729.6然后依据windowsde 配置调整了chromdriver,google-chrome的配置，但是仍然没有效果，最后发现centos 上的browsermob-proxy 是2.0-beta版本，而其他两个是2.14版本，最后调整之后，发现运行没有问题(暂时弄不明白为什么)<br>记录下正确的版本配置：<br>selenium: 3.141.0<br>chromdriver:75.0.3770.90<br>google-chrome: 75.0.3770.142<br>browsermob-proxy:2.1.4</p>
+<blockquote>
+<p>日志增长的问题 </p>
+</blockquote>
+<p>考虑到网关日志增长过大的可能性，考虑到使用脚本定期定量切割日志,重命名，创建新文件，后来发现linux系统中有现成工具 logrotate 可以对日志进行切割，里面的配置完全可以满足个人需求<br> 可以使用 man  logrotate 查看配置信息 或者  <a href="https://linux.die.net/man/8/logrotate" target="_blank" rel="noopener">logrotate Linxu 官网档案</a></p>
+<blockquote>
+<p>个人配置 </p>
+</blockquote>
+<pre><code>位置：/etc/logrotate.d/kong
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/kong/logs/access.log &#123;</span><br><span class="line">    missingok</span><br><span class="line">    rotate 200</span><br><span class="line">    size 10M</span><br><span class="line">    compress</span><br><span class="line">    delaycompress</span><br><span class="line">    notifempty</span><br><span class="line">    create 644 root root</span><br><span class="line">    dateext</span><br><span class="line">    sharedscripts</span><br><span class="line">    postrotate</span><br><span class="line">            if [ -f /var/run/nginx.pid ]; then</span><br><span class="line">                    kill -USR1 `cat /usr/local/kong/pids/nginx.pid`</span><br><span class="line"></span><br><span class="line">            fi</span><br><span class="line">    endscript</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>原本为 cat /var/run/nginx.pid 后来发现,kong的pid信息存放在/usr/local/kong/pids/nginx.pid<br>kill -USR1 在这里指重新加载配置信息，重新建立对日志文件的连接<br>详情 man kill/kill -l 或者查看 <a href="http://www.man7.org/linux/man-pages/man2/kill.2.html" target="_blank" rel="noopener">Linux kill 文档</a>  [Linux  signal 文档](<a href="http://www.man7.org/linux/man-pages/man7/signal.7.html" target="_blank" rel="noopener">http://www.man7.org/linux/man-pages/man7/signal.7.html</a></p>
+<p>包装 elastisearch API接口，简化经网关转发提供给外部使用<a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/index.html" target="_blank" rel="noopener">Elastisearch 官网开放API 文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">获取某一时间 ddj 服务的访问次数</span><br><span class="line">GET /_count</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">      &quot;bool&quot;:&#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">                &quot;range&quot;: &#123;</span><br><span class="line">                  &quot;@timestamp&quot;: &#123;</span><br><span class="line">                    &quot;gte&quot;: &quot;now-100h/h&quot;,</span><br><span class="line">                    &quot;lte&quot;: &quot;now/h&quot;,</span><br><span class="line">                    &quot;format&quot;: &quot;epoch_millis&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ,</span><br><span class="line">        &quot;must&quot;: &#123;</span><br><span class="line">                &quot;match&quot;: &#123;</span><br><span class="line">                  &quot;request&quot;: &#123;</span><br><span class="line">                    &quot;query&quot;: &quot;*ddj*&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">获取某一时间 ddj 服务的访问信息，相比于上者更为详细</span><br><span class="line">GET /_search</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">      &quot;bool&quot;:&#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">                &quot;range&quot;: &#123;</span><br><span class="line">                  &quot;@timestamp&quot;: &#123;</span><br><span class="line">                    &quot;gte&quot;: &quot;now-100h/h&quot;,</span><br><span class="line">                    &quot;lte&quot;: &quot;now/h&quot;,</span><br><span class="line">                    &quot;format&quot;: &quot;epoch_millis&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ,</span><br><span class="line">        &quot;must&quot;: &#123;</span><br><span class="line">                &quot;match&quot;: &#123;</span><br><span class="line">                  &quot;request&quot;: &#123;</span><br><span class="line">                    &quot;query&quot;: &quot;*ddj*&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,&quot;aggs&quot;: &#123;</span><br><span class="line">            &quot;dateAgg&quot;: &#123;</span><br><span class="line">              &quot;date_histogram&quot;: &#123;</span><br><span class="line">                &quot;field&quot;: &quot;@timestamp&quot;,</span><br><span class="line">                &quot;time_zone&quot;: &quot;Europe/Amsterdam&quot;,</span><br><span class="line">                &quot;interval&quot;: &quot;1m&quot;,</span><br><span class="line">                &quot;min_doc_count&quot;: 1</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本来想自己开发一个插件，似乎<a href="https://docs.konghq.com/hub/" target="_blank" rel="noopener">Kong Hub</a>上提供的第三方插件 <a href="https://docs.konghq.com/hub/stone-payments/kong-plugin-template-transformer/" target="_blank" rel="noopener">Template Transformer</a> 可以满足需要，<a href="https://github.com/stone-payments/kong-plugin-template-transformer" target="_blank" rel="noopener">源码</a>可以观摩下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST http://localhost:8001/routes/&#123;route&#125;/plugins --data &quot;name=kong-plugin-template-transformer&quot;   --data &quot;config.request_template=&apos;&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">      &quot;bool&quot;:&#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">                &quot;range&quot;: &#123;</span><br><span class="line">                  &quot;@timestamp&quot;: &#123;</span><br><span class="line">                    &quot;gte&quot;: &quot;now-&#123;&#123;headers.gt&#125;&#125;h/h&quot;,</span><br><span class="line">                    &quot;lte&quot;: &quot;now/h&quot;,</span><br><span class="line">                    &quot;format&quot;: &quot;epoch_millis&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ,</span><br><span class="line">        &quot;must&quot;: &#123;</span><br><span class="line">                &quot;match&quot;: &#123;</span><br><span class="line">                  &quot;request&quot;: &#123;</span><br><span class="line">                    &quot;query&quot;: &quot;*&#123;&#123;headers.department&#125;&#125;*&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;&quot;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/15/运维/" data-id="ck0qjewaq002iyou1otu4avfd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/05/15/spring security 和 oauth 认证中涉及的环节/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          spring security 和 oauth 认证中涉及的环节
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/14/authen-server/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">authen_server</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System/">Distributed System</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Distributed-System/" style="font-size: 10px;">Distributed System</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/19/centos/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/12/Paxos/">Paxos</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/22/go/">go</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

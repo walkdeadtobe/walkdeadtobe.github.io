@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>bug记录和解决 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1.  问题描述：人才库后端检测token失效后,返回要求跳转bug描述：由于返回跳转地址与Host不同,涉及跨域问题尝试1：解决问题位置,排除了问题出在授权服务器所在,确定由于浏览器拦截跨域请求尝试2：尝试将跨域请求伪装成同域的请求,在经同域的nginx拦截,使用rewrite规则或者return 301 重定向；错误,由于ajax请求,是局部数据请求,本身就是为了避免全局刷新的问题,所以aja">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bug记录和解决">
+<meta property="og:url" content="http://yoursite.com/2019/07/04/bug记录和解决/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1.  问题描述：人才库后端检测token失效后,返回要求跳转bug描述：由于返回跳转地址与Host不同,涉及跨域问题尝试1：解决问题位置,排除了问题出在授权服务器所在,确定由于浏览器拦截跨域请求尝试2：尝试将跨域请求伪装成同域的请求,在经同域的nginx拦截,使用rewrite规则或者return 301 重定向；错误,由于ajax请求,是局部数据请求,本身就是为了避免全局刷新的问题,所以aja">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-19T10:12:52.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bug记录和解决">
+<meta name="twitter:description" content="1.  问题描述：人才库后端检测token失效后,返回要求跳转bug描述：由于返回跳转地址与Host不同,涉及跨域问题尝试1：解决问题位置,排除了问题出在授权服务器所在,确定由于浏览器拦截跨域请求尝试2：尝试将跨域请求伪装成同域的请求,在经同域的nginx拦截,使用rewrite规则或者return 301 重定向；错误,由于ajax请求,是局部数据请求,本身就是为了避免全局刷新的问题,所以aja">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-bug记录和解决" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/04/bug记录和解决/" class="article-date">
+  <time datetime="2019-07-04T07:33:33.000Z" itemprop="datePublished">2019-07-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      bug记录和解决
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>1.</p>
+<blockquote>
+<p>问题描述：人才库后端检测token失效后,返回要求跳转<br>bug描述：由于返回跳转地址与Host不同,涉及跨域问题<br>尝试1：解决问题位置,排除了问题出在授权服务器所在,确定由于浏览器拦截跨域请求<br>尝试2：尝试将跨域请求伪装成同域的请求,在经同域的nginx拦截,使用rewrite规则或者return 301 重定向；错误,由于ajax请求,是局部数据请求,本身就是为了避免全局刷新的问题,所以ajax请求会自动紧接着执行重定向请求,最终仍然跨域<br>尝试3：尝试获取后端返回的重定向请求中的Location header,然后可以在ajax的complete函数中实现判断301/302状态,跳转到Location所在地址,错误：同尝试2的错误,ajax请求会紧接着执行重定向请求,因而会导致最终执行到complete函数时,已经没有 Location 头,（此外也可能是因为跨域请求只允许暴露部分header,你也可以选择在Access-Control-Expose-Headers 中添加 你所需要暴露进而获取的header）<br>尝试4：从后端入手,当token过期或者无token时,构造状态码为401（Unauthorized）的请求,并添加Header Location的值为所要跳转的地址,同时将Location 添加到 Access-Control-Expose-Headers中,最后在前端的ajax 请求 complete函数中,设置对于 401请求的跳转处理</p>
+</blockquote>
+<p>2.</p>
+<blockquote>
+<p>问题描述：spring oauth code 模式,以code请求token ,无法获得token,报 500 错误<br>排查:查看当时日志,发现是数据库查询出现问题,但没有指明查询的数据表；因而 开启MySQL数据库的日志功能,记录查询操作,从而定位数据表</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">set global general_log=on; #开启日志</span><br><span class="line">show variables like &apos;%general_log%&apos;; #获得日志文件位置,tail命令查询最新日志</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>前因后果：由于每次服务重启,都要执行数据库脚本(即先drop 然后 create,之后写入)；考虑到许多账户信息无需重复写入,所以更改脚本如果存在就无需drop,否则才create;同时这也引发问题,即对于oauth 模式不仅有账户信息,还有其他认证信息比如说本问题中涉及的 oauth_access_token,重新启动时应当清除其中的一些认证信息,最简单的方式就是清除重建其中的table(除身份信息)<br>解决：短暂解决，直接删除重复的行即可，之后会重新更改数据库脚本</p>
+</blockquote>
+<p>3.</p>
+<blockquote>
+<p>问题描述：在vue下使用外部图片链接作为 img的src 源,出现403forbidden<br>排查：起初通过chrome-&gt;developer tools-&gt;network  发现在访问原链接之后会发生一次302 重定向,在第二次请求的时候发生403 forbidden,猜测是否是因为重定向的原因导致403发生(认为由于浏览器或者js没有处理重定向)，后来尝试更改改为重定向之后链接发现,仍然有403 错误，最终发现可能是由于外部图片提供对于盗链的处理导致的<br>原因：图片提供的服务器根据 Request Header 的 Referer 来源字段判断图片是否盗链,所以可以通过隐藏这一字段来实现获取图片</p>
+</blockquote>
+<blockquote>
+<p>解决：在html head 标签下添加</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;/&gt;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>此外，由于是在vue项目下进行全局配置，以后是否会引发其他问题，是需要考虑的;后来发现 通过 vue-meta 插件可以<a href="https://blog.csdn.net/zc_ad/article/details/87776163" target="_blank" rel="noopener">配置单个页面的 head</a></p>
+</blockquote>
+<p>4.</p>
+<blockquote>
+<p>问题描述：在替换SSO服务打包之后的jar包之后，访问人才库，发现每隔一会,SSO分发的token就会失效<br>经过反复排查不是jar包损坏，后来经过开启mysql数据库日志：当建立数据库连接1分钟或者6秒之后，连接就会自动(?)断开,而在spring对于数据库的连接配置 autoConnect=true 以及 初始化脚本有对于数据库中部分表内容的全部删除,所以之后会重新建立连接，同时删除之前存储在数据库里面的token，导致最终每过一分钟就会使得token失效</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">2019-07-31T15:47:07.471818Z	   82 Connect	root@localhost on oauth using TCP/IP</span><br><span class="line">2019-07-31T15:47:07.472235Z	   82 Query	/* mysql-connector-java-5.1.46 ( Revision: 9cc87a48e75c2d2e87c1a293b2862ce651cb256e ) */SELECT  @@session.auto_increment_increment AS auto_increment_increment, @@character_set_client AS character_set_client, @@character_set_connection AS character_set_connection, @@character_set_results AS character_set_results, @@character_set_server AS character_set_server, @@collation_server AS collation_server, @@init_connect AS init_connect, @@interactive_timeout AS interactive_timeout, @@license AS license, @@lower_case_table_names AS lower_case_table_names, @@max_allowed_packet AS max_allowed_packet, @@net_buffer_length AS net_buffer_length, @@net_write_timeout AS net_write_timeout, @@query_cache_size AS query_cache_size, @@query_cache_type AS query_cache_type, @@sql_mode AS sql_mode, @@system_time_zone AS system_time_zone, @@time_zone AS time_zone, @@transaction_isolation AS transaction_isolation, @@wait_timeout AS wait_timeout</span><br><span class="line">2019-07-31T15:47:07.472785Z	   82 Query	SET character_set_results = NULL</span><br><span class="line">2019-07-31T15:47:07.473024Z	   82 Query	SET autocommit=1</span><br><span class="line">2019-07-31T15:47:07.473220Z	   82 Query	select @@session.transaction_read_only</span><br><span class="line">2019-07-31T15:47:13.644983Z	   73 Quit	</span><br><span class="line">2019-07-31T15:47:13.648349Z	   74 Quit	</span><br><span class="line">2019-07-31T15:47:13.648871Z	   75 Quit	</span><br><span class="line">2019-07-31T15:47:13.649378Z	   76 Quit	</span><br><span class="line">2019-07-31T15:47:13.650263Z	   77 Quit	</span><br><span class="line">2019-07-31T15:47:13.650841Z	   78 Quit	</span><br><span class="line">2019-07-31T15:47:13.651369Z	   79 Quit	</span><br><span class="line">2019-07-31T15:47:13.651845Z	   80 Quit	</span><br><span class="line">2019-07-31T15:47:13.652346Z	   81 Quit	</span><br><span class="line">2019-07-31T15:47:13.652853Z	   82 Quit</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>解决尝试：a) 可能是代码的原因，在对代码进行检查以及和git版本进行核对之后发现，代码并没有更改，排除之  b) maven 依赖的问题，猜测可能是由于maven依赖更新的原因，导致的不兼容，首先怀疑的是对于mysql的java 驱动 java-mysql-connector ,尝试过旧版本后发现版本不兼容，编译报错 ，最终把以前的jar解压后一一比对其中的依赖包文件版本是否相同，但是发现所有的依赖文件版本相同，当然也可能是由于maven其他我不知道的原因导致的，但是暂时排除之  c) 可能是由于mysql数据库本身配置的原因，比如说mysql配置中的 connect_timeout，net_read_timeout,net_write_timeout等参数，但是更改这些参数之后并没有起作用  d) 最终一次意外的尝试发现，当数据库停止运行一段时间后，再次运行之前有问题的jar包，发现不会出现重新连接的情况，猜测可能是数据库连接池没有释放或者类似的原因，导致再连数据库会出现问题 e)回来经过仔细审查发现，是由于crontab脚本出现的错误，导致最终每分钟会尝试执行数据库连接(脚本本身有错误以及脚本监控时候的设计有问题)，着可能导致SSO服务出现数据库连接闪断;<br>解决：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.</span><br><span class="line">service mysqld stop    #关闭mysql数据库</span><br><span class="line">service crond stop     #关闭crontab服务</span><br><span class="line">杀死SSO的进程</span><br><span class="line">echo 3 &gt; /proc/sys/vm/drop_caches  #释放相关缓存</span><br><span class="line">2.等待5分钟左右</span><br><span class="line">3.</span><br><span class="line">service crond start    #重启 crontab 服务,执行相关定时任务</span><br><span class="line">service mysqld stop    #重启 mysql  服务</span><br></pre></td></tr></table></figure>
+
+<p>5.</p>
+<blockquote>
+<p>问题描述：在使用git pull  origin master 报错</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">remote: Repository not found. </span><br><span class="line">fatal: repository &apos;https://github.com/*/*.git/&apos; not found</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>经过查询<a href="https://www.jianshu.com/p/5eb3a91458de" target="_blank" rel="noopener">相关博客</a>,发现是由于之前使用git clone 要求输入用户名与密码，而输入了另一个账户的密码，windows把密码记住了，下次直接使用(这涉及git credential)<br>在当前目录下查看  git config –list 可以看到配置 credential.helper=manager<br>解决方法<br>1: 在windows 用户凭据管理中更改涉及该仓库的用户名和密码(个人使用有效)<br>2: git credential-manager uninstall   git credential-manager install 再输入密码 <a href="https://www.cnblogs.com/zqyw/p/10988018.html" target="_blank" rel="noopener">来源博客</a> (未经测试)</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/04/bug记录和解决/" data-id="ck0qjew7a000hyou1kq0z4fqh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/09/regex/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          regex
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/22/psql/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">postgresql</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System/">Distributed System</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Distributed-System/" style="font-size: 10px;">Distributed System</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/19/centos/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/12/Paxos/">Paxos</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/22/go/">go</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

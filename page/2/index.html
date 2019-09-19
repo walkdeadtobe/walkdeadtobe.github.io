@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-跨域问题小结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/27/跨域问题小结/" class="article-date">
+  <time datetime="2019-05-27T03:56:40.000Z" itemprop="datePublished">2019-05-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/27/跨域问题小结/">跨域问题小结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在做项目时经常遇到跨域问题，经历过这种折腾，最终有两种比较可行的方法，但总体而言都是代理转发</p>
+<ul>
+<li>在nginx上部署相关请求的代理转发，在将请求指向同域名的nginx服务器</li>
+<li>将请求转发给网关，由网关做代理</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/27/跨域问题小结/" data-id="ck0qjew9m0029you1b9fnlus9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cross-domain/">cross_domain</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-微服务授权" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/22/微服务授权/" class="article-date">
+  <time datetime="2019-05-22T13:08:04.000Z" itemprop="datePublished">2019-05-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/22/微服务授权/">微服务授权</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>目前准备使用外部授权认证服务与kong结合，kong可能制作简单的限流任务；<br>经过查询，发现kong在这里提供两个插件<br><a href="https://docs.konghq.com/hub/kong-inc/oauth2/" target="_blank" rel="noopener">OAuth 2.0 Authentication</a><br>和 <a href="https://docs.konghq.com/hub/kong-inc/oauth2-introspection/" target="_blank" rel="noopener">OAuth 2.0 Introspection</a><br>前者主要可以提供Oauth 认证服务，而后者支持第三方的授权认证服务器，不过仅支持企业版<br>最后找到一个github同仁自己基于 lua开发的相关插件，<a href="https://github.com/mogui/kong-external-oauth" target="_blank" rel="noopener">链接</a></p>
+<p>安装 这个额外插件，重新启动kong 时，luarock 需要luacrypto 去完成加密相关操作，故直接即可  sudo luarocks install luacrypto（从源码配置有点麻烦）</p>
+<p>Spring Security 源码分析系列博客<br><a href="https://niocoder.com/categories/#Security" target="_blank" rel="noopener">链接1</a><br><a href="http://www.liuhaihua.cn/%E5%8F%B2%E4%B8%8A%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84-springcloud-%E6%95%99%E7%A8%8B" target="_blank" rel="noopener">链接2</a></p>
+<p>spring 讲解<br><a href="https://www.cnblogs.com/RunForLove/p/4641672.html" target="_blank" rel="noopener">链接1</a></p>
+<p>spring 默认配置<br><a href="https://www.jianshu.com/p/b02691ff4093" target="_blank" rel="noopener">链接1</a></p>
+<p>springboot+springsecurity+oauth2整合(并用mysql数据库实现持久化客户端数据 <a href="https://blog.csdn.net/Victor_An/article/details/81510874" target="_blank" rel="noopener">链接1</a></p>
+<p>spring登录认证 与 token<br><a href="https://www.huangyunkun.com/2016/03/02/spring-security-form-to-token/" target="_blank" rel="noopener">链接1</a><br><a href="https://www.jianshu.com/p/19059060036b" target="_blank" rel="noopener">链接2</a><br><a href="https://www.jianshu.com/p/68779236aa23" target="_blank" rel="noopener">链接3</a><br><a href="https://www.cnblogs.com/xifengxiaoma/p/10043173.html" target="_blank" rel="noopener">链接4 个人觉得最详细</a><br>access_token 获取过程 <a href="https://www.cnblogs.com/lexiaofei/p/7152326.html?utm_source=itdadao&utm_medium=referral" target="_blank" rel="noopener">链接1</a></p>
+<p>access_token 更改返回 <a href="https://www.jianshu.com/p/d9a35facff6f" target="_blank" rel="noopener">链接1</a></p>
+<p>oauth2数据库 表的说明 <a href="https://www.cnblogs.com/donglu/articles/10218348.html" target="_blank" rel="noopener">链接1</a><br><a href="https://www.bbsmax.com/A/qVdeeNmndP/" target="_blank" rel="noopener">链接2</a><br><a href="http://www.andaily.com/spring-oauth-server/db_table_description.html" target="_blank" rel="noopener">链接3</a></p>
+<p>oauth2 授权过程说明 来自知乎<a href="https://www.zhihu.com/question/19781476" target="_blank" rel="noopener">链接1</a><br><a href="http://andaily.com/spring-oauth-server/db_table_description.html" target="_blank" rel="noopener">链接2</a></p>
+<p>接口测试链接(备用)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">POST http://localhost:8082/oauth/token?grant_type=client_credentials&amp;client_id=curl_client&amp;client_secret=user</span><br><span class="line"></span><br><span class="line">GET http://localhost:8082/oauth/check_token?grant_type=client_credentials&amp;token=445d302d-4fa1-49c4-8800-617bd72dd1e9</span><br></pre></td></tr></table></figure>
+
+<p>在直接使用JdbcClientDetailsService 直接查询数据时，出现变量为null<br>即在非controller 层使用 @AUtowired时，无法取得变量<br>使用 如下方法 解决  <a href="https://blog.csdn.net/u013294097/article/details/84192367" target="_blank" rel="noopener">链接</a></p>
+<p>error</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data too long for oauth_code column &apos;authentication&apos;</span><br><span class="line">这是在oauth服务器中获取oauth_code时往数据库插入值时，发生的意外，在网上找到许多奇奇怪怪的方法，行不通，最后发现自己在数据库oauth建表是oauth_code 表 authentication 表项为 VARBINARY 而实际应该是 LONG VARBINARY</span><br></pre></td></tr></table></figure>
+
+<p>2019-5-21</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">目前，打算借助oauth2 实现SSO ,利用client_credential 来识别不同系统或者应用，只不过比较困惑的是如何定义用户的权限(目前做demou先不考虑)</span><br></pre></td></tr></table></figure>
+
+<p>2019-5-23<br>认证流程<br>1.系统A检测是否有token，没有跳转</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8082/oauth/authorize?client_id=test&amp;redirect_uri=http://127.0.0.1&amp;response_type=code&amp;scope=read</span><br></pre></td></tr></table></figure>
+
+<p>2.填写用户名与密码（图片不对，待更换）<br><img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="登录_png"><br>3.返回相应code 到系统A，系统A根据code到授权服务器申请token（部分图片错误，待更改）</p>
+<blockquote>
+<p>获取code<br><img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="获取code_png"></p>
+</blockquote>
+<blockquote>
+<p>根据code获取token<br><img src="https://github.com/walkdeadtobe/picture/raw/master/code_token.png" alt="获取token_png"></p>
+</blockquote>
+<p>4.系统检测到token后，需要到授权系统检测该token对应的用户权限</p>
+<blockquote>
+<p>获取token所对应用户权限<br><img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="检测token_png"></p>
+</blockquote>
+<p>2019-7-24<br>最近涉及到单点登陆系统记住用户所登陆的系统，下次访问默认登陆,经过思考可以在cookie里面添加tag字段,在接受登陆请求之后标志所登陆的系统,下次登陆时可以以此作为标志,此外应当保证登陆另外一个系统时，字段值更改(js),这就需要后端向前端传值,由于sprig boot里传递的是modelandview 所以不采用在url链接链接里附上参数的方法，转而 controller层通过Model对象传值到对应的返回页面，返回页面获得相应的参数来做处理;<br>前端页面我 使用 thymeleaf模板引擎 渲染,其也有相应的方法取值<br>后端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/login&quot;)</span><br><span class="line">    public ModelAndView loginPage(HttpServletRequest request, HttpServletResponse response) &#123;</span><br><span class="line">        RequestCache requestCache= new HttpSessionRequestCache();</span><br><span class="line">        SavedRequest savedrequest = requestCache.getRequest(request,response);</span><br><span class="line">        ModelAndView model = new ModelAndView(&quot;login&quot;);</span><br><span class="line">        model.addObject(&quot;from&quot;, &quot;all&quot;);</span><br><span class="line">       return model;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>前端：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">var s_from = [[$&#123;from&#125;]];</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;p  th:text=&quot;#&#123;from&#125;&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+<p>此外，由于需要获得服务启动时服务本身的端口号，需要配置读取 Application.yml 的配置信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># @ConfigurationProperties 注解依赖</span><br><span class="line">&lt;dependency&gt;  </span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  </span><br><span class="line">    &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;  </span><br><span class="line">    &lt;optional&gt;true&lt;/optional&gt;  </span><br><span class="line">&lt;/dependency&gt;  </span><br><span class="line"></span><br><span class="line">#Application.yml 部分内容</span><br><span class="line">server:</span><br><span class="line">  port: 80</span><br><span class="line">  address: 0.0.0.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 配置类</span><br><span class="line">package com.aak.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">@ConfigurationProperties(prefix=&quot;server&quot;) //接收application.yml中的server下面的属性</span><br><span class="line">public class MyApplication &#123;</span><br><span class="line">    public String address;</span><br><span class="line">    public String port;</span><br><span class="line">    public String getUrl() &#123;</span><br><span class="line">        return address;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUrl(String Url) &#123;</span><br><span class="line">        this.address = Url;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getPort() &#123;</span><br><span class="line">        return port;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setPort(String port) &#123;</span><br><span class="line">        this.port = port;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#使用</span><br><span class="line">@Autowired</span><br><span class="line">private MyApplication myApplication ;</span><br><span class="line">String port=myApplication.getPort();</span><br><span class="line">log.info(&quot;port:&quot;+port);</span><br></pre></td></tr></table></figure>
+
+<p>2019-8-5<br>spring security oauth2 authorization code模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[Spring Security Oauth 相关配置默认实现](https://docs.spring.io/spring-security/oauth/apidocs/org/springframework/security/oauth2/provider/endpoint/package-summary.html),其中包含(后期重新排版)</span><br><span class="line">AuthorizationEndpoint:Implementation of the Authorization Endpoint from the OAuth2 specification.</span><br><span class="line">CheckTokenEndpoint:Controller which decodes access tokens for clients who are not able to do so (or where opaque token values are used).</span><br><span class="line">DefaultRedirectResolver:Default implementation for a redirect resolver.</span><br><span class="line">ExactMatchRedirectResolver:Strict implementation for a redirect resolver which requires an exact match between the registered and requested redirect_uri.</span><br><span class="line">FrameworkEndpointHandlerMapping:A handler mapping for framework endpoints (those annotated with @FrameworkEndpoint).</span><br><span class="line">TokenEndpoint:Endpoint for token requests as described in the OAuth2 spec.</span><br><span class="line">TokenEndpointAuthenticationFilter:An optional authentication filter for the TokenEndpoint.</span><br><span class="line">TokenKeyEndpoint:OAuth2 token services that produces JWT encoded token values.</span><br><span class="line">WhitelabelApprovalEndpoint:Controller for displaying the approval page for the authorization server.</span><br><span class="line">WhitelabelErrorEndpoint:Controller for displaying the error page for the authorization server.</span><br><span class="line"></span><br><span class="line">最近需要在单点登录系统中实现在登录完成之后.跳转回系统跳转登录的页面</span><br><span class="line">code 模式下, </span><br><span class="line">1.跳转 http://localhost:8080/oauth/authorize?client_id=test2&amp;redirect_uri=http://127.0.0.1/oauth/code&amp;response_type=code&amp;scope=read</span><br><span class="line">2.登录成功之后返回code即重定向至http://127.0.0.1/oauth/code?code=CODE</span><br><span class="line">3.http://127.0.0.1/oauth/code?code=CODE获取code,传至后端,后端由此可以根据code获取token以Set-Cookie的方式返回response到页面</span><br><span class="line"></span><br><span class="line">AuthorizationEndpoint 实现 /oauth/authorize 接口,[实现流程](https://www.cnblogs.com/xifengxiaoma/p/10043173.html)中首先检验相关信息正确,之后在code模式下会生成code,并跳转回 redirect_uri?code=CODE</span><br><span class="line">最初以为需要重写 [AuthorizationEndpoint 实现](http://www.javased.com/?source_dir=spring-security-oauth/spring-security-oauth2/src/main/java/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java) 下面 /oauth/authorize 接口,使得最终重定向到redirect_uri后在链接中添加上跳转发生时来源的网址.经过调查没有找到重写 AuthorizationEndpoint 类的方法(spring security 没有提供接口,使得重写类覆盖默认类, 发生作用)</span><br><span class="line">后来发现 跳转时 是 由 window.location.href 实现的,但是无法像request请求一样 拥有 referer header ,即使能够重写 AuthorizationEndpoint 类,也不能从保存的请求中获取 相关header,只能在跳转链接中附上相关信息(暂时没有调研,是否可以在跳转的同时携带相关信息);</span><br><span class="line">问题在于 跳转回redirect_uri是在AuthorizationEndpoint 实现的,具体的地址已经配置好,而且没有找到相关的filter可以在这处理发生后拦截,进行相关逻辑处理,之后想到可以把 redirect_u redirect_uri 中,即redirect_uri=/oauth/code?back_to=原本处理code的地址</span><br><span class="line">以及可以在 跳转链接上 附上 window.location 信息(refer=window.location),然后在 login 中保存相关信息到 当前session,然后在接口中/oauth/code 接口实现中,提取出back_to和 code值,以及附上从session 获得的refer,返回,告知back_to获得token 后应当跳转的地址</span><br><span class="line">完整链接如下:</span><br><span class="line">window.location.href=&apos;http://localhost:8080/oauth/authorize?client_id=test2&amp;redirect_uri=/oauth/code?back_to=http://127.0.0.1/oauth/code&amp;response_type=code&amp;scope=read&amp;refer=&apos;+window.location</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/22/微服务授权/" data-id="ck0qjewab002hyou1zkkiyoth" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-watch_dog" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/21/watch_dog/" class="article-date">
+  <time datetime="2019-05-21T08:12:45.000Z" itemprop="datePublished">2019-05-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/21/watch_dog/">watch_dog</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由于需要某些程序一直运行，或者能够自动重启，由此接触到看门狗程序这一概念</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/21/watch_dog/" data-id="ck0qjew95001tyou1odx1gd7j" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/script/">script</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring security 和 oauth 认证中涉及的环节" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/15/spring security 和 oauth 认证中涉及的环节/" class="article-date">
+  <time datetime="2019-05-15T09:03:39.000Z" itemprop="datePublished">2019-05-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/15/spring security 和 oauth 认证中涉及的环节/">spring security 和 oauth 认证中涉及的环节</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>spring security 和 oauth 认证中涉及的环节<br>‘’’<br>UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication<br>所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，<br>然后生成的Authentication会被交由AuthenticationManager来进行管理<br>而AuthenticationManager管理一系列的AuthenticationProvider，<br>而每一个Provider都会通UserDetailsService和UserDetail来返回一个<br>以UsernamePasswordAuthenticationToken实现的带用户名和密码以及权限的Authentication<br>url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" rel="noopener">https://www.cnblogs.com/softidea/p/6716807.html</a><br>‘’’</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/15/spring security 和 oauth 认证中涉及的环节/" data-id="ck0qjew91001pyou1oj6me2fm" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-运维" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/15/运维/" class="article-date">
+  <time datetime="2019-05-15T09:03:39.000Z" itemprop="datePublished">2019-05-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/15/运维/">运维</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了测试整个系统的稳定性，写了一个脚本，模仿整个登录过程，中间出错就报错<br>了解到一个好工具 selenium<br><a href="https://blog.csdn.net/wkb342814892/article/details/81591394" target="_blank" rel="noopener">如何在centos上安装使用selenium-1</a><br><a href="https://www.bbsmax.com/A/A2dmRBKWze/" target="_blank" rel="noopener">如何在centos上安装使用selenium-2</a></p>
+<p>为了更为精确的监控网页，考虑使用selenium模拟打开每个页面去检查其中网络请求是否正常获得，最终的目标是获取类似chrome开发者模式中Network中的效果，但是经调查发现，selenium中没有对这部分进行实现(或者与其最初目标无关，不考虑实现)，找到的可行的方案是使用 selenium + browsermob-proxy,<br><a href="https://browsermob-proxy-py.readthedocs.io/en/latest/" target="_blank" rel="noopener">browsermob-proxy 官方文档</a><br><a href="https://github.com/webmetrics/browsermob-proxy/downloads" target="_blank" rel="noopener">browsermob-proxy 下载</a></p>
+<p><a href="https://stackoverflow.com/questions/48979520/chrome-headless-proxy-server" target="_blank" rel="noopener">示例代码</a></p>
+<p>记录下中间遇到的问题：</p>
+<blockquote>
+<ol>
+<li>端口冲突，报错</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 160, in &lt;module&gt;</span><br><span class="line">    selenium_example()</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 81, in selenium_example</span><br><span class="line">    proxy=server.create_proxy()</span><br><span class="line">  File &quot;/root/anaconda3/lib/python3.7/site-packages/browsermobproxy/server.py&quot;, line 40, in create_proxy</span><br><span class="line">    client = Client(self.url[7:], params)</span><br><span class="line">  File &quot;/root/anaconda3/lib/python3.7/site-packages/browsermobproxy/client.py&quot;, line 38, in __init__</span><br><span class="line">    self.port = jcontent[&apos;port&apos;]</span><br><span class="line">KeyError: &apos;port&apos;</span><br></pre></td></tr></table></figure>
+
+<p>经过查看源码，大约猜测是网络端口的问题(后来发现在产生的server.log 中把问题说的很清楚 ( ╯□╰ ))，查看相关文档确定 browsermob-proxy 启动的端口默认是8080 <a href="https://cloud.tencent.com/developer/news/365789" target="_blank" rel="noopener">相关文档</a> ,而服务器中已经使用的端口包括这个，考虑更改其启动的配置参数，按照上述文档的方法下修改，无效报错，经过查看与browsermob-proxy 版本对应 的官方文档<a href="https://browsermob-proxy-py.readthedocs.io/en/latest/server.html" target="_blank" rel="noopener">Server 初始化</a> 以及相应解析源码，重新修改配置<br>为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server=Server(&quot;/root/download/browsermob-proxy-2.0-beta-6/bin/browsermob-proxy&quot;,&#123;&quot;host&quot;:&quot;localhost&quot;,&quot;port&quot;:9000&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>成功</p>
+<blockquote>
+<ol start="2">
+<li>文件引用问题</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 159, in &lt;module&gt;</span><br><span class="line">    selenium_example()</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 79, in selenium_example</span><br><span class="line">    server.start()</span><br><span class="line">  File &quot;/root/anaconda3/lib/python3.7/site-packages/browsermobproxy/server.py&quot;, line 122, in start</span><br><span class="line">    raise ProxyServerError(message)</span><br><span class="line">browsermobproxy.exceptions.ProxyServerError: The Browsermob-Proxy server process failed to start. Check &lt;_io.TextIOWrapper name=&apos;/root/py_auto/Gateway_auto/server.log&apos; mode=&apos;w&apos; encoding=&apos;UTF-8&apos;&gt;for a helpful error message.</span><br><span class="line"># server.log</span><br><span class="line">错误: 找不到或无法加载主类 org.browsermob.proxy.Main</span><br></pre></td></tr></table></figure>
+
+<p>原因：我将browsermob-proxy解压后，将其中bin目录下browsermobproxy专门提取出来，放在一个专门目录下(以为是可执行文件)，引用之，后来发现它和windows下使用的browsermobproxy.bat 一样都是个脚本文件，需要在项目的固定位置<br>解决：将引用目录指向目录文件下的browsermobproxy</p>
+<blockquote>
+<ol start="3">
+<li>工具版本适配问题</li>
+</ol>
+</blockquote>
+<p>问题：使用browsermob-proxy +selenium 时候，出现网络请求异常，在查看browsermob-proxy 产生的har记录文件时发现某些网路请求异常，返回-999(no response)或者0,不是正常的返回，但是单独用requests 模块去做请求时，又没有问题，于是考虑是因为webdriver结束过早，考虑过强制sleep,以及 driver.implict_wait(),但是都起不到作用，或者不够明显。<br>后来思考了下，我想要做的事情是判断页面是否加载正常，静态数据大多没有太多问题，主要是动态数据，即我所关注或者担心的大部属分请求都是ajax异步请求，前面那些方法可能没有太多作用，于是查找是否有有相关手段使selenium 等待所有ajax请求结束，其中提到了selenium的三种等待方式：强制等待(sleep等方法)，隐式等待(driver.implict_wait(),全局效果)，显式等待(在一定时间内等待某一元素的出现)<br>最终采取的是第三种方法，</p>
+<blockquote>
+<p>WebDriverWait(driver, 30).until(lambda s: s.execute_script(“return jQuery.active == 0”))</p>
+</blockquote>
+<p>参考<a href="https://www.cnblogs.com/aoyede/articles/5804184.html" target="_blank" rel="noopener">博客</a></p>
+<p>但是在centos服务器上加上这行代码会出现<br>jQuery/$(如果使用 $.active)  no defined<br>最开始考虑类似与之前的方法，是因为这段脚本在jQuery加载之前执行引起的错误，后来尝试过强制等待后添加这行代码，无论等待多长时间都没有效果 ,开始怀疑是因为服务器环境的特殊性，于是在window笔记本,ubuntu台式机上尝试都没有异常，然后开始怀疑是环境配置的问题，其中包含的环境配置主要有selenium ,chromdriver,google-chrome,browsermob-proxy<br>由于selenium都是用pip安装的最新的，不考虑<br>然后发现centos服务器上的google-chrome是最新版76.0.3809.12   ,而windows上是75.0.3770.8，ubuntu上chromium是 v74.0.3729.6然后依据windowsde 配置调整了chromdriver,google-chrome的配置，但是仍然没有效果，最后发现centos 上的browsermob-proxy 是2.0-beta版本，而其他两个是2.14版本，最后调整之后，发现运行没有问题(暂时弄不明白为什么)<br>记录下正确的版本配置：<br>selenium: 3.141.0<br>chromdriver:75.0.3770.90<br>google-chrome: 75.0.3770.142<br>browsermob-proxy:2.1.4</p>
+<blockquote>
+<p>日志增长的问题 </p>
+</blockquote>
+<p>考虑到网关日志增长过大的可能性，考虑到使用脚本定期定量切割日志,重命名，创建新文件，后来发现linux系统中有现成工具 logrotate 可以对日志进行切割，里面的配置完全可以满足个人需求<br> 可以使用 man  logrotate 查看配置信息 或者  <a href="https://linux.die.net/man/8/logrotate" target="_blank" rel="noopener">logrotate Linxu 官网档案</a></p>
+<blockquote>
+<p>个人配置 </p>
+</blockquote>
+<pre><code>位置：/etc/logrotate.d/kong
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/kong/logs/access.log &#123;</span><br><span class="line">    missingok</span><br><span class="line">    rotate 200</span><br><span class="line">    size 10M</span><br><span class="line">    compress</span><br><span class="line">    delaycompress</span><br><span class="line">    notifempty</span><br><span class="line">    create 644 root root</span><br><span class="line">    dateext</span><br><span class="line">    sharedscripts</span><br><span class="line">    postrotate</span><br><span class="line">            if [ -f /var/run/nginx.pid ]; then</span><br><span class="line">                    kill -USR1 `cat /usr/local/kong/pids/nginx.pid`</span><br><span class="line"></span><br><span class="line">            fi</span><br><span class="line">    endscript</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></code></pre><p>原本为 cat /var/run/nginx.pid 后来发现,kong的pid信息存放在/usr/local/kong/pids/nginx.pid<br>kill -USR1 在这里指重新加载配置信息，重新建立对日志文件的连接<br>详情 man kill/kill -l 或者查看 <a href="http://www.man7.org/linux/man-pages/man2/kill.2.html" target="_blank" rel="noopener">Linux kill 文档</a>  [Linux  signal 文档](<a href="http://www.man7.org/linux/man-pages/man7/signal.7.html" target="_blank" rel="noopener">http://www.man7.org/linux/man-pages/man7/signal.7.html</a></p>
+<p>包装 elastisearch API接口，简化经网关转发提供给外部使用<a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/index.html" target="_blank" rel="noopener">Elastisearch 官网开放API 文档</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">获取某一时间 ddj 服务的访问次数</span><br><span class="line">GET /_count</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">      &quot;bool&quot;:&#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">                &quot;range&quot;: &#123;</span><br><span class="line">                  &quot;@timestamp&quot;: &#123;</span><br><span class="line">                    &quot;gte&quot;: &quot;now-100h/h&quot;,</span><br><span class="line">                    &quot;lte&quot;: &quot;now/h&quot;,</span><br><span class="line">                    &quot;format&quot;: &quot;epoch_millis&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ,</span><br><span class="line">        &quot;must&quot;: &#123;</span><br><span class="line">                &quot;match&quot;: &#123;</span><br><span class="line">                  &quot;request&quot;: &#123;</span><br><span class="line">                    &quot;query&quot;: &quot;*ddj*&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">获取某一时间 ddj 服务的访问信息，相比于上者更为详细</span><br><span class="line">GET /_search</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">      &quot;bool&quot;:&#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">                &quot;range&quot;: &#123;</span><br><span class="line">                  &quot;@timestamp&quot;: &#123;</span><br><span class="line">                    &quot;gte&quot;: &quot;now-100h/h&quot;,</span><br><span class="line">                    &quot;lte&quot;: &quot;now/h&quot;,</span><br><span class="line">                    &quot;format&quot;: &quot;epoch_millis&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ,</span><br><span class="line">        &quot;must&quot;: &#123;</span><br><span class="line">                &quot;match&quot;: &#123;</span><br><span class="line">                  &quot;request&quot;: &#123;</span><br><span class="line">                    &quot;query&quot;: &quot;*ddj*&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,&quot;aggs&quot;: &#123;</span><br><span class="line">            &quot;dateAgg&quot;: &#123;</span><br><span class="line">              &quot;date_histogram&quot;: &#123;</span><br><span class="line">                &quot;field&quot;: &quot;@timestamp&quot;,</span><br><span class="line">                &quot;time_zone&quot;: &quot;Europe/Amsterdam&quot;,</span><br><span class="line">                &quot;interval&quot;: &quot;1m&quot;,</span><br><span class="line">                &quot;min_doc_count&quot;: 1</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>本来想自己开发一个插件，似乎<a href="https://docs.konghq.com/hub/" target="_blank" rel="noopener">Kong Hub</a>上提供的第三方插件 <a href="https://docs.konghq.com/hub/stone-payments/kong-plugin-template-transformer/" target="_blank" rel="noopener">Template Transformer</a> 可以满足需要，<a href="https://github.com/stone-payments/kong-plugin-template-transformer" target="_blank" rel="noopener">源码</a>可以观摩下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST http://localhost:8001/routes/&#123;route&#125;/plugins --data &quot;name=kong-plugin-template-transformer&quot;   --data &quot;config.request_template=&apos;&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">      &quot;bool&quot;:&#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">                &quot;range&quot;: &#123;</span><br><span class="line">                  &quot;@timestamp&quot;: &#123;</span><br><span class="line">                    &quot;gte&quot;: &quot;now-&#123;&#123;headers.gt&#125;&#125;h/h&quot;,</span><br><span class="line">                    &quot;lte&quot;: &quot;now/h&quot;,</span><br><span class="line">                    &quot;format&quot;: &quot;epoch_millis&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ,</span><br><span class="line">        &quot;must&quot;: &#123;</span><br><span class="line">                &quot;match&quot;: &#123;</span><br><span class="line">                  &quot;request&quot;: &#123;</span><br><span class="line">                    &quot;query&quot;: &quot;*&#123;&#123;headers.department&#125;&#125;*&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&apos;&quot;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/15/运维/" data-id="ck0qjewaq002iyou1otu4avfd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-authen-server" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/14/authen-server/" class="article-date">
+  <time datetime="2019-05-14T09:11:39.000Z" itemprop="datePublished">2019-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/14/authen-server/">authen_server</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录<br>如何用idea 打包 maven项目<br>‘’’<br>用idea中maven 打开项目，点击idea 右侧的 Maven Projects，<br>点击 LIfecycle -&gt; install -&gt; run maven build 即可<br>‘’’<br>之后 将该项目scp至服务器<br>使用 java -jar *.jar 运行<br>在运行时出现一些错误，如下</p>
+<p>‘’’<br>2019-05-14 17:06:35.986 ERROR 1180706 — [ost-startStop-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.</p>
+<p>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</p>
+<p>The last packet successfully received from the server was 199 milliseconds ago.  The last packet sent successfully to the server was 192 milliseconds ago.<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_181]<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_181]<br>    ……………………………..<br>    ……………………………..<br>    … 154 common frames omitted<br>Caused by: java.security.cert.CertPathValidatorException: Path does not chain with any of the trust anchors<br>    at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:154) ~[na:1.8.0_181]<br>    at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:80) ~[na:1.8.0_181]<br>    at java.security.cert.CertPathValidator.validate(CertPathValidator.java:292) ~[na:1.8.0_181]<br>    at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(ExportControlled.java:295) ~[mysql-connector-java-5.1.46.jar!/:5.1.46]<br>    … 156 common frames omitted</p>
+<p>‘’’<br>经查询(<a href="https://www.jianshu.com/p/b3151ca89def" target="_blank" rel="noopener">https://www.jianshu.com/p/b3151ca89def</a> ）发现是因为SSL配置的原因（暂时没有细究），在源代码 application.yml 文件中将useSSL=true 改为 false即可，重新打包，scp，运行</p>
+<p>在查询过程中发现之后可能会出现的另一个问题，即在长时间未连接mysql时会报类似的 Communications link failure 错误，不过这里是因为mysql默认配置 无连接最长等待时间是8小时，可以通过修改配置文件 mysql.ini 去解决这个错误</p>
+<p>在此之前需要在服务器安装mysql<br>按照官网教程(下面的是Ubuntu下的，如果安装在redhat上，会有一些区别 ，具体参照官方教程 <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/</a>)</p>
+<ul>
+<li>wget <a href="https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</a></li>
+<li>也可以选择检查 文件传输中是否出错 md5sum mysql-apt-config_0.8.13-1_all.deb</li>
+<li>之后运行 dpkg -i mysql-apt-config_0.8.13-1_all.deb，选择你所需要安装的mysql版本，程序会将之添加到apt源中</li>
+<li>运行 sudo apt-get update （–fix-missing）</li>
+<li>自动下载之后需要配置用户名与密码，需要与你在spring程序中配置的一致</li>
+</ul>
+<p>进入数据库 mysql -u root -p ,之后输入密码</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/14/authen-server/" data-id="ck0qjew6r000gyou1vx7p3emo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oauth/">oauth</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Machine_learning_course" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/01/Machine_learning_course/" class="article-date">
+  <time datetime="2019-05-01T02:43:46.000Z" itemprop="datePublished">2019-05-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/01/Machine_learning_course/">Machine_learning_course</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2019-5-10<br>机器学习布置作业，6-15前交，内容未知<br>基于主成分分析方法的人脸识别方法</p>
+<ul>
+<li>之前是寻找空间特征，某一局部点</li>
+<li>人脸识别的核心问题是提取特征(人脸的相关性打，冗余信息多？如何去除：主成分分析，如何将一个矩阵变成一个向量)</li>
+<li>PCA方法的优缺点：从压缩能量的角度，PCA是最有效率的，可以用于维度压缩</li>
+<li>PCA  FisherDiscriminant analysis or LDA</li>
+<li>kErnel PCA </li>
+<li>KFDA</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/01/Machine_learning_course/" data-id="ck0qjew5g0003you1rkfv2n6g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-NLP" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/28/NLP/" class="article-date">
+  <time datetime="2019-04-28T08:42:56.000Z" itemprop="datePublished">2019-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/28/NLP/">NLP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2019-4-28 周日下午<br>    NLP aligment</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/28/NLP/" data-id="ck0qjew5r0006you1mvaqsqxq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-人脸识别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/27/人脸识别/" class="article-date">
+  <time datetime="2019-04-27T14:00:32.000Z" itemprop="datePublished">2019-04-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/27/人脸识别/">人脸识别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>PCA方法学习：解释得比较清楚<br><a href="https://blog.csdn.net/qq_32865355/article/details/80809835" target="_blank" rel="noopener">https://blog.csdn.net/qq_32865355/article/details/80809835</a></p>
+<p>github 开源方案<br><a href="https://github.com/ahhda/Face-Recogntion" target="_blank" rel="noopener">https://github.com/ahhda/Face-Recogntion</a><br><a href="https://github.com/ageitgey/face_recognition" target="_blank" rel="noopener">https://github.com/ageitgey/face_recognition</a></p>
+<p>相关论文<br><a href="https://blog.csdn.net/tMb8Z9Vdm66wH68VX1/article/details/83155487" target="_blank" rel="noopener">https://blog.csdn.net/tMb8Z9Vdm66wH68VX1/article/details/83155487</a></p>
+<p>CNN 实现 人脸识别<br><a href="https://blog.csdn.net/u012162613/article/details/43277187" target="_blank" rel="noopener">https://blog.csdn.net/u012162613/article/details/43277187</a><br><a href="https://blog.csdn.net/zouxy09/article/details/8781543" target="_blank" rel="noopener">https://blog.csdn.net/zouxy09/article/details/8781543</a></p>
+<p>相关github 代码<br><a href="https://github.com/wepe/MachineLearning" target="_blank" rel="noopener">https://github.com/wepe/MachineLearning</a></p>
+<p>faceCascade.detectMultiScale 从图像中找出人脸<br>theano.shared可以看作是将变量设置为全局变量，其值可以在多个函数中共用<br>theano.tensor.dot(X, Y) 简单的看做XY 矩阵相乘 或者说 内积<br>maxpooling 、average_pooling ？？</p>
+<p>tensor库函数解释<br><a href="http://deeplearning.net/software/theano/library/tensor/basic.html" target="_blank" rel="noopener">http://deeplearning.net/software/theano/library/tensor/basic.html</a></p>
+<p>损失函数的分类（交叉熵） <a href="https://www.jianshu.com/p/47172eb86b39" target="_blank" rel="noopener">https://www.jianshu.com/p/47172eb86b39</a></p>
+<p>神经网络 数学公式 表达 <a href="https://blog.csdn.net/sinat_35821976/article/details/80615612" target="_blank" rel="noopener">https://blog.csdn.net/sinat_35821976/article/details/80615612</a></p>
+<p>分类器用的是softmax  <a href="https://www.cnblogs.com/python-frog/p/9380290.html" target="_blank" rel="noopener">https://www.cnblogs.com/python-frog/p/9380290.html</a><br>，LeNet5用的是rbf？？</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/27/人脸识别/" data-id="ck0qjew97001wyou1gcljvbhg" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模式识别/">模式识别</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-决策树" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/27/决策树/" class="article-date">
+  <time datetime="2019-04-27T03:26:38.000Z" itemprop="datePublished">2019-04-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/27/决策树/">决策树</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天上课提及了决策树，随机森林，Dropout，Deepforest(周志华)<br>目前而言，决策树指对于一个集合，依此以某种确定特征作为分类标准，从而将该集合分为若干类(每个节点都代表一个分类或者一种决策标准)<br>随机森林，指在每个节点，随机选择某个特征从而构建一个线性分类器，将样本分为几部分</p>
+<p>Boosted Cascades VS 随机森林<br>前者是一个不平衡的树，适合不均匀的分类问题</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/27/决策树/" data-id="ck0qjew99001yyou11afrc0ov" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System/">Distributed System</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Distributed-System/" style="font-size: 10px;">Distributed System</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/19/centos/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/12/Paxos/">Paxos</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/22/go/">go</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

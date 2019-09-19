@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>bwg | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="今天尝试给bwg上的vpn安装上支持 IPV4,IPV6和多端口（即监听来自IPV4,ipv6的多个端口的访问） 弄了半天，把多端口访问的问题，弄好了，但是同时允许IPV4，IPv6的不行，被恶心了（有空再折腾这个） 暂且记录下流程  寻找多端口的方法；由于我的配置是基于openvpn，只能设置一个端口；多端口的话，可以安装基于python实现的shadowsocks 进行最后一步发现，都是对s">
+<meta name="keywords" content="vpn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="bwg">
+<meta property="og:url" content="http://yoursite.com/2019/06/17/bwg/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="今天尝试给bwg上的vpn安装上支持 IPV4,IPV6和多端口（即监听来自IPV4,ipv6的多个端口的访问） 弄了半天，把多端口访问的问题，弄好了，但是同时允许IPV4，IPv6的不行，被恶心了（有空再折腾这个） 暂且记录下流程  寻找多端口的方法；由于我的配置是基于openvpn，只能设置一个端口；多端口的话，可以安装基于python实现的shadowsocks 进行最后一步发现，都是对s">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-19T10:12:52.279Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="bwg">
+<meta name="twitter:description" content="今天尝试给bwg上的vpn安装上支持 IPV4,IPV6和多端口（即监听来自IPV4,ipv6的多个端口的访问） 弄了半天，把多端口访问的问题，弄好了，但是同时允许IPV4，IPv6的不行，被恶心了（有空再折腾这个） 暂且记录下流程  寻找多端口的方法；由于我的配置是基于openvpn，只能设置一个端口；多端口的话，可以安装基于python实现的shadowsocks 进行最后一步发现，都是对s">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-bwg" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/17/bwg/" class="article-date">
+  <time datetime="2019-06-17T08:31:44.000Z" itemprop="datePublished">2019-06-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      bwg
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p> 今天尝试给bwg上的vpn安装上支持 IPV4,IPV6和多端口（即监听来自IPV4,ipv6的多个端口的访问）<br> 弄了半天，把多端口访问的问题，弄好了，但是同时允许IPV4，IPv6的不行，被恶心了（有空再折腾这个）<br> 暂且记录下流程</p>
+<ul>
+<li>寻找多端口的方法；由于我的配置是基于openvpn，只能设置一个端口；多端口的话，可以安装基于python实现的shadowsocks</li>
+<li>进行最后一步发现，都是对ssserver的配置</li>
+<li>尝试配置监听IPV4,IPV6访问，尝试过各种配置发现，最后找到以为博主的方法，从方法逻辑上看，是可以的，但是实际中不行，可能是我的其他配置问题（例如防火墙？），但下次再折腾这个，再次列出 <a href="http://jinke.me/2015-12-20-shadowsocks/" target="_blank" rel="noopener">链接</a>,因为比较敏感，以防丢失，暂且记录下思路；大概是分别存在IPv4与ipv6的配置文件，并启动shadowsocks 分配给不同的进程</li>
+<li>由于基于python的shadowsocks很久都没有更新了，看github上的讨论，基于c语言的shadowsocks可以实现ipv4v6共存，因而尝试安装基于c语言的shadowsocks；</li>
+<li>发现安装shadowsocks-libev 需要很多依赖，而且依赖循环依赖，很恶心，尝试了一阵后，因为马上有事，就暂且放弃</li>
+<li>步骤1:在<a href="https://pkgs.org/上寻找需要的centosrpm包，下载，安装" target="_blank" rel="noopener">https://pkgs.org/上寻找需要的centosrpm包，下载，安装</a> ；步骤2：重复步骤1</li>
+<li>注意点：下载rpm包时，注意与自己服务器的系统对应（比如 我的系统是centos6，下载的7，/(ㄒoㄒ)/~~）； 留心该命令  yum install –downloadonly –downloaddir=/root/rpm <package-name> 以及<a href="https://blog.csdn.net/xuxile/article/details/88699910" target="_blank" rel="noopener">链接</a>，似乎可以避免循环依赖的问题,但是尝试失败；在使用yum repolist all 查看时发现很多源都被禁止，不知道为什么？下次有空探究下；</package-name></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/17/bwg/" data-id="ck0qjew7o000oyou10avu688q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vpn/">vpn</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/22/psql/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          postgresql
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/27/跨域问题小结/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">跨域问题小结</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System/">Distributed System</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Distributed-System/" style="font-size: 10px;">Distributed System</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/19/centos/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/12/Paxos/">Paxos</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/22/go/">go</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
