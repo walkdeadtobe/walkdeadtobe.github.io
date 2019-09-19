@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>nginx | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="rewrite规则必须匹配对应的域名才能生效，比如是server_name 为aa.com 下的rewrite 规则，则必须访问时前缀是 aa.com ，rewrite规则才能生效  在 nginx 反向代理处直接拒绝不携带token的请求  在 server 内 ，loaction 前对于所有请求 判断cookie内是否携带token(先不管token是否有效)，其中排除对包含code/oau">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx">
+<meta property="og:url" content="http://yoursite.com/2019/06/29/nginx/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="rewrite规则必须匹配对应的域名才能生效，比如是server_name 为aa.com 下的rewrite 规则，则必须访问时前缀是 aa.com ，rewrite规则才能生效  在 nginx 反向代理处直接拒绝不携带token的请求  在 server 内 ，loaction 前对于所有请求 判断cookie内是否携带token(先不管token是否有效)，其中排除对包含code/oau">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-19T10:14:44.421Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx">
+<meta name="twitter:description" content="rewrite规则必须匹配对应的域名才能生效，比如是server_name 为aa.com 下的rewrite 规则，则必须访问时前缀是 aa.com ，rewrite规则才能生效  在 nginx 反向代理处直接拒绝不携带token的请求  在 server 内 ，loaction 前对于所有请求 判断cookie内是否携带token(先不管token是否有效)，其中排除对包含code/oau">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-nginx" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/29/nginx/" class="article-date">
+  <time datetime="2019-06-29T09:31:56.000Z" itemprop="datePublished">2019-06-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      nginx
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>rewrite规则必须匹配对应的域名才能生效，比如是server_name 为aa.com 下的rewrite 规则，则必须访问时前缀是 aa.com ，rewrite规则才能生效</p>
+</blockquote>
+<p>在 nginx 反向代理处直接拒绝不携带token的请求</p>
+<blockquote>
+<p>在 server 内 ，loaction 前对于所有请求 判断cookie内是否携带token(先不管token是否有效)，其中排除对包含code/oauth/static的请求，如果不携带，则使之跳转到授权服务器，登录后自动跳转到首页</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// if ( $request_uri ~* (.*)210.14.118.96(.*))</span><br><span class="line"> // &#123;  rewrite ^/(.*)$  http://localhost:80/$1 break; &#125;</span><br><span class="line">  set $flag 1;</span><br><span class="line"></span><br><span class="line">  if ( $http_cookie ~* (.*)token=(.*) )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)code=(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)oauth(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)static(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)/js/(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)/css/(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $http_referer = &quot;http://210.14.118.96/&quot; )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $http_referer = &quot;&quot; )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $flag = 1)&#123;</span><br><span class="line">  //rewrite ^(.*)$ http://111.203.146.69/oauth/authorize?client_id=kexie&amp;redirect_uri=http://210.14.118.96/ep/cookie.html&amp;response_type=code&amp;scope=read permanent;# redirect;</span><br><span class="line">  return 301  http://111.203.146.69/oauth/authorize?client_id=kexie&amp;redirect_uri=http://210.14.118.96/ep/cookie.html&amp;response_type=code&amp;scope=read;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+<blockquote>
+<p>需要注意的是 从网上博客看，/etc/nginx/nginx.conf 的优先级比 /etc/nginx/conf.d/* 以及/etc/nginx/sites-enables/*优先级高，  但是如果后面的配置中标明了default_server，那么优先级应该是更高的(实际效果，没有去网上查找核实);导致后者的server_name:_  覆盖了前者的server_name:210.14.118.96</p>
+</blockquote>
+<p>在vue项目中 ，全局配置使得请求携带cookie<br>修改 ./src/main.js 添加 <a href="https://github.com/pagekit/vue-resource/issues/191" target="_blank" rel="noopener">相关问题连接</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &quot;vue&quot;;</span><br><span class="line">import VueAwesomeSwiper from &apos;vue-awesome-swiper&apos;</span><br><span class="line">import &apos;swiper/dist/css/swiper.css&apos;</span><br><span class="line">import App from &quot;./App.vue&quot;;</span><br><span class="line">import router from &quot;@/router/index&quot;;</span><br><span class="line">import store from &quot;@/store/index&quot;;</span><br><span class="line">import ElementUI from &quot;element-ui&quot;</span><br><span class="line">import &apos;element-ui/lib/theme-chalk/index.css&apos;</span><br><span class="line">import echarts from &quot;echarts&quot;;</span><br><span class="line">import &#123; debounce &#125; from &quot;@/assets/scripts/util&quot;;</span><br><span class="line">import starSky from &quot;@/assets/scripts/common/canvas.js&quot;;</span><br><span class="line">import echartTheme from &quot;@/constant/chalk.project.json&quot;</span><br><span class="line">//添加内容-开始</span><br><span class="line">import VueResource from &apos;vue-resource&apos;</span><br><span class="line">Vue.use(VueResource)</span><br><span class="line">Vue.http.options.xhr = &#123; withCredentials: true &#125;;</span><br><span class="line">//添加内容-结束</span><br><span class="line">echarts.registerTheme(&quot;chalk&quot;, echartTheme);</span><br><span class="line">Vue.config.productionTip = false;</span><br><span class="line">Vue.use(VueAwesomeSwiper)</span><br><span class="line">Vue.use(ElementUI)</span><br><span class="line">Vue.prototype.$charts = echarts;</span><br><span class="line">Vue.prototype.$debounce = debounce;</span><br><span class="line">Vue.prototype.$starSky = starSky;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: h =&gt; h(App)</span><br><span class="line">&#125;).$mount(&quot;#app&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>此外报错，需要安装插件</p>
+<blockquote>
+<p>npm install –save vue-resource</p>
+</blockquote>
+<blockquote>
+<p>清除cookie 使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &quot;token=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/&quot;; </span><br><span class="line">document.cookie = &quot;token=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/ep&quot;;</span><br></pre></td></tr></table></figure>
+
+<p>而 setCookie()不能删除不同域下cookie</p>
+<blockquote>
+<p>当使用 upstream 代指 上游 多个可用服务器，nginx会根据 error  timeout 来自动替换选择 可用服务器，但是不支持对于有状态码的返回，此外我们可以配置自动检查后端情况以及相应处理 ,<a href="https://www.nginx.com/resources/wiki/modules/healthcheck/" target="_blank" rel="noopener">Nginx ngx_http_healthcheck_module</a>  <a href="https://github.com/cep21/healthcheck_nginx_upstreams/blob/master/README" target="_blank" rel="noopener">Github healthcheck_nginx_upstreams</a><br>而在目前项目中，由于前端nginx调用后面网关 ，所以需要已具有某些状态码来决定是否轮替， 例如</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">upstream backends &#123;</span><br><span class="line">server 192.2.0.1;</span><br><span class="line">server 192.2.0.2;</span><br><span class="line">…</span><br><span class="line">&#125;</span><br><span class="line">server&#123;</span><br><span class="line">  location / &#123;</span><br><span class="line">  proxy_pass http://backends;</span><br><span class="line">  proxy_next_upstream error timeout http_404 http_502 http_500;#依据状态码确定轮替，此外在 多个nginx转发情况下使用 timeout，会导致其它一些问题，简单的方式是除去timeout </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>出于实际需要，需要在kong网关处进行添加自定义插件，其中逻辑需要添加自定义header，使用 ngx.request.set_header(name,value)<br>但是发现自己在网关处添加的header无法传递到(Django)后端,遍历httprequest.MEAT也没有发现，最终经过查询发现 nginx 默认(可以通过配置 underscores_in_headers  on)不允许 header name 中携带 下划线,可以除去下划线或者用’-‘代替’<em>‘,但是好奇的是在网关处 带下划线的header 仍然可以使用<br>可以使用 ngx.req.get_header(name) 查询，以及在日志中也可以配置 http_name得到值，或许只是不能够传出去??</em></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/29/nginx/" data-id="ck0qjjf26001a2ou13cuwz3yd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/04/bug记录和解决/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          bug记录和解决
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/06/22/psql/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">postgresql</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System/">Distributed System</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Distributed-System/" style="font-size: 10px;">Distributed System</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/centos/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/08/12/Paxos/">Paxos</a>
+          </li>
+        
+          <li>
+            <a href="/2019/07/22/go/">go</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

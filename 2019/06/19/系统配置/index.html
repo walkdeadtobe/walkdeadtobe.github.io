@@ -5,20 +5,20 @@
   
 
   
-  <title>跨域问题小结 | Hexo</title>
+  <title>系统配置 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在做项目时经常遇到跨域问题，经历过这种折腾，最终有两种比较可行的方法，但总体而言都是代理转发  在nginx上部署相关请求的代理转发，在将请求指向同域名的nginx服务器 将请求转发给网关，由网关做代理">
-<meta name="keywords" content="cross_domain">
+  <meta name="description" content="安装mysql，按照官网教程来即可 官网连接在 windows 下安装MySQL时会出现错误 123D:\Software\Mysql-8.0.17-winx64\bin&amp;gt;net start MySQL服务没有响应控制功能。请键入 NET HELPMSG 2186 以获得更多的帮助。  解决方法：在windows 服务控制中，设置MySQL服务的属性-&amp;gt;登陆-&amp;gt;登陆身份  中设置">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="跨域问题小结">
-<meta property="og:url" content="http://yoursite.com/2019/05/27/跨域问题小结/index.html">
+<meta property="og:title" content="系统配置">
+<meta property="og:url" content="http://yoursite.com/2019/06/19/系统配置/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="最近在做项目时经常遇到跨域问题，经历过这种折腾，最终有两种比较可行的方法，但总体而言都是代理转发  在nginx上部署相关请求的代理转发，在将请求指向同域名的nginx服务器 将请求转发给网关，由网关做代理">
+<meta property="og:description" content="安装mysql，按照官网教程来即可 官网连接在 windows 下安装MySQL时会出现错误 123D:\Software\Mysql-8.0.17-winx64\bin&amp;gt;net start MySQL服务没有响应控制功能。请键入 NET HELPMSG 2186 以获得更多的帮助。  解决方法：在windows 服务控制中，设置MySQL服务的属性-&amp;gt;登陆-&amp;gt;登陆身份  中设置">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-19T10:12:52.303Z">
+<meta property="og:updated_time" content="2019-09-19T10:16:44.936Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="跨域问题小结">
-<meta name="twitter:description" content="最近在做项目时经常遇到跨域问题，经历过这种折腾，最终有两种比较可行的方法，但总体而言都是代理转发  在nginx上部署相关请求的代理转发，在将请求指向同域名的nginx服务器 将请求转发给网关，由网关做代理">
+<meta name="twitter:title" content="系统配置">
+<meta name="twitter:description" content="安装mysql，按照官网教程来即可 官网连接在 windows 下安装MySQL时会出现错误 123D:\Software\Mysql-8.0.17-winx64\bin&amp;gt;net start MySQL服务没有响应控制功能。请键入 NET HELPMSG 2186 以获得更多的帮助。  解决方法：在windows 服务控制中，设置MySQL服务的属性-&amp;gt;登陆-&amp;gt;登陆身份  中设置">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -65,10 +65,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-跨域问题小结" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-系统配置" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/05/27/跨域问题小结/" class="article-date">
-  <time datetime="2019-05-27T03:56:40.000Z" itemprop="datePublished">2019-05-27</time>
+    <a href="/2019/06/19/系统配置/" class="article-date">
+  <time datetime="2019-06-19T11:17:38.000Z" itemprop="datePublished">2019-06-19</time>
 </a>
     
   </div>
@@ -79,7 +79,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      跨域问题小结
+      系统配置
     </h1>
   
 
@@ -87,19 +87,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>最近在做项目时经常遇到跨域问题，经历过这种折腾，最终有两种比较可行的方法，但总体而言都是代理转发</p>
-<ul>
-<li>在nginx上部署相关请求的代理转发，在将请求指向同域名的nginx服务器</li>
-<li>将请求转发给网关，由网关做代理</li>
-</ul>
+        <p>安装mysql，按照官网教程来即可 <a href="https://dev.mysql.com/doc/refman/8.0/en/linux-installation-yum-repo.html" target="_blank" rel="noopener">官网连接</a><br>在 windows 下安装MySQL时会出现错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">D:\Software\Mysql-8.0.17-winx64\bin&gt;net start MySQL</span><br><span class="line">服务没有响应控制功能。</span><br><span class="line">请键入 NET HELPMSG 2186 以获得更多的帮助。</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：在windows 服务控制中，设置MySQL服务的属性-&gt;登陆-&gt;登陆身份  中设置身份为此身份，身份应当有Administration权限<br>安装java</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/27/跨域问题小结/" data-id="ck0qjjf47002g2ou10nx41m9f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/19/系统配置/" data-id="ck0qjjf45002e2ou1mfz5fsf6" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cross-domain/">cross_domain</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
 
     </footer>
   </div>
@@ -107,19 +106,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/06/17/bwg/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/06/22/psql/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          bwg
+          postgresql
         
       </div>
     </a>
   
   
-    <a href="/2019/05/22/微服务授权/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/06/17/bwg/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">微服务授权</div>
+      <div class="article-nav-title">bwg</div>
     </a>
   
 </nav>
