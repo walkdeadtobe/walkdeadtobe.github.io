@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>distributed algorithm | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Rafthttps://cloud.tencent.com/developer/news/263309Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。  Raft是一个通过管理一个副本日志">
+<meta name="keywords" content="分布式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="distributed algorithm">
+<meta property="og:url" content="http://yoursite.com/2019/10/27/分布式算法/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Rafthttps://cloud.tencent.com/developer/news/263309Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。  Raft是一个通过管理一个副本日志">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-11-03T15:27:41.741Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="distributed algorithm">
+<meta name="twitter:description" content="Rafthttps://cloud.tencent.com/developer/news/263309Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。  Raft是一个通过管理一个副本日志">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-分布式算法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/10/27/分布式算法/" class="article-date">
+  <time datetime="2019-10-27T15:05:56.000Z" itemprop="datePublished">2019-10-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      distributed algorithm
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>Raft<br><a href="https://cloud.tencent.com/developer/news/263309" target="_blank" rel="noopener">https://cloud.tencent.com/developer/news/263309</a><br>Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。</p>
+</blockquote>
+<p>Raft是一个通过管理一个副本日志的一致性算法。它提供了跟(multi-)Paxos一样有效的功能，但是它的架构和Paxos不一样；它比Paxos更加容易理解，并且能用于生产环境中。为了加强理解，raft把一致性的问题分成了三个子问题，例如leader election, log replication, and safety,</p>
+<p>Role</p>
+<p>Leader，Follower，candidate</p>
+<p>在Raft集群中，有且仅有一个Leader，在Leader运行正常的情况下，一个节点服务器要么就是Leader，要么就是Follower。Follower直到Leader故障了，才有可能变成candidate。</p>
+<p>Leader负责把client的写请求log复制到follower。它会和follower保持心跳。每个follower都有一个timeout时间（一般为150ms~300ms），在接受到心跳的时候，这个timeout时间会被重置。如果follower没有接收到心跳，这些follower会把他们的状态变为candidate，并且开启新的一轮leader election。</p>
+<p>term逻辑时钟</p>
+<p>Term相当于paxos中的proposerID，相当于一个国家的朝代。term是一段任意的时间序号。每一任Leader都有一个与之前不同的term。</p>
+<p>当Leader选举成功之后，一个节点成为了Leader，就会产生一个新的term，并且直到Leader故障，整个集群都会一直在这个term下执行操作。</p>
+<p>如果leader选举失败了，则会再生成出一个term，再开启一轮leader选举。</p>
+<p>Quorums：</p>
+<p>多数派，意思是超过一半的机器存活，则这个机器可用，这个Quorums指的就是集群可用的指标。例如：集群中的节点数为2N，如果有N+1的机器存活，则代表集群可用，可接受请求，写入log，应用到state machine中去，执行操作。如果少于N+1个机器存活，则代表集群可用，可接受请求，可写入log，但不应用到state machine中去，不执行操作。</p>
+<p>Leader Election</p>
+<p>只有在下列两种情况下才会进行leader election：</p>
+<p>在第一次启动raft集群的时候</p>
+<p>在一个已存在的Leader故障的时候</p>
+<p>选举流程：</p>
+<p>如果以上两种任何一种发生了，所有的Follower无法再和Leader保持心跳，则它们都会等待一个（选举）timeout，如果其中一个Follower的timeout最先到时，则这个Follower变成candidate开始选举，</p>
+<p>第一，增加term计数器，</p>
+<p>第二，给自己投票并向所有其他的节点服务器请求投自己一票。</p>
+<p>如果一个Follower在接受到投票请求时，接受到两个term相同的投票请求时（也就是说，产生了两个candidate），则在多个相同term的投票请求中，这个Follower只能给投给其中一个请求，只能投一票，并且按照先来先服务的原则投票。</p>
+<p>如果这个candidate收到另外一个节点服务器的消息，并且这个节点服务器的term序号和当前的term序号一样大，甚至更大的话，则这个candidate选举失败，从而它的状态变成Follower，并且接受新的Leader。</p>
+<p>如果一个candidate获得了Quorums选票N+1(2N为集群中节点的数目)，则它变成新的leader。</p>
+<p>如果多个candidate和多个Follower投完票之后，有多个candidate获得了相同的票数，则会产生split vote，则新的term产生，重新选举。Raft用随机选举timeout迅速地解决split vote问题，这个方法就是对于产生spit vote的candidates各自随机生成一个选举timeout，谁先到时，谁当leader，其他candidate都变为Follower。</p>
+<p>当一个leader被选举出来之后，就在Follower timeout到时变为candidate之前，发心跳信息给所有Followers。</p>
+<p>Log Replication（Raft协议具体过程）</p>
+<p>Leader负责把client的请求日志复制给其他Followers。</p>
+<p>Raft协议具体过程就是通过复制状态机的架构实现的，如下：</p>
+<p>步骤：</p>
+<p>Client发送请求给Leader，其中每个请求都是一条操作指令。</p>
+<p>Leader接受到client请求之后，把操作指令(Entry)追加到Leader的操作日志中。紧接着对Follower发起AppendEntries请求、尝试让操作指令(Entry)追加到Followers的操作日志中，即落地。如果有Follower不可用，则一直尝试。</p>
+<p>一旦Leader接受到多数（Quorums）Follower的回应，Leader就会进行commit操作，每一台节点服务器会把操作指令交给状态机处理。这样就保证了各节点的状态的一致性。</p>
+<p>各服务器状态机处理完成之后，Leader将结果返回给Client。</p>
+<p>Saftety</p>
+<p>Raft的安全性，体现在如下几个方面：</p>
+<p>Election safety:在一个term下，最多只有一个Leader。</p>
+<p>Leader Append-Only:一个Leader只能追加新的entries，不能重写和删除entries</p>
+<p>Log Matching:集群中各个节点的log都是相同一致的</p>
+<p>Leader Completeness:如果一个log entry被committed了，则这个entry一定会出现在Leader的log里。</p>
+<p>State Machine Safety:如果一个节点服务器的state machine执行了一个某个log entry命令，则其他节点服务器，也会执行这个log entry命令，不会再执行其他命令</p>
+<p>之前四条，在前面都有所提及，而State Machine Safety是在Leader election过程中用到过。</p>
+<p>State Machine Safety</p>
+<p>一个candidate在选举的时候，它会向其他节点服务器发送包含他的log的消息，获取票数，如果它的log是最新的，则会获取选票，如果它的log不是最新的，其他节点服务器还有更加新的log，则会拒绝给这个candidate投票。这就保证了State Machine Safety。</p>
+<p>所以State Machine Safety保证的就是一个candidate必须拥有最新的log，才能获取票数，才有机会赢得Leader选举，才有机会成为Leader。</p>
+<p>Follower crashes</p>
+<p>如果一个follower故障了，则不会再接受AppendEntriesandvoterequests，并且Leader会不断尝试与这个节点保持心跳。</p>
+<p>如果这个节点恢复了，则会接受Leader的最新的log，并且将log应用到state machine中去，执行log中的操作</p>
+<p>方格指的是client发出的一条请求。</p>
+<p>方格虚线，说明一条log entry写入了log。</p>
+<p>方格实线，说明一条log entry应用到state machine中</p>
+<p>Leader crashes</p>
+<p>则会进行Leader election。</p>
+<p>如果碰到Leader故障的情况，集群中所有节点的日志可能不一致。</p>
+<p>old leader的一些操作日志没有通过集群完全复制。new leader将通过强制Followers复制自己的log来处理不一致的情况，步骤如下：</p>
+<p>对于每个Follower，new leader将其日志与Followers的日志进行比较，找到他们的达成一致的最后一个log entry。</p>
+<p>然后删除掉Followers中这个关键entry后面的所有entry，并将其替换为自己的log entry。该机制将恢复日志的一致性。</p>
+<p>下面这种情况集群中所有节点的日志可能不一致：</p>
+<p>总结</p>
+<p>Raft要求具备唯一Leader，并把一致性问题具体化为保持日志副本的一致性，以此实现相较Paxos而言更容易理解、更容易实现的目标。Raft是state machine system，Zab是primary-backup system。</p>
+<p>引用</p>
+<p><a href="https://en.wikipedia.org/wiki/Raft_(computer_science)" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Raft_(computer_science)</a></p>
+<p><a href="https://raft.github.io/" target="_blank" rel="noopener">https://raft.github.io/</a></p>
+<p><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="noopener">http://thesecretlivesofdata.com/raft/</a></p>
+<p><a href="https://raft.github.io/raft.pdf" target="_blank" rel="noopener">https://raft.github.io/raft.pdf</a></p>
+<p><a href="https://www.cnblogs.com/bangerlee/p/5991417.html" target="_blank" rel="noopener">https://www.cnblogs.com/bangerlee/p/5991417.html</a></p>
+<p><a href="https://www.bilibili.com/video/av21667358/" target="_blank" rel="noopener">https://www.bilibili.com/video/av21667358/</a></p>
+<p><a href="https://en.wikipedia.org/wiki/State_machine_replication" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/State_machine_replication</a></p>
+<p><a href="https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf" target="_blank" rel="noopener">https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf</a></p>
+<blockquote>
+<p>PAXOS<br>它的假设前提是，在分布式系统中进程之间的通信会出现丢失、延迟、重复等现象，但不会出现传错的现象。Paxos算法就是为了保证在这样的系统中进程间基于消息传递就某个值达成一致。</p>
+</blockquote>
+<p>在Paxos算法中，有两种角色：</p>
+<p>Proposer<br>Acceptor<br>Paxos算法分为两个阶段。具体如下：</p>
+<p>阶段一：<br>(a) Proposer选择一个提案编号N（全剧唯一version），然后向半数以上的Acceptor发送编号为N的Prepare请求。</p>
+<p>(b) 如果一个Acceptor收到一个编号为N的Prepare请求，且N大于该Acceptor已经响应过的所有Prepare请求的编号，那么它就会将它已经接受过的编号最大的提案（如果有的话）作为响应反馈给Proposer，同时该Acceptor承诺不再接受任何编号小于N的提案。如果已经接受过，比较版本号大小，持久化最新的，并返回信息</p>
+<p>阶段二：<br>(a) 如果Proposer收到半数以上Acceptor对其发出的编号为N的Prepare请求的响应，那么它就会发送一个针对[N,V]提案的Accept请求给半数以上的Acceptor。注意：V就是收到的响应中编号最大的提案的value，如果响应中不包含任何提案，那么V就由Proposer自己决定。</p>
+<p>(b) 如果Acceptor收到一个针对编号为N的提案的Accept请求，只要该Acceptor没有对编号大于N的Prepare请求做出过响应，它就接受该提案。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/10/27/分布式算法/" data-id="ck2j5o3nm002u98u1qif6nsni" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分布式/">分布式</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/19/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/10/27/分布式算法/">distributed algorithm</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/centos/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/19/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/17/Raft/">Raft算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

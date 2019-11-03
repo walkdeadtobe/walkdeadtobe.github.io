@@ -62,6 +62,59 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-authen-server" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/14/authen-server/" class="article-date">
+  <time datetime="2019-05-14T09:11:39.000Z" itemprop="datePublished">2019-05-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/14/authen-server/">authen_server</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录<br>如何用idea 打包 maven项目<br>‘’’<br>用idea中maven 打开项目，点击idea 右侧的 Maven Projects，<br>点击 LIfecycle -&gt; install -&gt; run maven build 即可<br>‘’’<br>之后 将该项目scp至服务器<br>使用 java -jar *.jar 运行<br>在运行时出现一些错误，如下</p>
+<p>‘’’<br>2019-05-14 17:06:35.986 ERROR 1180706 — [ost-startStop-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.</p>
+<p>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</p>
+<p>The last packet successfully received from the server was 199 milliseconds ago.  The last packet sent successfully to the server was 192 milliseconds ago.<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_181]<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_181]<br>    ……………………………..<br>    ……………………………..<br>    … 154 common frames omitted<br>Caused by: java.security.cert.CertPathValidatorException: Path does not chain with any of the trust anchors<br>    at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:154) ~[na:1.8.0_181]<br>    at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:80) ~[na:1.8.0_181]<br>    at java.security.cert.CertPathValidator.validate(CertPathValidator.java:292) ~[na:1.8.0_181]<br>    at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(ExportControlled.java:295) ~[mysql-connector-java-5.1.46.jar!/:5.1.46]<br>    … 156 common frames omitted</p>
+<p>‘’’<br>经查询(<a href="https://www.jianshu.com/p/b3151ca89def" target="_blank" rel="noopener">https://www.jianshu.com/p/b3151ca89def</a> ）发现是因为SSL配置的原因（暂时没有细究），在源代码 application.yml 文件中将useSSL=true 改为 false即可，重新打包，scp，运行</p>
+<p>在查询过程中发现之后可能会出现的另一个问题，即在长时间未连接mysql时会报类似的 Communications link failure 错误，不过这里是因为mysql默认配置 无连接最长等待时间是8小时，可以通过修改配置文件 mysql.ini 去解决这个错误</p>
+<p>在此之前需要在服务器安装mysql<br>按照官网教程(下面的是Ubuntu下的，如果安装在redhat上，会有一些区别 ，具体参照官方教程 <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/</a>)</p>
+<ul>
+<li>wget <a href="https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</a></li>
+<li>也可以选择检查 文件传输中是否出错 md5sum mysql-apt-config_0.8.13-1_all.deb</li>
+<li>之后运行 dpkg -i mysql-apt-config_0.8.13-1_all.deb，选择你所需要安装的mysql版本，程序会将之添加到apt源中</li>
+<li>运行 sudo apt-get update （–fix-missing）</li>
+<li>自动下载之后需要配置用户名与密码，需要与你在spring程序中配置的一致</li>
+</ul>
+<p>进入数据库 mysql -u root -p ,之后输入密码</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/14/authen-server/" data-id="ck2j5o3m0000j98u13jyedgaq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oauth/">oauth</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Machine_learning_course" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/05/01/Machine_learning_course/" class="article-date">
@@ -97,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/01/Machine_learning_course/" data-id="ck0qjpy9k0002iou1jf36fc6b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/01/Machine_learning_course/" data-id="ck2j5o3lh000298u1o8mzidl5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ML/">ML</a></li></ul>
@@ -136,7 +189,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/28/NLP/" data-id="ck0qjpya1000biou1f7i16bvc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/28/NLP/" data-id="ck2j5o3lr000a98u1txr8q9nw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
@@ -184,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/27/人脸识别/" data-id="ck0qjpyc20023iou1bqfzqpxg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/27/人脸识别/" data-id="ck2j5o3mz001y98u1x0tqcch5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模式识别/">模式识别</a></li></ul>
@@ -224,10 +277,72 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/27/决策树/" data-id="ck0qjpyc70027iou1cs4mbpes" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/27/决策树/" data-id="ck2j5o3n4002798u1ofaipb6q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-map_and_set" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/23/map_and_set/" class="article-date">
+  <time datetime="2019-04-23T11:31:56.000Z" itemprop="datePublished">2019-04-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/23/map_and_set/">map_and_set</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>List VS Map VS Set</p>
+<ul>
+<li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li>
+<li>Map ：键值对Key-value</li>
+<li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li>
+</ul>
+<p>HashMap VS TreeMap<br>HashSet VS TreeSet<br>在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>但是 哈希表的实现是无序的，而树的实现是有序的</p>
+<p>题目：242（Leetcode） Valid Anagrant<br>题意：对给定的两个字符串，判断是否是同一单词的错位变换</p>
+<ul>
+<li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>$$ O(Nlog^N) $$</li>
+<li>方法2：构造Map，比较Map是否相同算法复杂度<br>$$ O(N) $$</li>
+</ul>
+<p>题目：Two Sum(Three Sum)<br>题意：给定一个数组，以及value，输出数组中和为value的元素下标</p>
+<ul>
+<li>方法1：暴力方法时间复杂度<br>$$<br>O(N^2)<br>$$</li>
+<li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>$$<br>O(N)<br>$$</li>
+</ul>
+<p>那么对于ThreeSum</p>
+<ul>
+<li>方法1：暴力 时间复杂度<br>$$<br>O(N^3)<br>$$</li>
+<li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>$$<br>O(N^2)<br>$$</li>
+<li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>$$<br>O(N^2)<br>$$</li>
+<li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>$$<br>O(N^2)<br>$$</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/04/23/map_and_set/" data-id="ck2j5o3mj001998u1wxqhff3w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
 
     </footer>
   </div>
@@ -306,69 +421,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/23/slide_window/" data-id="ck0qjpybk001niou1xhg7vkgl" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-map_and_set" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/23/map_and_set/" class="article-date">
-  <time datetime="2019-04-23T11:31:56.000Z" itemprop="datePublished">2019-04-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/23/map_and_set/">map_and_set</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>List VS Map VS Set</p>
-<ul>
-<li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li>
-<li>Map ：键值对Key-value</li>
-<li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li>
-</ul>
-<p>HashMap VS TreeMap<br>HashSet VS TreeSet<br>在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>但是 哈希表的实现是无序的，而树的实现是有序的</p>
-<p>题目：242（Leetcode） Valid Anagrant<br>题意：对给定的两个字符串，判断是否是同一单词的错位变换</p>
-<ul>
-<li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>$$ O(Nlog^N) $$</li>
-<li>方法2：构造Map，比较Map是否相同算法复杂度<br>$$ O(N) $$</li>
-</ul>
-<p>题目：Two Sum(Three Sum)<br>题意：给定一个数组，以及value，输出数组中和为value的元素下标</p>
-<ul>
-<li>方法1：暴力方法时间复杂度<br>$$<br>O(N^2)<br>$$</li>
-<li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>$$<br>O(N)<br>$$</li>
-</ul>
-<p>那么对于ThreeSum</p>
-<ul>
-<li>方法1：暴力 时间复杂度<br>$$<br>O(N^3)<br>$$</li>
-<li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>$$<br>O(N^2)<br>$$</li>
-<li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>$$<br>O(N^2)<br>$$</li>
-<li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>$$<br>O(N^2)<br>$$</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/23/map_and_set/" data-id="ck0qjpyb40019iou1i685rc24" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/23/slide_window/" data-id="ck2j5o3mr001k98u1n6rn8lm7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -411,7 +464,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/22/小技巧总结/" data-id="ck0qjpyc40024iou1x9hdx6rh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/22/小技巧总结/" data-id="ck2j5o3n6002a98u1hkm33z12" class="article-share-link">Share</a>
       
       
     </footer>
@@ -448,7 +501,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/22/manacher/" data-id="ck0qjpyaz0015iou1wbjcbar2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/22/manacher/" data-id="ck2j5o3ml001b98u1ziktlfor" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -495,74 +548,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/22/代理/" data-id="ck0qjpyby0020iou1mgjjh7zn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/04/22/代理/" data-id="ck2j5o3n3002598u1t2n7htal" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Microservice/">Microservice</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-注解" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/04/20/注解/" class="article-date">
-  <time datetime="2019-04-20T11:17:38.000Z" itemprop="datePublished">2019-04-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/20/注解/">注解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>@Bean<br>(@Set @Get)</p>
-<p>@AutoWire<br>public class cla/public void set(class cla)</p>
-<blockquote>
-<p>自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量 </p>
-</blockquote>
-<p>@Component(“name”)</p>
-<blockquote>
-<p>目前的了解是，加上该注解，就无需告知spring为该类创建Bean;如果有括号，并将该Bean ID标识（命名）为里面的字符串</p>
-</blockquote>
-<p>@Name</p>
-<blockquote>
-<p>spring 支持其代替 @Component ，唔，但不了解</p>
-</blockquote>
-<p>@ComponentScan<br>@ComponentScan(“name”)<br>@ComponentScan(basePackages=”name”/{“name”,”name1”})</p>
-<blockquote>
-<p>1注解:在spring里开启组件扫描，默认扫描与配置类相同的包，扫描所在包以及子包中所有带有@Component注解的类<br>2注解:指明基础包，可以指明多个基础包</p>
-</blockquote>
-<p>@ContextConfiguration(classes=*.class)</p>
-<blockquote>
-<p>从指明的class里加载配置</p>
-</blockquote>
-<p>2019-6-27 更新</p>
-<blockquote>
-<p>今天在给spring 添加新restful接口时，发现无法访问；最后发现，接口如果不设置访问方法。默认访问方式是GET，奇怪的是，如果设置为POST方式，那么将无法访问，重定位回登录页面？？ </p>
-</blockquote>
-<p>在学习微服务构建时，需要看java代码，看到注解 时十分迷惑，暂时没有自己的见解<br>但是 这边博客说的不错<br><a href="https://blog.csdn.net/briblue/article/details/73824058" target="_blank" rel="noopener">https://blog.csdn.net/briblue/article/details/73824058</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/04/20/注解/" data-id="ck0qjpyc90029iou1tfze3dn1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
 
     </footer>
   </div>
@@ -575,7 +564,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -589,7 +578,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
     </div>
   </div>
 
@@ -599,7 +588,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+      <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
     </div>
   </div>
 
@@ -608,7 +597,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
     </div>
   </div>
 
@@ -619,6 +608,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/10/27/分布式算法/">distributed algorithm</a>
+          </li>
         
           <li>
             <a href="/2019/09/19/hello-world/">Hello World</a>
@@ -634,10 +627,6 @@
         
           <li>
             <a href="/2019/09/17/Raft/">Raft算法</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/04/Windows_terminal/">bwg</a>
           </li>
         
       </ul>

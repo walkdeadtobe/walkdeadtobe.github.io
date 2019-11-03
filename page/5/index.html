@@ -62,6 +62,92 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-kong-ACL" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/26/kong-ACL/" class="article-date">
+  <time datetime="2019-03-26T11:13:22.000Z" itemprop="datePublished">2019-03-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/26/kong-ACL/">kong_ACL</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>创造 consumers<br>curl -i -X POST  –url <a href="http://localhost:8001/consumers" target="_blank" rel="noopener">http://localhost:8001/consumers</a> –data “username=dzk”<br>给相应consumer 添加 basic-auth<br>curl -i -X POST  –url <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth</a> –data “username=dzk” –data “password=dzk”<br>添加 ACL<br>curl -X POST <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls</a> –data “group=group2”</p>
+<p>给相应服务添加 basic-auth ACL<br>curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> –data “name=basic-auth” –data “config.hide_credentials=true”</p>
+<p>curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> –data “name=acl” –data “config.whitelist=group1” –data “config.hide_groups_header=true”</p>
+<p>为kong添加 访问 admin 的外部服务<br><a href="https://docs.gelato.io/guides/advanced-kong-integration" target="_blank" rel="noopener">https://docs.gelato.io/guides/advanced-kong-integration</a><br>curl -i -X POST  –url <a href="http://localhost:8001/services/" target="_blank" rel="noopener">http://localhost:8001/services/</a>  –data ‘name=admin’ –data ‘url=<a href="http://localhost:8001&#39;" target="_blank" rel="noopener">http://localhost:8001&#39;</a><br>curl -i -X POST   –url <a href="http://localhost:8001/services/admin/routes" target="_blank" rel="noopener">http://localhost:8001/services/admin/routes</a>  –data ‘paths=/admin’ –data ‘strip_path=true’</p>
+<p>kong发送的信息不含用户consumer信息，使用datadog的log功能进行统计</p>
+<p>datadog-agent 相关命令<br>/etc/init.d/datadog-agent restart、stop<br>sudo datadog-agent check kong/status<br>systemctl start datadog-agent</p>
+<p>kong 数据库操作</p>
+<p>su - postgres<br>pslq<br>\c kong 切换数据库kong<br>select * from pg_tables 查看当前数据库所有的表</p>
+<p>更新 2019-4-18<br>给服务ACL 服务whitelist 添加 多个 group<br>出现问题，提交bug，kong开发大佬解决 ，附链接 <a href="https://github.com/Kong/kong/issues/4523" target="_blank" rel="noopener">https://github.com/Kong/kong/issues/4523</a><br>给插件 CORS 添加多个header<br>curl -X PATCH <a href="http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1" target="_blank" rel="noopener">http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1</a> <br>–data “config.headers=Origin” <br>–data “config.headers=X-Requested-With” <br>–data “config.headers=Content-Type” <br>–data “config.headers=Authorization” <br>–data “config.headers=Accept” <br>–data “config.headers=Accept-Version” <br>–data “config.headers=Content-Length” <br>–data “config.headers=Content-MD5” <br>–data “config.headers=Date” <br>–data “config.headers=X-Auth-Token”</p>
+<p>更新 2019-6-22<br>在查询kong的服务数目时，发现postgresql数据库的services数目与 curl <a href="http://localhost:8001/services" target="_blank" rel="noopener">http://localhost:8001/services</a> 数目不同，最后在github源码中发现 在api中设置最大返回值为100;唔在考虑从源码编译修改，但是安装会很蛋疼</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/03/26/kong-ACL/" data-id="ck2j5o3mc000x98u1tm8pwt5y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-bp-rbf-lstm" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/23/bp-rbf-lstm/" class="article-date">
+  <time datetime="2019-03-23T04:30:07.000Z" itemprop="datePublished">2019-03-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/23/bp-rbf-lstm/">bp+rbf+lstm</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>fisher +感知器  属于   线性分类器</p>
+<p>人工神经网络（DP）  对比    径向基函数（RBF：神经元不只是感知器）<br>LSTM<br>模式识别 思考题 5000男+5000女 特征 分类</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/03/23/bp-rbf-lstm/" data-id="ck2j5o3lx000g98u12260ner1" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/deep-learning/">deep learning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ABAC" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/20/ABAC/" class="article-date">
@@ -90,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/20/ABAC/" data-id="ck0qjpy9h0001iou1zrh6g2za" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/20/ABAC/" data-id="ck2j5o3le000198u17y95oq2e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -130,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/18/Multivariate-normal-distribution-density/" data-id="ck0qjpy9t0006iou1o1hdwu0x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/18/Multivariate-normal-distribution-density/" data-id="ck2j5o3lm000598u1ufh3sjnr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/模式识别/">模式识别</a></li></ul>
@@ -172,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/18/素数问题：艾拉欧拉筛法/" data-id="ck0qjpycd002diou1pr0kp5sa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/18/素数问题：艾拉欧拉筛法/" data-id="ck2j5o3n8002e98u1p5clcmvp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/algorithm/">algorithm</a></li></ul>
@@ -217,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/14/microservice-about-resource/" data-id="ck0qjpyb6001biou1qbt6bb1y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/14/microservice-about-resource/" data-id="ck2j5o3mm001e98u1v4acfvxt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +345,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/14/KNN/" data-id="ck0qjpy980000iou15mlup113" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/14/KNN/" data-id="ck2j5o3ln000698u1n7pdtmqz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/13/service-discovery-and-register/" data-id="ck0qjpybo001siou1cl7ldocw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/13/service-discovery-and-register/" data-id="ck2j5o3mu001r98u1wae13zr1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -389,7 +475,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/08/openresty-source-compile/" data-id="ck0qjpybi001liou13n8rkrdi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/08/openresty-source-compile/" data-id="ck2j5o3mt001p98u1r2a0sst9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -435,47 +521,7 @@ https://github.com/mdirolf/nginx-gridfs
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/06/nginx-mongodb/" data-id="ck0qjpyb8001diou1xn9rg8xt" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-API-Key" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/03/06/API-Key/" class="article-date">
-  <time datetime="2019-03-06T01:20:15.000Z" itemprop="datePublished">2019-03-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/06/API-Key/">API_Key</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="How-Kong-generate-api-key-in-plugin-key-auth"><a href="#How-Kong-generate-api-key-in-plugin-key-auth" class="headerlink" title="How Kong  generate api key in plugin key-auth"></a>How Kong  generate api key in plugin key-auth</h2><p> 在 github <a href="https://github.com/Kong/kong" target="_blank" rel="noopener">https://github.com/Kong/kong</a> ，我们可以看到关于Kong的代码<br> 在<a href="https://github.com/eyolas/kong-plugin-key-auth-referer/blob/master/kong/plugins/key-auth-referer/daos.lua" target="_blank" rel="noopener">https://github.com/eyolas/kong-plugin-key-auth-referer/blob/master/kong/plugins/key-auth-referer/daos.lua</a> 上，我们可以看到其中包含代码<br> <code>local utils = require &quot;kong.tools.utils&quot;</code><br> <code>key = {type = &quot;string&quot;, required = false, unique = true, default = utils.random_string}</code><br> 按照目录搜索<code>https://github.com/Kong/kong/blob/master/kong/tools/utils.lua</code>，从中可以查询到函数<code>random_string</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">local function random_string()</span><br><span class="line">    -- get 24 bytes, which will return a 32 char string after encoding</span><br><span class="line">    -- this is done in attempt to maintain backwards compatibility as</span><br><span class="line">    -- much as possible while improving the strength of this function</span><br><span class="line">    return encode_base64(get_rand_bytes(24, true))</span><br><span class="line">           :gsub(&quot;/&quot;, char(rand(48, 57)))  -- 0 - 10</span><br><span class="line">           :gsub(&quot;+&quot;, char(rand(65, 90)))  -- A - Z</span><br><span class="line">           :gsub(&quot;=&quot;, char(rand(97, 122))) -- a - z</span><br><span class="line">  end</span><br></pre></td></tr></table></figure>
-
-<p>由此可知，当使用key-auth插件，但不指明key值时，就会默认自动生成 24位字符，对于产生的特殊字符进行替换</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/06/API-Key/" data-id="ck0qjpy9l0003iou1sjdhvhcn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/06/nginx-mongodb/" data-id="ck2j5o3mm001d98u1ecsgld3p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -489,7 +535,7 @@ https://github.com/mdirolf/nginx-gridfs
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -503,7 +549,7 @@ https://github.com/mdirolf/nginx-gridfs
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
     </div>
   </div>
 
@@ -513,7 +559,7 @@ https://github.com/mdirolf/nginx-gridfs
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+      <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
     </div>
   </div>
 
@@ -522,7 +568,7 @@ https://github.com/mdirolf/nginx-gridfs
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
     </div>
   </div>
 
@@ -533,6 +579,10 @@ https://github.com/mdirolf/nginx-gridfs
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/10/27/分布式算法/">distributed algorithm</a>
+          </li>
         
           <li>
             <a href="/2019/09/19/hello-world/">Hello World</a>
@@ -548,10 +598,6 @@ https://github.com/mdirolf/nginx-gridfs
         
           <li>
             <a href="/2019/09/17/Raft/">Raft算法</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/04/Windows_terminal/">bwg</a>
           </li>
         
       </ul>
