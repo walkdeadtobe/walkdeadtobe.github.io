@@ -133,7 +133,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/04/bug记录和解决/" data-id="ck2j5o3m5000o98u1ogm41d8j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/04/bug记录和解决/" data-id="ck2rfb9nh000l08u157pwxyol" class="article-share-link">Share</a>
       
       
     </footer>
@@ -203,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/29/nginx/" data-id="ck2j5o3n2002398u10ngzrf47" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/29/nginx/" data-id="ck2rfb9oa001f08u1c8lgicfd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -245,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/22/psql/" data-id="ck2j5o3mp001i98u1hz82fq5f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/22/psql/" data-id="ck2rfb9oc001h08u1iq7mctn7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -287,7 +287,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/19/系统配置/" data-id="ck2j5o3nl002t98u1fjwt9x8h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/19/系统配置/" data-id="ck2rfb9p3002f08u1bgnadaxm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -335,7 +335,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/17/bwg/" data-id="ck2j5o3m3000m98u1zw5ysbkl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/17/bwg/" data-id="ck2rfb9nn000p08u129x1xfkn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vpn/">vpn</a></li></ul>
@@ -378,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/27/跨域问题小结/" data-id="ck2j5o3n8002d98u15cn2fdv9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/27/跨域问题小结/" data-id="ck2rfb9ox002608u14k5d8v7i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cross-domain/">cross_domain</a></li></ul>
@@ -460,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/22/微服务授权/" data-id="ck2j5o3nn002w98u14v2jpbxr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/22/微服务授权/" data-id="ck2rfb9pg002w08u1sy8eea91" class="article-share-link">Share</a>
       
       
     </footer>
@@ -497,10 +497,49 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/21/watch_dog/" data-id="ck2j5o3n0002098u1b4zyp2ba" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/21/watch_dog/" data-id="ck2rfb9om001s08u1dtrjburp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/script/">script</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring security 和 oauth 认证中涉及的环节" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/15/spring security 和 oauth 认证中涉及的环节/" class="article-date">
+  <time datetime="2019-05-15T09:03:39.000Z" itemprop="datePublished">2019-05-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/15/spring security 和 oauth 认证中涉及的环节/">spring security 和 oauth 认证中涉及的环节</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>spring security 和 oauth 认证中涉及的环节<br>‘’’<br>UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication<br>所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，<br>然后生成的Authentication会被交由AuthenticationManager来进行管理<br>而AuthenticationManager管理一系列的AuthenticationProvider，<br>而每一个Provider都会通UserDetailsService和UserDetail来返回一个<br>以UsernamePasswordAuthenticationToken实现的带用户名和密码以及权限的Authentication<br>url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" rel="noopener">https://www.cnblogs.com/softidea/p/6716807.html</a><br>‘’’</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/05/15/spring security 和 oauth 认证中涉及的环节/" data-id="ck2rfb9ol001r08u1fhz2e0ns" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li></ul>
 
     </footer>
   </div>
@@ -584,49 +623,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/15/运维/" data-id="ck2j5o3no002x98u1te3f1m19" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/15/运维/" data-id="ck2rfb9pj002y08u1sxf3r5qx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-spring security 和 oauth 认证中涉及的环节" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/15/spring security 和 oauth 认证中涉及的环节/" class="article-date">
-  <time datetime="2019-05-15T09:03:39.000Z" itemprop="datePublished">2019-05-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/15/spring security 和 oauth 认证中涉及的环节/">spring security 和 oauth 认证中涉及的环节</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>spring security 和 oauth 认证中涉及的环节<br>‘’’<br>UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication<br>所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，<br>然后生成的Authentication会被交由AuthenticationManager来进行管理<br>而AuthenticationManager管理一系列的AuthenticationProvider，<br>而每一个Provider都会通UserDetailsService和UserDetail来返回一个<br>以UsernamePasswordAuthenticationToken实现的带用户名和密码以及权限的Authentication<br>url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" rel="noopener">https://www.cnblogs.com/softidea/p/6716807.html</a><br>‘’’</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/15/spring security 和 oauth 认证中涉及的环节/" data-id="ck2j5o3mx001v98u1sw7dob17" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li></ul>
 
     </footer>
   </div>

@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="今天搭建对于kong log读取的系统，来源与师兄的经验，一些坑就可以避免了这套系统由4部分组成 Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Lucen">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-19T10:21:48.753Z">
+<meta property="og:updated_time" content="2019-11-09T10:50:11.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="log_read">
 <meta name="twitter:description" content="今天搭建对于kong log读取的系统，来源与师兄的经验，一些坑就可以避免了这套系统由4部分组成 Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Lucen">
@@ -97,12 +97,12 @@
 <p>FIleBeat  是一个日志文件托运工具，在服务器安装客户端后，FIlebeat可以监控日志目录或者指定的日志文件，追踪读取这些文件（追踪文件的变化，不停的读），并且转发这些信息到elasticsearch或者logstarsh中存放。</p>
 <p>Metricbeat可以定期收集操作系统和服务器的运行指标（CPU，内存，硬盘，IO,读写速度，进程等等），Metricbeat可以将收集到的指标和数据发送到你指定的输出，比如：elasticsearch，最终达成监视服务器的目标。</p>
 <p>Kibana是一个开源的分析和可视化平台，设计用于和Elasticsearch一起工作。你用Kibana来搜索，查看，并和存储在Elasticsearch索引中的数据进行交互。你可以轻松地执行高级数据分析，并且以各种图标、表格和地图的形式可视化数据。Kibana使得理解大量数据变得很容易。它简单的、基于浏览器的界面使你能够快速创建和共享动态仪表板，实时显示Elasticsearch查询的变化。</p>
-<p>在安装的过程中，踩了一些坑，备注一下</p>
-<ul>
-<li>在配置logstash时，配置数据输入为json ；之后配置filebeat 时同样配置输入json格式数据，之后出现乱码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">syslog &#123;</span><br><span class="line">     type =&gt; &quot;logs&quot;</span><br><span class="line">     port =&gt; 9044</span><br><span class="line">       &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>在安装的过程中，踩了一些坑，备注一下<br>kong log format </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">log_format json_log escape=json &apos;&#123; &quot;@timestamp&quot;: &quot;$time_iso8601&quot;, &apos;  &apos;&quot;remote_addr&quot;: &quot;$remote_addr&quot;, &apos;  &apos;&quot;referer&quot;: &quot;$http_referer&quot;, &apos;  &apos;&quot;request&quot;: &quot;$request&quot;, &apos;  &apos;&quot;status&quot;: $status, &apos;  &apos;&quot;bytes&quot;:$body_bytes_sent, &apos;  &apos;&quot;agent&quot;: &quot;$http_user_agent&quot;, &apos;  &apos;&quot;user&quot;: &quot;$http_username&quot;, &apos; &apos;&quot;x_forwarded&quot;: &quot;$http_x_forwarded_for&quot;, &apos;  &apos;&quot;upstr_addr&quot;: &quot;$upstream_addr&quot;,&apos;  &apos;&quot;upstr_host&quot;: &quot;$upstream_http_host&quot;,&apos;  &apos;&quot;ups_resp_time&quot;: &quot;$upstream_response_time&quot; &#125;&apos;;</span><br></pre></td></tr></table></figure>
 
-</li>
-</ul>
+<p>在配置logstash时，配置数据输入为json ；之后配置filebeat 时同样配置输入json格式数据，之后出现乱码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">syslog &#123;</span><br><span class="line">     type =&gt; &quot;logs&quot;</span><br><span class="line">     port =&gt; 9044</span><br><span class="line">       &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
 <p>之后出现乱码，例如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;message&quot; =&gt; &quot;%P\\u001A(%\\xBDi\\t\\x83,\\u001FϘ\\xF5H\\x8E$ofw\\x98\\x9F\\xDD\\xFB\\\&quot;&#123;f7\\x9B\\r%W\\u0003\\x9A\\xE3\\xA3\\xF3\\u&#123;7CBF2&#125;\\xDFnnn\\xBE\\xBB\\xB9\\xF9\\xFE\\xDF\\u0013\\xBC&gt;`P\\x9D\\n&quot;,</span><br></pre></td></tr></table></figure>
 
@@ -149,7 +149,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/29/log-read/" data-id="ck2j5o3mi001798u1f1f29lyz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/29/log-read/" data-id="ck2rfb9o0001208u1pj5zwksa" class="article-share-link">Share</a>
       
       
     </footer>
