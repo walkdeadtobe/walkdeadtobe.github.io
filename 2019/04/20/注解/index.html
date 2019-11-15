@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="@Bean(@Set @Get) @AutoWirepublic class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量   @Component(“name”)  目前的了解是，加上该注解，就无需告知">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-19T10:12:52.301Z">
+<meta property="og:updated_time" content="2019-11-09T11:21:28.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="注解">
 <meta name="twitter:description" content="@Bean(@Set @Get) @AutoWirepublic class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量   @Component(“name”)  目前的了解是，加上该注解，就无需告知">
@@ -89,29 +89,27 @@
       
         <p>@Bean<br>(@Set @Get)</p>
 <p>@AutoWire<br>public class cla/public void set(class cla)</p>
-<blockquote>
-<p>自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量 </p>
-</blockquote>
+<ul>
+<li>自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量 </li>
+</ul>
 <p>@Component(“name”)</p>
-<blockquote>
-<p>目前的了解是，加上该注解，就无需告知spring为该类创建Bean;如果有括号，并将该Bean ID标识（命名）为里面的字符串</p>
-</blockquote>
+<ul>
+<li>目前的了解是，加上该注解，就无需告知spring为该类创建Bean;如果有括号，并将该Bean ID标识（命名）为里面的字符串</li>
+</ul>
 <p>@Name</p>
-<blockquote>
-<p>spring 支持其代替 @Component ，唔，但不了解</p>
-</blockquote>
+<ul>
+<li>spring 支持其代替 @Component ，唔，但不了解</li>
+</ul>
 <p>@ComponentScan<br>@ComponentScan(“name”)<br>@ComponentScan(basePackages=”name”/{“name”,”name1”})</p>
-<blockquote>
-<p>1注解:在spring里开启组件扫描，默认扫描与配置类相同的包，扫描所在包以及子包中所有带有@Component注解的类<br>2注解:指明基础包，可以指明多个基础包</p>
-</blockquote>
+<ol>
+<li>注解:在spring里开启组件扫描，默认扫描与配置类相同的包，扫描所在包以及子包中所有带有@Component注解的类</li>
+<li>注解:指明基础包，可以指明多个基础包</li>
+</ol>
 <p>@ContextConfiguration(classes=*.class)</p>
-<blockquote>
-<p>从指明的class里加载配置</p>
-</blockquote>
-<p>2019-6-27 更新</p>
-<blockquote>
-<p>今天在给spring 添加新restful接口时，发现无法访问；最后发现，接口如果不设置访问方法。默认访问方式是GET，奇怪的是，如果设置为POST方式，那么将无法访问，重定位回登录页面？？ </p>
-</blockquote>
+<ul>
+<li>从指明的class里加载配置</li>
+</ul>
+<p>2019-6-27 更新<br>今天在给spring 添加新restful接口时，发现无法访问；最后发现，接口如果不设置访问方法。默认访问方式是GET，奇怪的是，如果设置为POST方式，那么将无法访问，重定位回登录页面？？ </p>
 <p>在学习微服务构建时，需要看java代码，看到注解 时十分迷惑，暂时没有自己的见解<br>但是 这边博客说的不错<br><a href="https://blog.csdn.net/briblue/article/details/73824058" target="_blank" rel="noopener">https://blog.csdn.net/briblue/article/details/73824058</a></p>
 
       
@@ -159,7 +157,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Competition-ML/">Competition ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
     </div>
   </div>
 
@@ -169,7 +167,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+      <a href="/tags/Competition-ML/" style="font-size: 10px;">Competition ML</a> <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
     </div>
   </div>
 
@@ -178,7 +176,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
     </div>
   </div>
 
@@ -191,6 +189,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/09/迁移/">系统迁移</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/Aminer/">Aminer</a>
+          </li>
+        
+          <li>
             <a href="/2019/10/27/分布式算法/">distributed algorithm</a>
           </li>
         
@@ -200,14 +206,6 @@
         
           <li>
             <a href="/2019/09/19/centos/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/19/README/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/17/Raft/">Raft算法</a>
           </li>
         
       </ul>

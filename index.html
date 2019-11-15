@@ -62,6 +62,110 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-迁移" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/09/迁移/" class="article-date">
+  <time datetime="2019-11-09T11:22:46.000Z" itemprop="datePublished">2019-11-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/09/迁移/">系统迁移</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这套系统由4部分组成</p>
+<p>Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch</p>
+<p>Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Lucene 基础上的搜索引擎，Elastricsearch 不仅包括全文搜索功能，还可以进行</p>
+<ul>
+<li>分布式实时文件存储，将每一个字段都编入索引，使之可以被搜索</li>
+<li>实时分析的分布式搜索引擎</li>
+<li>可以扩展到上百台服务器上，处理PB级别的结果或者非结构化数据</li>
+</ul>
+<p>FIleBeat  是一个日志文件托运工具，在服务器安装客户端后，FIlebeat可以监控日志目录或者指定的日志文件，追踪读取这些文件（追踪文件的变化，不停的读），并且转发这些信息到elasticsearch或者logstarsh中存放。</p>
+<p>Metricbeat可以定期收集操作系统和服务器的运行指标（CPU，内存，硬盘，IO,读写速度，进程等等），Metricbeat可以将收集到的指标和数据发送到你指定的输出，比如：elasticsearch，最终达成监视服务器的目标。</p>
+<p>Kibana是一个开源的分析和可视化平台，设计用于和Elasticsearch一起工作。你用Kibana来搜索，查看，并和存储在Elasticsearch索引中的数据进行交互。你可以轻松地执行高级数据分析，并且以各种图标、表格和地图的形式可视化数据。Kibana使得理解大量数据变得很容易。它简单的、基于浏览器的界面使你能够快速创建和共享动态仪表板，实时显示Elasticsearch查询的变化。</p>
+<p><font size="6">kong</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log_format json_log escape=json &apos;&#123; &quot;@timestamp&quot;: &quot;$time_iso8601&quot;, &apos;  &apos;&quot;remote_addr&quot;: &quot;$remote_addr&quot;, &apos;  &apos;&quot;referer&quot;: &quot;$http_referer&quot;, &apos;  &apos;&quot;request&quot;: &quot;$request&quot;, &apos;  &apos;&quot;status&quot;: $status, &apos;  &apos;&quot;bytes&quot;:$body_bytes_sent, &apos;  &apos;&quot;agent&quot;: &quot;$http_user_agent&quot;, &apos;  &apos;&quot;user&quot;: &quot;$http_username&quot;, &apos; &apos;&quot;x_forwarded&quot;: &quot;$http_x_forwarded_for&quot;, &apos;  &apos;&quot;upstr_addr&quot;: &quot;$upstream_addr&quot;,&apos;  &apos;&quot;upstr_host&quot;: &quot;$upstream_http_host&quot;,&apos;  &apos;&quot;ups_resp_time&quot;: &quot;$upstream_response_time&quot; &#125;&apos;;</span><br><span class="line">access_log logs/access.log json_log;</span><br></pre></td></tr></table></figure>
+
+<p><font size="6">logstash</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#filebeat_kong.conf</span><br><span class="line">input&#123;</span><br><span class="line">   beats &#123;</span><br><span class="line">        type =&gt; &quot;nginx-log&quot; #&quot;logs&quot;</span><br><span class="line">        port =&gt; 9044</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">filter&#123;</span><br><span class="line">    json&#123; #获取nginx log日志</span><br><span class="line">        source =&gt; &quot;message&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    mutate&#123;# 删去logstash转化后保留的messegae字段</span><br><span class="line">            remove_field =&gt; [&quot;message&quot;]</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">output&#123;</span><br><span class="line">    stdout &#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; [&quot;10.1.1.46:9200&quot;]</span><br><span class="line">        index =&gt; &quot;system-syslog-%&#123;+YYYY.MM&#125;&quot;</span><br><span class="line">        document_type =&gt; &quot;logs&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><font size="6">filebeat</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#filebeat.yml</span><br><span class="line">filebeat.prospectors:</span><br><span class="line"></span><br><span class="line">- input_type: log</span><br><span class="line"> # encoding: UTF-8</span><br><span class="line">  paths:</span><br><span class="line">    - /home/LAB/chengr/kong_log/file.log</span><br><span class="line">  json.keys_under_root: true #在一次部署中发现这一行不能识别，最终注释之解决</span><br><span class="line">  #json.add_error_key: true</span><br><span class="line">  #json.message_key: log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">output.logstash:</span><br><span class="line">  #The Logstash hosts</span><br><span class="line">  hosts: [&quot;10.1.1.46:9044&quot;]</span><br></pre></td></tr></table></figure>
+
+<p><font size="6">elastcisearch</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#config/elasticsearch.yml</span><br><span class="line">cluster.name: my-es-cluster</span><br><span class="line">node.name: es-node-1</span><br><span class="line">path.data: /home/LAB/chengr/ELK/data/data-es</span><br><span class="line">path.logs: /home/LAB/chengr/ELK/log/log-es</span><br><span class="line">network.host: 10.1.1.46</span><br><span class="line">http.port: 9200</span><br></pre></td></tr></table></figure>
+
+<p><font size="6">kibana</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#config/kibana.yml</span><br><span class="line">server.port: 5601</span><br><span class="line">elasticsearch.url: &quot;http://10.1.1.46:9200&quot;</span><br></pre></td></tr></table></figure>
+
+<p>ps:部署在实际机器上时将配置中ip改为对应的IP</p>
+<p><font size="5">kibana 添加邮件预警 </font><br><a href="http://www.cnblogs.com/small-k/p/8551960.html" target="_blank" rel="noopener">http://www.cnblogs.com/small-k/p/8551960.html</a><br><a href="https://blog.51cto.com/10546390/2051676" target="_blank" rel="noopener">https://blog.51cto.com/10546390/2051676</a></p>
+<p>ps:<a href="https://docs.konghq.com/0.13.x/configuration/?_ga=2.242544130.102618566.1558236281-1173907870.1558236281#proxy_access_log" target="_blank" rel="noopener">kong 相关配置地址</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/09/迁移/" data-id="ck2rgo5q00001h8u17vjr9vls" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Aminer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/11/03/Aminer/" class="article-date">
+  <time datetime="2019-11-03T15:07:22.000Z" itemprop="datePublished">2019-11-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/11/03/Aminer/">Aminer</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://github.com/t6am3/AMiner_Name_Disambiguation" target="_blank" rel="noopener">Github 项目地址</a><br>这是一场关于论文 同名消歧的比赛,<a href="https://biendata.com/competition/aminer2019/data/" target="_blank" rel="noopener">项目地址</a><br>我们主要借鉴的<a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=4597035&tag=1" target="_blank" rel="noopener">论文</a><br>论文中发现直接聚类的效果不好，其思路是首先进行居于规则的原子聚类，然后基于原子聚类的结果进一步进行聚类算法，论文中所举的例子是层次聚类(Hierarchical Clustering)以及K-means聚类,论文中发现这种方法可以大幅提升正确率<br>但是我们在实际中发现,论文中所提及的原子聚类效果并不好，也有可能是这场比赛所提供的数据集的问题，最终我们尝试使用自己首先进行规则上的归类，然后再进行基于层次聚类以及K-means聚类</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/11/03/Aminer/" data-id="ck2rfb9mp000308u14cd4u521" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Competition-ML/">Competition ML</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-分布式算法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/10/27/分布式算法/" class="article-date">
@@ -85,8 +189,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>Raft<br><a href="https://cloud.tencent.com/developer/news/263309" target="_blank" rel="noopener">https://cloud.tencent.com/developer/news/263309</a><br>Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。</p>
+<p>Raft</p>
 </blockquote>
+<p><a href="https://cloud.tencent.com/developer/news/263309" target="_blank" rel="noopener">参考链接</a><br>Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。</p>
 <p>Raft是一个通过管理一个副本日志的一致性算法。它提供了跟(multi-)Paxos一样有效的功能，但是它的架构和Paxos不一样；它比Paxos更加容易理解，并且能用于生产环境中。为了加强理解，raft把一致性的问题分成了三个子问题，例如leader election, log replication, and safety,</p>
 <p>Role</p>
 <p>Leader，Follower，candidate</p>
@@ -146,17 +251,20 @@
 <p>总结</p>
 <p>Raft要求具备唯一Leader，并把一致性问题具体化为保持日志副本的一致性，以此实现相较Paxos而言更容易理解、更容易实现的目标。Raft是state machine system，Zab是primary-backup system。</p>
 <p>引用</p>
-<p><a href="https://en.wikipedia.org/wiki/Raft_(computer_science)" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Raft_(computer_science)</a></p>
-<p><a href="https://raft.github.io/" target="_blank" rel="noopener">https://raft.github.io/</a></p>
-<p><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="noopener">http://thesecretlivesofdata.com/raft/</a></p>
-<p><a href="https://raft.github.io/raft.pdf" target="_blank" rel="noopener">https://raft.github.io/raft.pdf</a></p>
-<p><a href="https://www.cnblogs.com/bangerlee/p/5991417.html" target="_blank" rel="noopener">https://www.cnblogs.com/bangerlee/p/5991417.html</a></p>
-<p><a href="https://www.bilibili.com/video/av21667358/" target="_blank" rel="noopener">https://www.bilibili.com/video/av21667358/</a></p>
-<p><a href="https://en.wikipedia.org/wiki/State_machine_replication" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/State_machine_replication</a></p>
-<p><a href="https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf" target="_blank" rel="noopener">https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf</a></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Raft_(computer_science)" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Raft_(computer_science)</a></li>
+<li><a href="https://raft.github.io/" target="_blank" rel="noopener">https://raft.github.io/</a></li>
+<li><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="noopener">http://thesecretlivesofdata.com/raft/</a></li>
+<li><a href="https://raft.github.io/raft.pdf" target="_blank" rel="noopener">https://raft.github.io/raft.pdf</a></li>
+<li><a href="https://www.cnblogs.com/bangerlee/p/5991417.html" target="_blank" rel="noopener">https://www.cnblogs.com/bangerlee/p/5991417.html</a></li>
+<li><a href="https://www.bilibili.com/video/av21667358/" target="_blank" rel="noopener">https://www.bilibili.com/video/av21667358/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/State_machine_replication" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/State_machine_replication</a></li>
+<li><a href="https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf" target="_blank" rel="noopener">https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf</a></li>
+</ul>
 <blockquote>
-<p>PAXOS<br>它的假设前提是，在分布式系统中进程之间的通信会出现丢失、延迟、重复等现象，但不会出现传错的现象。Paxos算法就是为了保证在这样的系统中进程间基于消息传递就某个值达成一致。</p>
+<p>PAXOS</p>
 </blockquote>
+<p>它的假设前提是，在分布式系统中进程之间的通信会出现丢失、延迟、重复等现象，但不会出现传错的现象。Paxos算法就是为了保证在这样的系统中进程间基于消息传递就某个值达成一致。</p>
 <p>在Paxos算法中，有两种角色：</p>
 <p>Proposer<br>Acceptor<br>Paxos算法分为两个阶段。具体如下：</p>
 <p>阶段一：<br>(a) Proposer选择一个提案编号N（全剧唯一version），然后向半数以上的Acceptor发送编号为N的Prepare请求。</p>
@@ -241,9 +349,12 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>centos  安装  psycopg2</p>
-<blockquote>
-<p>直接 pip install psycopg2报错，根据错误 还需要安装 pip install psycopg2-binary/setuptools,以及  yum install gcc<br>可能还需要安装<br>sudo yum install postgresql-libs<br>sudo yum install postgresql-devel<br>sudo yum install python-devel</p>
-</blockquote>
+<p>直接 pip install psycopg2报错，根据错误 还需要安装 pip install psycopg2-binary/setuptools,以及  yum install gcc<br>可能还需要安装</p>
+<ul>
+<li>sudo yum install postgresql-libs</li>
+<li>sudo yum install postgresql-devel</li>
+<li>sudo yum install python-devel</li>
+</ul>
 
       
     </div>
@@ -388,10 +499,22 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>博客列表：<br><a href="https://www.cnblogs.com/hugb/p/8955505.html" target="_blank" rel="noopener">图解分布式一致性协议Paxos</a><br>相关概念</p>
-<blockquote>
-<p>拜占庭模型: <a href="https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">wiki 拜占庭问题</a> 分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。<br>非拜占庭模型：指可能出现故障，但是不会伪造信息的情况(即，要么收不到信息，要么收到真实的信息)</p>
-</blockquote>
+        <p>博客列表：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/hugb/p/8955505.html" target="_blank" rel="noopener">图解分布式一致性协议Paxos</a></li>
+</ul>
+<p>相关概念</p>
+<ul>
+<li>拜占庭模型: <ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">wiki 拜占庭问题</a> </li>
+<li>分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。</li>
+</ul>
+</li>
+<li>非拜占庭模型：<ul>
+<li>指可能出现故障，但是不会伪造信息的情况(即，要么收不到信息，要么收到真实的信息)</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -449,93 +572,6 @@
 
 
   
-    <article id="post-lua" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/10/lua/" class="article-date">
-  <time datetime="2019-07-10T12:20:19.000Z" itemprop="datePublished">2019-07-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/10/lua/">lua</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><br>因为决定学习开发网关kong的插件，所以需要学习lua语言，正在从<a href="https://www.runoob.com/lua/" target="_blank" rel="noopener">Lua 菜鸟教程</a>学习<br><br>关于kong插件开发的博客 <a href="https://www.jianshu.com/p/68457b42b84f" target="_blank" rel="noopener">链接1</a><br><br>发现一个很有意思的lua 模块  :openresty 的lua-resty-template 模块，提供模板渲染的功能<br><br>准备在网关处进行对于token的检验工作，由于没有使用已有的oauth server 插件，所以需要自己写个额外插件<br>    在这个插件中主要需要完成的工作是从cookie 中 提取出 token ,并以此为凭借到oauth  server 进行相关检验，如果检验成功，应当返回id 以及这个token的ttl ,网关处获得id 应当 将之体现在日志里(插件逻辑处新建header,在nginx日志处自定义日志格式,指明该id或者在网关处建立与oauth server相同的用户体系，起码账户名一致，这样根据id 可以从数据库中提取出相应的consumer credential ,这样的话可以用于后续的基于用户的限流等操作)<br>主要点在于1.Lua中进行http 操作  ,<a href="https://github.com/ledgetech/lua-resty-http#request" target="_blank" rel="noopener">Github 源码文档</a><br>        2.考虑对token进行缓存,[‘token’,’id’,ttl],这样无需多次存取(可能带来的问题有，注销登录后如何通知网关注销token：这又分为两种注销后不再登录和重新登陆，对于后者可以下次请求经过网关时,注销相同id的键值对)<br>        <a href="https://github.com/openresty/lua-resty-redis/" target="_blank" rel="noopener">Github lua-resty-redis</a><br>        <a href="https://github.com/Kong/kong/blob/master/kong/plugins/rate-limiting/policies/init.lua" target="_blank" rel="noopener">Kong rate-limiting 插件</a>中涉及对于redis的操作,可以观摩下</p>
-<p><br>目前在网关处验证用户身份成功后，在后端为避免再次检验身份的需要，因此需要网关提供给后端身份凭据，认可这次身份凭据，同时应当提供某种验证手段，让后端验证请求是否身份凭据是否是真的/是否是伪造<br>方案1 ：利用某种对称加密算法,网关对用户身份进行加密,后端以相同的密钥进行解密,得到身份<br>        确定使用AES算法<a href="https://github.com/openresty/lua-resty-string/" target="_blank" rel="noopener">Github 示例</a>,在网关处使用CBC加密，相同的偏移向量,结果转化为hex格式，传输到python后端，对结果转发，解密，但是解密始终得不到正确的结果，怀疑是<a href="https://blog.csdn.net/diodosu/article/details/51923670" target="_blank" rel="noopener">博客</a>中提到的问题，但是我在测试中设置的加密字段,加密密钥，偏移向量都是16位的，看起来应该不会有填充的问题才对，但是解密仍然失败<br>方案2 ：采取非对称加密算法，在网关处向后端传递两个header：userid,encrypted 在网关处按照某种方法加密得到 encrypt header,后端使用同样的方法加密，如果结果相同，则认为 userid 经过了网关的认证，同时加密内容应当是网关与后端之间相互约定的动态的内容</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/10/lua/" data-id="ck2rfb9o1001408u1tg1co13c" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lua/">lua</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-regex" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/07/09/regex/" class="article-date">
-  <time datetime="2019-07-09T02:27:42.000Z" itemprop="datePublished">2019-07-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/09/regex/">regex</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近需要从nginx header中提取出变量，需要学习正则表达式相关知识<br><a href="https://www.runoob.com/regexp/regexp-tutorial.html" target="_blank" rel="noopener">菜鸟教程 正则表达式</a></p>
-<blockquote>
-<p>可以使用 $1 $2 $3等来表示匹配的变量<br>例如 对于字符串  A90B3C  ,正则表达式  /A(\d+)B(\d+)C/  匹配的 $1=90 $2=3<br>亦或者 对于正则表达式 /A((\d+)B)(\d+)C/  匹配的 $1=90B  $2=90  $3=3</p>
-</blockquote>
-<br>
->对实际应用可以匹配  $http_cookie ~ token=([a-z0-9]*);api_key=([a-z0-9]*)
-在实际搜素中发现有人使用 {variable}以及<variable> 来匹配变量 variable ，但是在查询文档中没有发现这种用法，也欸有试过是否能用
-
-
-</variable>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/09/regex/" data-id="ck2rfb9oh001n08u1m5gbxrwp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
@@ -554,7 +590,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Competition-ML/">Competition ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
     </div>
   </div>
 
@@ -564,7 +600,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+      <a href="/tags/Competition-ML/" style="font-size: 10px;">Competition ML</a> <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
     </div>
   </div>
 
@@ -573,7 +609,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
     </div>
   </div>
 
@@ -586,6 +622,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/09/迁移/">系统迁移</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/Aminer/">Aminer</a>
+          </li>
+        
+          <li>
             <a href="/2019/10/27/分布式算法/">distributed algorithm</a>
           </li>
         
@@ -595,14 +639,6 @@
         
           <li>
             <a href="/2019/09/19/centos/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/19/README/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/17/Raft/">Raft算法</a>
           </li>
         
       </ul>

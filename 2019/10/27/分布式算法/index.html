@@ -7,18 +7,18 @@
   
   <title>distributed algorithm | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Rafthttps://cloud.tencent.com/developer/news/263309Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。  Raft是一个通过管理一个副本日志">
+  <meta name="description" content="Raft  参考链接Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。 Raft是一个通过管理一个副本日志的一致性算法。它提供了跟(multi-)Paxos一样有效的功能，但是它的架构和Pa">
 <meta name="keywords" content="分布式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="distributed algorithm">
 <meta property="og:url" content="http://yoursite.com/2019/10/27/分布式算法/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Rafthttps://cloud.tencent.com/developer/news/263309Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。  Raft是一个通过管理一个副本日志">
+<meta property="og:description" content="Raft  参考链接Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。 Raft是一个通过管理一个副本日志的一致性算法。它提供了跟(multi-)Paxos一样有效的功能，但是它的架构和Pa">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-03T15:27:41.741Z">
+<meta property="og:updated_time" content="2019-11-09T11:26:19.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="distributed algorithm">
-<meta name="twitter:description" content="Rafthttps://cloud.tencent.com/developer/news/263309Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。  Raft是一个通过管理一个副本日志">
+<meta name="twitter:description" content="Raft  参考链接Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。 Raft是一个通过管理一个副本日志的一致性算法。它提供了跟(multi-)Paxos一样有效的功能，但是它的架构和Pa">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -88,8 +88,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote>
-<p>Raft<br><a href="https://cloud.tencent.com/developer/news/263309" target="_blank" rel="noopener">https://cloud.tencent.com/developer/news/263309</a><br>Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。</p>
+<p>Raft</p>
 </blockquote>
+<p><a href="https://cloud.tencent.com/developer/news/263309" target="_blank" rel="noopener">参考链接</a><br>Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。</p>
 <p>Raft是一个通过管理一个副本日志的一致性算法。它提供了跟(multi-)Paxos一样有效的功能，但是它的架构和Paxos不一样；它比Paxos更加容易理解，并且能用于生产环境中。为了加强理解，raft把一致性的问题分成了三个子问题，例如leader election, log replication, and safety,</p>
 <p>Role</p>
 <p>Leader，Follower，candidate</p>
@@ -149,17 +150,20 @@
 <p>总结</p>
 <p>Raft要求具备唯一Leader，并把一致性问题具体化为保持日志副本的一致性，以此实现相较Paxos而言更容易理解、更容易实现的目标。Raft是state machine system，Zab是primary-backup system。</p>
 <p>引用</p>
-<p><a href="https://en.wikipedia.org/wiki/Raft_(computer_science)" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Raft_(computer_science)</a></p>
-<p><a href="https://raft.github.io/" target="_blank" rel="noopener">https://raft.github.io/</a></p>
-<p><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="noopener">http://thesecretlivesofdata.com/raft/</a></p>
-<p><a href="https://raft.github.io/raft.pdf" target="_blank" rel="noopener">https://raft.github.io/raft.pdf</a></p>
-<p><a href="https://www.cnblogs.com/bangerlee/p/5991417.html" target="_blank" rel="noopener">https://www.cnblogs.com/bangerlee/p/5991417.html</a></p>
-<p><a href="https://www.bilibili.com/video/av21667358/" target="_blank" rel="noopener">https://www.bilibili.com/video/av21667358/</a></p>
-<p><a href="https://en.wikipedia.org/wiki/State_machine_replication" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/State_machine_replication</a></p>
-<p><a href="https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf" target="_blank" rel="noopener">https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf</a></p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Raft_(computer_science)" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Raft_(computer_science)</a></li>
+<li><a href="https://raft.github.io/" target="_blank" rel="noopener">https://raft.github.io/</a></li>
+<li><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="noopener">http://thesecretlivesofdata.com/raft/</a></li>
+<li><a href="https://raft.github.io/raft.pdf" target="_blank" rel="noopener">https://raft.github.io/raft.pdf</a></li>
+<li><a href="https://www.cnblogs.com/bangerlee/p/5991417.html" target="_blank" rel="noopener">https://www.cnblogs.com/bangerlee/p/5991417.html</a></li>
+<li><a href="https://www.bilibili.com/video/av21667358/" target="_blank" rel="noopener">https://www.bilibili.com/video/av21667358/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/State_machine_replication" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/State_machine_replication</a></li>
+<li><a href="https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf" target="_blank" rel="noopener">https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf</a></li>
+</ul>
 <blockquote>
-<p>PAXOS<br>它的假设前提是，在分布式系统中进程之间的通信会出现丢失、延迟、重复等现象，但不会出现传错的现象。Paxos算法就是为了保证在这样的系统中进程间基于消息传递就某个值达成一致。</p>
+<p>PAXOS</p>
 </blockquote>
+<p>它的假设前提是，在分布式系统中进程之间的通信会出现丢失、延迟、重复等现象，但不会出现传错的现象。Paxos算法就是为了保证在这样的系统中进程间基于消息传递就某个值达成一致。</p>
 <p>在Paxos算法中，有两种角色：</p>
 <p>Proposer<br>Acceptor<br>Paxos算法分为两个阶段。具体如下：</p>
 <p>阶段一：<br>(a) Proposer选择一个提案编号N（全剧唯一version），然后向半数以上的Acceptor发送编号为N的Prepare请求。</p>
@@ -180,6 +184,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2019/11/03/Aminer/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Aminer
+        
+      </div>
+    </a>
   
   
     <a href="/2019/09/19/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
@@ -203,7 +216,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Competition-ML/">Competition ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
     </div>
   </div>
 
@@ -213,7 +226,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+      <a href="/tags/Competition-ML/" style="font-size: 10px;">Competition ML</a> <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
     </div>
   </div>
 
@@ -222,7 +235,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/11/">November 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li></ul>
     </div>
   </div>
 
@@ -235,6 +248,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/09/迁移/">系统迁移</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/03/Aminer/">Aminer</a>
+          </li>
+        
+          <li>
             <a href="/2019/10/27/分布式算法/">distributed algorithm</a>
           </li>
         
@@ -244,14 +265,6 @@
         
           <li>
             <a href="/2019/09/19/centos/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/19/README/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/17/Raft/">Raft算法</a>
           </li>
         
       </ul>
