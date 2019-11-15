@@ -62,6 +62,136 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-service-discovery-and-register" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/13/service-discovery-and-register/" class="article-date">
+  <time datetime="2019-03-13T07:51:50.000Z" itemprop="datePublished">2019-03-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/13/service-discovery-and-register/">service discovery and register</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://mp.weixin.qq.com/s/uzGF5b4sn1DeSc1F1FOGRA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/uzGF5b4sn1DeSc1F1FOGRA</a> </p>
+<p>微信 上关于微服务发现的推文<br>服务发现背后的基本思想是对于服务的每一个新实例（或应用程序），能够识别当前环境和存储相关信息。存储的注册表信息本身通常采用键/值对的格式，由于服务发现经常用于分布式系统，所以要求这些信息可伸缩、支持容错和分布式集群中的所有节点</p>
+<p> 做到服务发现之前首先需要做到的是提供服务注册表，供服务消毒费查询<br> 同时注册表应当保持高可用，大多以键值对的形式存在</p>
+<p>Zookeeper</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/03/13/service-discovery-and-register/" data-id="ck30bilby002240u118o3ngjk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-openresty-source-compile" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/03/08/openresty-source-compile/" class="article-date">
+  <time datetime="2019-03-08T12:30:42.000Z" itemprop="datePublished">2019-03-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/openresty-source-compile/">openresty_source_compile</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近调研APIGateway，目前主要在研究 kong 的东西，打算在服务器上布置环境，测试其性能<br>系统环境：<br>操作系统版本：Linux version 4.4.0-134-generic (buildd@lgw01-amd64-033) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) )</p>
+<p>用户目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">×××@bd45:~$ tree -L 1  </span><br><span class="line">.  </span><br><span class="line">|-- apr  </span><br><span class="line">|-- apr-1.4.5  </span><br><span class="line">|-- apr-1.4.5.tar.gz  </span><br><span class="line">|-- apr-util  </span><br><span class="line">|-- apr-util-1.3.12  </span><br><span class="line">|-- apr-util-1.3.12.tar.gz  </span><br><span class="line">|-- download_file?file_path=dists%2Fkong-community-edition-1.0.3.xenial.all.deb </span><br><span class="line">|-- httpd  </span><br><span class="line">|-- httpd-2.4.38  </span><br><span class="line">|-- httpd-2.4.38.tar.gz  </span><br><span class="line">|-- kong  </span><br><span class="line">|-- kong_source  </span><br><span class="line">|-- lua-5.3.4  </span><br><span class="line">|-- lua-5.3.4.tar.gz  </span><br><span class="line">|-- luarocks  </span><br><span class="line">|-- nginx  </span><br><span class="line">|-- nginx-1.15.9  </span><br><span class="line">|-- nginx-1.15.9.tar.gz  </span><br><span class="line">|-- openresty  </span><br><span class="line">|-- openresty-1.13.6.2  </span><br><span class="line">|-- openresty-1.13.6.2.tar.gz</span><br><span class="line">|-- openssl</span><br><span class="line">|-- openssl-1.0.2r</span><br><span class="line">|-- openssl-1.0.2r.tar.gz</span><br><span class="line">|-- pcre</span><br><span class="line">|-- pcre-8.43</span><br><span class="line">|-- pcre-8.43.tar.gz</span><br><span class="line">|-- postgresql</span><br><span class="line">|-- postgresql-11.2</span><br><span class="line">|-- postgresql-11.2.tar.gz</span><br><span class="line">|-- siege</span><br><span class="line">|-- siege-4.0.4</span><br><span class="line">`-- siege-4.0.4.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>安装pcre</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O  https://ftp.pcre.org/pub/pcre/pcre-8.43.tar.gz</span><br><span class="line">./configure --prefix=/home/LAB/chengr/pcre </span><br><span class="line">./configure --prefix=/home/LAB/chengr/nginx --with-pcre=/home/LAB/chengr/pcre-8.43</span><br></pre></td></tr></table></figure>
+
+<p>安装zlib</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://prdownloads.sourceforge.net/libpng/zlib-1.2.11.tar.gz</span><br><span class="line"> ./configure  --prefix=/home/LAB/chengr/zlib</span><br><span class="line"> make &amp;&amp; make check &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>安装 nginx，官网配置说明 ：<a href="https://nginx.org/en/docs/configure.html" target="_blank" rel="noopener">https://nginx.org/en/docs/configure.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O http://nginx.org/download/nginx-1.15.8.tar.gz</span><br><span class="line">tar -zvxf nginx-1.15.8.tar.gz</span><br><span class="line">cd nginx-1.15.8</span><br><span class="line">(./configure: error: the HTTP rewrite module requires the PCRE library.)</span><br><span class="line">(./configure: error: the HTTP magzip module requires the zlib library.)</span><br><span class="line">与nginx模块一起编译，要求指定源码目录</span><br><span class="line">./configure --prefix=/home/LAB/chengr/nginx  --with-pcre=/home/LAB/chengr/pcre-8.39  --with-zlib=/home/LAB/chengr/zlib-1.2.11</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>下载openssl(配置openresty)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O https://www.openssl.org/source/openssl-1.0.2r.tar.gz(https://www.openssl.org/source/)</span><br><span class="line">tar -zvxf openssl-1.0.2r.tar.gz</span><br><span class="line">./config --prefix=/home/LAB/chengr/openssl  -fPIC no-gost no-shared no-zlib</span><br><span class="line">make depend</span><br></pre></td></tr></table></figure>
+
+<p>安装luarock:<br>按照教程来 <a href="https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Unix" target="_blank" rel="noopener">https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Unix</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">（其中configure 改为./configure    --prefix=/home/LAB/chengr/luarocks   --lua-suffix=jit    --with-lua=/home/LAB/chengr/openresty/luajit    --with-lua-include=/home/LAB/chengr/openresty/luajit/include/luajit-2.1）</span><br><span class="line">make</span><br><span class="line">  make install</span><br><span class="line">  make bootstrap</span><br></pre></td></tr></table></figure>
+
+<p>安装 openresty 官网教程：<a href="https://openresty.org/cn/installation.html" target="_blank" rel="noopener">https://openresty.org/cn/installation.html</a>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O https://openresty.org/download/openresty-1.13.6.2.tar.gz  </span><br><span class="line">tar -xzvf openresty-1.13.6.2.tar.gz  </span><br><span class="line">cd cd openresty-1.13.6.2  </span><br><span class="line">mkdir openresty  </span><br><span class="line">./configure --prefix=/home/LAB/chengr/openresty  --with-luajit --with-stream   --with-http_iconv_module --with-http_realip_module   --with-ld-opt=&quot;-Wl,-rpath,/usr/local/lib&quot;  --with-http_stub_status_module   --with-http_ssl_module --with-http_sub_module  </span><br><span class="line">//按照kong官网要求加上如下配置  </span><br><span class="line">   --with-pcre-jit </span><br><span class="line">   --with-http_ssl_module </span><br><span class="line">   --with-http_realip_module </span><br><span class="line">   --with-http_stub_status_module </span><br><span class="line">   --with-http_v2_module   </span><br><span class="line">   --with-openssl=/home/LAB/chengr/openssl-1.0.2r</span><br><span class="line"></span><br><span class="line">make   </span><br><span class="line">sudo make install</span><br><span class="line">【】</span><br></pre></td></tr></table></figure>
+
+<p>安装postgresql （官网教程：<a href="https://www.postgresql.org/docs/current/install-procedure.html）" target="_blank" rel="noopener">https://www.postgresql.org/docs/current/install-procedure.html）</a>  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O https://ftp.postgresql.org/pub/source/v11.2/postgresql-11.2.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p>按安装性能测试工具：siege ab</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O http://download.joedog.org/siege/siege-4.0.4.tar.gz</span><br><span class="line">tar -zvxf siege-4.0.4.tar.gz   </span><br><span class="line">cd siege-4.0.4</span><br><span class="line">./configure --prefix=/home/LAB/chengr/siege  </span><br><span class="line">make     </span><br><span class="line">sudo make install   </span><br><span class="line"> siege/bin/siege –help</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>ab（需要提前安装 apr 、apr-util、pcre、openssl）<br>apr</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://archive.apache.org/dist/apr/apr-1.4.5.tar.gz</span><br><span class="line">tar -zxf apr-1.4.5.tar.gz  </span><br><span class="line">cd  apr-1.4.5  </span><br><span class="line">./configure --prefix=/home/LAB/chengr/apr  </span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>apr-util</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://archive.apache.org/dist/apr/apr-util-1.3.12.tar.gz</span><br><span class="line">tar -zxf apr-util-1.3.12.tar.gz</span><br><span class="line">cd apr-util-1.3.12</span><br><span class="line">./configure --prefix=/home/LAB/chengr/apr-util --with-apr=/home/LAB/chengr/apr/</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>pcre</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://jaist.dl.sourceforge.net/project/pcre/pcre/8.39/pcre-8.39.tar.gz</span><br><span class="line">tar -zxf pcre-8.39.tar.gz</span><br><span class="line">cd pcre-8.10</span><br><span class="line">./configure --prefix=/home/LAB/chengr/pcre</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>最终安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd httpd-2.4.38</span><br><span class="line">./configure --prefix=/home/LAB/chengr/httpd --with-apr=/home/LAB/chengr/apr --with-apr-util=/home/LAB/chengr/apr-util --with-pcre=/home/LAB/chengr/pcre --enable-ssl --with-ssl=/home/LAB/chengr/openssl</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+
+<p>curl -# -O <a href="https://www-us.apache.org/dist//httpd/httpd-2.4.38.tar.gz" target="_blank" rel="noopener">https://www-us.apache.org/dist//httpd/httpd-2.4.38.tar.gz</a></p>
+<p>按照教程安装 <a href="https://www.cnblogs.com/chevin/p/10222681.html" target="_blank" rel="noopener">https://www.cnblogs.com/chevin/p/10222681.html</a></p>
+<p>（下载 httpd wget <a href="https://www.apache.org/dist/httpd/httpd-2.4.38.tar.gz" target="_blank" rel="noopener">https://www.apache.org/dist/httpd/httpd-2.4.38.tar.gz</a> ）</p>
+<p>./config –prefix=/home/LAB/chengr/openssl  -fPIC no-gost no-shared no-zlib<br>make depend<br>解决：<a href="http://www.bubuko.com/infodetail-621556.html" target="_blank" rel="noopener">http://www.bubuko.com/infodetail-621556.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">chengr@bd46:~$ tree -L 2 -d</span><br><span class="line">.</span><br><span class="line">|-- apr</span><br><span class="line">|   |-- bin</span><br><span class="line">|   `-- lib</span><br><span class="line"></span><br><span class="line">|-- apr-util</span><br><span class="line">|   |-- bin</span><br><span class="line">|   `-- lib</span><br><span class="line">|-- httpd</span><br><span class="line">|   |-- bin</span><br><span class="line">|   |-- build</span><br><span class="line">|   |-- cgi-bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">|-- openssl</span><br><span class="line">|   |-- bin</span><br><span class="line">|   |-- lib</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">|   `-- VMS</span><br><span class="line">|-- pcre</span><br><span class="line">|   |-- bin</span><br><span class="line">|   |-- lib</span><br><span class="line"></span><br><span class="line">|-- siege</span><br><span class="line">|   |-- bin</span><br></pre></td></tr></table></figure>
+
+<p>添加到环境变量中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">#add for apr 2019-3-10</span><br><span class="line">export APR_HOME=/home/LAB/chengr/apr</span><br><span class="line">export PATH=$PATH:$APR_HOME/bin</span><br><span class="line">#export LIB_PATH+=$APR_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for apr-util 2019-3-10</span><br><span class="line">export APRUTIL_HOME=/home/LAB/chengr/apr-util</span><br><span class="line">export PATH=$PATH:$APRUTIL_HOME/bin</span><br><span class="line">#export LIB_PATH+=$APRUTIL_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for httpd 2019-3-10</span><br><span class="line">export HTTPD_HOME=/home/LAB/chengr/httpd</span><br><span class="line">export PATH=$PATH:$HTTPD_HOME/bin</span><br><span class="line">#export LIB_PATH+=$HTTPD_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for openssl 2019-3-10</span><br><span class="line">export OPENSSL_HOME=/home/LAB/chengr/openssl</span><br><span class="line">export PATH=$PATH:$OPENSSL_HOME/bin</span><br><span class="line">#export LIB_PATH+=$OPENSSL_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for pcre 2019-3-10</span><br><span class="line">export PCRE_HOME=/home/LAB/chengr/pcre</span><br><span class="line">export PATH=$PATH:$PCRE_HOME/bin</span><br><span class="line">#export LIB_PATH+=$HTTPD_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for siege 2019-3-10</span><br><span class="line">export SIEGE_HOME=/home/LAB/chengr/siege</span><br><span class="line">export PATH=$PATH:$SIEGE_HOME/bin</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for luarocks 2019-3-10</span><br><span class="line">export LUAROCKS_HOME=/home/LAB/chengr/luarocks</span><br><span class="line">export PATH=$PATH:$LUAROCKS_HOME/bin</span><br><span class="line">#export LIB_PATH+=$LUAROCKS_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for nginx 2019-3-10</span><br><span class="line">export NGINX_HOME=/home/LAB/chengr/nginx</span><br><span class="line">export PATH=$PATH:$NGINX_HOME/sbin</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for openresty 2019-3-10</span><br><span class="line">export OPENRESTY_HOME=/home/LAB/chengr/openresty</span><br><span class="line">export PATH=$PATH:$OPENRESTY_HOME/bin</span><br><span class="line">#export LIB_PATH+=$OPENRESTY_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for postgresql 2019-3-10</span><br><span class="line">export POSTGRESQL_HOME=/home/LAB/chengr/postgresql</span><br><span class="line">export PATH=$PATH:$POSTGRESQL_HOME/bin</span><br><span class="line">#export LIB_PATH+=$POSTGRESQL_HOME/lib</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+
+<p>jhipster<br><a href="https://blog.csdn.net/zhao50632/article/details/54582177" target="_blank" rel="noopener">https://blog.csdn.net/zhao50632/article/details/54582177</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/03/08/openresty-source-compile/" data-id="ck30bilbs001v40u1q4jps6vw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-nginx-mongodb" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/03/06/nginx-mongodb/" class="article-date">
@@ -98,7 +228,7 @@ https://github.com/mdirolf/nginx-gridfs
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/06/nginx-mongodb/" data-id="ck2rfb9o7001b08u1lnr336xt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/06/nginx-mongodb/" data-id="ck30bilbn001p40u1hh99mll7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -138,7 +268,7 @@ https://github.com/mdirolf/nginx-gridfs
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/03/06/API-Key/" data-id="ck2rfb9mm000108u1mli2v2lc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/03/06/API-Key/" data-id="ck30bila9000140u1ji30yad7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -166,7 +296,7 @@ https://github.com/mdirolf/nginx-gridfs
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Competition-ML/">Competition ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Competition-ML/">Competition ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
     </div>
   </div>
 
@@ -176,7 +306,7 @@ https://github.com/mdirolf/nginx-gridfs
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Competition-ML/" style="font-size: 10px;">Competition ML</a> <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+      <a href="/tags/Competition-ML/" style="font-size: 10px;">Competition ML</a> <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
     </div>
   </div>
 
@@ -198,6 +328,14 @@ https://github.com/mdirolf/nginx-gridfs
       <ul>
         
           <li>
+            <a href="/2019/11/15/部署/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/15/markdown/">Learn Markdown</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/09/迁移/">系统迁移</a>
           </li>
         
@@ -207,14 +345,6 @@ https://github.com/mdirolf/nginx-gridfs
         
           <li>
             <a href="/2019/10/27/分布式算法/">distributed algorithm</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/19/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/19/centos/">(no title)</a>
           </li>
         
       </ul>

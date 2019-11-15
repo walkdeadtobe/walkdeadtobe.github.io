@@ -62,6 +62,101 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Paxos" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/08/12/Paxos/" class="article-date">
+  <time datetime="2019-08-12T05:40:30.000Z" itemprop="datePublished">2019-08-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/12/Paxos/">Paxos</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>博客列表：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/hugb/p/8955505.html" target="_blank" rel="noopener">图解分布式一致性协议Paxos</a></li>
+</ul>
+<p>相关概念</p>
+<ul>
+<li>拜占庭模型: <ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">wiki 拜占庭问题</a> </li>
+<li>分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。</li>
+</ul>
+</li>
+<li>非拜占庭模型：<ul>
+<li>指可能出现故障，但是不会伪造信息的情况(即，要么收不到信息，要么收到真实的信息)</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/08/12/Paxos/" data-id="ck30bilaj000a40u1ywaoie7h" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-go" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/07/22/go/" class="article-date">
+  <time datetime="2019-07-22T07:42:16.000Z" itemprop="datePublished">2019-07-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/22/go/">go</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>分布式系统学习第一弹<br><a href="https://pdos.csail.mit.edu/6.824/labs/lab-1.html" target="_blank" rel="noopener">MIT 6.824</a><br>按照课程要求，下载源码<br>修改一：添加日志，在 go  init 函数更改日志格式,使得输出时带位置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//init log format</span><br><span class="line">func init()&#123;</span><br><span class="line">    log.SetFlags(log.Ldate| log.Lshortfile |log.Ltime |log.LUTC)</span><br><span class="line">&#125;</span><br><span class="line">//样例输出</span><br><span class="line">2019/07/22 07:34:41 master_splitmerge.go:23: Merge: open mrtmp.test-res-0: no such file or directory</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/07/22/go/" data-id="ck30bilaz000w40u1kond9wic" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-lua" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/07/10/lua/" class="article-date">
@@ -90,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/10/lua/" data-id="ck2rfb9o1001408u1tg1co13c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/10/lua/" data-id="ck30bilbf001c40u1k1j8nout" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lua/">lua</a></li></ul>
@@ -137,7 +232,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/09/regex/" data-id="ck2rfb9oh001n08u1m5gbxrwp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/09/regex/" data-id="ck30bilbt001w40u11v3co6bg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则表达式/">正则表达式</a></li></ul>
@@ -220,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/07/04/bug记录和解决/" data-id="ck2rfb9nh000l08u157pwxyol" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/07/04/bug记录和解决/" data-id="ck30bilar000j40u1ppbpwguk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -290,7 +385,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/29/nginx/" data-id="ck2rfb9oa001f08u1c8lgicfd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/29/nginx/" data-id="ck30bilbo001r40u1i9esskz8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -332,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/22/psql/" data-id="ck2rfb9oc001h08u1iq7mctn7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/22/psql/" data-id="ck30bilbr001u40u1b6349l90" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
@@ -374,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/19/系统配置/" data-id="ck2rfb9p3002f08u1bgnadaxm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/19/系统配置/" data-id="ck30bilcb002l40u1w6vynzfg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
@@ -422,7 +517,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/17/bwg/" data-id="ck2rfb9nn000p08u129x1xfkn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/17/bwg/" data-id="ck30bilau000n40u14j6mc70t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vpn/">vpn</a></li></ul>
@@ -465,129 +560,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/27/跨域问题小结/" data-id="ck2rfb9ox002608u14k5d8v7i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/05/27/跨域问题小结/" data-id="ck30bilce002p40u108a7b64g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cross-domain/">cross_domain</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-微服务授权" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/22/微服务授权/" class="article-date">
-  <time datetime="2019-05-22T13:08:04.000Z" itemprop="datePublished">2019-05-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/22/微服务授权/">微服务授权</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>目前准备使用外部授权认证服务与kong结合，kong可能制作简单的限流任务；<br>经过查询，发现kong在这里提供两个插件<br><a href="https://docs.konghq.com/hub/kong-inc/oauth2/" target="_blank" rel="noopener">OAuth 2.0 Authentication</a><br>和 <a href="https://docs.konghq.com/hub/kong-inc/oauth2-introspection/" target="_blank" rel="noopener">OAuth 2.0 Introspection</a><br>前者主要可以提供Oauth 认证服务，而后者支持第三方的授权认证服务器，不过仅支持企业版<br>最后找到一个github同仁自己基于 lua开发的相关插件，<a href="https://github.com/mogui/kong-external-oauth" target="_blank" rel="noopener">链接</a></p>
-<p>安装 这个额外插件，重新启动kong 时，luarock 需要luacrypto 去完成加密相关操作，故直接即可  sudo luarocks install luacrypto（从源码配置有点麻烦）</p>
-<p>Spring Security 源码分析系列博客<br><a href="https://niocoder.com/categories/#Security" target="_blank" rel="noopener">链接1</a><br><a href="http://www.liuhaihua.cn/%E5%8F%B2%E4%B8%8A%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84-springcloud-%E6%95%99%E7%A8%8B" target="_blank" rel="noopener">链接2</a></p>
-<p>spring 讲解<br><a href="https://www.cnblogs.com/RunForLove/p/4641672.html" target="_blank" rel="noopener">链接1</a></p>
-<p>spring 默认配置<br><a href="https://www.jianshu.com/p/b02691ff4093" target="_blank" rel="noopener">链接1</a></p>
-<p>springboot+springsecurity+oauth2整合(并用mysql数据库实现持久化客户端数据 <a href="https://blog.csdn.net/Victor_An/article/details/81510874" target="_blank" rel="noopener">链接1</a></p>
-<p>spring登录认证 与 token<br><a href="https://www.huangyunkun.com/2016/03/02/spring-security-form-to-token/" target="_blank" rel="noopener">链接1</a><br><a href="https://www.jianshu.com/p/19059060036b" target="_blank" rel="noopener">链接2</a><br><a href="https://www.jianshu.com/p/68779236aa23" target="_blank" rel="noopener">链接3</a><br><a href="https://www.cnblogs.com/xifengxiaoma/p/10043173.html" target="_blank" rel="noopener">链接4 个人觉得最详细</a><br>access_token 获取过程 <a href="https://www.cnblogs.com/lexiaofei/p/7152326.html?utm_source=itdadao&utm_medium=referral" target="_blank" rel="noopener">链接1</a></p>
-<p>access_token 更改返回 <a href="https://www.jianshu.com/p/d9a35facff6f" target="_blank" rel="noopener">链接1</a></p>
-<p>oauth2数据库 表的说明 <a href="https://www.cnblogs.com/donglu/articles/10218348.html" target="_blank" rel="noopener">链接1</a><br><a href="https://www.bbsmax.com/A/qVdeeNmndP/" target="_blank" rel="noopener">链接2</a><br><a href="http://www.andaily.com/spring-oauth-server/db_table_description.html" target="_blank" rel="noopener">链接3</a></p>
-<p>oauth2 授权过程说明 来自知乎<a href="https://www.zhihu.com/question/19781476" target="_blank" rel="noopener">链接1</a><br><a href="http://andaily.com/spring-oauth-server/db_table_description.html" target="_blank" rel="noopener">链接2</a></p>
-<p>接口测试链接(备用)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">POST http://localhost:8082/oauth/token?grant_type=client_credentials&amp;client_id=curl_client&amp;client_secret=user</span><br><span class="line"></span><br><span class="line">GET http://localhost:8082/oauth/check_token?grant_type=client_credentials&amp;token=445d302d-4fa1-49c4-8800-617bd72dd1e9</span><br></pre></td></tr></table></figure>
-
-<p>在直接使用JdbcClientDetailsService 直接查询数据时，出现变量为null<br>即在非controller 层使用 @AUtowired时，无法取得变量<br>使用 如下方法 解决  <a href="https://blog.csdn.net/u013294097/article/details/84192367" target="_blank" rel="noopener">链接</a></p>
-<p>error</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data too long for oauth_code column &apos;authentication&apos;</span><br><span class="line">这是在oauth服务器中获取oauth_code时往数据库插入值时，发生的意外，在网上找到许多奇奇怪怪的方法，行不通，最后发现自己在数据库oauth建表是oauth_code 表 authentication 表项为 VARBINARY 而实际应该是 LONG VARBINARY</span><br></pre></td></tr></table></figure>
-
-<p>2019-5-21</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">目前，打算借助oauth2 实现SSO ,利用client_credential 来识别不同系统或者应用，只不过比较困惑的是如何定义用户的权限(目前做demou先不考虑)</span><br></pre></td></tr></table></figure>
-
-<p>2019-5-23<br>认证流程<br>1.系统A检测是否有token，没有跳转</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8082/oauth/authorize?client_id=test&amp;redirect_uri=http://127.0.0.1&amp;response_type=code&amp;scope=read</span><br></pre></td></tr></table></figure>
-
-<p>2.填写用户名与密码（图片不对，待更换）<br><img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="登录_png"><br>3.返回相应code 到系统A，系统A根据code到授权服务器申请token（部分图片错误，待更改）</p>
-<blockquote>
-<p>获取code<br><img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="获取code_png"></p>
-</blockquote>
-<blockquote>
-<p>根据code获取token<br><img src="https://github.com/walkdeadtobe/picture/raw/master/code_token.png" alt="获取token_png"></p>
-</blockquote>
-<p>4.系统检测到token后，需要到授权系统检测该token对应的用户权限</p>
-<blockquote>
-<p>获取token所对应用户权限<br><img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="检测token_png"></p>
-</blockquote>
-<p>2019-7-24<br>最近涉及到单点登陆系统记住用户所登陆的系统，下次访问默认登陆,经过思考可以在cookie里面添加tag字段,在接受登陆请求之后标志所登陆的系统,下次登陆时可以以此作为标志,此外应当保证登陆另外一个系统时，字段值更改(js),这就需要后端向前端传值,由于sprig boot里传递的是modelandview 所以不采用在url链接链接里附上参数的方法，转而 controller层通过Model对象传值到对应的返回页面，返回页面获得相应的参数来做处理;<br>前端页面我 使用 thymeleaf模板引擎 渲染,其也有相应的方法取值<br>后端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/login&quot;)</span><br><span class="line">    public ModelAndView loginPage(HttpServletRequest request, HttpServletResponse response) &#123;</span><br><span class="line">        RequestCache requestCache= new HttpSessionRequestCache();</span><br><span class="line">        SavedRequest savedrequest = requestCache.getRequest(request,response);</span><br><span class="line">        ModelAndView model = new ModelAndView(&quot;login&quot;);</span><br><span class="line">        model.addObject(&quot;from&quot;, &quot;all&quot;);</span><br><span class="line">       return model;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>前端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">var s_from = [[$&#123;from&#125;]];</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;p  th:text=&quot;#&#123;from&#125;&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-
-<p>此外，由于需要获得服务启动时服务本身的端口号，需要配置读取 Application.yml 的配置信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># @ConfigurationProperties 注解依赖</span><br><span class="line">&lt;dependency&gt;  </span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  </span><br><span class="line">    &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;  </span><br><span class="line">    &lt;optional&gt;true&lt;/optional&gt;  </span><br><span class="line">&lt;/dependency&gt;  </span><br><span class="line"></span><br><span class="line">#Application.yml 部分内容</span><br><span class="line">server:</span><br><span class="line">  port: 80</span><br><span class="line">  address: 0.0.0.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 配置类</span><br><span class="line">package com.aak.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">@ConfigurationProperties(prefix=&quot;server&quot;) //接收application.yml中的server下面的属性</span><br><span class="line">public class MyApplication &#123;</span><br><span class="line">    public String address;</span><br><span class="line">    public String port;</span><br><span class="line">    public String getUrl() &#123;</span><br><span class="line">        return address;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUrl(String Url) &#123;</span><br><span class="line">        this.address = Url;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getPort() &#123;</span><br><span class="line">        return port;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setPort(String port) &#123;</span><br><span class="line">        this.port = port;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#使用</span><br><span class="line">@Autowired</span><br><span class="line">private MyApplication myApplication ;</span><br><span class="line">String port=myApplication.getPort();</span><br><span class="line">log.info(&quot;port:&quot;+port);</span><br></pre></td></tr></table></figure>
-
-<p>2019-8-5<br>spring security oauth2 authorization code模式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[Spring Security Oauth 相关配置默认实现](https://docs.spring.io/spring-security/oauth/apidocs/org/springframework/security/oauth2/provider/endpoint/package-summary.html),其中包含(后期重新排版)</span><br><span class="line">AuthorizationEndpoint:Implementation of the Authorization Endpoint from the OAuth2 specification.</span><br><span class="line">CheckTokenEndpoint:Controller which decodes access tokens for clients who are not able to do so (or where opaque token values are used).</span><br><span class="line">DefaultRedirectResolver:Default implementation for a redirect resolver.</span><br><span class="line">ExactMatchRedirectResolver:Strict implementation for a redirect resolver which requires an exact match between the registered and requested redirect_uri.</span><br><span class="line">FrameworkEndpointHandlerMapping:A handler mapping for framework endpoints (those annotated with @FrameworkEndpoint).</span><br><span class="line">TokenEndpoint:Endpoint for token requests as described in the OAuth2 spec.</span><br><span class="line">TokenEndpointAuthenticationFilter:An optional authentication filter for the TokenEndpoint.</span><br><span class="line">TokenKeyEndpoint:OAuth2 token services that produces JWT encoded token values.</span><br><span class="line">WhitelabelApprovalEndpoint:Controller for displaying the approval page for the authorization server.</span><br><span class="line">WhitelabelErrorEndpoint:Controller for displaying the error page for the authorization server.</span><br><span class="line"></span><br><span class="line">最近需要在单点登录系统中实现在登录完成之后.跳转回系统跳转登录的页面</span><br><span class="line">code 模式下, </span><br><span class="line">1.跳转 http://localhost:8080/oauth/authorize?client_id=test2&amp;redirect_uri=http://127.0.0.1/oauth/code&amp;response_type=code&amp;scope=read</span><br><span class="line">2.登录成功之后返回code即重定向至http://127.0.0.1/oauth/code?code=CODE</span><br><span class="line">3.http://127.0.0.1/oauth/code?code=CODE获取code,传至后端,后端由此可以根据code获取token以Set-Cookie的方式返回response到页面</span><br><span class="line"></span><br><span class="line">AuthorizationEndpoint 实现 /oauth/authorize 接口,[实现流程](https://www.cnblogs.com/xifengxiaoma/p/10043173.html)中首先检验相关信息正确,之后在code模式下会生成code,并跳转回 redirect_uri?code=CODE</span><br><span class="line">最初以为需要重写 [AuthorizationEndpoint 实现](http://www.javased.com/?source_dir=spring-security-oauth/spring-security-oauth2/src/main/java/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java) 下面 /oauth/authorize 接口,使得最终重定向到redirect_uri后在链接中添加上跳转发生时来源的网址.经过调查没有找到重写 AuthorizationEndpoint 类的方法(spring security 没有提供接口,使得重写类覆盖默认类, 发生作用)</span><br><span class="line">后来发现 跳转时 是 由 window.location.href 实现的,但是无法像request请求一样 拥有 referer header ,即使能够重写 AuthorizationEndpoint 类,也不能从保存的请求中获取 相关header,只能在跳转链接中附上相关信息(暂时没有调研,是否可以在跳转的同时携带相关信息);</span><br><span class="line">问题在于 跳转回redirect_uri是在AuthorizationEndpoint 实现的,具体的地址已经配置好,而且没有找到相关的filter可以在这处理发生后拦截,进行相关逻辑处理,之后想到可以把 redirect_u redirect_uri 中,即redirect_uri=/oauth/code?back_to=原本处理code的地址</span><br><span class="line">以及可以在 跳转链接上 附上 window.location 信息(refer=window.location),然后在 login 中保存相关信息到 当前session,然后在接口中/oauth/code 接口实现中,提取出back_to和 code值,以及附上从session 获得的refer,返回,告知back_to获得token 后应当跳转的地址</span><br><span class="line">完整链接如下:</span><br><span class="line">window.location.href=&apos;http://localhost:8080/oauth/authorize?client_id=test2&amp;redirect_uri=/oauth/code?back_to=http://127.0.0.1/oauth/code&amp;response_type=code&amp;scope=read&amp;refer=&apos;+window.location</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/22/微服务授权/" data-id="ck2rfb9pg002w08u1sy8eea91" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-watch_dog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/05/21/watch_dog/" class="article-date">
-  <time datetime="2019-05-21T08:12:45.000Z" itemprop="datePublished">2019-05-21</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/05/21/watch_dog/">watch_dog</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>由于需要某些程序一直运行，或者能够自动重启，由此接触到看门狗程序这一概念</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/05/21/watch_dog/" data-id="ck2rfb9om001s08u1dtrjburp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/script/">script</a></li></ul>
 
     </footer>
   </div>
@@ -614,7 +590,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Competition-ML/">Competition ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Competition-ML/">Competition ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Distributed-System-一致性/">Distributed System 一致性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MIT6-824/">MIT6.824</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ML/">ML</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Microservice/">Microservice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm/">algorithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algorithm-一致性-分布式/">algorithm 一致性 分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/algrithm/">algrithm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cross-domain/">cross_domain</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/deep-learning/">deep learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lua/">lua</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth/">oauth</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oauth-spring-security/">oauth + spring security</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-爬虫/">python,爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/script/">script</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/windows-terminal/">windows terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分布式/">分布式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/模式识别/">模式识别</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则表达式/">正则表达式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自然语言处理/">自然语言处理</a></li></ul>
     </div>
   </div>
 
@@ -624,7 +600,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Competition-ML/" style="font-size: 10px;">Competition ML</a> <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
+      <a href="/tags/Competition-ML/" style="font-size: 10px;">Competition ML</a> <a href="/tags/Distributed-System-一致性/" style="font-size: 10px;">Distributed System 一致性</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/MIT6-824/" style="font-size: 10px;">MIT6.824</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Markdown/" style="font-size: 10px;">Markdown</a> <a href="/tags/Microservice/" style="font-size: 10px;">Microservice</a> <a href="/tags/algorithm/" style="font-size: 20px;">algorithm</a> <a href="/tags/algorithm-一致性-分布式/" style="font-size: 10px;">algorithm 一致性 分布式</a> <a href="/tags/algrithm/" style="font-size: 10px;">algrithm</a> <a href="/tags/cross-domain/" style="font-size: 10px;">cross_domain</a> <a href="/tags/deep-learning/" style="font-size: 10px;">deep learning</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/oauth/" style="font-size: 10px;">oauth</a> <a href="/tags/oauth-spring-security/" style="font-size: 10px;">oauth + spring security</a> <a href="/tags/python-爬虫/" style="font-size: 10px;">python,爬虫</a> <a href="/tags/script/" style="font-size: 10px;">script</a> <a href="/tags/vpn/" style="font-size: 10px;">vpn</a> <a href="/tags/windows-terminal/" style="font-size: 10px;">windows terminal</a> <a href="/tags/分布式/" style="font-size: 10px;">分布式</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/模式识别/" style="font-size: 15px;">模式识别</a> <a href="/tags/正则表达式/" style="font-size: 10px;">正则表达式</a> <a href="/tags/自然语言处理/" style="font-size: 10px;">自然语言处理</a>
     </div>
   </div>
 
@@ -646,6 +622,14 @@
       <ul>
         
           <li>
+            <a href="/2019/11/15/部署/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2019/11/15/markdown/">Learn Markdown</a>
+          </li>
+        
+          <li>
             <a href="/2019/11/09/迁移/">系统迁移</a>
           </li>
         
@@ -655,14 +639,6 @@
         
           <li>
             <a href="/2019/10/27/分布式算法/">distributed algorithm</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/19/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2019/09/19/centos/">(no title)</a>
           </li>
         
       </ul>
