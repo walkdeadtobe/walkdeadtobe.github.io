@@ -229,6 +229,252 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/22/psql/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/22/psql/" itemprop="url">postgresql</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-22T19:31:56+08:00">
+                2019-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>按照官网教程安装postgresql数据库<br><a href="https://www.postgresql.org/download/linux/redhat/" target="_blank" rel="noopener">https://www.postgresql.org/download/linux/redhat/</a><br>输入</p>
+<blockquote>
+<p>su - postgres<br>进入 postgresql 用户<br>输入<br>psql<br>进入数据库<br>输入<br>\c kong<br>切换数据库<br>输入<br>select * from pg_tables where schemaname = ‘public’;<br>查询该数据库的所有表</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/系统配置/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/06/19/系统配置/" itemprop="url">系统配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-19T19:17:38+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>安装mysql，按照官网教程来即可 <a href="https://dev.mysql.com/doc/refman/8.0/en/linux-installation-yum-repo.html" target="_blank" rel="noopener">官网连接</a><br>在 windows 下安装MySQL时会出现错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">D:\Software\Mysql-8.0.17-winx64\bin&gt;net start MySQL</span><br><span class="line">服务没有响应控制功能。</span><br><span class="line">请键入 NET HELPMSG 2186 以获得更多的帮助。</span><br></pre></td></tr></table></figure>
+
+<p>解决方法：在windows 服务控制中，设置MySQL服务的属性-&gt;登陆-&gt;登陆身份  中设置身份为此身份，身份应当有Administration权限<br>安装java</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/17/bwg/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -765,126 +1011,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/spring security 和 oauth 认证中涉及的环节/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/15/spring security 和 oauth 认证中涉及的环节/" itemprop="url">spring security 和 oauth 认证中涉及的环节</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-15T17:03:39+08:00">
-                2019-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>spring security 和 oauth 认证中涉及的环节<br>‘’’<br>UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication<br>所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，<br>然后生成的Authentication会被交由AuthenticationManager来进行管理<br>而AuthenticationManager管理一系列的AuthenticationProvider，<br>而每一个Provider都会通UserDetailsService和UserDetail来返回一个<br>以UsernamePasswordAuthenticationToken实现的带用户名和密码以及权限的Authentication<br>url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" rel="noopener">https://www.cnblogs.com/softidea/p/6716807.html</a><br>‘’’</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/运维/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1015,6 +1141,126 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">curl -i -X POST   --url http://localhost:8001/services/-search/routes  --data &apos;paths=/api/v1/data/es/list_user&apos;</span><br><span class="line">curl -X POST http://localhost:8001/routes/ad0226f7-0877-4557-b81b-f30cd227cf61/plugins --data &quot;name=kong-plugin-template-transformer&quot;   --data &quot;config.request_template=&#123;</span><br><span class="line">    \&quot;query\&quot;: &#123;</span><br><span class="line">      \&quot;bool\&quot;: &#123;</span><br><span class="line">      \&quot;filter\&quot;: &#123;</span><br><span class="line">                \&quot;range\&quot;: &#123;</span><br><span class="line">                  \&quot;@timestamp\&quot;: &#123;</span><br><span class="line">                    \&quot;gte\&quot;: \&quot;now-&#123;&#123;headers.gt&#125;&#125;h/h\&quot;,</span><br><span class="line">                    \&quot;lte\&quot;: \&quot;now/h\&quot;,</span><br><span class="line">                    \&quot;format\&quot;: \&quot;epoch_millis\&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">  \&quot;size\&quot;:0,</span><br><span class="line">  \&quot;aggs\&quot;: &#123;</span><br><span class="line">    \&quot;test\&quot;: &#123;</span><br><span class="line">      \&quot;terms\&quot;: &#123;</span><br><span class="line">        \&quot;field\&quot;: \&quot;user.keyword\&quot;,</span><br><span class="line">        \&quot;size\&quot;:&#123;&#123;headers.size&#125;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;&quot;</span><br></pre></td></tr></table></figure>
 
 <p>luarocks make<br>luarocks pack kong-plugin-myplugin 0.1.0-1<br>luarocks install kong-plugin-myplugin-0.1.0-1.all.rock<br>kong restart</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/spring security 和 oauth 认证中涉及的环节/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/15/spring security 和 oauth 认证中涉及的环节/" itemprop="url">spring security 和 oauth 认证中涉及的环节</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-15T17:03:39+08:00">
+                2019-05-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>spring security 和 oauth 认证中涉及的环节<br>‘’’<br>UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication<br>所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，<br>然后生成的Authentication会被交由AuthenticationManager来进行管理<br>而AuthenticationManager管理一系列的AuthenticationProvider，<br>而每一个Provider都会通UserDetailsService和UserDetail来返回一个<br>以UsernamePasswordAuthenticationToken实现的带用户名和密码以及权限的Authentication<br>url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" rel="noopener">https://www.cnblogs.com/softidea/p/6716807.html</a><br>‘’’</p>
 
           
         
@@ -1312,255 +1558,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/28/NLP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/28/NLP/" itemprop="url">NLP</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-28T16:42:56+08:00">
-                2019-04-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2019-4-28 周日下午<br>    NLP aligment</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/人脸识别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/27/人脸识别/" itemprop="url">人脸识别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-27T22:00:32+08:00">
-                2019-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>PCA方法学习：解释得比较清楚<br><a href="https://blog.csdn.net/qq_32865355/article/details/80809835" target="_blank" rel="noopener">https://blog.csdn.net/qq_32865355/article/details/80809835</a></p>
-<p>github 开源方案<br><a href="https://github.com/ahhda/Face-Recogntion" target="_blank" rel="noopener">https://github.com/ahhda/Face-Recogntion</a><br><a href="https://github.com/ageitgey/face_recognition" target="_blank" rel="noopener">https://github.com/ageitgey/face_recognition</a></p>
-<p>相关论文<br><a href="https://blog.csdn.net/tMb8Z9Vdm66wH68VX1/article/details/83155487" target="_blank" rel="noopener">https://blog.csdn.net/tMb8Z9Vdm66wH68VX1/article/details/83155487</a></p>
-<p>CNN 实现 人脸识别<br><a href="https://blog.csdn.net/u012162613/article/details/43277187" target="_blank" rel="noopener">https://blog.csdn.net/u012162613/article/details/43277187</a><br><a href="https://blog.csdn.net/zouxy09/article/details/8781543" target="_blank" rel="noopener">https://blog.csdn.net/zouxy09/article/details/8781543</a></p>
-<p>相关github 代码<br><a href="https://github.com/wepe/MachineLearning" target="_blank" rel="noopener">https://github.com/wepe/MachineLearning</a></p>
-<p>faceCascade.detectMultiScale 从图像中找出人脸<br>theano.shared可以看作是将变量设置为全局变量，其值可以在多个函数中共用<br>theano.tensor.dot(X, Y) 简单的看做XY 矩阵相乘 或者说 内积<br>maxpooling 、average_pooling ？？</p>
-<p>tensor库函数解释<br><a href="http://deeplearning.net/software/theano/library/tensor/basic.html" target="_blank" rel="noopener">http://deeplearning.net/software/theano/library/tensor/basic.html</a></p>
-<p>损失函数的分类（交叉熵） <a href="https://www.jianshu.com/p/47172eb86b39" target="_blank" rel="noopener">https://www.jianshu.com/p/47172eb86b39</a></p>
-<p>神经网络 数学公式 表达 <a href="https://blog.csdn.net/sinat_35821976/article/details/80615612" target="_blank" rel="noopener">https://blog.csdn.net/sinat_35821976/article/details/80615612</a></p>
-<p>分类器用的是softmax  <a href="https://www.cnblogs.com/python-frog/p/9380290.html" target="_blank" rel="noopener">https://www.cnblogs.com/python-frog/p/9380290.html</a><br>，LeNet5用的是rbf？？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1611,7 +1608,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1624,7 +1621,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

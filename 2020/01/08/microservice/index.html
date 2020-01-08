@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linuxhttps://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux v1.13.0 更改镜像 https://coding.imooc.com/l">
+<meta name="description" content="#对于错误[unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-lo">
 <meta name="keywords" content="microservice deployment">
 <meta property="og:type" content="article">
 <meta property="og:title" content="microservice 部署">
 <meta property="og:url" content="http://yoursite.com/2020/01/08/microservice/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linuxhttps://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux v1.13.0 更改镜像 https://coding.imooc.com/l">
+<meta property="og:description" content="#对于错误[unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-lo">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-08T16:14:37.592Z">
+<meta property="og:updated_time" content="2020-01-08T16:46:23.697Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="microservice 部署">
-<meta name="twitter:description" content="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linuxhttps://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux v1.13.0 更改镜像 https://coding.imooc.com/l">
+<meta name="twitter:description" content="#对于错误[unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-lo">
 
 
 
@@ -300,17 +300,7 @@
       
 
       
-        <p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux</a><br><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux</a></p>
-<p>v1.13.0</p>
-<p>更改镜像 <a href="https://coding.imooc.com/learn/questiondetail/81560.html" target="_blank" rel="noopener">https://coding.imooc.com/learn/questiondetail/81560.html</a></p>
-<p>minikube start –vm-driver=none</p>
-<p>#in local linux environment use local dockeclearr</p>
-<p>kubeadm init –image-repository registry.aliyuncs.com/google_containers</p>
-<p>#kubeadm init –image-repository index.docker.io/mirrorgooglecontainers</p>
-<p>kubeadm config migrate –old-config old.yaml –new-config new.yaml</p>
-<p>minikube start –vm-driver=none –image-repository=registry.aliyuncs.com/google_containers</p>
-<p>minikube stop/delete</p>
-<p>#对于错误<br>[unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-logging/fluentd-daemon.yml”: no matches for kind “DaemonSet” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-logging/kibana.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”]</p>
+        <p>#对于错误<br>[unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-logging/fluentd-daemon.yml”: no matches for kind “DaemonSet” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-logging/kibana.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”]</p>
 <p>应用　　<a href="https://github.com/microservices-demo/microservices-demo/issues/802" target="_blank" rel="noopener">https://github.com/microservices-demo/microservices-demo/issues/802</a>  解决</p>
 <p>尝试排查错误</p>
 <blockquote>
@@ -318,6 +308,21 @@
 </blockquote>
 <blockquote>
 <p>部署<a href="https://github.com/microservices-demo/microservices-demo" target="_blank" rel="noopener">microservice demo</a> 发现问题：部署错误，原本服务应当暴漏出的接口无法访问，发现是因为 一些pod在部署之后，发现频繁重启,就是因为这些暴露出的接口无法访问，它们是作为监测是否健康的接口存在，认为容器启动错误，因而POD重启container<br>NAME                            READY   STATUS        RESTARTS   AGE<br>carts-fc985d95-h78dn            0/1     Running       22         12h<br>经过各种排查，无法发现原因，最终一次偶然发现行得通了，尝试通过更改配置重现这次情况，最后发现，是因为容器启动太慢，导致监测的delay相对太小，因而监测失败<br>而重复监测失败，重复重启，又有多个pod(contianer)重启，导致CPU占有率高，从而启动速度可能更受影响</p>
+</blockquote>
+<p>dokcer java 应用启动慢　尝试解决</p>
+<blockquote>
+<p>1.非阻塞熵池策略 优化　<a href="http://hongjiang.info/tomcat-startup-slowly-in-docker/" target="_blank" rel="noopener">Docker中apache-tomcat启动慢的问题</a>　<a href="https://www.cnblogs.com/a1304908180/p/10745284.html" target="_blank" rel="noopener">为什么阿里云服务器的docker启动tomcat这么慢？</a> -Djava.security.egd=file:/dev/urandom　－＞　-Djava.security.egd=file:/dev/./urandom<br>2.JVM 容量优化，即增加参数值 -Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m </p>
+</blockquote>
+<p>port</p>
+<blockquote>
+<p>containerPort,targetPort,nodePort,port 之间的区别<br>在deployment 文件中　containerPort相当于映射到容器外的端口 == docker run IMAGE_ID -P OUTSIDE_PORT:INSIDE_PORT</p>
+</blockquote>
+<blockquote>
+<p>docker exec -it  –privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker，避免进入docker内需要某些权限的操作 </p>
+</blockquote>
+<p>kubectl </p>
+<blockquote>
+<p>kubectl describe pod/orders-5dbffdd8ff-zqp2c –namespace=’sock-shop’<br>kubectl get pods –namespace=’sock-shop’</p>
 </blockquote>
 
       
@@ -358,6 +363,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/01/09/kubernets/" rel="prev" title="kubernets">
+                kubernets <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -425,7 +434,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">58</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -438,7 +447,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-count">32</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
