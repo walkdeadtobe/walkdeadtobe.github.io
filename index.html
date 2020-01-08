@@ -302,7 +302,7 @@
           
             <p>docker</p>
 <blockquote>
-<p>docker ps -a<br>docker images<br>dokcer stop/restart/rm CONTAINER_ID<br>docker rmi IAMGE_ID</p>
+<p>docker ps -a<br>docker images<br>dokcer stop/restart/rm CONTAINER_ID<br>docker rmi IAMGE_ID<br>docker logs CONTAINER_ID –tail NUMBER<br>docker inspect  </p>
 </blockquote>
 
           
@@ -433,6 +433,17 @@
 <p>kubeadm config migrate –old-config old.yaml –new-config new.yaml</p>
 <p>minikube start –vm-driver=none –image-repository=registry.aliyuncs.com/google_containers</p>
 <p>minikube stop/delete</p>
+<p>port</p>
+<blockquote>
+<p>containerPort,targetPort,nodePort,port 之间的区别<br>在deployment 文件中　containerPort相当于映射到容器外的端口 == docker run IMAGE_ID -P OUTSIDE_PORT:INSIDE_PORT</p>
+</blockquote>
+<blockquote>
+<p>docker exec -it  –privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker，避免进入docker内需要某些权限的操作 </p>
+</blockquote>
+<p>kubectl </p>
+<blockquote>
+<p>kubectl describe pod/orders-5dbffdd8ff-zqp2c –namespace=’sock-shop’<br>kubectl get pods –namespace=’sock-shop’<br>kubectl edit deploy/shipping  –namespace=’sock-shop’</p>
+</blockquote>
 
           
         
@@ -564,17 +575,6 @@
 <p>dokcer java 应用启动慢　尝试解决</p>
 <blockquote>
 <p>1.非阻塞熵池策略 优化　<a href="http://hongjiang.info/tomcat-startup-slowly-in-docker/" target="_blank" rel="noopener">Docker中apache-tomcat启动慢的问题</a>　<a href="https://www.cnblogs.com/a1304908180/p/10745284.html" target="_blank" rel="noopener">为什么阿里云服务器的docker启动tomcat这么慢？</a> -Djava.security.egd=file:/dev/urandom　－＞　-Djava.security.egd=file:/dev/./urandom<br>2.JVM 容量优化，即增加参数值 -Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m </p>
-</blockquote>
-<p>port</p>
-<blockquote>
-<p>containerPort,targetPort,nodePort,port 之间的区别<br>在deployment 文件中　containerPort相当于映射到容器外的端口 == docker run IMAGE_ID -P OUTSIDE_PORT:INSIDE_PORT</p>
-</blockquote>
-<blockquote>
-<p>docker exec -it  –privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker，避免进入docker内需要某些权限的操作 </p>
-</blockquote>
-<p>kubectl </p>
-<blockquote>
-<p>kubectl describe pod/orders-5dbffdd8ff-zqp2c –namespace=’sock-shop’<br>kubectl get pods –namespace=’sock-shop’</p>
 </blockquote>
 
           

@@ -599,149 +599,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/map_and_set/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/23/map_and_set/" itemprop="url">map_and_set</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-23T19:31:56+08:00">
-                2019-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>List VS Map VS Set</p>
-<ul>
-<li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li>
-<li>Map ：键值对Key-value</li>
-<li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li>
-</ul>
-<p>HashMap VS TreeMap<br>HashSet VS TreeSet<br>在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>但是 哈希表的实现是无序的，而树的实现是有序的</p>
-<p>题目：242（Leetcode） Valid Anagrant<br>题意：对给定的两个字符串，判断是否是同一单词的错位变换</p>
-<ul>
-<li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>$$ O(Nlog^N) $$</li>
-<li>方法2：构造Map，比较Map是否相同算法复杂度<br>$$ O(N) $$</li>
-</ul>
-<p>题目：Two Sum(Three Sum)<br>题意：给定一个数组，以及value，输出数组中和为value的元素下标</p>
-<ul>
-<li>方法1：暴力方法时间复杂度<br>$$<br>O(N^2)<br>$$</li>
-<li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>$$<br>O(N)<br>$$</li>
-</ul>
-<p>那么对于ThreeSum</p>
-<ul>
-<li>方法1：暴力 时间复杂度<br>$$<br>O(N^3)<br>$$</li>
-<li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>$$<br>O(N^2)<br>$$</li>
-<li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>$$<br>O(N^2)<br>$$</li>
-<li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>$$<br>O(N^2)<br>$$</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/slide_window/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -858,6 +715,149 @@
     </ol>
   </li>
 </ul>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/map_and_set/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/23/map_and_set/" itemprop="url">map_and_set</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-23T19:31:56+08:00">
+                2019-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>List VS Map VS Set</p>
+<ul>
+<li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li>
+<li>Map ：键值对Key-value</li>
+<li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li>
+</ul>
+<p>HashMap VS TreeMap<br>HashSet VS TreeSet<br>在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>但是 哈希表的实现是无序的，而树的实现是有序的</p>
+<p>题目：242（Leetcode） Valid Anagrant<br>题意：对给定的两个字符串，判断是否是同一单词的错位变换</p>
+<ul>
+<li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>$$ O(Nlog^N) $$</li>
+<li>方法2：构造Map，比较Map是否相同算法复杂度<br>$$ O(N) $$</li>
+</ul>
+<p>题目：Two Sum(Three Sum)<br>题意：给定一个数组，以及value，输出数组中和为value的元素下标</p>
+<ul>
+<li>方法1：暴力方法时间复杂度<br>$$<br>O(N^2)<br>$$</li>
+<li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>$$<br>O(N)<br>$$</li>
+</ul>
+<p>那么对于ThreeSum</p>
+<ul>
+<li>方法1：暴力 时间复杂度<br>$$<br>O(N^3)<br>$$</li>
+<li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>$$<br>O(N^2)<br>$$</li>
+<li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>$$<br>O(N^2)<br>$$</li>
+<li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>$$<br>O(N^2)<br>$$</li>
+</ul>
+
           
         
       

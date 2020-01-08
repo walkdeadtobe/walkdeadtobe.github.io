@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linuxhttps://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux v1.13.0 更改镜像 https://coding.imooc.com/l">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-08T16:25:44.818Z">
+<meta property="og:updated_time" content="2020-01-08T16:55:37.628Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kubernets">
 <meta name="twitter:description" content="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linuxhttps://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux v1.13.0 更改镜像 https://coding.imooc.com/l">
@@ -310,6 +310,17 @@
 <p>kubeadm config migrate –old-config old.yaml –new-config new.yaml</p>
 <p>minikube start –vm-driver=none –image-repository=registry.aliyuncs.com/google_containers</p>
 <p>minikube stop/delete</p>
+<p>port</p>
+<blockquote>
+<p>containerPort,targetPort,nodePort,port 之间的区别<br>在deployment 文件中　containerPort相当于映射到容器外的端口 == docker run IMAGE_ID -P OUTSIDE_PORT:INSIDE_PORT</p>
+</blockquote>
+<blockquote>
+<p>docker exec -it  –privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker，避免进入docker内需要某些权限的操作 </p>
+</blockquote>
+<p>kubectl </p>
+<blockquote>
+<p>kubectl describe pod/orders-5dbffdd8ff-zqp2c –namespace=’sock-shop’<br>kubectl get pods –namespace=’sock-shop’<br>kubectl edit deploy/shipping  –namespace=’sock-shop’</p>
+</blockquote>
 
       
     </div>
