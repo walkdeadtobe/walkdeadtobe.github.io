@@ -304,6 +304,10 @@
 <blockquote>
 <p>docker ps -a<br>docker images<br>dokcer stop/restart/rm CONTAINER_ID<br>docker rmi IAMGE_ID<br>docker logs CONTAINER_ID –tail NUMBER<br>docker inspect  </p>
 </blockquote>
+<p>dokcer java 应用启动慢　尝试解决</p>
+<blockquote>
+<p>1.非阻塞熵池策略 优化　<a href="http://hongjiang.info/tomcat-startup-slowly-in-docker/" target="_blank" rel="noopener">Docker中apache-tomcat启动慢的问题</a>　<a href="https://www.cnblogs.com/a1304908180/p/10745284.html" target="_blank" rel="noopener">为什么阿里云服务器的docker启动tomcat这么慢？</a> -Djava.security.egd=file:/dev/urandom　－＞　-Djava.security.egd=file:/dev/./urandom<br>2.JVM 容量优化，即增加参数值 -Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m </p>
+</blockquote>
 
           
         
@@ -423,27 +427,54 @@
       
         
           
-            <p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux</a><br><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux</a></p>
-<p>v1.13.0</p>
-<p>更改镜像 <a href="https://coding.imooc.com/learn/questiondetail/81560.html" target="_blank" rel="noopener">https://coding.imooc.com/learn/questiondetail/81560.html</a></p>
+            <p>##Install<br>我安装的是 minikube <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">K8S官方教程</a><br>注意点:  </p>
+<ul>
+<li><p>网络问题：</p>
+<ul>
+<li><a href="https://coding.imooc.com/learn/questiondetail/81560.html" target="_blank" rel="noopener">更改镜像源</a></li>
+<li>更改 k8s image 源<blockquote>
+<p>kubeadm init –image-repository registry.aliyuncs.com/google_containers<br>kubeadm init –image-repository index.docker.io/mirrorgooglecontainers</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>启动选项:</p>
+<ul>
+<li>选择 vm drive(in local linux environment use local docker)<blockquote>
 <p>minikube start –vm-driver=none</p>
-<p>#in local linux environment use local dockeclearr</p>
-<p>kubeadm init –image-repository registry.aliyuncs.com/google_containers</p>
-<p>#kubeadm init –image-repository index.docker.io/mirrorgooglecontainers</p>
-<p>kubeadm config migrate –old-config old.yaml –new-config new.yaml</p>
+</blockquote>
+</li>
+<li>更改 kubeadm 配置<blockquote>
+<p>导出　kubeadm 原本配置　old.yaml，然后更改为 new.yaml<br>kubeadm config migrate –old-config old.yaml –new-config new.yaml</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>最终:     </p>
+<blockquote>
 <p>minikube start –vm-driver=none –image-repository=registry.aliyuncs.com/google_containers</p>
+</blockquote>
+</li>
+</ul>
+<p>##Kubernets/minikube 相关操作</p>
+<p><a href="http://docs.kubernetes.org.cn/664.html" target="_blank" rel="noopener">k8s中文文档</a><br>minikube</p>
+<blockquote>
 <p>minikube stop/delete</p>
+</blockquote>
 <p>port</p>
 <blockquote>
-<p>containerPort,targetPort,nodePort,port 之间的区别<br>在deployment 文件中　containerPort相当于映射到容器外的端口 == docker run IMAGE_ID -P OUTSIDE_PORT:INSIDE_PORT</p>
-</blockquote>
-<blockquote>
-<p>docker exec -it  –privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker，避免进入docker内需要某些权限的操作 </p>
+<p>containerPort,targetPort,nodePort,port 之间的区别<br>在deployment 文件中　containerPort相当于映射到容器外的端口 == docker run IMAGE_ID -P OUTSIDE_PORT:INSIDE_PORT<br>docker exec -it  –privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker，避免进入docker内需要某些权限的操作 </p>
 </blockquote>
 <p>kubectl </p>
 <blockquote>
 <p>kubectl describe pod/orders-5dbffdd8ff-zqp2c –namespace=’sock-shop’<br>kubectl get pods –namespace=’sock-shop’<br>kubectl edit deploy/shipping  –namespace=’sock-shop’</p>
 </blockquote>
+<p>##相关概念</p>
+<ol>
+<li>pod vs container</li>
+<li>containerPort vs targetPort vs nodePort vs port</li>
+<li>service </li>
+</ol>
 
           
         
@@ -563,19 +594,33 @@
       
         
           
-            <p>#对于错误<br>[unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-logging/fluentd-daemon.yml”: no matches for kind “DaemonSet” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-logging/kibana.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”]</p>
-<p>应用　　<a href="https://github.com/microservices-demo/microservices-demo/issues/802" target="_blank" rel="noopener">https://github.com/microservices-demo/microservices-demo/issues/802</a>  解决</p>
-<p>尝试排查错误</p>
-<blockquote>
-<p>部署pod无法正常运行<br>　1.观察日志无法发现错误<br>　2.经过观察，基本都是80端口的问题<br>尝试<br>　1.是否因为port范围限制？尝试在/etc/kubernets/manifests/api-servers.yaml 中更改，无效<br> 2.尝试更改　pod 的yaml 中的port ，并重新apply,确定是否是端口限制的原因</p>
+            <p>##部署　microservice benchmark<br><a href="https://github.com/microservices-demo/microservices-demo" target="_blank" rel="noopener">官方教程</a></p>
+<p>##问题</p>
+<ol>
+<li><p>yml部署文件　unable to recognize</p>
+<ul>
+<li>错误：<blockquote>
+<p>unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-logging/fluentd-daemon.yml”: no matches for kind “DaemonSet” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-logging/kibana.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”</p>
 </blockquote>
-<blockquote>
-<p>部署<a href="https://github.com/microservices-demo/microservices-demo" target="_blank" rel="noopener">microservice demo</a> 发现问题：部署错误，原本服务应当暴漏出的接口无法访问，发现是因为 一些pod在部署之后，发现频繁重启,就是因为这些暴露出的接口无法访问，它们是作为监测是否健康的接口存在，认为容器启动错误，因而POD重启container<br>NAME                            READY   STATUS        RESTARTS   AGE<br>carts-fc985d95-h78dn            0/1     Running       22         12h<br>经过各种排查，无法发现原因，最终一次偶然发现行得通了，尝试通过更改配置重现这次情况，最后发现，是因为容器启动太慢，导致监测的delay相对太小，因而监测失败<br>而重复监测失败，重复重启，又有多个pod(contianer)重启，导致CPU占有率高，从而启动速度可能更受影响</p>
+</li>
+<li>解决　<a href="https://github.com/microservices-demo/microservices-demo/issues/802" target="_blank" rel="noopener">benchmark github issue</a>    </li>
+</ul>
+</li>
+<li><p>部署pod无法正常运行    </p>
+<ul>
+<li>部署错误，原本服务应当暴漏出的接口无法访问<blockquote>
+<p>发现是因为 一些pod在部署之后，发现频繁重启,就是因为这些暴露出的接口无法访问，它们是作为监测是否健康的接口存在，认为容器启动错误，因而POD重启container<br>NAME                            READY   STATUS        RESTARTS   AGE<br>carts-fc985d95-h78dn            0/1     Running       22         12h<br>经过各种排查，无法发现原因，最终一次偶然发现行得通了，尝试通过更改配置重现这次情况，最后发现，是因为容器启动太慢，导致监测的delay相对太小，因而监测失败<br>而重复监测失败，重复重启，又有多个pod(contianer)重启，导致CPU占有率高，从而启动速度可能更受影响</p>
 </blockquote>
-<p>dokcer java 应用启动慢　尝试解决</p>
-<blockquote>
-<p>1.非阻塞熵池策略 优化　<a href="http://hongjiang.info/tomcat-startup-slowly-in-docker/" target="_blank" rel="noopener">Docker中apache-tomcat启动慢的问题</a>　<a href="https://www.cnblogs.com/a1304908180/p/10745284.html" target="_blank" rel="noopener">为什么阿里云服务器的docker启动tomcat这么慢？</a> -Djava.security.egd=file:/dev/urandom　－＞　-Djava.security.egd=file:/dev/./urandom<br>2.JVM 容量优化，即增加参数值 -Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m </p>
+</li>
+<li>尝试排查错误<br>　       1. 观察日志无法发现错误<br>　       2. 经过观察，基本都是80端口的问题</li>
+<li>尝试<br>　       1. 是否因为port范围限制?尝试在/etc/kubernets/manifests/api-servers.yaml中更改，无效<br>　       2. 尝试更改　pod 的yaml 中的port ，并重新apply,确定是否是端口限制的原因</li>
+<li>解决方法：<blockquote>
+<p>本质是因为docker启动慢，而此时　pod 的检测已经开始了，从而判断docker未正常启动，从而重启docker,从而陷入循环，所以有两种方法<br>1.加快docker的启动速度，详见<a href="https://walkdeadtobe.github.io/2020/01/09/docker/" target="_blank" rel="noopener">dokcer java 应用启动慢</a><br>2.延后pod的检测，等docker正常启动，可以增加 initialDelaySeconds,failureThreshold,periodSeconds,successThreshold等参数的值</p>
 </blockquote>
+</li>
+</ul>
+</li>
+</ol>
 
           
         

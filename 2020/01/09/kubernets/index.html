@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linuxhttps://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux v1.13.0 更改镜像 https://coding.imooc.com/l">
+<meta name="description" content="##Install我安装的是 minikube K8S官方教程注意点:    网络问题：  更改镜像源 更改 k8s image 源 kubeadm init –image-repository registry.aliyuncs.com/google_containerskubeadm init –image-repository index.docker.io/mirrorgooglecont">
 <meta name="keywords" content="k8s install">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kubernets">
 <meta property="og:url" content="http://yoursite.com/2020/01/09/kubernets/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linuxhttps://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux v1.13.0 更改镜像 https://coding.imooc.com/l">
+<meta property="og:description" content="##Install我安装的是 minikube K8S官方教程注意点:    网络问题：  更改镜像源 更改 k8s image 源 kubeadm init –image-repository registry.aliyuncs.com/google_containerskubeadm init –image-repository index.docker.io/mirrorgooglecont">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-08T16:55:37.628Z">
+<meta property="og:updated_time" content="2020-01-09T08:26:21.024Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kubernets">
-<meta name="twitter:description" content="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linuxhttps://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux v1.13.0 更改镜像 https://coding.imooc.com/l">
+<meta name="twitter:description" content="##Install我安装的是 minikube K8S官方教程注意点:    网络问题：  更改镜像源 更改 k8s image 源 kubeadm init –image-repository registry.aliyuncs.com/google_containerskubeadm init –image-repository index.docker.io/mirrorgooglecont">
 
 
 
@@ -300,27 +300,54 @@
       
 
       
-        <p><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux</a><br><a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux</a></p>
-<p>v1.13.0</p>
-<p>更改镜像 <a href="https://coding.imooc.com/learn/questiondetail/81560.html" target="_blank" rel="noopener">https://coding.imooc.com/learn/questiondetail/81560.html</a></p>
+        <p>##Install<br>我安装的是 minikube <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">K8S官方教程</a><br>注意点:  </p>
+<ul>
+<li><p>网络问题：</p>
+<ul>
+<li><a href="https://coding.imooc.com/learn/questiondetail/81560.html" target="_blank" rel="noopener">更改镜像源</a></li>
+<li>更改 k8s image 源<blockquote>
+<p>kubeadm init –image-repository registry.aliyuncs.com/google_containers<br>kubeadm init –image-repository index.docker.io/mirrorgooglecontainers</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>启动选项:</p>
+<ul>
+<li>选择 vm drive(in local linux environment use local docker)<blockquote>
 <p>minikube start –vm-driver=none</p>
-<p>#in local linux environment use local dockeclearr</p>
-<p>kubeadm init –image-repository registry.aliyuncs.com/google_containers</p>
-<p>#kubeadm init –image-repository index.docker.io/mirrorgooglecontainers</p>
-<p>kubeadm config migrate –old-config old.yaml –new-config new.yaml</p>
+</blockquote>
+</li>
+<li>更改 kubeadm 配置<blockquote>
+<p>导出　kubeadm 原本配置　old.yaml，然后更改为 new.yaml<br>kubeadm config migrate –old-config old.yaml –new-config new.yaml</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>最终:     </p>
+<blockquote>
 <p>minikube start –vm-driver=none –image-repository=registry.aliyuncs.com/google_containers</p>
+</blockquote>
+</li>
+</ul>
+<p>##Kubernets/minikube 相关操作</p>
+<p><a href="http://docs.kubernetes.org.cn/664.html" target="_blank" rel="noopener">k8s中文文档</a><br>minikube</p>
+<blockquote>
 <p>minikube stop/delete</p>
+</blockquote>
 <p>port</p>
 <blockquote>
-<p>containerPort,targetPort,nodePort,port 之间的区别<br>在deployment 文件中　containerPort相当于映射到容器外的端口 == docker run IMAGE_ID -P OUTSIDE_PORT:INSIDE_PORT</p>
-</blockquote>
-<blockquote>
-<p>docker exec -it  –privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker，避免进入docker内需要某些权限的操作 </p>
+<p>containerPort,targetPort,nodePort,port 之间的区别<br>在deployment 文件中　containerPort相当于映射到容器外的端口 == docker run IMAGE_ID -P OUTSIDE_PORT:INSIDE_PORT<br>docker exec -it  –privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker，避免进入docker内需要某些权限的操作 </p>
 </blockquote>
 <p>kubectl </p>
 <blockquote>
 <p>kubectl describe pod/orders-5dbffdd8ff-zqp2c –namespace=’sock-shop’<br>kubectl get pods –namespace=’sock-shop’<br>kubectl edit deploy/shipping  –namespace=’sock-shop’</p>
 </blockquote>
+<p>##相关概念</p>
+<ol>
+<li>pod vs container</li>
+<li>containerPort vs targetPort vs nodePort vs port</li>
+<li>service </li>
+</ol>
 
       
     </div>
