@@ -229,6 +229,208 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/27/分布式算法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/10/27/分布式算法/" itemprop="url">distributed algorithm</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-10-27T23:05:56+08:00">
+                2019-10-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>Raft</p>
+</blockquote>
+<p><a href="https://cloud.tencent.com/developer/news/263309" target="_blank" rel="noopener">参考链接</a><br>Raft是一个一致性算法，旨在易于理解。它提供了Paxos的容错和性能。不同之处在于它被分解为相对独立的子问题，它清楚地解决了实际系统所需的所有主要部分。我们希望Raft能够为更广泛的受众提供共识，并且这个更广泛的受众将能够开发出比现在更多的高质量共识系统。</p>
+<p>Raft是一个通过管理一个副本日志的一致性算法。它提供了跟(multi-)Paxos一样有效的功能，但是它的架构和Paxos不一样；它比Paxos更加容易理解，并且能用于生产环境中。为了加强理解，raft把一致性的问题分成了三个子问题，例如leader election, log replication, and safety,</p>
+<p>Role</p>
+<p>Leader，Follower，candidate</p>
+<p>在Raft集群中，有且仅有一个Leader，在Leader运行正常的情况下，一个节点服务器要么就是Leader，要么就是Follower。Follower直到Leader故障了，才有可能变成candidate。</p>
+<p>Leader负责把client的写请求log复制到follower。它会和follower保持心跳。每个follower都有一个timeout时间（一般为150ms~300ms），在接受到心跳的时候，这个timeout时间会被重置。如果follower没有接收到心跳，这些follower会把他们的状态变为candidate，并且开启新的一轮leader election。</p>
+<p>term逻辑时钟</p>
+<p>Term相当于paxos中的proposerID，相当于一个国家的朝代。term是一段任意的时间序号。每一任Leader都有一个与之前不同的term。</p>
+<p>当Leader选举成功之后，一个节点成为了Leader，就会产生一个新的term，并且直到Leader故障，整个集群都会一直在这个term下执行操作。</p>
+<p>如果leader选举失败了，则会再生成出一个term，再开启一轮leader选举。</p>
+<p>Quorums：</p>
+<p>多数派，意思是超过一半的机器存活，则这个机器可用，这个Quorums指的就是集群可用的指标。例如：集群中的节点数为2N，如果有N+1的机器存活，则代表集群可用，可接受请求，写入log，应用到state machine中去，执行操作。如果少于N+1个机器存活，则代表集群可用，可接受请求，可写入log，但不应用到state machine中去，不执行操作。</p>
+<p>Leader Election</p>
+<p>只有在下列两种情况下才会进行leader election：</p>
+<p>在第一次启动raft集群的时候</p>
+<p>在一个已存在的Leader故障的时候</p>
+<p>选举流程：</p>
+<p>如果以上两种任何一种发生了，所有的Follower无法再和Leader保持心跳，则它们都会等待一个（选举）timeout，如果其中一个Follower的timeout最先到时，则这个Follower变成candidate开始选举，</p>
+<p>第一，增加term计数器，</p>
+<p>第二，给自己投票并向所有其他的节点服务器请求投自己一票。</p>
+<p>如果一个Follower在接受到投票请求时，接受到两个term相同的投票请求时（也就是说，产生了两个candidate），则在多个相同term的投票请求中，这个Follower只能给投给其中一个请求，只能投一票，并且按照先来先服务的原则投票。</p>
+<p>如果这个candidate收到另外一个节点服务器的消息，并且这个节点服务器的term序号和当前的term序号一样大，甚至更大的话，则这个candidate选举失败，从而它的状态变成Follower，并且接受新的Leader。</p>
+<p>如果一个candidate获得了Quorums选票N+1(2N为集群中节点的数目)，则它变成新的leader。</p>
+<p>如果多个candidate和多个Follower投完票之后，有多个candidate获得了相同的票数，则会产生split vote，则新的term产生，重新选举。Raft用随机选举timeout迅速地解决split vote问题，这个方法就是对于产生spit vote的candidates各自随机生成一个选举timeout，谁先到时，谁当leader，其他candidate都变为Follower。</p>
+<p>当一个leader被选举出来之后，就在Follower timeout到时变为candidate之前，发心跳信息给所有Followers。</p>
+<p>Log Replication（Raft协议具体过程）</p>
+<p>Leader负责把client的请求日志复制给其他Followers。</p>
+<p>Raft协议具体过程就是通过复制状态机的架构实现的，如下：</p>
+<p>步骤：</p>
+<p>Client发送请求给Leader，其中每个请求都是一条操作指令。</p>
+<p>Leader接受到client请求之后，把操作指令(Entry)追加到Leader的操作日志中。紧接着对Follower发起AppendEntries请求、尝试让操作指令(Entry)追加到Followers的操作日志中，即落地。如果有Follower不可用，则一直尝试。</p>
+<p>一旦Leader接受到多数（Quorums）Follower的回应，Leader就会进行commit操作，每一台节点服务器会把操作指令交给状态机处理。这样就保证了各节点的状态的一致性。</p>
+<p>各服务器状态机处理完成之后，Leader将结果返回给Client。</p>
+<p>Saftety</p>
+<p>Raft的安全性，体现在如下几个方面：</p>
+<p>Election safety:在一个term下，最多只有一个Leader。</p>
+<p>Leader Append-Only:一个Leader只能追加新的entries，不能重写和删除entries</p>
+<p>Log Matching:集群中各个节点的log都是相同一致的</p>
+<p>Leader Completeness:如果一个log entry被committed了，则这个entry一定会出现在Leader的log里。</p>
+<p>State Machine Safety:如果一个节点服务器的state machine执行了一个某个log entry命令，则其他节点服务器，也会执行这个log entry命令，不会再执行其他命令</p>
+<p>之前四条，在前面都有所提及，而State Machine Safety是在Leader election过程中用到过。</p>
+<p>State Machine Safety</p>
+<p>一个candidate在选举的时候，它会向其他节点服务器发送包含他的log的消息，获取票数，如果它的log是最新的，则会获取选票，如果它的log不是最新的，其他节点服务器还有更加新的log，则会拒绝给这个candidate投票。这就保证了State Machine Safety。</p>
+<p>所以State Machine Safety保证的就是一个candidate必须拥有最新的log，才能获取票数，才有机会赢得Leader选举，才有机会成为Leader。</p>
+<p>Follower crashes</p>
+<p>如果一个follower故障了，则不会再接受AppendEntriesandvoterequests，并且Leader会不断尝试与这个节点保持心跳。</p>
+<p>如果这个节点恢复了，则会接受Leader的最新的log，并且将log应用到state machine中去，执行log中的操作</p>
+<p>方格指的是client发出的一条请求。</p>
+<p>方格虚线，说明一条log entry写入了log。</p>
+<p>方格实线，说明一条log entry应用到state machine中</p>
+<p>Leader crashes</p>
+<p>则会进行Leader election。</p>
+<p>如果碰到Leader故障的情况，集群中所有节点的日志可能不一致。</p>
+<p>old leader的一些操作日志没有通过集群完全复制。new leader将通过强制Followers复制自己的log来处理不一致的情况，步骤如下：</p>
+<p>对于每个Follower，new leader将其日志与Followers的日志进行比较，找到他们的达成一致的最后一个log entry。</p>
+<p>然后删除掉Followers中这个关键entry后面的所有entry，并将其替换为自己的log entry。该机制将恢复日志的一致性。</p>
+<p>下面这种情况集群中所有节点的日志可能不一致：</p>
+<p>总结</p>
+<p>Raft要求具备唯一Leader，并把一致性问题具体化为保持日志副本的一致性，以此实现相较Paxos而言更容易理解、更容易实现的目标。Raft是state machine system，Zab是primary-backup system。</p>
+<p>引用</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Raft_(computer_science)" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Raft_(computer_science)</a></li>
+<li><a href="https://raft.github.io/" target="_blank" rel="noopener">https://raft.github.io/</a></li>
+<li><a href="http://thesecretlivesofdata.com/raft/" target="_blank" rel="noopener">http://thesecretlivesofdata.com/raft/</a></li>
+<li><a href="https://raft.github.io/raft.pdf" target="_blank" rel="noopener">https://raft.github.io/raft.pdf</a></li>
+<li><a href="https://www.cnblogs.com/bangerlee/p/5991417.html" target="_blank" rel="noopener">https://www.cnblogs.com/bangerlee/p/5991417.html</a></li>
+<li><a href="https://www.bilibili.com/video/av21667358/" target="_blank" rel="noopener">https://www.bilibili.com/video/av21667358/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/State_machine_replication" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/State_machine_replication</a></li>
+<li><a href="https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf" target="_blank" rel="noopener">https://github.com/CNiceToUpp/notes/blob/master/paxos%2Craft%2Czab/paper/In%20Search%20of%20an%20Understandable%20Consensus%20Algorithm.pdf</a></li>
+</ul>
+<blockquote>
+<p>PAXOS</p>
+</blockquote>
+<p>它的假设前提是，在分布式系统中进程之间的通信会出现丢失、延迟、重复等现象，但不会出现传错的现象。Paxos算法就是为了保证在这样的系统中进程间基于消息传递就某个值达成一致。</p>
+<p>在Paxos算法中，有两种角色：</p>
+<p>Proposer<br>Acceptor<br>Paxos算法分为两个阶段。具体如下：</p>
+<p>阶段一：<br>(a) Proposer选择一个提案编号N（全剧唯一version），然后向半数以上的Acceptor发送编号为N的Prepare请求。</p>
+<p>(b) 如果一个Acceptor收到一个编号为N的Prepare请求，且N大于该Acceptor已经响应过的所有Prepare请求的编号，那么它就会将它已经接受过的编号最大的提案（如果有的话）作为响应反馈给Proposer，同时该Acceptor承诺不再接受任何编号小于N的提案。如果已经接受过，比较版本号大小，持久化最新的，并返回信息</p>
+<p>阶段二：<br>(a) 如果Proposer收到半数以上Acceptor对其发出的编号为N的Prepare请求的响应，那么它就会发送一个针对[N,V]提案的Accept请求给半数以上的Acceptor。注意：V就是收到的响应中编号最大的提案的value，如果响应中不包含任何提案，那么V就由Proposer自己决定。</p>
+<p>(b) 如果Acceptor收到一个针对编号为N的提案的Accept请求，只要该Acceptor没有对编号大于N的Prepare请求做出过响应，它就接受该提案。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/19/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1056,9 +1258,10 @@
       
         
           
-            <p>分布式系统学习第一弹<br><a href="https://pdos.csail.mit.edu/6.824/labs/lab-1.html" target="_blank" rel="noopener">MIT 6.824</a><br>按照课程要求，下载源码<br>修改一：添加日志，在 go  init 函数更改日志格式,使得输出时带位置</p>
+            <h2 id="分布式系统学习第一弹"><a href="#分布式系统学习第一弹" class="headerlink" title="分布式系统学习第一弹"></a>分布式系统学习第一弹</h2><p><a href="https://pdos.csail.mit.edu/6.824/labs/lab-1.html" target="_blank" rel="noopener">MIT 6.824</a><br>按照课程要求，下载源码<br>修改一：添加日志，在 go  init 函数更改日志格式,使得输出时带位置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//init log format</span><br><span class="line">func init()&#123;</span><br><span class="line">    log.SetFlags(log.Ldate| log.Lshortfile |log.Ltime |log.LUTC)</span><br><span class="line">&#125;</span><br><span class="line">//样例输出</span><br><span class="line">2019/07/22 07:34:41 master_splitmerge.go:23: Merge: open mrtmp.test-res-0: no such file or directory</span><br></pre></td></tr></table></figure>
 
+<h2 id="cache2go-学习"><a href="#cache2go-学习" class="headerlink" title="cache2go 学习"></a>cache2go 学习</h2><p><a href="https://blog.csdn.net/notbaron/article/details/52008155" target="_blank" rel="noopener">项目结构 简介</a><br><a href="https://blog.csdn.net/zhizhengguan/article/details/84257338" target="_blank" rel="noopener">Go缓存库cache2go介绍</a></p>
 
           
         
@@ -1180,6 +1383,8 @@
           
             <p><br>因为决定学习开发网关kong的插件，所以需要学习lua语言，正在从<a href="https://www.runoob.com/lua/" target="_blank" rel="noopener">Lua 菜鸟教程</a>学习<br><br>关于kong插件开发的博客 <a href="https://www.jianshu.com/p/68457b42b84f" target="_blank" rel="noopener">链接1</a><br><br>发现一个很有意思的lua 模块  :openresty 的lua-resty-template 模块，提供模板渲染的功能<br><br>准备在网关处进行对于token的检验工作，由于没有使用已有的oauth server 插件，所以需要自己写个额外插件<br>    在这个插件中主要需要完成的工作是从cookie 中 提取出 token ,并以此为凭借到oauth  server 进行相关检验，如果检验成功，应当返回id 以及这个token的ttl ,网关处获得id 应当 将之体现在日志里(插件逻辑处新建header,在nginx日志处自定义日志格式,指明该id或者在网关处建立与oauth server相同的用户体系，起码账户名一致，这样根据id 可以从数据库中提取出相应的consumer credential ,这样的话可以用于后续的基于用户的限流等操作)<br>主要点在于1.Lua中进行http 操作  ,<a href="https://github.com/ledgetech/lua-resty-http#request" target="_blank" rel="noopener">Github 源码文档</a><br>        2.考虑对token进行缓存,[‘token’,’id’,ttl],这样无需多次存取(可能带来的问题有，注销登录后如何通知网关注销token：这又分为两种注销后不再登录和重新登陆，对于后者可以下次请求经过网关时,注销相同id的键值对)<br>        <a href="https://github.com/openresty/lua-resty-redis/" target="_blank" rel="noopener">Github lua-resty-redis</a><br>        <a href="https://github.com/Kong/kong/blob/master/kong/plugins/rate-limiting/policies/init.lua" target="_blank" rel="noopener">Kong rate-limiting 插件</a>中涉及对于redis的操作,可以观摩下</p>
 <p><br>目前在网关处验证用户身份成功后，在后端为避免再次检验身份的需要，因此需要网关提供给后端身份凭据，认可这次身份凭据，同时应当提供某种验证手段，让后端验证请求是否身份凭据是否是真的/是否是伪造<br>方案1 ：利用某种对称加密算法,网关对用户身份进行加密,后端以相同的密钥进行解密,得到身份<br>        确定使用AES算法<a href="https://github.com/openresty/lua-resty-string/" target="_blank" rel="noopener">Github 示例</a>,在网关处使用CBC加密，相同的偏移向量,结果转化为hex格式，传输到python后端，对结果转发，解密，但是解密始终得不到正确的结果，怀疑是<a href="https://blog.csdn.net/diodosu/article/details/51923670" target="_blank" rel="noopener">博客</a>中提到的问题，但是我在测试中设置的加密字段,加密密钥，偏移向量都是16位的，看起来应该不会有填充的问题才对，但是解密仍然失败<br>方案2 ：采取非对称加密算法，在网关处向后端传递两个header：userid,encrypted 在网关处按照某种方法加密得到 encrypt header,后端使用同样的方法加密，如果结果相同，则认为 userid 经过了网关的认证，同时加密内容应当是网关与后端之间相互约定的动态的内容</p>
+<p><br>2020-1-10 代码更新，把硬编码信息改为插件的配置输入<br>curl -i -X POST <a href="http://localhost:8001/plugins" target="_blank" rel="noopener">http://localhost:8001/plugins</a> <br>–data “name=kong-plugin-myplugin” <br>–data “config.sso_domain=SS0_DOMAIN” <br>–data “config.check_path=CHECK_PATH” <br>–data “config.front_domain=FRONT_DOMAIN” <br>–data “config.client=CLIENT_JSON”</p>
+<p>其中需要注意的是，kong网关对于插件配置的输入中对于字符 ‘&amp;’ 的支持不好，而使用’\&amp;’的话，网关处接收后会转化为’\\&amp;’,看起来很不舒服，然后我 使用 ‘\a’ 字符代表 ‘&amp;’,在插件处理逻辑处再替换回来(需要注意的是如果单个的’&#39;存在，会影响 string 转化为 json)</p>
 
           
         
@@ -1343,159 +1548,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/29/nginx/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/06/29/nginx/" itemprop="url">nginx</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-29T17:31:56+08:00">
-                2019-06-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>rewrite规则必须匹配对应的域名才能生效，比如是server_name 为aa.com 下的rewrite 规则，则必须访问时前缀是 aa.com ，rewrite规则才能生效</p>
-</blockquote>
-<p>在 nginx 反向代理处直接拒绝不携带token的请求</p>
-<blockquote>
-<p>在 server 内 ，loaction 前对于所有请求 判断cookie内是否携带token(先不管token是否有效)，其中排除对包含code/oauth/static的请求，如果不携带，则使之跳转到授权服务器，登录后自动跳转到首页</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// if ( $request_uri ~* (.*)210.14.118.96(.*))</span><br><span class="line"> // &#123;  rewrite ^/(.*)$  http://localhost:80/$1 break; &#125;</span><br><span class="line">  set $flag 1;</span><br><span class="line"></span><br><span class="line">  if ( $http_cookie ~* (.*)token=(.*) )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)code=(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)oauth(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)static(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)/js/(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)/css/(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $http_referer = &quot;http://210.14.118.96/&quot; )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $http_referer = &quot;&quot; )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $flag = 1)&#123;</span><br><span class="line">  //rewrite ^(.*)$ http://111.203.146.69/oauth/authorize?client_id=kexie&amp;redirect_uri=http://210.14.118.96/ep/cookie.html&amp;response_type=code&amp;scope=read permanent;# redirect;</span><br><span class="line">  return 301  http://111.203.146.69/oauth/authorize?client_id=kexie&amp;redirect_uri=http://210.14.118.96/ep/cookie.html&amp;response_type=code&amp;scope=read;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-<blockquote>
-<p>需要注意的是 从网上博客看，/etc/nginx/nginx.conf 的优先级比 /etc/nginx/conf.d/* 以及/etc/nginx/sites-enables/*优先级高，  但是如果后面的配置中标明了default_server，那么优先级应该是更高的(实际效果，没有去网上查找核实);导致后者的server_name:_  覆盖了前者的server_name:210.14.118.96</p>
-</blockquote>
-<p>在vue项目中 ，全局配置使得请求携带cookie<br>修改 ./src/main.js 添加 <a href="https://github.com/pagekit/vue-resource/issues/191" target="_blank" rel="noopener">相关问题连接</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &quot;vue&quot;;</span><br><span class="line">import VueAwesomeSwiper from &apos;vue-awesome-swiper&apos;</span><br><span class="line">import &apos;swiper/dist/css/swiper.css&apos;</span><br><span class="line">import App from &quot;./App.vue&quot;;</span><br><span class="line">import router from &quot;@/router/index&quot;;</span><br><span class="line">import store from &quot;@/store/index&quot;;</span><br><span class="line">import ElementUI from &quot;element-ui&quot;</span><br><span class="line">import &apos;element-ui/lib/theme-chalk/index.css&apos;</span><br><span class="line">import echarts from &quot;echarts&quot;;</span><br><span class="line">import &#123; debounce &#125; from &quot;@/assets/scripts/util&quot;;</span><br><span class="line">import starSky from &quot;@/assets/scripts/common/canvas.js&quot;;</span><br><span class="line">import echartTheme from &quot;@/constant/chalk.project.json&quot;</span><br><span class="line">//添加内容-开始</span><br><span class="line">import VueResource from &apos;vue-resource&apos;</span><br><span class="line">Vue.use(VueResource)</span><br><span class="line">Vue.http.options.xhr = &#123; withCredentials: true &#125;;</span><br><span class="line">//添加内容-结束</span><br><span class="line">echarts.registerTheme(&quot;chalk&quot;, echartTheme);</span><br><span class="line">Vue.config.productionTip = false;</span><br><span class="line">Vue.use(VueAwesomeSwiper)</span><br><span class="line">Vue.use(ElementUI)</span><br><span class="line">Vue.prototype.$charts = echarts;</span><br><span class="line">Vue.prototype.$debounce = debounce;</span><br><span class="line">Vue.prototype.$starSky = starSky;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: h =&gt; h(App)</span><br><span class="line">&#125;).$mount(&quot;#app&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>此外报错，需要安装插件</p>
-<blockquote>
-<p>npm install –save vue-resource</p>
-</blockquote>
-<blockquote>
-<p>清除cookie 使用</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &quot;token=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/&quot;; </span><br><span class="line">document.cookie = &quot;token=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/ep&quot;;</span><br></pre></td></tr></table></figure>
-
-<p>而 setCookie()不能删除不同域下cookie</p>
-<blockquote>
-<p>当使用 upstream 代指 上游 多个可用服务器，nginx会根据 error  timeout 来自动替换选择 可用服务器，但是不支持对于有状态码的返回，此外我们可以配置自动检查后端情况以及相应处理 ,<a href="https://www.nginx.com/resources/wiki/modules/healthcheck/" target="_blank" rel="noopener">Nginx ngx_http_healthcheck_module</a>  <a href="https://github.com/cep21/healthcheck_nginx_upstreams/blob/master/README" target="_blank" rel="noopener">Github healthcheck_nginx_upstreams</a><br>而在目前项目中，由于前端nginx调用后面网关 ，所以需要已具有某些状态码来决定是否轮替， 例如</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">upstream backends &#123;</span><br><span class="line">server 192.2.0.1;</span><br><span class="line">server 192.2.0.2;</span><br><span class="line">…</span><br><span class="line">&#125;</span><br><span class="line">server&#123;</span><br><span class="line">  location / &#123;</span><br><span class="line">  proxy_pass http://backends;</span><br><span class="line">  proxy_next_upstream error timeout http_404 http_502 http_500;#依据状态码确定轮替，此外在 多个nginx转发情况下使用 timeout，会导致其它一些问题，简单的方式是除去timeout </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>出于实际需要，需要在kong网关处进行添加自定义插件，其中逻辑需要添加自定义header，使用 ngx.request.set_header(name,value)<br>但是发现自己在网关处添加的header无法传递到(Django)后端,遍历httprequest.MEAT也没有发现，最终经过查询发现 nginx 默认(可以通过配置 underscores_in_headers  on)不允许 header name 中携带 下划线,可以除去下划线或者用’-‘代替’<em>‘,但是好奇的是在网关处 带下划线的header 仍然可以使用<br>可以使用 ngx.req.get_header(name) 查询，以及在日志中也可以配置 http_name得到值，或许只是不能够传出去??</em></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1559,7 +1611,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-count">34</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
