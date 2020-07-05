@@ -303,6 +303,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-01-02T18:50:19+08:00" content="2020-01-02">
+                2020-01-02
+              </time>
+            </span>
+          
 
           
 
@@ -333,23 +342,23 @@
 
       
         <blockquote>
-<h1><span id="1-nginx">1 nginx</span></h1>
+<h1 id="1-nginx">1 nginx</h1>
 </blockquote>
 <blockquote>
 <blockquote>
-<h2><span id="11-dockerfile">1.1 dockerfile</span></h2>
+<h2 id="11-dockerfile">1.1 dockerfile</h2>
 </blockquote>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#Dockerfile</span><br><span class="line">FROM nginx:latest</span><br><span class="line">MAINTAINER chengr chengr@buaa.edu.cn</span><br><span class="line">#mkdir</span><br><span class="line">RUN mkdir -p /home/cast/web/kexie_BigScreen_vue/dist \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/act-kexie-big \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/vue_front_of_talent/vue-demo \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/talent_zhejiang/vue-demo \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/kexie_news/dist \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/activeDay0904 \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/kexie_Local_BigScreen_vue/dist \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/kexie_Local_BigScreen_GuangXi/dist \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/kexie_BigsScreen_city/dist</span><br><span class="line"></span><br><span class="line">#WORKDIR /home/LAB/bdbc.kg</span><br><span class="line">#copy file</span><br><span class="line">COPY nginx.conf /etc/nginx/</span><br><span class="line">COPY default /etc/nginx/conf.d/default.conf</span><br><span class="line">#COPY Frontend/talent/vue-demo /home/cast/web/vue_front_of_talent/vue-demo</span><br><span class="line">#COPY /home/LAB/bdbc.kg/Frontend/kexie/dist /home/cast/web/kexie_BigScreen_vue/dist</span><br><span class="line"></span><br><span class="line">EXPOSE 80 8003 8010 9010  8888 8889  8890  8891</span><br></pre></td></tr></table></figure>
 <blockquote>
 <blockquote>
-<h2><span id="12-build-images">1.2 build images</span></h2>
+<h2 id="12-build-images">1.2 build images</h2>
 </blockquote>
 </blockquote>
 <p>docker build -t nginx_bh .</p>
 <blockquote>
 <blockquote>
-<h2><span id="13-create-container">1.3 create container</span></h2>
+<h2 id="13-create-container">1.3 create container</h2>
 </blockquote>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">--name beihang_nginx \</span><br><span class="line">-p 80:80 \</span><br><span class="line">-p 8010:8010 \</span><br><span class="line">-p 9010:9010 \</span><br><span class="line">-p 8888:8888 \</span><br><span class="line">-p 8889:8889 \</span><br><span class="line">-p 8890:8890 \</span><br><span class="line">-p 8891:8891 \</span><br><span class="line">-p 8003:8003 \</span><br><span class="line">-v /home/LAB/bdbc.kg/Frontend/talent/vue-demo:/home/cast/web/vue_front_of_talent/vue-demo \</span><br><span class="line">-v /home/LAB/bdbc.kg/Frontend/kexie_BigScreen_vue/dist:/home/cast/web/kexie_BigScreen_vue/dist \</span><br><span class="line">-v /home/LAB/bdbc.kg/Frontend/talent_zhejiang/vue-demo:/home/cast/web/talent_zhejiang/vue-demo \</span><br><span class="line">-d nginx_bh</span><br></pre></td></tr></table></figure>
@@ -371,23 +380,23 @@
 <li>2.是否可能因为时延部分，导致网关与后端验证失败</li>
 </ul>
 <blockquote>
-<h1><span id="2-kong">2 kong</span></h1>
+<h1 id="2-kong">2 kong</h1>
 </blockquote>
 <blockquote>
 <blockquote>
-<h2><span id="21-dockerfile">2.1 dockerfile</span></h2>
+<h2 id="21-dockerfile">2.1 dockerfile</h2>
 </blockquote>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#Dockerfile</span><br><span class="line">FROM gecwf5gs.mirror.aliyuncs.com/library/kong:1.4</span><br><span class="line">WORKDIR /usr/src/app</span><br><span class="line">ADD my_kong_plugin my_kong_plugin</span><br><span class="line">WORKDIR /usr/src/app/my_kong_plugin</span><br><span class="line">RUN luarocks make &amp;&amp; luarocks pack kong-plugin-myplugin &amp;&amp; luarocks install kong-plugin-myplugin-0.1.0-1.all.rock &amp;&amp; cp ./conf/kong.conf /etc/kong/</span><br><span class="line">ENTRYPOINT [&quot;/docker-entrypoint.sh&quot;]</span><br><span class="line">EXPOSE 8000 8443 8001 8444</span><br><span class="line">STOPSIGNAL SIGQUIT</span><br><span class="line">CMD [&quot;kong&quot;, &quot;docker-start&quot;]</span><br></pre></td></tr></table></figure>
 <blockquote>
 <blockquote>
-<h2><span id="22-build-image">2.2 build image</span></h2>
+<h2 id="22-build-image">2.2 build image</h2>
 </blockquote>
 </blockquote>
 <p>docker build -t  gateway .</p>
 <blockquote>
 <blockquote>
-<h2><span id="23-create-container">2.3 create container</span></h2>
+<h2 id="23-create-container">2.3 create container</h2>
 </blockquote>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name gateway \</span><br><span class="line">--network=kong-net \</span><br><span class="line">-e &quot;KONG_DATABASE=postgres&quot; \</span><br><span class="line">-e &quot;KONG_PG_</span><br><span class="line">hunHOST=kong-database&quot; \</span><br><span class="line">-e &quot;KONG_CASSANDRA_CONTACT_POINTS=kong-database&quot; \</span><br><span class="line">-e &quot;KONG_PLUGINS= bundled,kong-plugin-myplugin&quot;   \</span><br><span class="line">-e &quot;KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl&quot; \</span><br><span class="line">-p 8000:8000 \</span><br><span class="line">-p 8443:8443 \</span><br><span class="line">-p 8001:8001 \</span><br><span class="line">-p 8444:8444 \</span><br><span class="line">-e &quot;KONG_PROXY_ACCESS_LOG=/dev/stdout&quot; \</span><br><span class="line">-e &quot;KONG_ADMIN_ACCESS_LOG=/dev/stdout&quot; \</span><br><span class="line">-e &quot;KONG_PROXY_ERROR_LOG=/dev/stderr&quot; \</span><br><span class="line">-e &quot;KONG_ADMIN_ERROR_LOG=/dev/stderr&quot; \</span><br><span class="line">gateway</span><br></pre></td></tr></table></figure>
@@ -531,7 +540,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -544,7 +553,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -577,7 +586,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">1 nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 build images</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 create container</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">2 kong</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 build image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 create container</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-nginx"><span class="nav-number">1.</span> <span class="nav-text">1 nginx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#11-dockerfile"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-build-images"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 build images</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-create-container"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 create container</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-kong"><span class="nav-number">2.</span> <span class="nav-text">2 kong</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#21-dockerfile"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 dockerfile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#22-build-image"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 build image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#23-create-container"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 create container</span></a></li></ol></li></ol></div>
             
 
           </div>

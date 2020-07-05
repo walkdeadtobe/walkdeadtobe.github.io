@@ -261,6 +261,165 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/20/注解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/20/注解/" itemprop="url">注解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-20T19:17:38+08:00">
+                2019-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-11-09T19:21:28+08:00" content="2019-11-09">
+                2019-11-09
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>@Bean<br>
+(@Set @Get)</p>
+<p>@AutoWire<br>
+public class cla/public void set(class cla)</p>
+<ul>
+<li>自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量</li>
+</ul>
+<p>@Component(“name”)</p>
+<ul>
+<li>目前的了解是，加上该注解，就无需告知spring为该类创建Bean;如果有括号，并将该Bean ID标识（命名）为里面的字符串</li>
+</ul>
+<p>@Name</p>
+<ul>
+<li>spring 支持其代替 @Component ，唔，但不了解</li>
+</ul>
+<p>@ComponentScan<br>
+@ComponentScan(“name”)<br>
+@ComponentScan(basePackages=“name”/{“name”,“name1”})</p>
+<ol>
+<li>注解:在spring里开启组件扫描，默认扫描与配置类相同的包，扫描所在包以及子包中所有带有@Component注解的类</li>
+<li>注解:指明基础包，可以指明多个基础包</li>
+</ol>
+<p>@ContextConfiguration(classes=*.class)</p>
+<ul>
+<li>从指明的class里加载配置</li>
+</ul>
+<p>2019-6-27 更新<br>
+今天在给spring 添加新restful接口时，发现无法访问；最后发现，接口如果不设置访问方法。默认访问方式是GET，奇怪的是，如果设置为POST方式，那么将无法访问，重定位回登录页面？？</p>
+<p>在学习微服务构建时，需要看java代码，看到注解 时十分迷惑，暂时没有自己的见解<br>
+但是 这边博客说的不错<br>
+<a href="https://blog.csdn.net/briblue/article/details/73824058" target="_blank" rel="noopener">https://blog.csdn.net/briblue/article/details/73824058</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/stack-queue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -301,6 +460,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -431,6 +599,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -560,6 +737,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -685,6 +871,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -810,6 +1005,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -931,6 +1135,15 @@ EM算法 （迭代计算）</p>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -1060,6 +1273,15 @@ EM算法 （迭代计算）</p>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-11-09T19:24:33+08:00" content="2019-11-09">
+                2019-11-09
+              </time>
+            </span>
+          
 
           
 
@@ -1237,6 +1459,15 @@ filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-01-10T14:35:12+08:00" content="2020-01-10">
+                2020-01-10
+              </time>
+            </span>
+          
 
           
 
@@ -1268,9 +1499,9 @@ filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash
       
         
           
-            <h2><span id="kong">Kong</span></h2>
+            <h2 id="kong">Kong</h2>
 <p><a href="https://konghq.com/" target="_blank" rel="noopener">官网</a></p>
-<h2><span id="相关概念">相关概念</span></h2>
+<h2 id="相关概念">相关概念</h2>
 <p>consumer</p>
 <blockquote></blockquote>
 <p>service</p>
@@ -1284,7 +1515,7 @@ filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash
 <p><a href="https://docs.konghq.com/hub/" target="_blank" rel="noopener">官网</a> 包含 官方插件以及第三方插件<br>
 <a href="https://github.com/walkdeadtobe/my_kong_plugin" target="_blank" rel="noopener">个人自定义插件</a></p>
 </blockquote>
-<h2><span id="相关操作">相关操作</span></h2>
+<h2 id="相关操作">相关操作</h2>
 <p>创造 consumers</p>
 <blockquote>
 <p>curl -i -X POST  --url <a href="http://localhost:8001/consumers" target="_blank" rel="noopener">http://localhost:8001/consumers</a> --data “username=dzk”<br>
@@ -1335,7 +1566,7 @@ curl -X PATCH <a href="http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1
 –data “config.headers=X-Auth-Token”</p>
 <p>更新 2019-6-22<br>
 在查询kong的服务数目时，发现postgresql数据库的services数目与 curl <a href="http://localhost:8001/services" target="_blank" rel="noopener">http://localhost:8001/services</a> 数目不同，最后在github源码中发现 在api中设置最大返回值为100;唔在考虑从源码编译修改，但是安装会很蛋疼</p>
-<h2><span id="插件使用">插件使用</span></h2>
+<h2 id="插件使用">插件使用</h2>
 <p>kong_datadog_agent</p>
 <blockquote>
 <p>更爱配置文件后出现</p>
@@ -1432,6 +1663,15 @@ curl -X PATCH <a href="http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -1467,131 +1707,6 @@ curl -X PATCH <a href="http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1
 <p>人工神经网络（DP）  对比    径向基函数（RBF：神经元不只是感知器）<br>
 LSTM<br>
 模式识别 思考题 5000男+5000女 特征 分类</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/ABAC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/20/ABAC/" itemprop="url">ABAC</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-20T21:04:17+08:00">
-                2019-03-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>ABAC:Attribute Based Access Control<br>
-abaC 介绍视频： <a href="https://www.youtube.com/watch?v=cgTa7YnGfHA" target="_blank" rel="noopener">https://www.youtube.com/watch?v=cgTa7YnGfHA</a><br>
-+<br>
-<a href="https://www.youtube.com/watch?v=gskKUIa0_6A" target="_blank" rel="noopener">https://www.youtube.com/watch?v=gskKUIa0_6A</a><br>
-An Attribute Based Access Control Model for RESTful Service：一篇相关论文，其视频：<a href="https://www.youtube.com/watch?v=hDlr66-4paI" target="_blank" rel="noopener">https://www.youtube.com/watch?v=hDlr66-4paI</a></p>
-<p>相关概念延伸：XACML</p>
 
           
         
@@ -1677,7 +1792,7 @@ An Attribute Based Access Control Model for RESTful Service：一篇相关论文
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1690,7 +1805,7 @@ An Attribute Based Access Control Model for RESTful Service：一篇相关论文
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

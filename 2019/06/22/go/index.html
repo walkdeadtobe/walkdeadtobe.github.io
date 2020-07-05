@@ -83,11 +83,11 @@
 <meta name="keywords" content="MIT6.824">
 <meta property="og:type" content="article">
 <meta property="og:title" content="go">
-<meta property="og:url" content="http://yoursite.com/2019/07/22/go/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/06/22/go/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Go语言学习 注意点 变量类型  切片和指针都是引用类型 实际存储的字符的ascii值，没有char,取而代之的是byte(uint8),rune(int32) raw string？？ fmt.Println 与 println的区别 list.List 与 list.New() 的[区别]](https://golang.org/pkg/container/list/)CSDN list.Li">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-05T09:22:48.808Z">
+<meta property="og:updated_time" content="2019-07-02T07:42:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="go">
 <meta name="twitter:description" content="Go语言学习 注意点 变量类型  切片和指针都是引用类型 实际存储的字符的ascii值，没有char,取而代之的是byte(uint8),rune(int32) raw string？？ fmt.Println 与 println的区别 list.List 与 list.New() 的[区别]](https://golang.org/pkg/container/list/)CSDN list.Li">
@@ -120,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/07/22/go/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/22/go/">
 
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/go/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/22/go/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chengr">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-22T15:42:16+08:00">
-                2019-07-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-22T15:42:16+08:00">
+                2019-06-22
               </time>
             
 
@@ -303,6 +303,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-07-02T15:42:16+08:00" content="2019-07-02">
+                2019-07-02
+              </time>
+            </span>
+          
 
           
 
@@ -332,9 +341,9 @@
       
 
       
-        <h2><span id="go语言学习">Go语言学习</span></h2>
-<h3><span id="注意点">注意点</span></h3>
-<h4><span id="变量类型">变量类型</span></h4>
+        <h2 id="go语言学习">Go语言学习</h2>
+<h3 id="注意点">注意点</h3>
+<h4 id="变量类型">变量类型</h4>
 <ol>
 <li>切片和指针都是引用类型</li>
 <li>实际存储的字符的ascii值，没有char,取而代之的是byte(uint8),rune(int32)</li>
@@ -343,15 +352,15 @@
 <li>list.List 与 list.New() 的[区别]](<a href="https://golang.org/pkg/container/list/" target="_blank" rel="noopener">https://golang.org/pkg/container/list/</a>)<a href="https://blog.csdn.net/xxx9001/article/details/52574501" target="_blank" rel="noopener">CSDN</a><br>
 list.List 返回的是一个结构体值类型,list.New()返回的是一个初始化的结构体的指针类型，区别在于1.作为函数参数传入时,list.List不可更改，而指针类型可更改2.传入参数需要与函数定义相同,即函数定义的是值类型，那么只能传入值类型</li>
 </ol>
-<h2><span id="分布式系统学习第一弹">分布式系统学习第一弹</span></h2>
+<h2 id="分布式系统学习第一弹">分布式系统学习第一弹</h2>
 <p><a href="https://pdos.csail.mit.edu/6.824/labs/lab-1.html" target="_blank" rel="noopener">MIT 6.824</a><br>
 按照课程要求，下载源码<br>
 修改一：添加日志，在 go  init 函数更改日志格式,使得输出时带位置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//init log format</span><br><span class="line">func init()&#123;</span><br><span class="line">    log.SetFlags(log.Ldate| log.Lshortfile |log.Ltime |log.LUTC)</span><br><span class="line">&#125;</span><br><span class="line">//样例输出</span><br><span class="line">2019/07/22 07:34:41 master_splitmerge.go:23: Merge: open mrtmp.test-res-0: no such file or directory</span><br></pre></td></tr></table></figure>
-<h2><span id="cache2go-学习">cache2go 学习</span></h2>
+<h2 id="cache2go-学习">cache2go 学习</h2>
 <p><a href="https://blog.csdn.net/notbaron/article/details/52008155" target="_blank" rel="noopener">项目结构 简介</a><br>
 <a href="https://blog.csdn.net/zhizhengguan/article/details/84257338" target="_blank" rel="noopener">Go缓存库cache2go介绍</a></p>
-<h2><span id="go-语言">go 语言</span></h2>
+<h2 id="go-语言">go 语言</h2>
 <p>实现长度为变量的二维数组</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var status [][]int</span><br><span class="line">for i := 0; i &lt; len(variable1); i++ &#123;</span><br><span class="line">	var statu = make([]int, len(variable2))</span><br><span class="line">	status = append(status, statu)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>range</p>
@@ -387,8 +396,8 @@ list.List 返回的是一个结构体值类型,list.New()返回的是一个初�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/10/dp/" rel="next" title="动态规划学习">
-                <i class="fa fa-chevron-left"></i> 动态规划学习
+              <a href="/2019/06/19/系统配置/" rel="next" title="系统配置">
+                <i class="fa fa-chevron-left"></i> 系统配置
               </a>
             
           </div>
@@ -397,8 +406,8 @@ list.List 返回的是一个结构体值类型,list.New()返回的是一个初�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/22/Git/" rel="prev" title="git 学习">
-                git 学习 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/06/22/psql/" rel="prev" title="postgresql">
+                postgresql <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -476,7 +485,7 @@ list.List 返回的是一个结构体值类型,list.New()返回的是一个初�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -489,7 +498,7 @@ list.List 返回的是一个结构体值类型,list.New()返回的是一个初�
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -522,7 +531,7 @@ list.List 返回的是一个结构体值类型,list.New()返回的是一个初�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">Go语言学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.1.</span> <span class="nav-text">注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">1.1.1.</span> <span class="nav-text">变量类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">分布式系统学习第一弹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">cache2go 学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">go 语言</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#go语言学习"><span class="nav-number">1.</span> <span class="nav-text">Go语言学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意点"><span class="nav-number">1.1.</span> <span class="nav-text">注意点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量类型"><span class="nav-number">1.1.1.</span> <span class="nav-text">变量类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式系统学习第一弹"><span class="nav-number">2.</span> <span class="nav-text">分布式系统学习第一弹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cache2go-学习"><span class="nav-number">3.</span> <span class="nav-text">cache2go 学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go-语言"><span class="nav-number">4.</span> <span class="nav-text">go 语言</span></a></li></ol></div>
             
 
           </div>

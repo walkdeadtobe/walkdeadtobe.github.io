@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="nginx,">
+  <meta name="keywords" content="hexo next,">
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="rewrite规则必须匹配对应的域名才能生效，比如是server_name 为aa.com 下的rewrite 规则，则必须访问时前缀是 aa.com ，rewrite规则才能生效  在 nginx 反向代理处直接拒绝不携带token的请求  在 server 内 ，loaction 前对于所有请求 判断cookie内是否携带token(先不管token是否有效)，其中排除对包含code/oau">
-<meta name="keywords" content="nginx">
+<meta name="description" content="部署 hexo next plugin  hexo-generator-search hexo-renderer-markdown-it  问题 hexo toc 锚点失效">
+<meta name="keywords" content="hexo next">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx">
-<meta property="og:url" content="http://yoursite.com/2019/06/29/nginx/index.html">
+<meta property="og:title" content="blog 产生记">
+<meta property="og:url" content="http://yoursite.com/2020/07/05/blog/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="rewrite规则必须匹配对应的域名才能生效，比如是server_name 为aa.com 下的rewrite 规则，则必须访问时前缀是 aa.com ，rewrite规则才能生效  在 nginx 反向代理处直接拒绝不携带token的请求  在 server 内 ，loaction 前对于所有请求 判断cookie内是否携带token(先不管token是否有效)，其中排除对包含code/oau">
+<meta property="og:description" content="部署 hexo next plugin  hexo-generator-search hexo-renderer-markdown-it  问题 hexo toc 锚点失效">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-19T10:14:44.421Z">
+<meta property="og:updated_time" content="2020-07-05T15:14:30.885Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nginx">
-<meta name="twitter:description" content="rewrite规则必须匹配对应的域名才能生效，比如是server_name 为aa.com 下的rewrite 规则，则必须访问时前缀是 aa.com ，rewrite规则才能生效  在 nginx 反向代理处直接拒绝不携带token的请求  在 server 内 ，loaction 前对于所有请求 判断cookie内是否携带token(先不管token是否有效)，其中排除对包含code/oau">
+<meta name="twitter:title" content="blog 产生记">
+<meta name="twitter:description" content="部署 hexo next plugin  hexo-generator-search hexo-renderer-markdown-it  问题 hexo toc 锚点失效">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/29/nginx/">
+  <link rel="canonical" href="http://yoursite.com/2020/07/05/blog/">
 
 
 
 
 
-  <title>nginx | Hexo</title>
+  <title>blog 产生记 | Hexo</title>
   
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/29/nginx/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chengr">
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">nginx</h1>
+          <h1 class="post-title" itemprop="name headline">blog 产生记</h1>
         
 
         <div class="post-meta">
@@ -294,8 +294,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-29T17:31:56+08:00">
-                2019-06-29
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-05T22:52:19+08:00">
+                2020-07-05
               </time>
             
 
@@ -307,8 +307,8 @@
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2019-09-19T18:14:44+08:00" content="2019-09-19">
-                2019-09-19
+              <time itemprop="dateUpdated" datetime="2020-07-05T23:14:30+08:00" content="2020-07-05">
+                2020-07-05
               </time>
             </span>
           
@@ -341,37 +341,16 @@
       
 
       
-        <blockquote>
-<p>rewrite规则必须匹配对应的域名才能生效，比如是server_name <a href="http://xn--aa-tz2c.com" target="_blank" rel="noopener">为aa.com</a> 下的rewrite 规则，则必须访问时前缀是 <a href="http://aa.com" target="_blank" rel="noopener">aa.com</a> ，rewrite规则才能生效</p>
-</blockquote>
-<p>在 nginx 反向代理处直接拒绝不携带token的请求</p>
-<blockquote>
-<p>在 server 内 ，loaction 前对于所有请求 判断cookie内是否携带token(先不管token是否有效)，其中排除对包含code/oauth/static的请求，如果不携带，则使之跳转到授权服务器，登录后自动跳转到首页</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// if ( $request_uri ~* (.*)210.14.118.96(.*))</span><br><span class="line"> // &#123;  rewrite ^/(.*)$  http://localhost:80/$1 break; &#125;</span><br><span class="line">  set $flag 1;</span><br><span class="line"></span><br><span class="line">  if ( $http_cookie ~* (.*)token=(.*) )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)code=(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)oauth(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)static(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)/js/(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)/css/(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $http_referer = &quot;http://210.14.118.96/&quot; )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $http_referer = &quot;&quot; )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $flag = 1)&#123;</span><br><span class="line">  //rewrite ^(.*)$ http://111.203.146.69/oauth/authorize?client_id=kexie&amp;redirect_uri=http://210.14.118.96/ep/cookie.html&amp;response_type=code&amp;scope=read permanent;# redirect;</span><br><span class="line">  return 301  http://111.203.146.69/oauth/authorize?client_id=kexie&amp;redirect_uri=http://210.14.118.96/ep/cookie.html&amp;response_type=code&amp;scope=read;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>需要注意的是 从网上博客看，/etc/nginx/nginx.conf 的优先级比 /etc/nginx/conf.d/* 以及/etc/nginx/sites-enables/*优先级高，  但是如果后面的配置中标明了default_server，那么优先级应该是更高的(实际效果，没有去网上查找核实);导致后者的server_name:_  覆盖了前者的server_name:210.14.118.96</p>
-</blockquote>
-<p>在vue项目中 ，全局配置使得请求携带cookie<br>
-修改 ./src/main.js 添加 <a href="https://github.com/pagekit/vue-resource/issues/191" target="_blank" rel="noopener">相关问题连接</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &quot;vue&quot;;</span><br><span class="line">import VueAwesomeSwiper from &apos;vue-awesome-swiper&apos;</span><br><span class="line">import &apos;swiper/dist/css/swiper.css&apos;</span><br><span class="line">import App from &quot;./App.vue&quot;;</span><br><span class="line">import router from &quot;@/router/index&quot;;</span><br><span class="line">import store from &quot;@/store/index&quot;;</span><br><span class="line">import ElementUI from &quot;element-ui&quot;</span><br><span class="line">import &apos;element-ui/lib/theme-chalk/index.css&apos;</span><br><span class="line">import echarts from &quot;echarts&quot;;</span><br><span class="line">import &#123; debounce &#125; from &quot;@/assets/scripts/util&quot;;</span><br><span class="line">import starSky from &quot;@/assets/scripts/common/canvas.js&quot;;</span><br><span class="line">import echartTheme from &quot;@/constant/chalk.project.json&quot;</span><br><span class="line">//添加内容-开始</span><br><span class="line">import VueResource from &apos;vue-resource&apos;</span><br><span class="line">Vue.use(VueResource)</span><br><span class="line">Vue.http.options.xhr = &#123; withCredentials: true &#125;;</span><br><span class="line">//添加内容-结束</span><br><span class="line">echarts.registerTheme(&quot;chalk&quot;, echartTheme);</span><br><span class="line">Vue.config.productionTip = false;</span><br><span class="line">Vue.use(VueAwesomeSwiper)</span><br><span class="line">Vue.use(ElementUI)</span><br><span class="line">Vue.prototype.$charts = echarts;</span><br><span class="line">Vue.prototype.$debounce = debounce;</span><br><span class="line">Vue.prototype.$starSky = starSky;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: h =&gt; h(App)</span><br><span class="line">&#125;).$mount(&quot;#app&quot;);</span><br></pre></td></tr></table></figure>
-<p>此外报错，需要安装插件</p>
-<blockquote>
-<p>npm install --save vue-resource</p>
-</blockquote>
-<blockquote>
-<p>清除cookie 使用</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &quot;token=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/&quot;; </span><br><span class="line">document.cookie = &quot;token=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/ep&quot;;</span><br></pre></td></tr></table></figure>
-<p>而 setCookie()不能删除不同域下cookie</p>
-<blockquote>
-<p>当使用 upstream 代指 上游 多个可用服务器，nginx会根据 error  timeout 来自动替换选择 可用服务器，但是不支持对于有状态码的返回，此外我们可以配置自动检查后端情况以及相应处理 ,<a href="https://www.nginx.com/resources/wiki/modules/healthcheck/" target="_blank" rel="noopener">Nginx ngx_http_healthcheck_module</a>  <a href="https://github.com/cep21/healthcheck_nginx_upstreams/blob/master/README" target="_blank" rel="noopener">Github healthcheck_nginx_upstreams</a><br>
-而在目前项目中，由于前端nginx调用后面网关 ，所以需要已具有某些状态码来决定是否轮替， 例如</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">upstream backends &#123;</span><br><span class="line">server 192.2.0.1;</span><br><span class="line">server 192.2.0.2;</span><br><span class="line">…</span><br><span class="line">&#125;</span><br><span class="line">server&#123;</span><br><span class="line">  location / &#123;</span><br><span class="line">  proxy_pass http://backends;</span><br><span class="line">  proxy_next_upstream error timeout http_404 http_502 http_500;#依据状态码确定轮替，此外在 多个nginx转发情况下使用 timeout，会导致其它一些问题，简单的方式是除去timeout </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>出于实际需要，需要在kong网关处进行添加自定义插件，其中逻辑需要添加自定义header，使用 ngx.request.set_header(name,value)<br>
-但是发现自己在网关处添加的header无法传递到(Django)后端,遍历httprequest.MEAT也没有发现，最终经过查询发现 nginx 默认(可以通过配置 underscores_in_headers  on)不允许 header name 中携带 下划线,可以除去下划线或者用’-‘代替’<em>’,但是好奇的是在网关处 带下划线的header 仍然可以使用<br>
-可以使用 ngx.req.get_header(name) 查询，以及在日志中也可以配置 http_name得到值，或许只是不能够传出去??</em></p>
+        <h3 id="部署">部署</h3>
+<p>hexo<br>
+next</p>
+<h3 id="plugin">plugin</h3>
+<ul>
+<li>hexo-generator-search</li>
+<li>hexo-renderer-markdown-it</li>
+</ul>
+<h3 id="问题">问题</h3>
+<p><a href="https://convivae.top/posts/hexo-bo-ke-cai-keng/" target="_blank" rel="noopener">hexo toc 锚点失效</a></p>
 
       
     </div>
@@ -389,7 +368,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
+            <a href="/tags/hexo-next/" rel="tag"># hexo next</a>
           
         </div>
       
@@ -402,8 +381,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/22/psql/" rel="next" title="postgresql">
-                <i class="fa fa-chevron-left"></i> postgresql
+              <a href="/2020/07/05/Clousim/" rel="next" title>
+                <i class="fa fa-chevron-left"></i> 
               </a>
             
           </div>
@@ -411,10 +390,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/09/regex/" rel="prev" title="regex">
-                regex <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -466,8 +441,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -518,6 +502,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#部署"><span class="nav-number">1.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#plugin"><span class="nav-number">2.</span> <span class="nav-text">plugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#问题"><span class="nav-number">3.</span> <span class="nav-text">问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -261,6 +261,151 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/09/docker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/09/docker/" itemprop="url">docker</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-01-09T00:42:40+08:00">
+                2020-01-09
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-01-12T21:43:21+08:00" content="2020-01-12">
+                2020-01-12
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##Install<br>
+<a href="https://docs.docker.com/install/linux/linux-postinstall/" target="_blank" rel="noopener">官方教程</a></p>
+<p>##Usage<br>
+docker</p>
+<blockquote>
+<p>docker ps -a<br>
+docker images<br>
+dokcer stop/restart/rm CONTAINER_ID<br>
+docker rmi IAMGE_ID<br>
+docker logs CONTAINER_ID --tail NUMBER<br>
+docker inspect</p>
+</blockquote>
+<p>dokcer java 应用启动慢　尝试解决</p>
+<blockquote>
+<p>1.非阻塞熵池策略 优化　<a href="http://hongjiang.info/tomcat-startup-slowly-in-docker/" target="_blank" rel="noopener">Docker中apache-tomcat启动慢的问题</a>　<a href="https://www.cnblogs.com/a1304908180/p/10745284.html" target="_blank" rel="noopener">为什么阿里云服务器的docker启动tomcat这么慢？</a> -Djava.security.egd=file:/dev/urandom　－＞　-Djava.security.egd=file:/dev/./urandom<br>
+2.JVM 容量优化，即增加参数值 -Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/09/kubernets/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -301,6 +446,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-01-09T16:29:22+08:00" content="2020-01-09">
+                2020-01-09
+              </time>
+            </span>
+          
 
           
 
@@ -332,7 +486,7 @@
       
         
           
-            <h2><span id="install">Install</span></h2>
+            <h2 id="install">Install</h2>
 <p>我安装的是 minikube <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">K8S官方教程</a><br>
 注意点:</p>
 <ul>
@@ -371,7 +525,7 @@ kubeadm config migrate --old-config old.yaml --new-config new.yaml</p>
 <blockquote>
 <p>minikube start --vm-driver=none --image-repository=<a href="http://registry.aliyuncs.com/google_containers" target="_blank" rel="noopener">registry.aliyuncs.com/google_containers</a></p>
 </blockquote>
-<h2><span id="kubernetsminikube-相关操作">Kubernets/minikube 相关操作</span></h2>
+<h2 id="kubernetsminikube-相关操作">Kubernets/minikube 相关操作</h2>
 <p><a href="http://docs.kubernetes.org.cn/664.html" target="_blank" rel="noopener">k8s中文文档</a><br>
 minikube</p>
 <blockquote>
@@ -389,7 +543,7 @@ docker exec -it  --privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker
 kubectl get pods --namespace=‘sock-shop’<br>
 kubectl edit deploy/shipping  --namespace=‘sock-shop’</p>
 </blockquote>
-<h2><span id="相关概念">相关概念</span></h2>
+<h2 id="相关概念">相关概念</h2>
 <ol>
 <li>pod vs container</li>
 <li>containerPort vs targetPort vs nodePort vs port</li>
@@ -483,6 +637,15 @@ kubectl edit deploy/shipping  --namespace=‘sock-shop’</p>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-01-09T16:29:40+08:00" content="2020-01-09">
+                2020-01-09
+              </time>
+            </span>
+          
 
           
 
@@ -514,9 +677,9 @@ kubectl edit deploy/shipping  --namespace=‘sock-shop’</p>
       
         
           
-            <h2><span id="部署-microservice-benchmark">部署　microservice benchmark</span></h2>
+            <h2 id="部署-microservice-benchmark">部署　microservice benchmark</h2>
 <p><a href="https://github.com/microservices-demo/microservices-demo" target="_blank" rel="noopener">官方教程</a></p>
-<h2><span id="问题">问题</span></h2>
+<h2 id="问题">问题</h2>
 <ol>
 <li>
 <p>yml部署文件　unable to recognize</p>
@@ -646,6 +809,15 @@ carts-fc985d95-h78dn            0/1     Running       22         12h<br>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-12-30T21:47:55+08:00" content="2019-12-30">
+                2019-12-30
+              </time>
+            </span>
+          
 
           
 
@@ -769,6 +941,15 @@ carts-fc985d95-h78dn            0/1     Running       22         12h<br>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-01-02T18:50:19+08:00" content="2020-01-02">
+                2020-01-02
+              </time>
+            </span>
+          
 
           
 
@@ -801,23 +982,23 @@ carts-fc985d95-h78dn            0/1     Running       22         12h<br>
         
           
             <blockquote>
-<h1><span id="1-nginx">1 nginx</span></h1>
+<h1 id="1-nginx">1 nginx</h1>
 </blockquote>
 <blockquote>
 <blockquote>
-<h2><span id="11-dockerfile">1.1 dockerfile</span></h2>
+<h2 id="11-dockerfile">1.1 dockerfile</h2>
 </blockquote>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#Dockerfile</span><br><span class="line">FROM nginx:latest</span><br><span class="line">MAINTAINER chengr chengr@buaa.edu.cn</span><br><span class="line">#mkdir</span><br><span class="line">RUN mkdir -p /home/cast/web/kexie_BigScreen_vue/dist \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/act-kexie-big \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/vue_front_of_talent/vue-demo \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/talent_zhejiang/vue-demo \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/kexie_news/dist \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/activeDay0904 \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/kexie_Local_BigScreen_vue/dist \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/kexie_Local_BigScreen_GuangXi/dist \</span><br><span class="line"> &amp;&amp; mkdir -p /home/cast/web/kexie_BigsScreen_city/dist</span><br><span class="line"></span><br><span class="line">#WORKDIR /home/LAB/bdbc.kg</span><br><span class="line">#copy file</span><br><span class="line">COPY nginx.conf /etc/nginx/</span><br><span class="line">COPY default /etc/nginx/conf.d/default.conf</span><br><span class="line">#COPY Frontend/talent/vue-demo /home/cast/web/vue_front_of_talent/vue-demo</span><br><span class="line">#COPY /home/LAB/bdbc.kg/Frontend/kexie/dist /home/cast/web/kexie_BigScreen_vue/dist</span><br><span class="line"></span><br><span class="line">EXPOSE 80 8003 8010 9010  8888 8889  8890  8891</span><br></pre></td></tr></table></figure>
 <blockquote>
 <blockquote>
-<h2><span id="12-build-images">1.2 build images</span></h2>
+<h2 id="12-build-images">1.2 build images</h2>
 </blockquote>
 </blockquote>
 <p>docker build -t nginx_bh .</p>
 <blockquote>
 <blockquote>
-<h2><span id="13-create-container">1.3 create container</span></h2>
+<h2 id="13-create-container">1.3 create container</h2>
 </blockquote>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">docker run \</span><br><span class="line">--name beihang_nginx \</span><br><span class="line">-p 80:80 \</span><br><span class="line">-p 8010:8010 \</span><br><span class="line">-p 9010:9010 \</span><br><span class="line">-p 8888:8888 \</span><br><span class="line">-p 8889:8889 \</span><br><span class="line">-p 8890:8890 \</span><br><span class="line">-p 8891:8891 \</span><br><span class="line">-p 8003:8003 \</span><br><span class="line">-v /home/LAB/bdbc.kg/Frontend/talent/vue-demo:/home/cast/web/vue_front_of_talent/vue-demo \</span><br><span class="line">-v /home/LAB/bdbc.kg/Frontend/kexie_BigScreen_vue/dist:/home/cast/web/kexie_BigScreen_vue/dist \</span><br><span class="line">-v /home/LAB/bdbc.kg/Frontend/talent_zhejiang/vue-demo:/home/cast/web/talent_zhejiang/vue-demo \</span><br><span class="line">-d nginx_bh</span><br></pre></td></tr></table></figure>
@@ -839,23 +1020,23 @@ carts-fc985d95-h78dn            0/1     Running       22         12h<br>
 <li>2.是否可能因为时延部分，导致网关与后端验证失败</li>
 </ul>
 <blockquote>
-<h1><span id="2-kong">2 kong</span></h1>
+<h1 id="2-kong">2 kong</h1>
 </blockquote>
 <blockquote>
 <blockquote>
-<h2><span id="21-dockerfile">2.1 dockerfile</span></h2>
+<h2 id="21-dockerfile">2.1 dockerfile</h2>
 </blockquote>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#Dockerfile</span><br><span class="line">FROM gecwf5gs.mirror.aliyuncs.com/library/kong:1.4</span><br><span class="line">WORKDIR /usr/src/app</span><br><span class="line">ADD my_kong_plugin my_kong_plugin</span><br><span class="line">WORKDIR /usr/src/app/my_kong_plugin</span><br><span class="line">RUN luarocks make &amp;&amp; luarocks pack kong-plugin-myplugin &amp;&amp; luarocks install kong-plugin-myplugin-0.1.0-1.all.rock &amp;&amp; cp ./conf/kong.conf /etc/kong/</span><br><span class="line">ENTRYPOINT [&quot;/docker-entrypoint.sh&quot;]</span><br><span class="line">EXPOSE 8000 8443 8001 8444</span><br><span class="line">STOPSIGNAL SIGQUIT</span><br><span class="line">CMD [&quot;kong&quot;, &quot;docker-start&quot;]</span><br></pre></td></tr></table></figure>
 <blockquote>
 <blockquote>
-<h2><span id="22-build-image">2.2 build image</span></h2>
+<h2 id="22-build-image">2.2 build image</h2>
 </blockquote>
 </blockquote>
 <p>docker build -t  gateway .</p>
 <blockquote>
 <blockquote>
-<h2><span id="23-create-container">2.3 create container</span></h2>
+<h2 id="23-create-container">2.3 create container</h2>
 </blockquote>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name gateway \</span><br><span class="line">--network=kong-net \</span><br><span class="line">-e &quot;KONG_DATABASE=postgres&quot; \</span><br><span class="line">-e &quot;KONG_PG_</span><br><span class="line">hunHOST=kong-database&quot; \</span><br><span class="line">-e &quot;KONG_CASSANDRA_CONTACT_POINTS=kong-database&quot; \</span><br><span class="line">-e &quot;KONG_PLUGINS= bundled,kong-plugin-myplugin&quot;   \</span><br><span class="line">-e &quot;KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl&quot; \</span><br><span class="line">-p 8000:8000 \</span><br><span class="line">-p 8443:8443 \</span><br><span class="line">-p 8001:8001 \</span><br><span class="line">-p 8444:8444 \</span><br><span class="line">-e &quot;KONG_PROXY_ACCESS_LOG=/dev/stdout&quot; \</span><br><span class="line">-e &quot;KONG_ADMIN_ACCESS_LOG=/dev/stdout&quot; \</span><br><span class="line">-e &quot;KONG_PROXY_ERROR_LOG=/dev/stderr&quot; \</span><br><span class="line">-e &quot;KONG_ADMIN_ERROR_LOG=/dev/stderr&quot; \</span><br><span class="line">gateway</span><br></pre></td></tr></table></figure>
@@ -968,6 +1149,15 @@ carts-fc985d95-h78dn            0/1     Running       22         12h<br>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-12-30T21:43:22+08:00" content="2019-12-30">
+                2019-12-30
+              </time>
+            </span>
+          
 
           
 
@@ -1173,6 +1363,15 @@ bug描述：由于返回跳转地址与Host不同,涉及跨域问题<br>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-01-09T16:26:21+08:00" content="2020-01-09">
+                2020-01-09
+              </time>
+            </span>
+          
 
           
 
@@ -1215,13 +1414,13 @@ bug描述：由于返回跳转地址与Host不同,涉及跨域问题<br>
 <p>大小</p>
 </blockquote>
 <p><code># 一号字</code></p>
-<h1><span id="一号字">一号字</span></h1>
+<h1 id="一号字">一号字</h1>
 <p><code>## 二号字</code></p>
-<h2><span id="二号字">二号字</span></h2>
+<h2 id="二号字">二号字</h2>
 <p><code>### 三号字</code></p>
-<h3><span id="三号字">三号字</span></h3>
+<h3 id="三号字">三号字</h3>
 <p><code>#### 四号字</code></p>
-<h4><span id="四号字">四号字</span></h4>
+<h4 id="四号字">四号字</h4>
 <blockquote>
 <p>居中,字体,颜色</p>
 </blockquote>
@@ -1455,6 +1654,8 @@ bug描述：由于返回跳转地址与Host不同,涉及跨域问题<br>
 
             
           </span>
+          
+          
 
           
 
@@ -1600,6 +1801,15 @@ bug描述：由于返回跳转地址与Host不同,涉及跨域问题<br>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-11-15T23:42:36+08:00" content="2019-11-15">
+                2019-11-15
+              </time>
+            </span>
+          
 
           
 
@@ -1724,6 +1934,15 @@ bug描述：由于返回跳转地址与Host不同,涉及跨域问题<br>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-11-09T19:26:19+08:00" content="2019-11-09">
+                2019-11-09
+              </time>
+            </span>
+          
 
           
 
@@ -1878,139 +2097,6 @@ Paxos算法分为两个阶段。具体如下：</p>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/19/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/09/19/hello-world/" itemprop="url">Hello World</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-19T18:12:52+08:00">
-                2019-09-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2><span id="quick-start">Quick Start</span></h2>
-<h3><span id="create-a-new-post">Create a new post</span></h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3><span id="run-server">Run server</span></h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3><span id="generate-static-files">Generate static files</span></h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2061,7 +2147,7 @@ Paxos算法分为两个阶段。具体如下：</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -2074,7 +2160,7 @@ Paxos算法分为两个阶段。具体如下：</p>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

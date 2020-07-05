@@ -261,6 +261,171 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/authen-server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/05/14/authen-server/" itemprop="url">authen_server</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-14T17:11:39+08:00">
+                2019-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录<br>
+如何用idea 打包 maven项目<br>
+‘’’<br>
+用idea中maven 打开项目，点击idea 右侧的 Maven Projects，<br>
+点击 LIfecycle -&gt; install -&gt; run maven build 即可<br>
+‘’’<br>
+之后 将该项目scp至服务器<br>
+使用 java -jar *.jar 运行<br>
+在运行时出现一些错误，如下</p>
+<p>‘’’<br>
+2019-05-14 17:06:35.986 ERROR 1180706 — [ost-startStop-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.</p>
+<p>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</p>
+<p>The last packet successfully received from the server was 199 milliseconds ago.  The last packet sent successfully to the server was 192 milliseconds ago.<br>
+at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_181]<br>
+at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_181]<br>
+…<br>
+…<br>
+… 154 common frames omitted<br>
+Caused by: java.security.cert.CertPathValidatorException: Path does not chain with any of the trust anchors<br>
+at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:154) ~[na:1.8.0_181]<br>
+at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:80) ~[na:1.8.0_181]<br>
+at java.security.cert.CertPathValidator.validate(CertPathValidator.java:292) ~[na:1.8.0_181]<br>
+at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(ExportControlled.java:295) ~[mysql-connector-java-5.1.46.jar!/:5.1.46]<br>
+… 156 common frames omitted</p>
+<p>‘’’<br>
+经查询(<a href="https://www.jianshu.com/p/b3151ca89def" target="_blank" rel="noopener">https://www.jianshu.com/p/b3151ca89def</a> ）发现是因为SSL配置的原因（暂时没有细究），在源代码 application.yml 文件中将useSSL=true 改为 false即可，重新打包，scp，运行</p>
+<p>在查询过程中发现之后可能会出现的另一个问题，即在长时间未连接mysql时会报类似的 Communications link failure 错误，不过这里是因为mysql默认配置 无连接最长等待时间是8小时，可以通过修改配置文件 mysql.ini 去解决这个错误</p>
+<p>在此之前需要在服务器安装mysql<br>
+按照官网教程(下面的是Ubuntu下的，如果安装在redhat上，会有一些区别 ，具体参照官方教程 <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/</a>)</p>
+<ul>
+<li>wget <a href="https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</a></li>
+<li>也可以选择检查 文件传输中是否出错 md5sum mysql-apt-config_0.8.13-1_all.deb</li>
+<li>之后运行 dpkg -i mysql-apt-config_0.8.13-1_all.deb，选择你所需要安装的mysql版本，程序会将之添加到apt源中</li>
+<li>运行 sudo apt-get update （–fix-missing）</li>
+<li>自动下载之后需要配置用户名与密码，需要与你在spring程序中配置的一致</li>
+</ul>
+<p>进入数据库 mysql -u root -p ,之后输入密码</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/01/Machine_learning_course/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -301,6 +466,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -431,6 +605,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -552,6 +735,15 @@ NLP aligment</p>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -693,6 +885,15 @@ maxpooling 、average_pooling ？？</p>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -817,6 +1018,15 @@ maxpooling 、average_pooling ？？</p>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -982,6 +1192,15 @@ $$ N log^{k} $$</li>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -1151,6 +1370,15 @@ $$</li>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -1281,6 +1509,15 @@ kill -9 $(ps -ef|grep id | grep -v grep|awk ‘{print $2}’ )。</li>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2019-09-19T18:12:52+08:00" content="2019-09-19">
+                2019-09-19
+              </time>
+            </span>
+          
 
           
 
@@ -1401,6 +1638,15 @@ kill -9 $(ps -ef|grep id | grep -v grep|awk ‘{print $2}’ )。</li>
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-07-05T16:40:45+08:00" content="2020-07-05">
+                2020-07-05
+              </time>
+            </span>
+          
 
           
 
@@ -1490,156 +1736,6 @@ systemctl start nginx<br>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/20/注解/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/20/注解/" itemprop="url">注解</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-20T19:17:38+08:00">
-                2019-04-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>@Bean<br>
-(@Set @Get)</p>
-<p>@AutoWire<br>
-public class cla/public void set(class cla)</p>
-<ul>
-<li>自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量</li>
-</ul>
-<p>@Component(“name”)</p>
-<ul>
-<li>目前的了解是，加上该注解，就无需告知spring为该类创建Bean;如果有括号，并将该Bean ID标识（命名）为里面的字符串</li>
-</ul>
-<p>@Name</p>
-<ul>
-<li>spring 支持其代替 @Component ，唔，但不了解</li>
-</ul>
-<p>@ComponentScan<br>
-@ComponentScan(“name”)<br>
-@ComponentScan(basePackages=“name”/{“name”,“name1”})</p>
-<ol>
-<li>注解:在spring里开启组件扫描，默认扫描与配置类相同的包，扫描所在包以及子包中所有带有@Component注解的类</li>
-<li>注解:指明基础包，可以指明多个基础包</li>
-</ol>
-<p>@ContextConfiguration(classes=*.class)</p>
-<ul>
-<li>从指明的class里加载配置</li>
-</ul>
-<p>2019-6-27 更新<br>
-今天在给spring 添加新restful接口时，发现无法访问；最后发现，接口如果不设置访问方法。默认访问方式是GET，奇怪的是，如果设置为POST方式，那么将无法访问，重定位回登录页面？？</p>
-<p>在学习微服务构建时，需要看java代码，看到注解 时十分迷惑，暂时没有自己的见解<br>
-但是 这边博客说的不错<br>
-<a href="https://blog.csdn.net/briblue/article/details/73824058" target="_blank" rel="noopener">https://blog.csdn.net/briblue/article/details/73824058</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1690,7 +1786,7 @@ public class cla/public void set(class cla)</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1703,7 +1799,7 @@ public class cla/public void set(class cla)</p>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

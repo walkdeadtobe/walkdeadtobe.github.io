@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="java 多线程 设计模式 单例模式 数据库 其他 java stack不推荐使用,建议使用dequeue代替">
+<meta name="description" content="多线程 设计模式 单例模式  单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象     懒汉模式：实例在使用到的时候才创建,当多线程并发调用">
 <meta name="keywords" content="java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="java 语言学习">
 <meta property="og:url" content="http://yoursite.com/2020/06/30/Java/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="java 多线程 设计模式 单例模式 数据库 其他 java stack不推荐使用,建议使用dequeue代替">
+<meta property="og:description" content="多线程 设计模式 单例模式  单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象     懒汉模式：实例在使用到的时候才创建,当多线程并发调用">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-05T09:22:48.805Z">
+<meta property="og:updated_time" content="2020-07-05T14:37:38.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java 语言学习">
-<meta name="twitter:description" content="java 多线程 设计模式 单例模式 数据库 其他 java stack不推荐使用,建议使用dequeue代替">
+<meta name="twitter:description" content="多线程 设计模式 单例模式  单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象     懒汉模式：实例在使用到的时候才创建,当多线程并发调用">
 
 
 
@@ -303,6 +303,15 @@
 
             
           </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-07-05T22:37:38+08:00" content="2020-07-05">
+                2020-07-05
+              </time>
+            </span>
+          
 
           
 
@@ -332,11 +341,54 @@
       
 
       
-        <h3><span id="java-多线程">java 多线程</span></h3>
-<h3><span id="设计模式">设计模式</span></h3>
-<h4><span id="单例模式">单例模式</span></h4>
-<h3><span id="数据库">数据库</span></h3>
-<h3><span id="其他">其他</span></h3>
+        <h3 id="多线程">多线程</h3>
+<h3 id="设计模式">设计模式</h3>
+<h4 id="单例模式">单例模式</h4>
+<blockquote>
+<p>单例模式（Singleton Pattern）是 Java 中最简单的设计模式之一。这种类型的设计模式属于创建型模式，它提供了一种创建对象的最佳方式。这种模式涉及到一个单一的类，该类负责创建自己的对象，同时确保只有单个对象被创建。这个类提供了一种访问其唯一的对象的方式，可以直接访问，不需要实例化该类的对象</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<ol>
+<li>懒汉模式：实例在使用到的时候才创建,当多线程并发调用 getInstance(),如果方法不加synchronize 关键字修饰,会导致线程不安全</li>
+</ol>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class LHan &#123;</span><br><span class="line">    private static LHan instance;</span><br><span class="line">    private LHan()&#123;&#125;</span><br><span class="line">    public static LHan getInstance()&#123;</span><br><span class="line">        if(instance == null)&#123;</span><br><span class="line">            instance = new LHan();</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<ol start="2">
+<li>饿汉模式,实例在最初已经初始化,getInstance()方法线程安全，但浪费内存空间</li>
+</ol>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class EHan &#123;</span><br><span class="line">    private static EHan instance = new EHan();</span><br><span class="line">    private EHan()&#123;&#125;</span><br><span class="line">    public static EHan getInstance()&#123;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<ol start="3">
+<li>双检锁,双重校验锁,在synchronize 关键字内外都加上一层if判断,即避免内存浪费,又保证了线程安全,同时 比直接上锁提高了执行效率</li>
+</ol>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class DoubleCheck &#123;</span><br><span class="line">    private static DoubleCheck instance;</span><br><span class="line">    private DoubleCheck()&#123;&#125;</span><br><span class="line">    public static DoubleCheck getInstance()&#123;</span><br><span class="line">        if(instance == null)&#123;</span><br><span class="line">            synchronize(DoubleCheck.class)&#123;</span><br><span class="line">                if(instance == null)&#123;</span><br><span class="line">                    instance = new DoubleCheck();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<ol start="4">
+<li>静态内部类(内部类是外部类的一个成员,分为静态内部类和非静态内部类：静态内部类可以直接调用外部类的静态成员(静态成员变量和静态方法)，但是不能直接调用外部类的非静态成员；而非静态内部类可以直接调用外部类的其他成员)</li>
+</ol>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class SingleTon &#123;</span><br><span class="line">    private static class SingletonHolder &#123;</span><br><span class="line">        private static final SingleTon INSTANCE = new SingleTon();</span><br><span class="line">    &#125;</span><br><span class="line">    private SingleTon()&#123;&#125;</span><br><span class="line">    public static final SingleTon getInstance()&#123;</span><br><span class="line">        return SingletonHolder.INSTANCE;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<blockquote>
+<ol start="5">
+<li>枚举</li>
+</ol>
+</blockquote>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public enum SingleTonn &#123;</span><br><span class="line">    INSTANCE;</span><br><span class="line">    public void AnyMethod()&#123;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数据库">数据库</h3>
+<h3 id="其他">其他</h3>
 <p><a href="https://www.cnblogs.com/cosmos-wong/p/11845934.html" target="_blank" rel="noopener">java stack不推荐使用</a>,建议使用dequeue代替</p>
 
       
@@ -457,7 +509,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">69</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -470,7 +522,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">42</span>
+                  <span class="site-state-item-count">43</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -503,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">java 多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#null"><span class="nav-number">2.1.</span> <span class="nav-text">单例模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程"><span class="nav-number">1.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计模式"><span class="nav-number">2.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单例模式"><span class="nav-number">2.1.</span> <span class="nav-text">单例模式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库"><span class="nav-number">3.</span> <span class="nav-text">数据库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a></li></ol></div>
             
 
           </div>
