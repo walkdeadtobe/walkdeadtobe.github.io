@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Install我安装的是 minikube K8S官方教程注意点:    网络问题：  更改镜像源 更改 k8s image 源 kubeadm init –image-repository registry.aliyuncs.com/google_containerskubeadm init –image-repository index.docker.io/mirrorgooglecontai">
+<meta name="description" content="Install 我安装的是 minikube K8S官方教程 注意点:   网络问题：  更改镜像源 更改 k8s image 源  kubeadm init --image-repository registry.aliyuncs.com/google_containers kubeadm init --image-repository index.docker.io/mirrorgooglec">
 <meta name="keywords" content="k8s install">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kubernets">
 <meta property="og:url" content="http://yoursite.com/2020/01/09/kubernets/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Install我安装的是 minikube K8S官方教程注意点:    网络问题：  更改镜像源 更改 k8s image 源 kubeadm init –image-repository registry.aliyuncs.com/google_containerskubeadm init –image-repository index.docker.io/mirrorgooglecontai">
+<meta property="og:description" content="Install 我安装的是 minikube K8S官方教程 注意点:   网络问题：  更改镜像源 更改 k8s image 源  kubeadm init --image-repository registry.aliyuncs.com/google_containers kubeadm init --image-repository index.docker.io/mirrorgooglec">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-01-09T08:29:22.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kubernets">
-<meta name="twitter:description" content="Install我安装的是 minikube K8S官方教程注意点:    网络问题：  更改镜像源 更改 k8s image 源 kubeadm init –image-repository registry.aliyuncs.com/google_containerskubeadm init –image-repository index.docker.io/mirrorgooglecontai">
+<meta name="twitter:description" content="Install 我安装的是 minikube K8S官方教程 注意点:   网络问题：  更改镜像源 更改 k8s image 源  kubeadm init --image-repository registry.aliyuncs.com/google_containers kubeadm init --image-repository index.docker.io/mirrorgooglec">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,51 +332,68 @@
       
 
       
-        <h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><p>我安装的是 minikube <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">K8S官方教程</a><br>注意点:  </p>
+        <h2><span id="install">Install</span></h2>
+<p>我安装的是 minikube <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-linux" target="_blank" rel="noopener">K8S官方教程</a><br>
+注意点:</p>
 <ul>
-<li><p>网络问题：</p>
+<li>
+<p>网络问题：</p>
 <ul>
 <li><a href="https://coding.imooc.com/learn/questiondetail/81560.html" target="_blank" rel="noopener">更改镜像源</a></li>
-<li>更改 k8s image 源<blockquote>
-<p>kubeadm init –image-repository registry.aliyuncs.com/google_containers<br>kubeadm init –image-repository index.docker.io/mirrorgooglecontainers</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>启动选项:</p>
-<ul>
-<li>选择 vm drive(in local linux environment use local docker)<blockquote>
-<p>minikube start –vm-driver=none</p>
-</blockquote>
-</li>
-<li>更改 kubeadm 配置<blockquote>
-<p>导出　kubeadm 原本配置　old.yaml，然后更改为 new.yaml<br>kubeadm config migrate –old-config old.yaml –new-config new.yaml</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>最终:     </p>
+<li>更改 k8s image 源
 <blockquote>
-<p>minikube start –vm-driver=none –image-repository=registry.aliyuncs.com/google_containers</p>
+<p>kubeadm init --image-repository <a href="http://registry.aliyuncs.com/google_containers" target="_blank" rel="noopener">registry.aliyuncs.com/google_containers</a><br>
+kubeadm init --image-repository <a href="http://index.docker.io/mirrorgooglecontainers" target="_blank" rel="noopener">index.docker.io/mirrorgooglecontainers</a></p>
 </blockquote>
 </li>
 </ul>
-<h2 id="Kubernets-minikube-相关操作"><a href="#Kubernets-minikube-相关操作" class="headerlink" title="Kubernets/minikube 相关操作"></a>Kubernets/minikube 相关操作</h2><p><a href="http://docs.kubernetes.org.cn/664.html" target="_blank" rel="noopener">k8s中文文档</a><br>minikube</p>
+</li>
+<li>
+<p>启动选项:</p>
+<ul>
+<li>选择 vm drive(in local linux environment use local docker)</li>
+</ul>
+<blockquote>
+<p>minikube start --vm-driver=none</p>
+</blockquote>
+<ul>
+<li>更改 kubeadm 配置</li>
+</ul>
+<blockquote>
+<p>导出　kubeadm 原本配置　old.yaml，然后更改为 new.yaml<br>
+kubeadm config migrate --old-config old.yaml --new-config new.yaml</p>
+</blockquote>
+</li>
+<li>
+<p>最终:</p>
+</li>
+</ul>
+<blockquote>
+<p>minikube start --vm-driver=none --image-repository=<a href="http://registry.aliyuncs.com/google_containers" target="_blank" rel="noopener">registry.aliyuncs.com/google_containers</a></p>
+</blockquote>
+<h2><span id="kubernetsminikube-相关操作">Kubernets/minikube 相关操作</span></h2>
+<p><a href="http://docs.kubernetes.org.cn/664.html" target="_blank" rel="noopener">k8s中文文档</a><br>
+minikube</p>
 <blockquote>
 <p>minikube stop/delete</p>
 </blockquote>
 <p>port</p>
 <blockquote>
-<p>containerPort,targetPort,nodePort,port 之间的区别<br>在deployment 文件中　containerPort相当于映射到容器外的端口 == docker run IMAGE_ID -P OUTSIDE_PORT:INSIDE_PORT<br>docker exec -it  –privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker，避免进入docker内需要某些权限的操作 </p>
+<p>containerPort,targetPort,nodePort,port 之间的区别<br>
+在deployment 文件中　containerPort相当于映射到容器外的端口 == docker run IMAGE_ID -P OUTSIDE_PORT:INSIDE_PORT<br>
+docker exec -it  --privileged   ab56f4a5d15c  /bin/sh  携带权限进入 docker，避免进入docker内需要某些权限的操作</p>
 </blockquote>
-<p>kubectl </p>
+<p>kubectl</p>
 <blockquote>
-<p>kubectl describe pod/orders-5dbffdd8ff-zqp2c –namespace=’sock-shop’<br>kubectl get pods –namespace=’sock-shop’<br>kubectl edit deploy/shipping  –namespace=’sock-shop’</p>
+<p>kubectl describe pod/orders-5dbffdd8ff-zqp2c --namespace=‘sock-shop’<br>
+kubectl get pods --namespace=‘sock-shop’<br>
+kubectl edit deploy/shipping  --namespace=‘sock-shop’</p>
 </blockquote>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ol>
+<h2><span id="相关概念">相关概念</span></h2>
+<ol>
 <li>pod vs container</li>
 <li>containerPort vs targetPort vs nodePort vs port</li>
-<li>service </li>
+<li>service</li>
 </ol>
 
       
@@ -553,7 +560,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Install"><span class="nav-number">1.</span> <span class="nav-text">Install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kubernets-minikube-相关操作"><span class="nav-number">2.</span> <span class="nav-text">Kubernets/minikube 相关操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关概念"><span class="nav-number">3.</span> <span class="nav-text">相关概念</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">Install</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">Kubernets/minikube 相关操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">相关概念</span></a></li></ol></div>
             
 
           </div>

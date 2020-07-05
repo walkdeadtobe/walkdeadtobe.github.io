@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="极客时间哈希函数：将key隐射到一维数组的特殊位置（很少有错）即使有错也可以 采取二维数组，减小错误率类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联） 布隆过滤器：将key分解为若干元素组成，比如说连续的二进制每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）">
+<meta name="description" content="极客时间 哈希函数：将key隐射到一维数组的特殊位置（很少有错） 即使有错也可以 采取二维数组，减小错误率 类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联） 布隆过滤器：将key分解为若干元素组成，比如说连续的二进制 每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）">
 <meta name="keywords" content="algrithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="bullon_filter">
 <meta property="og:url" content="http://yoursite.com/2019/04/11/bullon-filter/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="极客时间哈希函数：将key隐射到一维数组的特殊位置（很少有错）即使有错也可以 采取二维数组，减小错误率类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联） 布隆过滤器：将key分解为若干元素组成，比如说连续的二进制每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）">
+<meta property="og:description" content="极客时间 哈希函数：将key隐射到一维数组的特殊位置（很少有错） 即使有错也可以 采取二维数组，减小错误率 类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联） 布隆过滤器：将key分解为若干元素组成，比如说连续的二进制 每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-09-19T10:12:52.278Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="bullon_filter">
-<meta name="twitter:description" content="极客时间哈希函数：将key隐射到一维数组的特殊位置（很少有错）即使有错也可以 采取二维数组，减小错误率类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联） 布隆过滤器：将key分解为若干元素组成，比如说连续的二进制每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）">
+<meta name="twitter:description" content="极客时间 哈希函数：将key隐射到一维数组的特殊位置（很少有错） 即使有错也可以 采取二维数组，减小错误率 类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联） 布隆过滤器：将key分解为若干元素组成，比如说连续的二进制 每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,8 +332,12 @@
       
 
       
-        <p>极客时间<br>哈希函数：将key隐射到一维数组的特殊位置（很少有错）<br>即使有错也可以 采取二维数组，减小错误率<br>类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联）</p>
-<p>布隆过滤器：将key分解为若干元素组成，比如说连续的二进制<br>每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）</p>
+        <p>极客时间<br>
+哈希函数：将key隐射到一维数组的特殊位置（很少有错）<br>
+即使有错也可以 采取二维数组，减小错误率<br>
+类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联）</p>
+<p>布隆过滤器：将key分解为若干元素组成，比如说连续的二进制<br>
+每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）</p>
 
       
     </div>

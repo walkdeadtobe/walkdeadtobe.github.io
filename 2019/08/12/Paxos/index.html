@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="博客列表：  图解分布式一致性协议Paxos  相关概念  拜占庭模型:  wiki 拜占庭问题  分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。   非拜占庭模型： 指可能出现故障，但是不会伪造信息的情况(即，要么收">
+<meta name="description" content="博客列表：  图解分布式一致性协议Paxos  相关概念  拜占庭模型:  wiki 拜占庭问题 分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。   非拜占庭模型：  指可能出现故障，但是不会伪造信息的情况(即，要么收">
 <meta name="keywords" content="Distributed System 一致性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Paxos">
 <meta property="og:url" content="http://yoursite.com/2019/08/12/Paxos/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="博客列表：  图解分布式一致性协议Paxos  相关概念  拜占庭模型:  wiki 拜占庭问题  分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。   非拜占庭模型： 指可能出现故障，但是不会伪造信息的情况(即，要么收">
+<meta property="og:description" content="博客列表：  图解分布式一致性协议Paxos  相关概念  拜占庭模型:  wiki 拜占庭问题 分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。   非拜占庭模型：  指可能出现故障，但是不会伪造信息的情况(即，要么收">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-11-09T11:20:17.919Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Paxos">
-<meta name="twitter:description" content="博客列表：  图解分布式一致性协议Paxos  相关概念  拜占庭模型:  wiki 拜占庭问题  分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。   非拜占庭模型： 指可能出现故障，但是不会伪造信息的情况(即，要么收">
+<meta name="twitter:description" content="博客列表：  图解分布式一致性协议Paxos  相关概念  拜占庭模型:  wiki 拜占庭问题 分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。   非拜占庭模型：  指可能出现故障，但是不会伪造信息的情况(即，要么收">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -348,12 +338,14 @@
 </ul>
 <p>相关概念</p>
 <ul>
-<li>拜占庭模型: <ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">wiki 拜占庭问题</a> </li>
+<li>拜占庭模型:
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">wiki 拜占庭问题</a></li>
 <li>分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。</li>
 </ul>
 </li>
-<li>非拜占庭模型：<ul>
+<li>非拜占庭模型：
+<ul>
 <li>指可能出现故障，但是不会伪造信息的情况(即，要么收不到信息，要么收到真实的信息)</li>
 </ul>
 </li>

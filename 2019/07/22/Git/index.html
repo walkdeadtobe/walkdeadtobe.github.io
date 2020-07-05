@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容远程内容待补充  目录">
+<meta name="description" content="GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充  目">
 <meta name="keywords" content="git  file">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git 学习">
 <meta property="og:url" content="http://yoursite.com/2019/07/22/Git/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容远程内容待补充  目录">
+<meta property="og:description" content="GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充  目">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-07-05T08:40:45.330Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 学习">
-<meta name="twitter:description" content="GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容远程内容待补充  目录">
+<meta name="twitter:description" content="GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充  目">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -344,9 +334,22 @@
       
         <p>GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)</p>
 <blockquote>
-<p>在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容<br>远程内容待补充</p>
+<p>在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容<br>
+远程内容待补充</p>
 </blockquote>
-<p>目录解析<br>.git<br>├── COMMIT_EDITMSG<br>├── FETCH_HEAD<br>├── HEAD<br>├── config<br>├── description<br>├── index<br>├── hooks//以下是文件夹<br>├── info<br>├── logs<br>├── objects<br>└── refs</p>
+<p>目录解析<br>
+.git<br>
+├── COMMIT_EDITMSG<br>
+├── FETCH_HEAD<br>
+├── HEAD<br>
+├── config<br>
+├── description<br>
+├── index<br>
+├── hooks//以下是文件夹<br>
+├── info<br>
+├── logs<br>
+├── objects<br>
+└── refs</p>
 <p>1.git/COMMIT_EDITMSG</p>
 <blockquote>
 <p>记录commit附带的说明，经测试只记录最新的commit 说明</p>
@@ -365,15 +368,18 @@
 </blockquote>
 <p>5.git/index</p>
 <blockquote>
-<p>暂存区:存储时间戳,文件名,文件的SHA值等元数据<br>每当我们执行 git add操作的时候， git会给添加的每个文件的内容创建一个对象，然后把这个文件的路径和生成的对象进行映射，存放到 .git/index文件中。等到后期新的命令（比如：git add、 git rm或者 git mv）执行的时候，又会重新更新索引。</p>
+<p>暂存区:存储时间戳,文件名,文件的SHA值等元数据<br>
+每当我们执行 git add操作的时候， git会给添加的每个文件的内容创建一个对象，然后把这个文件的路径和生成的对象进行映射，存放到 .git/index文件中。等到后期新的命令（比如：git add、 git rm或者 git mv）执行的时候，又会重新更新索引。</p>
 </blockquote>
 <p>6.git/hook</p>
 <blockquote>
-<p>伴随着git的命令所触发的处理脚本,通常在 git init 时拷贝到新目录<br>具体脚本可分为客户端和服务端两种,待补充</p>
+<p>伴随着git的命令所触发的处理脚本,通常在 git init 时拷贝到新目录<br>
+具体脚本可分为客户端和服务端两种,待补充</p>
 </blockquote>
 <p>7.git/info</p>
 <blockquote>
-<p>关于仓库的的其他信息<br>例如.git/info/exclude 可以排除本地本人不想提交的文件,只与自己相关,该文件也不会上传,可用于排除私人的某些配置等,注意与全局的 .gitignore 文件区别</p>
+<p>关于仓库的的其他信息<br>
+例如.git/info/exclude 可以排除本地本人不想提交的文件,只与自己相关,该文件也不会上传,可用于排除私人的某些配置等,注意与全局的 .gitignore 文件区别</p>
 </blockquote>
 <p>8.git/logs</p>
 <blockquote>
@@ -381,24 +387,36 @@
 </blockquote>
 <p>9.git/objects</p>
 <blockquote>
-<p>真正保存代码的地方。其中分成两种类型的文件，一种是 pack，另外的是 blob文件。其中 pack是根据定位内容非常相似的全部文件，然后为他们之一存储整个内容。之后计算相似文件之间的差异并且只存储差异。而 blob文件就是记录差异。blob是“二进制大对象”（ binary largeobject）的简写，是计算机领域常用术语，用来指代某些可以包含任意数据的变量或文件<br>.git/objects:三种类型</p>
+<p>真正保存代码的地方。其中分成两种类型的文件，一种是 pack，另外的是 blob文件。其中 pack是根据定位内容非常相似的全部文件，然后为他们之一存储整个内容。之后计算相似文件之间的差异并且只存储差异。而 blob文件就是记录差异。blob是“二进制大对象”（ binary largeobject）的简写，是计算机领域常用术语，用来指代某些可以包含任意数据的变量或文件<br>
+.git/objects:三种类型</p>
 <blockquote>
-<p>blob :实际存储的文件,<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-Objects" target="_blank" rel="noopener">具体详情</a><br>tree : 当前project的一个快照,存储多个实体/数据结构(由blob object的git mode,类型,SHA-1值,文件名构成),记录了当前tree下所有文件所指向的blob object<br>commit: 记录所产生的tree object,作者,时间,commit msg,上一个commit object<br>tag: 根据我查看的文件结构与commit相同,但引用博客中说没有记录tree object,而记录创建tag 所在的commit object,是因为更新了？   </p>
+<p>blob :实际存储的文件,<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-Objects" target="_blank" rel="noopener">具体详情</a><br>
+tree : 当前project的一个快照,存储多个实体/数据结构(由blob object的git mode,类型,SHA-1值,文件名构成),记录了当前tree下所有文件所指向的blob object<br>
+commit: 记录所产生的tree object,作者,时间,commit msg,上一个commit object<br>
+tag: 根据我查看的文件结构与commit相同,但引用博客中说没有记录tree object,而记录创建tag 所在的commit object,是因为更新了？</p>
 </blockquote>
 </blockquote>
 <blockquote>
-<p>.git/objects/info 关于object的其他信息<br>.git/objects/pack 在git gc  或者 git push 时,git 会将松散的object文件打包压缩,降低存储空间 <a href="https://www.git-scm.com/book/en/v2/Git-Internals-Packfiles" target="_blank" rel="noopener">详情</a></p>
+<p>.git/objects/info 关于object的其他信息<br>
+.git/objects/pack 在git gc  或者 git push 时,git 会将松散的object文件打包压缩,降低存储空间 <a href="https://www.git-scm.com/book/en/v2/Git-Internals-Packfiles" target="_blank" rel="noopener">详情</a></p>
 </blockquote>
 <p>10.git/refs</p>
 <blockquote>
-<p>引用文件<br>.git/refs/heads 记录本地各分支最新状态(文件中存储git object 的SHA-1值),即指向最后一次commit提交只有产生的git object<br>.git/refs/tags<br>.git/refs/remotes 记录远程各分支最新状态(文件中存储git object 的SHA-1值),同样指向本地的git object(每次fetch或者pull会拉去远程的更新)</p>
+<p>引用文件<br>
+.git/refs/heads 记录本地各分支最新状态(文件中存储git object 的SHA-1值),即指向最后一次commit提交只有产生的git object<br>
+.git/refs/tags<br>
+.git/refs/remotes 记录远程各分支最新状态(文件中存储git object 的SHA-1值),同样指向本地的git object(每次fetch或者pull会拉去远程的更新)</p>
 </blockquote>
 <p>常见命令的实际流程：</p>
 <blockquote>
-<p>git add/commit<br>git push</p>
+<p>git add/commit<br>
+git push</p>
 </blockquote>
 <p>跟随态 VS 游离态</p>
-<p>参考：<br>1.<a href="https://www.siteground.com/tutorials/git/directory-structure/" target="_blank" rel="noopener">Git Directory</a><br>2.<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-References" target="_blank" rel="noopener">Git Ref</a><br>3.<a href="https://www.git-scm.com/docs/githooks" target="_blank" rel="noopener">Git hooks</a></p>
+<p>参考：<br>
+1.<a href="https://www.siteground.com/tutorials/git/directory-structure/" target="_blank" rel="noopener">Git Directory</a><br>
+2.<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-References" target="_blank" rel="noopener">Git Ref</a><br>
+3.<a href="https://www.git-scm.com/docs/githooks" target="_blank" rel="noopener">Git hooks</a></p>
 
       
     </div>

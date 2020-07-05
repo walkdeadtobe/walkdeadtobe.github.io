@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="@Bean(@Set @Get) @AutoWirepublic class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量   @Component(“name”)  目前的了解是，加上该注解，就无需告知">
+<meta name="description" content="@Bean (@Set @Get) @AutoWire public class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量  @Component(“name”)  目前的了解是，加上该注解，就无需告">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="注解">
 <meta property="og:url" content="http://yoursite.com/2019/04/20/注解/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="@Bean(@Set @Get) @AutoWirepublic class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量   @Component(“name”)  目前的了解是，加上该注解，就无需告知">
+<meta property="og:description" content="@Bean (@Set @Get) @AutoWire public class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量  @Component(“name”)  目前的了解是，加上该注解，就无需告">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-11-09T11:21:28.975Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="注解">
-<meta name="twitter:description" content="@Bean(@Set @Get) @AutoWirepublic class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量   @Component(“name”)  目前的了解是，加上该注解，就无需告知">
+<meta name="twitter:description" content="@Bean (@Set @Get) @AutoWire public class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量  @Component(“name”)  目前的了解是，加上该注解，就无需告">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,10 +332,12 @@
       
 
       
-        <p>@Bean<br>(@Set @Get)</p>
-<p>@AutoWire<br>public class cla/public void set(class cla)</p>
+        <p>@Bean<br>
+(@Set @Get)</p>
+<p>@AutoWire<br>
+public class cla/public void set(class cla)</p>
 <ul>
-<li>自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量 </li>
+<li>自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量</li>
 </ul>
 <p>@Component(“name”)</p>
 <ul>
@@ -355,7 +347,9 @@
 <ul>
 <li>spring 支持其代替 @Component ，唔，但不了解</li>
 </ul>
-<p>@ComponentScan<br>@ComponentScan(“name”)<br>@ComponentScan(basePackages=”name”/{“name”,”name1”})</p>
+<p>@ComponentScan<br>
+@ComponentScan(“name”)<br>
+@ComponentScan(basePackages=“name”/{“name”,“name1”})</p>
 <ol>
 <li>注解:在spring里开启组件扫描，默认扫描与配置类相同的包，扫描所在包以及子包中所有带有@Component注解的类</li>
 <li>注解:指明基础包，可以指明多个基础包</li>
@@ -364,8 +358,11 @@
 <ul>
 <li>从指明的class里加载配置</li>
 </ul>
-<p>2019-6-27 更新<br>今天在给spring 添加新restful接口时，发现无法访问；最后发现，接口如果不设置访问方法。默认访问方式是GET，奇怪的是，如果设置为POST方式，那么将无法访问，重定位回登录页面？？ </p>
-<p>在学习微服务构建时，需要看java代码，看到注解 时十分迷惑，暂时没有自己的见解<br>但是 这边博客说的不错<br><a href="https://blog.csdn.net/briblue/article/details/73824058" target="_blank" rel="noopener">https://blog.csdn.net/briblue/article/details/73824058</a></p>
+<p>2019-6-27 更新<br>
+今天在给spring 添加新restful接口时，发现无法访问；最后发现，接口如果不设置访问方法。默认访问方式是GET，奇怪的是，如果设置为POST方式，那么将无法访问，重定位回登录页面？？</p>
+<p>在学习微服务构建时，需要看java代码，看到注解 时十分迷惑，暂时没有自己的见解<br>
+但是 这边博客说的不错<br>
+<a href="https://blog.csdn.net/briblue/article/details/73824058" target="_blank" rel="noopener">https://blog.csdn.net/briblue/article/details/73824058</a></p>
 
       
     </div>

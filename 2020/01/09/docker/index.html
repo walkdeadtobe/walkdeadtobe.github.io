@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="##Install官方教程 ##Usagedocker  docker ps -adocker imagesdokcer stop/restart/rm CONTAINER_IDdocker rmi IAMGE_IDdocker logs CONTAINER_ID –tail NUMBERdocker inspect    dokcer java 应用启动慢　尝试解决  1.非阻塞熵池策略 优化">
+<meta name="description" content="##Install 官方教程 ##Usage docker  docker ps -a docker images dokcer stop/restart/rm CONTAINER_ID docker rmi IAMGE_ID docker logs CONTAINER_ID --tail NUMBER docker inspect  dokcer java 应用启动慢　尝试解决  1.非阻塞熵池">
 <meta name="keywords" content="docker install use">
 <meta property="og:type" content="article">
 <meta property="og:title" content="docker">
 <meta property="og:url" content="http://yoursite.com/2020/01/09/docker/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="##Install官方教程 ##Usagedocker  docker ps -adocker imagesdokcer stop/restart/rm CONTAINER_IDdocker rmi IAMGE_IDdocker logs CONTAINER_ID –tail NUMBERdocker inspect    dokcer java 应用启动慢　尝试解决  1.非阻塞熵池策略 优化">
+<meta property="og:description" content="##Install 官方教程 ##Usage docker  docker ps -a docker images dokcer stop/restart/rm CONTAINER_ID docker rmi IAMGE_ID docker logs CONTAINER_ID --tail NUMBER docker inspect  dokcer java 应用启动慢　尝试解决  1.非阻塞熵池">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-01-12T13:43:21.317Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker">
-<meta name="twitter:description" content="##Install官方教程 ##Usagedocker  docker ps -adocker imagesdokcer stop/restart/rm CONTAINER_IDdocker rmi IAMGE_IDdocker logs CONTAINER_ID –tail NUMBERdocker inspect    dokcer java 应用启动慢　尝试解决  1.非阻塞熵池策略 优化">
+<meta name="twitter:description" content="##Install 官方教程 ##Usage docker  docker ps -a docker images dokcer stop/restart/rm CONTAINER_ID docker rmi IAMGE_ID docker logs CONTAINER_ID --tail NUMBER docker inspect  dokcer java 应用启动慢　尝试解决  1.非阻塞熵池">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,14 +332,22 @@
       
 
       
-        <p>##Install<br><a href="https://docs.docker.com/install/linux/linux-postinstall/" target="_blank" rel="noopener">官方教程</a></p>
-<p>##Usage<br>docker</p>
+        <p>##Install<br>
+<a href="https://docs.docker.com/install/linux/linux-postinstall/" target="_blank" rel="noopener">官方教程</a></p>
+<p>##Usage<br>
+docker</p>
 <blockquote>
-<p>docker ps -a<br>docker images<br>dokcer stop/restart/rm CONTAINER_ID<br>docker rmi IAMGE_ID<br>docker logs CONTAINER_ID –tail NUMBER<br>docker inspect  </p>
+<p>docker ps -a<br>
+docker images<br>
+dokcer stop/restart/rm CONTAINER_ID<br>
+docker rmi IAMGE_ID<br>
+docker logs CONTAINER_ID --tail NUMBER<br>
+docker inspect</p>
 </blockquote>
 <p>dokcer java 应用启动慢　尝试解决</p>
 <blockquote>
-<p>1.非阻塞熵池策略 优化　<a href="http://hongjiang.info/tomcat-startup-slowly-in-docker/" target="_blank" rel="noopener">Docker中apache-tomcat启动慢的问题</a>　<a href="https://www.cnblogs.com/a1304908180/p/10745284.html" target="_blank" rel="noopener">为什么阿里云服务器的docker启动tomcat这么慢？</a> -Djava.security.egd=file:/dev/urandom　－＞　-Djava.security.egd=file:/dev/./urandom<br>2.JVM 容量优化，即增加参数值 -Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m </p>
+<p>1.非阻塞熵池策略 优化　<a href="http://hongjiang.info/tomcat-startup-slowly-in-docker/" target="_blank" rel="noopener">Docker中apache-tomcat启动慢的问题</a>　<a href="https://www.cnblogs.com/a1304908180/p/10745284.html" target="_blank" rel="noopener">为什么阿里云服务器的docker启动tomcat这么慢？</a> -Djava.security.egd=file:/dev/urandom　－＞　-Djava.security.egd=file:/dev/./urandom<br>
+2.JVM 容量优化，即增加参数值 -Xms256m -Xmx512m -XX:PermSize=64m -XX:MaxPermSize=128m</p>
 </blockquote>
 
       

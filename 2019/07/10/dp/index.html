@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="参考资料：  百度文库资料 博客  动态规划(dynamic programming)条件：  最优子问题结构 子问题重叠性质 无后效性  动态规划分类  线性型 简介：在线性空间上的递推dp 思路： 例子：最长上升子序列(LIS)、最长公共子序列(LCS)、最大子序列和   区间型 简介：区间dp就是在区间上进行动态规划，求解一段区间上的最优解。可以是二维的也可以是三维的，一般情况下为二维； 思">
+<meta name="description" content="参考资料：  百度文库资料 博客  动态规划(dynamic programming) 条件：  最优子问题结构 子问题重叠性质 无后效性  动态规划分类  线性型  简介：在线性空间上的递推dp 思路： 例子：最长上升子序列(LIS)、最长公共子序列(LCS)、最大子序列和   区间型  简介：区间dp就是在区间上进行动态规划，求解一段区间上的最优解。可以是二维的也可以是三维的，一般情况下为二维">
 <meta name="keywords" content="dp  algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="动态规划学习">
 <meta property="og:url" content="http://yoursite.com/2019/07/10/dp/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="参考资料：  百度文库资料 博客  动态规划(dynamic programming)条件：  最优子问题结构 子问题重叠性质 无后效性  动态规划分类  线性型 简介：在线性空间上的递推dp 思路： 例子：最长上升子序列(LIS)、最长公共子序列(LCS)、最大子序列和   区间型 简介：区间dp就是在区间上进行动态规划，求解一段区间上的最优解。可以是二维的也可以是三维的，一般情况下为二维； 思">
+<meta property="og:description" content="参考资料：  百度文库资料 博客  动态规划(dynamic programming) 条件：  最优子问题结构 子问题重叠性质 无后效性  动态规划分类  线性型  简介：在线性空间上的递推dp 思路： 例子：最长上升子序列(LIS)、最长公共子序列(LCS)、最大子序列和   区间型  简介：区间dp就是在区间上进行动态规划，求解一段区间上的最优解。可以是二维的也可以是三维的，一般情况下为二维">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-07-05T08:40:45.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="动态规划学习">
-<meta name="twitter:description" content="参考资料：  百度文库资料 博客  动态规划(dynamic programming)条件：  最优子问题结构 子问题重叠性质 无后效性  动态规划分类  线性型 简介：在线性空间上的递推dp 思路： 例子：最长上升子序列(LIS)、最长公共子序列(LCS)、最大子序列和   区间型 简介：区间dp就是在区间上进行动态规划，求解一段区间上的最优解。可以是二维的也可以是三维的，一般情况下为二维； 思">
+<meta name="twitter:description" content="参考资料：  百度文库资料 博客  动态规划(dynamic programming) 条件：  最优子问题结构 子问题重叠性质 无后效性  动态规划分类  线性型  简介：在线性空间上的递推dp 思路： 例子：最长上升子序列(LIS)、最长公共子序列(LCS)、最大子序列和   区间型  简介：区间dp就是在区间上进行动态规划，求解一段区间上的最优解。可以是二维的也可以是三维的，一般情况下为二维">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -347,7 +337,8 @@
 <li><a href="https://wenku.baidu.com/view/cd5dc88ef80f76c66137ee06eff9aef8951e4854.html" target="_blank" rel="noopener">百度文库资料</a></li>
 <li><a href="https://www.cnblogs.com/Renyi-Fan/p/9285495.html" target="_blank" rel="noopener">博客</a></li>
 </ul>
-<p>动态规划(dynamic programming)<br>条件：</p>
+<p>动态规划(dynamic programming)<br>
+条件：</p>
 <ol>
 <li>最优子问题结构</li>
 <li>子问题重叠性质</li>
@@ -355,30 +346,35 @@
 </ol>
 <p>动态规划分类</p>
 <ul>
-<li>线性型<ul>
+<li>线性型
+<ul>
 <li>简介：在线性空间上的递推dp</li>
 <li>思路：</li>
 <li>例子：最长上升子序列(LIS)、最长公共子序列(LCS)、最大子序列和</li>
 </ul>
 </li>
-<li>区间型<ul>
+<li>区间型
+<ul>
 <li>简介：区间dp就是在区间上进行动态规划，求解一段区间上的最优解。可以是二维的也可以是三维的，一般情况下为二维；</li>
 <li>思路：主要是通过合并小区间的 最优解进而得出整个大区间上最优解的dp算法</li>
 <li>例子：</li>
 </ul>
 </li>
-<li>背包型<ul>
+<li>背包型
+<ul>
 <li>简介：</li>
 <li>思路：</li>
 <li>例子：0-1背包、完全背包、分组背包、多重背包</li>
 </ul>
 </li>
-<li>树型<ul>
+<li>树型
+<ul>
 <li>简介：建立在树这种数据结构上的dp</li>
 <li>思路：一般可以通过dfs维护从根到叶子或从叶子到根的状态转移</li>
 </ul>
 </li>
-<li>其他<ul>
+<li>其他
+<ul>
 <li>矩阵型</li>
 <li>序列型</li>
 <li>双序列型</li>

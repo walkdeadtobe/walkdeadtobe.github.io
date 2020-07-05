@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="##stack：    先进后出；有压栈，出栈等操作    算法题：判断输入字符创是否符合规范，比如“【（）】”和“【（{”，利用栈去做比较好（需要存储正确对应的Map，比如 map={“{“:”}”}）,还可以选择重复循环消除“{}”、“（）”、“【】”等组合 ##Queue：    先进先出； 如何用stack实现queue 以及如何使用Queue 实现stack    思路：负负得正；两个s">
+<meta name="description" content="##stack： 先进后出；有压栈，出栈等操作 算法题：判断输入字符创是否符合规范，比如“【（）】”和“【（{”，利用栈去做比较好（需要存储正确对应的Map，比如 map={&amp;quot;{&amp;quot;:&amp;quot;}&amp;quot;}）,还可以选择重复循环消除“{}”、“（）”、“【】”等组合 ##Queue： 先进先出； 如何用stack实现queue 以及如何使用Queue 实现stack 思路：">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="stack+queue">
 <meta property="og:url" content="http://yoursite.com/2019/04/15/stack-queue/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="##stack：    先进后出；有压栈，出栈等操作    算法题：判断输入字符创是否符合规范，比如“【（）】”和“【（{”，利用栈去做比较好（需要存储正确对应的Map，比如 map={“{“:”}”}）,还可以选择重复循环消除“{}”、“（）”、“【】”等组合 ##Queue：    先进先出； 如何用stack实现queue 以及如何使用Queue 实现stack    思路：负负得正；两个s">
+<meta property="og:description" content="##stack： 先进后出；有压栈，出栈等操作 算法题：判断输入字符创是否符合规范，比如“【（）】”和“【（{”，利用栈去做比较好（需要存储正确对应的Map，比如 map={&amp;quot;{&amp;quot;:&amp;quot;}&amp;quot;}）,还可以选择重复循环消除“{}”、“（）”、“【】”等组合 ##Queue： 先进先出； 如何用stack实现queue 以及如何使用Queue 实现stack 思路：">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-09-19T10:12:52.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="stack+queue">
-<meta name="twitter:description" content="##stack：    先进后出；有压栈，出栈等操作    算法题：判断输入字符创是否符合规范，比如“【（）】”和“【（{”，利用栈去做比较好（需要存储正确对应的Map，比如 map={“{“:”}”}）,还可以选择重复循环消除“{}”、“（）”、“【】”等组合 ##Queue：    先进先出； 如何用stack实现queue 以及如何使用Queue 实现stack    思路：负负得正；两个s">
+<meta name="twitter:description" content="##stack： 先进后出；有压栈，出栈等操作 算法题：判断输入字符创是否符合规范，比如“【（）】”和“【（{”，利用栈去做比较好（需要存储正确对应的Map，比如 map={&amp;quot;{&amp;quot;:&amp;quot;}&amp;quot;}）,还可以选择重复循环消除“{}”、“（）”、“【】”等组合 ##Queue： 先进先出； 如何用stack实现queue 以及如何使用Queue 实现stack 思路：">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,10 +332,17 @@
       
 
       
-        <p>##stack：<br>    先进后出；有压栈，出栈等操作<br>    算法题：判断输入字符创是否符合规范，比如“【（）】”和“【（{”，利用栈去做比较好（需要存储正确对应的Map，比如 map={“{“:”}”}）,还可以选择重复循环消除“{}”、“（）”、“【】”等组合</p>
-<p>##Queue：<br>    先进先出；</p>
-<p>如何用stack实现queue 以及如何使用Queue 实现stack<br>    思路：负负得正；两个stack实现 Queue<br>    利用两个栈的之间的元素的转移，实现元素顺序的反转</p>
-<p>##Priority Queue<br>    正常进入，按照优先级出<br>    实现机制：Heap（二叉堆、多项式堆、斐波拉契堆）、二叉搜索树</p>
+        <p>##stack：<br>
+先进后出；有压栈，出栈等操作<br>
+算法题：判断输入字符创是否符合规范，比如“【（）】”和“【（{”，利用栈去做比较好（需要存储正确对应的Map，比如 map={&quot;{&quot;:&quot;}&quot;}）,还可以选择重复循环消除“{}”、“（）”、“【】”等组合</p>
+<p>##Queue：<br>
+先进先出；</p>
+<p>如何用stack实现queue 以及如何使用Queue 实现stack<br>
+思路：负负得正；两个stack实现 Queue<br>
+利用两个栈的之间的元素的转移，实现元素顺序的反转</p>
+<p>##Priority Queue<br>
+正常进入，按照优先级出<br>
+实现机制：Heap（二叉堆、多项式堆、斐波拉契堆）、二叉搜索树</p>
 
       
     </div>

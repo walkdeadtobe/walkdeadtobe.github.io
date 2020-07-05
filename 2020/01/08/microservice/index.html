@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="部署　microservice benchmark官方教程 问题 yml部署文件　unable to recognize  错误： unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v">
+<meta name="description" content="部署　microservice benchmark 官方教程 问题   yml部署文件　unable to recognize  错误：   unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensi">
 <meta name="keywords" content="microservice deployment">
 <meta property="og:type" content="article">
 <meta property="og:title" content="microservice 部署">
 <meta property="og:url" content="http://yoursite.com/2020/01/08/microservice/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="部署　microservice benchmark官方教程 问题 yml部署文件　unable to recognize  错误： unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v">
+<meta property="og:description" content="部署　microservice benchmark 官方教程 问题   yml部署文件　unable to recognize  错误：   unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensi">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-01-09T08:29:40.419Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="microservice 部署">
-<meta name="twitter:description" content="部署　microservice benchmark官方教程 问题 yml部署文件　unable to recognize  错误： unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v">
+<meta name="twitter:description" content="部署　microservice benchmark 官方教程 问题   yml部署文件　unable to recognize  错误：   unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensi">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,30 +332,48 @@
       
 
       
-        <h2 id="部署-microservice-benchmark"><a href="#部署-microservice-benchmark" class="headerlink" title="部署　microservice benchmark"></a>部署　microservice benchmark</h2><p><a href="https://github.com/microservices-demo/microservices-demo" target="_blank" rel="noopener">官方教程</a></p>
-<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><ol>
-<li><p>yml部署文件　unable to recognize</p>
+        <h2><span id="部署-microservice-benchmark">部署　microservice benchmark</span></h2>
+<p><a href="https://github.com/microservices-demo/microservices-demo" target="_blank" rel="noopener">官方教程</a></p>
+<h2><span id="问题">问题</span></h2>
+<ol>
+<li>
+<p>yml部署文件　unable to recognize</p>
 <ul>
-<li>错误：<blockquote>
+<li>错误：</li>
+</ul>
+<blockquote>
 <p>unable to recognize “deploy/kubernetes/manifests-logging/elasticsearch.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-logging/fluentd-daemon.yml”: no matches for kind “DaemonSet” in version “extensions/v1beta1”, unable to recognize “deploy/kubernetes/manifests-logging/kibana.yml”: no matches for kind “Deployment” in version “extensions/v1beta1”</p>
 </blockquote>
-</li>
-<li>解决　<a href="https://github.com/microservices-demo/microservices-demo/issues/802" target="_blank" rel="noopener">benchmark github issue</a>    </li>
-</ul>
-</li>
-<li><p>部署pod无法正常运行    </p>
 <ul>
-<li>部署错误，原本服务应当暴漏出的接口无法访问<blockquote>
-<p>发现是因为 一些pod在部署之后，发现频繁重启,就是因为这些暴露出的接口无法访问，它们是作为监测是否健康的接口存在，认为容器启动错误，因而POD重启container<br>NAME                            READY   STATUS        RESTARTS   AGE<br>carts-fc985d95-h78dn            0/1     Running       22         12h<br>经过各种排查，无法发现原因，最终一次偶然发现行得通了，尝试通过更改配置重现这次情况，最后发现，是因为容器启动太慢，导致监测的delay相对太小，因而监测失败<br>而重复监测失败，重复重启，又有多个pod(contianer)重启，导致CPU占有率高，从而启动速度可能更受影响</p>
-</blockquote>
-</li>
-<li>尝试排查错误<br>　       1. 观察日志无法发现错误<br>　       2. 经过观察，基本都是80端口的问题</li>
-<li>尝试<br>　       1. 是否因为port范围限制?尝试在/etc/kubernets/manifests/api-servers.yaml中更改，无效<br>　       2. 尝试更改　pod 的yaml 中的port ，并重新apply,确定是否是端口限制的原因</li>
-<li>解决方法：<blockquote>
-<p>本质是因为docker启动慢，而此时　pod 的检测已经开始了，从而判断docker未正常启动，从而重启docker,从而陷入循环，所以有两种方法<br>1.加快docker的启动速度，详见<a href="https://walkdeadtobe.github.io/2020/01/09/docker/" target="_blank" rel="noopener">dokcer java 应用启动慢</a><br>2.延后pod的检测，等docker正常启动，可以增加 initialDelaySeconds,failureThreshold,periodSeconds,successThreshold等参数的值</p>
-</blockquote>
-</li>
+<li>解决　<a href="https://github.com/microservices-demo/microservices-demo/issues/802" target="_blank" rel="noopener">benchmark github issue</a></li>
 </ul>
+</li>
+<li>
+<p>部署pod无法正常运行</p>
+<ul>
+<li>部署错误，原本服务应当暴漏出的接口无法访问</li>
+</ul>
+<blockquote>
+<p>发现是因为 一些pod在部署之后，发现频繁重启,就是因为这些暴露出的接口无法访问，它们是作为监测是否健康的接口存在，认为容器启动错误，因而POD重启container<br>
+NAME                            READY   STATUS        RESTARTS   AGE<br>
+carts-fc985d95-h78dn            0/1     Running       22         12h<br>
+经过各种排查，无法发现原因，最终一次偶然发现行得通了，尝试通过更改配置重现这次情况，最后发现，是因为容器启动太慢，导致监测的delay相对太小，因而监测失败<br>
+而重复监测失败，重复重启，又有多个pod(contianer)重启，导致CPU占有率高，从而启动速度可能更受影响</p>
+</blockquote>
+<ul>
+<li>尝试排查错误<br>
+　       1. 观察日志无法发现错误<br>
+　       2. 经过观察，基本都是80端口的问题</li>
+<li>尝试<br>
+　       1. 是否因为port范围限制?尝试在/etc/kubernets/manifests/api-servers.yaml中更改，无效<br>
+　       2. 尝试更改　pod 的yaml 中的port ，并重新apply,确定是否是端口限制的原因</li>
+<li>解决方法：</li>
+</ul>
+<blockquote>
+<p>本质是因为docker启动慢，而此时　pod 的检测已经开始了，从而判断docker未正常启动，从而重启docker,从而陷入循环，所以有两种方法<br>
+1.加快docker的启动速度，详见<a href="https://walkdeadtobe.github.io/2020/01/09/docker/" target="_blank" rel="noopener">dokcer java 应用启动慢</a><br>
+2.延后pod的检测，等docker正常启动，可以增加 initialDelaySeconds,failureThreshold,periodSeconds,successThreshold等参数的值</p>
+</blockquote>
 </li>
 </ol>
 
@@ -533,7 +541,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#部署-microservice-benchmark"><span class="nav-number">1.</span> <span class="nav-text">部署　microservice benchmark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#问题"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">部署　microservice benchmark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">问题</span></a></li></ol></div>
             
 
           </div>

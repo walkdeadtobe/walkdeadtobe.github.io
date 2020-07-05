@@ -99,7 +99,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -196,16 +196,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,11 +332,9 @@
 
       
         <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">def knearestEstimate(sampleSet,k):</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    K近邻非参数估计方法</span><br><span class="line">    Args:</span><br><span class="line">        sampleSet:样本向量的集合</span><br><span class="line">        k:用于计算近邻数Kn的常数</span><br><span class="line">    Returns:</span><br><span class="line">        估计的概率密度函数</span><br><span class="line">    &apos;&apos;&apos;</span><br><span class="line">    n,d=np.shape(sampleset)</span><br><span class="line">    m=(k*n**0.5)</span><br><span class="line">    def probability(sample):</span><br><span class="line">        &apos;&apos;&apos;</span><br><span class="line">        K近邻非参数估计得到的概率密度函数</span><br><span class="line">        Args:</span><br><span class="line">            sampleSet:概率密度待估计的样本向量</span><br><span class="line">        Returns:</span><br><span class="line">            估计的概率密度</span><br><span class="line">        &apos;&apos;&apos;</span><br><span class="line">        dist=[]</span><br><span class="line">        for p in sampleSet-sample:</span><br><span class="line">            dist.append((np.sum(p**2))**0.5)</span><br><span class="line">        np.sort(np.array(dist))</span><br><span class="line">        r=dist[int(m)]</span><br><span class="line">        v=math.pi**(d/2)*r**d/math.gamma(d/2+1)</span><br><span class="line">        return m/n/v</span><br><span class="line">    return probability</span><br></pre></td></tr></table></figure>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.sum(p**2))**0.5</span><br></pre></td></tr></table></figure>
-
 <p>即  $$ \sqrt{(x_{1}-y_{1})^2+(x_{2}-y_{2})^2} $$</p>
-<p>n纬球体的体积公式为(<a href="https://spaces.ac.cn/archives/3154" target="_blank" rel="noopener">https://spaces.ac.cn/archives/3154</a>) $$ V_{n}(r)= \frac{2\pi^{\frac{n}{2}}}{ \Gamma (\frac{n}{2})}r^{n-1} $$</p>
+<p>n纬球体的体积公式为(<a href="https://spaces.ac.cn/archives/3154" target="_blank" rel="noopener">https://spaces.ac.cn/archives/3154</a>) $$ V_{n}®= \frac{2\pi^{\frac{n}{2}}}{ \Gamma (\frac{n}{2})}r^{n-1} $$</p>
 
       
     </div>

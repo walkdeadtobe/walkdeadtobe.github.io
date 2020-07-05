@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="1.git commit 由于没有添加 -m 而进入 vim界面，无法退出，在一个博文找到方法（https://blog.csdn.net/weixin_42197191/article/details/87015837）Ctrl + v + 命令键 实现命令  2.由于两个电脑同时修改自己的blog markdown文件，导致文件有差异，如何解决，暂时没有找到思路，将某一个电脑的master回退">
+<meta name="description" content="1.git commit 由于没有添加 -m 而进入 vim界面，无法退出，在一个博文找到方法（https://blog.csdn.net/weixin_42197191/article/details/87015837） Ctrl + v + 命令键 实现命令 2.由于两个电脑同时修改自己的blog markdown文件，导致文件有差异，如何解决，暂时没有找到思路，将某一个电脑的master回退">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小技巧总结">
 <meta property="og:url" content="http://yoursite.com/2019/04/22/小技巧总结/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1.git commit 由于没有添加 -m 而进入 vim界面，无法退出，在一个博文找到方法（https://blog.csdn.net/weixin_42197191/article/details/87015837）Ctrl + v + 命令键 实现命令  2.由于两个电脑同时修改自己的blog markdown文件，导致文件有差异，如何解决，暂时没有找到思路，将某一个电脑的master回退">
+<meta property="og:description" content="1.git commit 由于没有添加 -m 而进入 vim界面，无法退出，在一个博文找到方法（https://blog.csdn.net/weixin_42197191/article/details/87015837） Ctrl + v + 命令键 实现命令 2.由于两个电脑同时修改自己的blog markdown文件，导致文件有差异，如何解决，暂时没有找到思路，将某一个电脑的master回退">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-09-19T10:12:52.300Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小技巧总结">
-<meta name="twitter:description" content="1.git commit 由于没有添加 -m 而进入 vim界面，无法退出，在一个博文找到方法（https://blog.csdn.net/weixin_42197191/article/details/87015837）Ctrl + v + 命令键 实现命令  2.由于两个电脑同时修改自己的blog markdown文件，导致文件有差异，如何解决，暂时没有找到思路，将某一个电脑的master回退">
+<meta name="twitter:description" content="1.git commit 由于没有添加 -m 而进入 vim界面，无法退出，在一个博文找到方法（https://blog.csdn.net/weixin_42197191/article/details/87015837） Ctrl + v + 命令键 实现命令 2.由于两个电脑同时修改自己的blog markdown文件，导致文件有差异，如何解决，暂时没有找到思路，将某一个电脑的master回退">
 
 
 
@@ -99,7 +99,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -196,16 +196,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -341,10 +331,16 @@
       
 
       
-        <p>1.git commit 由于没有添加 -m 而进入 vim界面，无法退出，在一个博文找到方法（<a href="https://blog.csdn.net/weixin_42197191/article/details/87015837）" target="_blank" rel="noopener">https://blog.csdn.net/weixin_42197191/article/details/87015837）</a><br>Ctrl + v + 命令键 实现命令 </p>
-<p>2.由于两个电脑同时修改自己的blog markdown文件，导致文件有差异，如何解决，暂时没有找到思路，将某一个电脑的master回退，会导致他的修改丢失（或者提前保存其修改，或许这就是多分支存在的理由）<br>git log 查看最近commit的记录<br>git reset –hard (HEAD～n)/(commit_id)   会退到当前(之前的n个提交记录)/(在git log 中的某个提交记录)<br>git push –force 将当前分支提交<br>it branch –set-upstream-to=<remote origin>/<remote branch> <local branch>  绑定当前本地分支与某个远程分支   </local></remote></remote></p>
+        <p>1.git commit 由于没有添加 -m 而进入 vim界面，无法退出，在一个博文找到方法（<a href="https://blog.csdn.net/weixin_42197191/article/details/87015837%EF%BC%89" target="_blank" rel="noopener">https://blog.csdn.net/weixin_42197191/article/details/87015837）</a><br>
+Ctrl + v + 命令键 实现命令</p>
+<p>2.由于两个电脑同时修改自己的blog markdown文件，导致文件有差异，如何解决，暂时没有找到思路，将某一个电脑的master回退，会导致他的修改丢失（或者提前保存其修改，或许这就是多分支存在的理由）<br>
+git log 查看最近commit的记录<br>
+git reset --hard (HEAD～n)/(commit_id)   会退到当前(之前的n个提交记录)/(在git log 中的某个提交记录)<br>
+git push --force 将当前分支提交<br>
+it branch --set-upstream-to=<remote origin>/<remote branch> <local branch>  绑定当前本地分支与某个远程分支</local></remote></remote></p>
 <ol start="3">
-<li>获得 包含某个字符串的进程ID 并且将之作为参数，删除相应进程<br>kill -9 $(ps -ef|grep id | grep -v grep|awk ‘{print $2}’ )。</li>
+<li>获得 包含某个字符串的进程ID 并且将之作为参数，删除相应进程<br>
+kill -9 $(ps -ef|grep id | grep -v grep|awk ‘{print $2}’ )。</li>
 </ol>
 
       

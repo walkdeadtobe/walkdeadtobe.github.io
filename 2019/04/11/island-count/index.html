@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积第一种方法：染色（我更愿意理解为聚类删除） 即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除第二种方法：并查集 遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合；  应用：朋友圈">
+<meta name="description" content="算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积 第一种方法：染色（我更愿意理解为聚类删除） 即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除 第二种方法：并查集 遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合； 应用：朋友圈">
 <meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="island_count">
 <meta property="og:url" content="http://yoursite.com/2019/04/11/island-count/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积第一种方法：染色（我更愿意理解为聚类删除） 即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除第二种方法：并查集 遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合；  应用：朋友圈">
+<meta property="og:description" content="算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积 第一种方法：染色（我更愿意理解为聚类删除） 即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除 第二种方法：并查集 遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合； 应用：朋友圈">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-09-19T10:12:52.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="island_count">
-<meta name="twitter:description" content="算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积第一种方法：染色（我更愿意理解为聚类删除） 即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除第二种方法：并查集 遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合；  应用：朋友圈">
+<meta name="twitter:description" content="算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积 第一种方法：染色（我更愿意理解为聚类删除） 即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除 第二种方法：并查集 遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合； 应用：朋友圈">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,8 +332,12 @@
       
 
       
-        <p>算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积<br>第一种方法：染色（我更愿意理解为聚类删除）<br> 即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除<br>第二种方法：并查集<br> 遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合；</p>
-<p> 应用：朋友圈</p>
+        <p>算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积<br>
+第一种方法：染色（我更愿意理解为聚类删除）<br>
+即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除<br>
+第二种方法：并查集<br>
+遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合；</p>
+<p>应用：朋友圈</p>
 
       
     </div>

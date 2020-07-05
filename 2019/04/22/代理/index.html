@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -351,13 +341,20 @@
 <li>跳板：如果 A、B 双方因为某些原因不能直接访问，而代理可以和双方通信，那么通过代理，双方可以绕过原来的限制进行通信。VPN，内网穿透。</li>
 <li>注入：既然代理可以看到流量，那么它也可以修改网络流量，可以自动在收到的流量中添加一些数据，比如有些宽带提供商的弹窗广告。</li>
 </ul>
-<p>ssr速度不行安装v2ray<br>参考<a href="https://www.stackcc.com/2019/04/02/v2raysetup/" target="_blank" rel="noopener">网站1</a><a href="https://tlanyan.me/v2ray-tutorial/" target="_blank" rel="noopener">网站2</a><br><a href="https://www.hijk.pw/v2rayn-config-tutorial/" target="_blank" rel="noopener">网站3</a></p>
+<p>ssr速度不行安装v2ray<br>
+参考<a href="https://www.stackcc.com/2019/04/02/v2raysetup/" target="_blank" rel="noopener">网站1</a><a href="https://tlanyan.me/v2ray-tutorial/" target="_blank" rel="noopener">网站2</a><br>
+<a href="https://www.hijk.pw/v2rayn-config-tutorial/" target="_blank" rel="noopener">网站3</a></p>
 <p><a href="https://www.v2rayssr.com/v2raynginx.html" target="_blank" rel="noopener">V2RAY+Nginx+Ws+Tls+Host+Path</a></p>
 <ol>
-<li>域名购买：<a href="https://dcc.godaddy.com/" target="_blank" rel="noopener">狗爹</a><br> [godaddy 域名解析]whetstone.xyz</li>
+<li>域名购买：<a href="https://dcc.godaddy.com/" target="_blank" rel="noopener">狗爹</a><br>
+[godaddy 域名解析]whetstone.xyz</li>
 </ol>
-<p>export CF_Token=”0gE0NDS31pewoA8ykVN2CqQXC_kKxcp5C2yp_ZNn”</p>
-<p>acme.sh –issue –dns dns_cf -d whetstone.xyz -d <a href="http://www.whetstone.xyz" target="_blank" rel="noopener">www.whetstone.xyz</a> -k ec-256<br>cat ~/.acme.sh/whetstone.xyz_ecc/fullchain.cer &gt; /etc/nginx/ssl/whetstone.xyz.crt<br>cat ~/.acme.sh/whetstone.xyz_ecc/whetstone.xyz.key &gt; /etc/nginx/ssl/whetstone.xyz.key<br>systemctl start nginx<br>acme.sh –installcert -d whetstone.xyz -d <a href="http://www.whetstone.xyz" target="_blank" rel="noopener">www.whetstone.xyz</a> –fullchainpath /etc/nginx/ssl/whetstone.xyz.crt –keypath /etc/nginx/ssl/whetstone.xyz.key –ecc –reloadcmd “systemctl reload nginx”</p>
+<p>export CF_Token=“0gE0NDS31pewoA8ykVN2CqQXC_kKxcp5C2yp_ZNn”</p>
+<p><a href="http://acme.sh" target="_blank" rel="noopener">acme.sh</a> --issue --dns dns_cf -d whetstone.xyz -d www.whetstone.xyz -k ec-256<br>
+cat ~/.acme.sh/whetstone.xyz_ecc/fullchain.cer &gt; /etc/nginx/ssl/whetstone.xyz.crt<br>
+cat ~/.acme.sh/whetstone.xyz_ecc/whetstone.xyz.key &gt; /etc/nginx/ssl/whetstone.xyz.key<br>
+systemctl start nginx<br>
+<a href="http://acme.sh" target="_blank" rel="noopener">acme.sh</a> --installcert -d whetstone.xyz -d www.whetstone.xyz --fullchainpath /etc/nginx/ssl/whetstone.xyz.crt --keypath /etc/nginx/ssl/whetstone.xyz.key --ecc --reloadcmd “systemctl reload nginx”</p>
 
       
     </div>

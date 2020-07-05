@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="install luarock:https://blog.csdn.net/kgzhang/article/details/72885199      install lua_nginx_moudle https://www.cnblogs.com/uglyliu/p/8534473.html  install nginx-gridfx https://blog.csdn.net/jam">
+<meta name="description" content="install luarock:https://blog.csdn.net/kgzhang/article/details/72885199      install lua_nginx_moudle https://www.cnblogs.com/uglyliu/p/8534473.html  install nginx-gridfx https://blog.csdn.net/james">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nginx+mongodb">
 <meta property="og:url" content="http://yoursite.com/2019/03/06/nginx-mongodb/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="install luarock:https://blog.csdn.net/kgzhang/article/details/72885199      install lua_nginx_moudle https://www.cnblogs.com/uglyliu/p/8534473.html  install nginx-gridfx https://blog.csdn.net/jam">
+<meta property="og:description" content="install luarock:https://blog.csdn.net/kgzhang/article/details/72885199      install lua_nginx_moudle https://www.cnblogs.com/uglyliu/p/8534473.html  install nginx-gridfx https://blog.csdn.net/james">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-09-19T10:12:52.290Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx+mongodb">
-<meta name="twitter:description" content="install luarock:https://blog.csdn.net/kgzhang/article/details/72885199      install lua_nginx_moudle https://www.cnblogs.com/uglyliu/p/8534473.html  install nginx-gridfx https://blog.csdn.net/jam">
+<meta name="twitter:description" content="install luarock:https://blog.csdn.net/kgzhang/article/details/72885199      install lua_nginx_moudle https://www.cnblogs.com/uglyliu/p/8534473.html  install nginx-gridfx https://blog.csdn.net/james">
 
 
 
@@ -99,7 +99,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -196,16 +196,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -341,16 +331,15 @@
       
 
       
-          <br>
+        <br>
   install luarock:https://blog.csdn.net/kgzhang/article/details/72885199
   <br>
   install lua_nginx_moudle https://www.cnblogs.com/uglyliu/p/8534473.html
 <br>
 install nginx-gridfx https://blog.csdn.net/jameshadoop/article/details/52665342  + https://blog.csdn.net/caiwenfeng_for_23/article/details/44230513 +
 https://github.com/mdirolf/nginx-gridfs
-
-<p> ./configure –user=nginx –group=nginx –prefix=/usr/local/nginx  –with-http_realip_module –with-http_stub_status_module –with-http_ssl_module –with-http_flv_module –with-http_gzip_static_module –with-cc-opt=-Wno-error –with-stream –add-module=/opt/nginx_module/ngx_devel_kit –add-module=/opt/nginx_module/lua-nginx-module –add-module=/opt/nginx_module/nginx-gridfs</p>
-<p>  ./configure –user=nginx –group=nginx –prefix=/usr/local/nginx –with-cc-opt=-Wno-error –add-module=/opt/nginx_module/ngx_devel_kit –add-module=/opt/nginx_module/lua-nginx-module –add-module=/opt/nginx_module/nginx-gridfs</p>
+<p>./configure --user=nginx --group=nginx --prefix=/usr/local/nginx  --with-http_realip_module --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module --with-cc-opt=-Wno-error --with-stream --add-module=/opt/nginx_module/ngx_devel_kit --add-module=/opt/nginx_module/lua-nginx-module --add-module=/opt/nginx_module/nginx-gridfs</p>
+<p>./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-cc-opt=-Wno-error --add-module=/opt/nginx_module/ngx_devel_kit --add-module=/opt/nginx_module/lua-nginx-module --add-module=/opt/nginx_module/nginx-gridfs</p>
 
       
     </div>

@@ -95,7 +95,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -193,16 +193,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -343,7 +333,8 @@
         
           
             <p>centos  安装  psycopg2</p>
-<p>直接 pip install psycopg2报错，根据错误 还需要安装 pip install psycopg2-binary/setuptools,以及  yum install gcc<br>可能还需要安装</p>
+<p>直接 pip install psycopg2报错，根据错误 还需要安装 pip install psycopg2-binary/setuptools,以及  yum install gcc<br>
+可能还需要安装</p>
 <ul>
 <li>sudo yum install postgresql-libs</li>
 <li>sudo yum install postgresql-devel</li>
@@ -468,7 +459,8 @@
       
         
           
-            <h1 id="myblog"><a href="#myblog" class="headerlink" title="myblog"></a>myblog</h1><p>my_github_blog in markdown </p>
+            <h1><span id="myblog">myblog</span></h1>
+<p>my_github_blog in markdown</p>
 
           
         
@@ -707,7 +699,8 @@
       
         
           
-            <p>开始尝试使用windows terminal ,遇到有些问题记录下来<br>1.在termianl 进入Ubuntu 继续使用 windows安装的程序 </p>
+            <p>开始尝试使用windows terminal ,遇到有些问题记录下来<br>
+1.在termianl 进入Ubuntu 继续使用 windows安装的程序</p>
 <ul>
 <li>首先在 ~/.bashrc 中添加可执行程序的路径所在</li>
 <li>使用 chmod +x 标识 可执行程序 可执行</li>
@@ -837,12 +830,14 @@
 </ul>
 <p>相关概念</p>
 <ul>
-<li>拜占庭模型: <ul>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">wiki 拜占庭问题</a> </li>
+<li>拜占庭模型:
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">wiki 拜占庭问题</a></li>
 <li>分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。</li>
 </ul>
 </li>
-<li>非拜占庭模型：<ul>
+<li>非拜占庭模型：
+<ul>
 <li>指可能出现故障，但是不会伪造信息的情况(即，要么收不到信息，要么收到真实的信息)</li>
 </ul>
 </li>
@@ -968,9 +963,22 @@
           
             <p>GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)</p>
 <blockquote>
-<p>在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容<br>远程内容待补充</p>
+<p>在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容<br>
+远程内容待补充</p>
 </blockquote>
-<p>目录解析<br>.git<br>├── COMMIT_EDITMSG<br>├── FETCH_HEAD<br>├── HEAD<br>├── config<br>├── description<br>├── index<br>├── hooks//以下是文件夹<br>├── info<br>├── logs<br>├── objects<br>└── refs</p>
+<p>目录解析<br>
+.git<br>
+├── COMMIT_EDITMSG<br>
+├── FETCH_HEAD<br>
+├── HEAD<br>
+├── config<br>
+├── description<br>
+├── index<br>
+├── hooks//以下是文件夹<br>
+├── info<br>
+├── logs<br>
+├── objects<br>
+└── refs</p>
 <p>1.git/COMMIT_EDITMSG</p>
 <blockquote>
 <p>记录commit附带的说明，经测试只记录最新的commit 说明</p>
@@ -989,15 +997,18 @@
 </blockquote>
 <p>5.git/index</p>
 <blockquote>
-<p>暂存区:存储时间戳,文件名,文件的SHA值等元数据<br>每当我们执行 git add操作的时候， git会给添加的每个文件的内容创建一个对象，然后把这个文件的路径和生成的对象进行映射，存放到 .git/index文件中。等到后期新的命令（比如：git add、 git rm或者 git mv）执行的时候，又会重新更新索引。</p>
+<p>暂存区:存储时间戳,文件名,文件的SHA值等元数据<br>
+每当我们执行 git add操作的时候， git会给添加的每个文件的内容创建一个对象，然后把这个文件的路径和生成的对象进行映射，存放到 .git/index文件中。等到后期新的命令（比如：git add、 git rm或者 git mv）执行的时候，又会重新更新索引。</p>
 </blockquote>
 <p>6.git/hook</p>
 <blockquote>
-<p>伴随着git的命令所触发的处理脚本,通常在 git init 时拷贝到新目录<br>具体脚本可分为客户端和服务端两种,待补充</p>
+<p>伴随着git的命令所触发的处理脚本,通常在 git init 时拷贝到新目录<br>
+具体脚本可分为客户端和服务端两种,待补充</p>
 </blockquote>
 <p>7.git/info</p>
 <blockquote>
-<p>关于仓库的的其他信息<br>例如.git/info/exclude 可以排除本地本人不想提交的文件,只与自己相关,该文件也不会上传,可用于排除私人的某些配置等,注意与全局的 .gitignore 文件区别</p>
+<p>关于仓库的的其他信息<br>
+例如.git/info/exclude 可以排除本地本人不想提交的文件,只与自己相关,该文件也不会上传,可用于排除私人的某些配置等,注意与全局的 .gitignore 文件区别</p>
 </blockquote>
 <p>8.git/logs</p>
 <blockquote>
@@ -1005,24 +1016,36 @@
 </blockquote>
 <p>9.git/objects</p>
 <blockquote>
-<p>真正保存代码的地方。其中分成两种类型的文件，一种是 pack，另外的是 blob文件。其中 pack是根据定位内容非常相似的全部文件，然后为他们之一存储整个内容。之后计算相似文件之间的差异并且只存储差异。而 blob文件就是记录差异。blob是“二进制大对象”（ binary largeobject）的简写，是计算机领域常用术语，用来指代某些可以包含任意数据的变量或文件<br>.git/objects:三种类型</p>
+<p>真正保存代码的地方。其中分成两种类型的文件，一种是 pack，另外的是 blob文件。其中 pack是根据定位内容非常相似的全部文件，然后为他们之一存储整个内容。之后计算相似文件之间的差异并且只存储差异。而 blob文件就是记录差异。blob是“二进制大对象”（ binary largeobject）的简写，是计算机领域常用术语，用来指代某些可以包含任意数据的变量或文件<br>
+.git/objects:三种类型</p>
 <blockquote>
-<p>blob :实际存储的文件,<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-Objects" target="_blank" rel="noopener">具体详情</a><br>tree : 当前project的一个快照,存储多个实体/数据结构(由blob object的git mode,类型,SHA-1值,文件名构成),记录了当前tree下所有文件所指向的blob object<br>commit: 记录所产生的tree object,作者,时间,commit msg,上一个commit object<br>tag: 根据我查看的文件结构与commit相同,但引用博客中说没有记录tree object,而记录创建tag 所在的commit object,是因为更新了？   </p>
+<p>blob :实际存储的文件,<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-Objects" target="_blank" rel="noopener">具体详情</a><br>
+tree : 当前project的一个快照,存储多个实体/数据结构(由blob object的git mode,类型,SHA-1值,文件名构成),记录了当前tree下所有文件所指向的blob object<br>
+commit: 记录所产生的tree object,作者,时间,commit msg,上一个commit object<br>
+tag: 根据我查看的文件结构与commit相同,但引用博客中说没有记录tree object,而记录创建tag 所在的commit object,是因为更新了？</p>
 </blockquote>
 </blockquote>
 <blockquote>
-<p>.git/objects/info 关于object的其他信息<br>.git/objects/pack 在git gc  或者 git push 时,git 会将松散的object文件打包压缩,降低存储空间 <a href="https://www.git-scm.com/book/en/v2/Git-Internals-Packfiles" target="_blank" rel="noopener">详情</a></p>
+<p>.git/objects/info 关于object的其他信息<br>
+.git/objects/pack 在git gc  或者 git push 时,git 会将松散的object文件打包压缩,降低存储空间 <a href="https://www.git-scm.com/book/en/v2/Git-Internals-Packfiles" target="_blank" rel="noopener">详情</a></p>
 </blockquote>
 <p>10.git/refs</p>
 <blockquote>
-<p>引用文件<br>.git/refs/heads 记录本地各分支最新状态(文件中存储git object 的SHA-1值),即指向最后一次commit提交只有产生的git object<br>.git/refs/tags<br>.git/refs/remotes 记录远程各分支最新状态(文件中存储git object 的SHA-1值),同样指向本地的git object(每次fetch或者pull会拉去远程的更新)</p>
+<p>引用文件<br>
+.git/refs/heads 记录本地各分支最新状态(文件中存储git object 的SHA-1值),即指向最后一次commit提交只有产生的git object<br>
+.git/refs/tags<br>
+.git/refs/remotes 记录远程各分支最新状态(文件中存储git object 的SHA-1值),同样指向本地的git object(每次fetch或者pull会拉去远程的更新)</p>
 </blockquote>
 <p>常见命令的实际流程：</p>
 <blockquote>
-<p>git add/commit<br>git push</p>
+<p>git add/commit<br>
+git push</p>
 </blockquote>
 <p>跟随态 VS 游离态</p>
-<p>参考：<br>1.<a href="https://www.siteground.com/tutorials/git/directory-structure/" target="_blank" rel="noopener">Git Directory</a><br>2.<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-References" target="_blank" rel="noopener">Git Ref</a><br>3.<a href="https://www.git-scm.com/docs/githooks" target="_blank" rel="noopener">Git hooks</a></p>
+<p>参考：<br>
+1.<a href="https://www.siteground.com/tutorials/git/directory-structure/" target="_blank" rel="noopener">Git Directory</a><br>
+2.<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-References" target="_blank" rel="noopener">Git Ref</a><br>
+3.<a href="https://www.git-scm.com/docs/githooks" target="_blank" rel="noopener">Git hooks</a></p>
 
           
         
@@ -1142,24 +1165,31 @@
       
         
           
-            <h2 id="Go语言学习"><a href="#Go语言学习" class="headerlink" title="Go语言学习"></a>Go语言学习</h2><h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><h4 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h4><ol>
+            <h2><span id="go语言学习">Go语言学习</span></h2>
+<h3><span id="注意点">注意点</span></h3>
+<h4><span id="变量类型">变量类型</span></h4>
+<ol>
 <li>切片和指针都是引用类型</li>
 <li>实际存储的字符的ascii值，没有char,取而代之的是byte(uint8),rune(int32)</li>
 <li>raw string？？</li>
 <li>fmt.Println 与 println的区别</li>
-<li>list.List 与 list.New() 的[区别]](<a href="https://golang.org/pkg/container/list/)[CSDN](https://blog.csdn.net/xxx9001/article/details/52574501)" target="_blank" rel="noopener">https://golang.org/pkg/container/list/)[CSDN](https://blog.csdn.net/xxx9001/article/details/52574501)</a><br> list.List 返回的是一个结构体值类型,list.New()返回的是一个初始化的结构体的指针类型，区别在于1.作为函数参数传入时,list.List不可更改，而指针类型可更改2.传入参数需要与函数定义相同,即函数定义的是值类型，那么只能传入值类型</li>
+<li>list.List 与 list.New() 的[区别]](<a href="https://golang.org/pkg/container/list/" target="_blank" rel="noopener">https://golang.org/pkg/container/list/</a>)<a href="https://blog.csdn.net/xxx9001/article/details/52574501" target="_blank" rel="noopener">CSDN</a><br>
+list.List 返回的是一个结构体值类型,list.New()返回的是一个初始化的结构体的指针类型，区别在于1.作为函数参数传入时,list.List不可更改，而指针类型可更改2.传入参数需要与函数定义相同,即函数定义的是值类型，那么只能传入值类型</li>
 </ol>
-<h2 id="分布式系统学习第一弹"><a href="#分布式系统学习第一弹" class="headerlink" title="分布式系统学习第一弹"></a>分布式系统学习第一弹</h2><p><a href="https://pdos.csail.mit.edu/6.824/labs/lab-1.html" target="_blank" rel="noopener">MIT 6.824</a><br>按照课程要求，下载源码<br>修改一：添加日志，在 go  init 函数更改日志格式,使得输出时带位置</p>
+<h2><span id="分布式系统学习第一弹">分布式系统学习第一弹</span></h2>
+<p><a href="https://pdos.csail.mit.edu/6.824/labs/lab-1.html" target="_blank" rel="noopener">MIT 6.824</a><br>
+按照课程要求，下载源码<br>
+修改一：添加日志，在 go  init 函数更改日志格式,使得输出时带位置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//init log format</span><br><span class="line">func init()&#123;</span><br><span class="line">    log.SetFlags(log.Ldate| log.Lshortfile |log.Ltime |log.LUTC)</span><br><span class="line">&#125;</span><br><span class="line">//样例输出</span><br><span class="line">2019/07/22 07:34:41 master_splitmerge.go:23: Merge: open mrtmp.test-res-0: no such file or directory</span><br></pre></td></tr></table></figure>
-
-<h2 id="cache2go-学习"><a href="#cache2go-学习" class="headerlink" title="cache2go 学习"></a>cache2go 学习</h2><p><a href="https://blog.csdn.net/notbaron/article/details/52008155" target="_blank" rel="noopener">项目结构 简介</a><br><a href="https://blog.csdn.net/zhizhengguan/article/details/84257338" target="_blank" rel="noopener">Go缓存库cache2go介绍</a></p>
-<h2 id="go-语言"><a href="#go-语言" class="headerlink" title="go 语言"></a>go 语言</h2><p>实现长度为变量的二维数组</p>
+<h2><span id="cache2go-学习">cache2go 学习</span></h2>
+<p><a href="https://blog.csdn.net/notbaron/article/details/52008155" target="_blank" rel="noopener">项目结构 简介</a><br>
+<a href="https://blog.csdn.net/zhizhengguan/article/details/84257338" target="_blank" rel="noopener">Go缓存库cache2go介绍</a></p>
+<h2><span id="go-语言">go 语言</span></h2>
+<p>实现长度为变量的二维数组</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var status [][]int</span><br><span class="line">for i := 0; i &lt; len(variable1); i++ &#123;</span><br><span class="line">	var statu = make([]int, len(variable2))</span><br><span class="line">	status = append(status, statu)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>range</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for _, num := range nums &#123;</span><br><span class="line">    sum += num</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(&quot;sum:&quot;, sum)</span><br><span class="line">//在数组上使用range将传入index和值两个变量。上面那个例子我们不需要使用该元素的序号，所以我们使用空白符&quot;_&quot;省略了。有时侯我们确实需要知道它的索引。</span><br><span class="line">for i, num := range nums &#123;</span><br><span class="line">    if num == 3 &#123;</span><br><span class="line">        fmt.Println(&quot;index:&quot;, i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>make vs new </p>
+<p>make vs new</p>
 
           
         
@@ -1284,7 +1314,8 @@
 <li><a href="https://wenku.baidu.com/view/cd5dc88ef80f76c66137ee06eff9aef8951e4854.html" target="_blank" rel="noopener">百度文库资料</a></li>
 <li><a href="https://www.cnblogs.com/Renyi-Fan/p/9285495.html" target="_blank" rel="noopener">博客</a></li>
 </ul>
-<p>动态规划(dynamic programming)<br>条件：</p>
+<p>动态规划(dynamic programming)<br>
+条件：</p>
 <ol>
 <li>最优子问题结构</li>
 <li>子问题重叠性质</li>
@@ -1292,30 +1323,35 @@
 </ol>
 <p>动态规划分类</p>
 <ul>
-<li>线性型<ul>
+<li>线性型
+<ul>
 <li>简介：在线性空间上的递推dp</li>
 <li>思路：</li>
 <li>例子：最长上升子序列(LIS)、最长公共子序列(LCS)、最大子序列和</li>
 </ul>
 </li>
-<li>区间型<ul>
+<li>区间型
+<ul>
 <li>简介：区间dp就是在区间上进行动态规划，求解一段区间上的最优解。可以是二维的也可以是三维的，一般情况下为二维；</li>
 <li>思路：主要是通过合并小区间的 最优解进而得出整个大区间上最优解的dp算法</li>
 <li>例子：</li>
 </ul>
 </li>
-<li>背包型<ul>
+<li>背包型
+<ul>
 <li>简介：</li>
 <li>思路：</li>
 <li>例子：0-1背包、完全背包、分组背包、多重背包</li>
 </ul>
 </li>
-<li>树型<ul>
+<li>树型
+<ul>
 <li>简介：建立在树这种数据结构上的dp</li>
 <li>思路：一般可以通过dfs维护从根到叶子或从叶子到根的状态转移</li>
 </ul>
 </li>
-<li>其他<ul>
+<li>其他
+<ul>
 <li>矩阵型</li>
 <li>序列型</li>
 <li>双序列型</li>
@@ -1443,10 +1479,27 @@
       
         
           
-            <p><br>因为决定学习开发网关kong的插件，所以需要学习lua语言，正在从<a href="https://www.runoob.com/lua/" target="_blank" rel="noopener">Lua 菜鸟教程</a>学习<br><br>关于kong插件开发的博客 <a href="https://www.jianshu.com/p/68457b42b84f" target="_blank" rel="noopener">链接1</a><br><br>发现一个很有意思的lua 模块  :openresty 的lua-resty-template 模块，提供模板渲染的功能<br><br>准备在网关处进行对于token的检验工作，由于没有使用已有的oauth server 插件，所以需要自己写个额外插件<br>    在这个插件中主要需要完成的工作是从cookie 中 提取出 token ,并以此为凭借到oauth  server 进行相关检验，如果检验成功，应当返回id 以及这个token的ttl ,网关处获得id 应当 将之体现在日志里(插件逻辑处新建header,在nginx日志处自定义日志格式,指明该id或者在网关处建立与oauth server相同的用户体系，起码账户名一致，这样根据id 可以从数据库中提取出相应的consumer credential ,这样的话可以用于后续的基于用户的限流等操作)<br>主要点在于1.Lua中进行http 操作  ,<a href="https://github.com/ledgetech/lua-resty-http#request" target="_blank" rel="noopener">Github 源码文档</a><br>        2.考虑对token进行缓存,[‘token’,’id’,ttl],这样无需多次存取(可能带来的问题有，注销登录后如何通知网关注销token：这又分为两种注销后不再登录和重新登陆，对于后者可以下次请求经过网关时,注销相同id的键值对)<br>        <a href="https://github.com/openresty/lua-resty-redis/" target="_blank" rel="noopener">Github lua-resty-redis</a><br>        <a href="https://github.com/Kong/kong/blob/master/kong/plugins/rate-limiting/policies/init.lua" target="_blank" rel="noopener">Kong rate-limiting 插件</a>中涉及对于redis的操作,可以观摩下</p>
-<p><br>目前在网关处验证用户身份成功后，在后端为避免再次检验身份的需要，因此需要网关提供给后端身份凭据，认可这次身份凭据，同时应当提供某种验证手段，让后端验证请求是否身份凭据是否是真的/是否是伪造<br>方案1 ：利用某种对称加密算法,网关对用户身份进行加密,后端以相同的密钥进行解密,得到身份<br>        确定使用AES算法<a href="https://github.com/openresty/lua-resty-string/" target="_blank" rel="noopener">Github 示例</a>,在网关处使用CBC加密，相同的偏移向量,结果转化为hex格式，传输到python后端，对结果转发，解密，但是解密始终得不到正确的结果，怀疑是<a href="https://blog.csdn.net/diodosu/article/details/51923670" target="_blank" rel="noopener">博客</a>中提到的问题，但是我在测试中设置的加密字段,加密密钥，偏移向量都是16位的，看起来应该不会有填充的问题才对，但是解密仍然失败<br>方案2 ：采取非对称加密算法，在网关处向后端传递两个header：userid,encrypted 在网关处按照某种方法加密得到 encrypt header,后端使用同样的方法加密，如果结果相同，则认为 userid 经过了网关的认证，同时加密内容应当是网关与后端之间相互约定的动态的内容</p>
-<p><br>2020-1-10 代码更新，把硬编码信息改为插件的配置输入<br>curl -i -X POST <a href="http://localhost:8001/plugins" target="_blank" rel="noopener">http://localhost:8001/plugins</a> <br>–data “name=kong-plugin-myplugin” <br>–data “config.sso_domain=SS0_DOMAIN” <br>–data “config.check_path=CHECK_PATH” <br>–data “config.front_domain=FRONT_DOMAIN” <br>–data “config.client=CLIENT_JSON”</p>
-<p>其中需要注意的是，kong网关对于插件配置的输入中对于字符 ‘&amp;’ 的支持不好，而使用’\&amp;’的话，网关处接收后会转化为’\\&amp;’,看起来很不舒服，然后我 使用 ‘\a’ 字符代表 ‘&amp;’,在插件处理逻辑处再替换回来(需要注意的是如果单个的’&#39;存在，会影响 string 转化为 json)</p>
+            <p><br>因为决定学习开发网关kong的插件，所以需要学习lua语言，正在从<a href="https://www.runoob.com/lua/" target="_blank" rel="noopener">Lua 菜鸟教程</a>学习<br>
+<br>关于kong插件开发的博客 <a href="https://www.jianshu.com/p/68457b42b84f" target="_blank" rel="noopener">链接1</a><br>
+<br>发现一个很有意思的lua 模块  :openresty 的lua-resty-template 模块，提供模板渲染的功能<br>
+<br>准备在网关处进行对于token的检验工作，由于没有使用已有的oauth server 插件，所以需要自己写个额外插件<br>
+在这个插件中主要需要完成的工作是从cookie 中 提取出 token ,并以此为凭借到oauth  server 进行相关检验，如果检验成功，应当返回id 以及这个token的ttl ,网关处获得id 应当 将之体现在日志里(插件逻辑处新建header,在nginx日志处自定义日志格式,指明该id或者在网关处建立与oauth server相同的用户体系，起码账户名一致，这样根据id 可以从数据库中提取出相应的consumer credential ,这样的话可以用于后续的基于用户的限流等操作)<br>
+主要点在于1.Lua中进行http 操作  ,<a href="https://github.com/ledgetech/lua-resty-http#request" target="_blank" rel="noopener">Github 源码文档</a><br>
+2.考虑对token进行缓存,[‘token’,‘id’,ttl],这样无需多次存取(可能带来的问题有，注销登录后如何通知网关注销token：这又分为两种注销后不再登录和重新登陆，对于后者可以下次请求经过网关时,注销相同id的键值对)<br>
+<a href="https://github.com/openresty/lua-resty-redis/" target="_blank" rel="noopener">Github lua-resty-redis</a><br>
+<a href="https://github.com/Kong/kong/blob/master/kong/plugins/rate-limiting/policies/init.lua" target="_blank" rel="noopener">Kong rate-limiting 插件</a>中涉及对于redis的操作,可以观摩下</p>
+<p><br>目前在网关处验证用户身份成功后，在后端为避免再次检验身份的需要，因此需要网关提供给后端身份凭据，认可这次身份凭据，同时应当提供某种验证手段，让后端验证请求是否身份凭据是否是真的/是否是伪造<br>
+方案1 ：利用某种对称加密算法,网关对用户身份进行加密,后端以相同的密钥进行解密,得到身份<br>
+确定使用AES算法<a href="https://github.com/openresty/lua-resty-string/" target="_blank" rel="noopener">Github 示例</a>,在网关处使用CBC加密，相同的偏移向量,结果转化为hex格式，传输到python后端，对结果转发，解密，但是解密始终得不到正确的结果，怀疑是<a href="https://blog.csdn.net/diodosu/article/details/51923670" target="_blank" rel="noopener">博客</a>中提到的问题，但是我在测试中设置的加密字段,加密密钥，偏移向量都是16位的，看起来应该不会有填充的问题才对，但是解密仍然失败<br>
+方案2 ：采取非对称加密算法，在网关处向后端传递两个header：userid,encrypted 在网关处按照某种方法加密得到 encrypt header,后端使用同样的方法加密，如果结果相同，则认为 userid 经过了网关的认证，同时加密内容应当是网关与后端之间相互约定的动态的内容</p>
+<p><br>2020-1-10 代码更新，把硬编码信息改为插件的配置输入<br>
+curl -i -X POST <a href="http://localhost:8001/plugins" target="_blank" rel="noopener">http://localhost:8001/plugins</a> <br>
+–data “name=kong-plugin-myplugin” <br>
+–data “config.sso_domain=SS0_DOMAIN” <br>
+–data “config.check_path=CHECK_PATH” <br>
+–data “config.front_domain=FRONT_DOMAIN” <br>
+–data “config.client=CLIENT_JSON”</p>
+<p>其中需要注意的是，kong网关对于插件配置的输入中对于字符 ‘&amp;’ 的支持不好，而使用’\&amp;‘的话，网关处接收后会转化为’\\&amp;’,看起来很不舒服，然后我 使用 ‘\a’ 字符代表 ‘&amp;’,在插件处理逻辑处再替换回来(需要注意的是如果单个的’'存在，会影响 string 转化为 json)</p>
 
           
         
@@ -1566,15 +1619,16 @@
       
         
           
-            <p>最近需要从nginx header中提取出变量，需要学习正则表达式相关知识<br><a href="https://www.runoob.com/regexp/regexp-tutorial.html" target="_blank" rel="noopener">菜鸟教程 正则表达式</a></p>
+            <p>最近需要从nginx header中提取出变量，需要学习正则表达式相关知识<br>
+<a href="https://www.runoob.com/regexp/regexp-tutorial.html" target="_blank" rel="noopener">菜鸟教程 正则表达式</a></p>
 <blockquote>
-<p>可以使用 $1 $2 $3等来表示匹配的变量<br>例如 对于字符串  A90B3C  ,正则表达式  /A(\d+)B(\d+)C/  匹配的 $1=90 $2=3<br>亦或者 对于正则表达式 /A((\d+)B)(\d+)C/  匹配的 $1=90B  $2=90  $3=3</p>
+<p>可以使用 $1 $2 $3等来表示匹配的变量<br>
+例如 对于字符串  A90B3C  ,正则表达式  /A(\d+)B(\d+)C/  匹配的 $1=90 $2=3<br>
+亦或者 对于正则表达式 /A((\d+)B)(\d+)C/  匹配的 $1=90B  $2=90  $3=3</p>
 </blockquote>
 <br>
 >对实际应用可以匹配  $http_cookie ~ token=([a-z0-9]*);api_key=([a-z0-9]*)
 在实际搜素中发现有人使用 {variable}以及<variable> 来匹配变量 variable ，但是在查询文档中没有发现这种用法，也欸有试过是否能用
-
-
 </variable>
           
         

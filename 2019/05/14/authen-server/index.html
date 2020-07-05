@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录如何用idea 打包 maven项目‘’’用idea中maven 打开项目，点击idea 右侧的 Maven Projects，点击 LIfecycle -&amp;gt; install -&amp;gt; run maven build 即可‘’’之后 将该项目scp至服务器使用 java -jar">
+<meta name="description" content="2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录 如何用idea 打包 maven项目 ‘’’ 用idea中maven 打开项目，点击idea 右侧的 Maven Projects， 点击 LIfecycle -&amp;gt; install -&amp;gt; run maven build 即可 ‘’’ 之后 将该项目scp至服务器 使用 ja">
 <meta name="keywords" content="oauth">
 <meta property="og:type" content="article">
 <meta property="og:title" content="authen_server">
 <meta property="og:url" content="http://yoursite.com/2019/05/14/authen-server/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录如何用idea 打包 maven项目‘’’用idea中maven 打开项目，点击idea 右侧的 Maven Projects，点击 LIfecycle -&amp;gt; install -&amp;gt; run maven build 即可‘’’之后 将该项目scp至服务器使用 java -jar">
+<meta property="og:description" content="2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录 如何用idea 打包 maven项目 ‘’’ 用idea中maven 打开项目，点击idea 右侧的 Maven Projects， 点击 LIfecycle -&amp;gt; install -&amp;gt; run maven build 即可 ‘’’ 之后 将该项目scp至服务器 使用 ja">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-09-19T10:12:52.275Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="authen_server">
-<meta name="twitter:description" content="2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录如何用idea 打包 maven项目‘’’用idea中maven 打开项目，点击idea 右侧的 Maven Projects，点击 LIfecycle -&amp;gt; install -&amp;gt; run maven build 即可‘’’之后 将该项目scp至服务器使用 java -jar">
+<meta name="twitter:description" content="2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录 如何用idea 打包 maven项目 ‘’’ 用idea中maven 打开项目，点击idea 右侧的 Maven Projects， 点击 LIfecycle -&amp;gt; install -&amp;gt; run maven build 即可 ‘’’ 之后 将该项目scp至服务器 使用 ja">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,13 +332,35 @@
       
 
       
-        <p>2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录<br>如何用idea 打包 maven项目<br>‘’’<br>用idea中maven 打开项目，点击idea 右侧的 Maven Projects，<br>点击 LIfecycle -&gt; install -&gt; run maven build 即可<br>‘’’<br>之后 将该项目scp至服务器<br>使用 java -jar *.jar 运行<br>在运行时出现一些错误，如下</p>
-<p>‘’’<br>2019-05-14 17:06:35.986 ERROR 1180706 — [ost-startStop-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.</p>
+        <p>2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录<br>
+如何用idea 打包 maven项目<br>
+‘’’<br>
+用idea中maven 打开项目，点击idea 右侧的 Maven Projects，<br>
+点击 LIfecycle -&gt; install -&gt; run maven build 即可<br>
+‘’’<br>
+之后 将该项目scp至服务器<br>
+使用 java -jar *.jar 运行<br>
+在运行时出现一些错误，如下</p>
+<p>‘’’<br>
+2019-05-14 17:06:35.986 ERROR 1180706 — [ost-startStop-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.</p>
 <p>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</p>
-<p>The last packet successfully received from the server was 199 milliseconds ago.  The last packet sent successfully to the server was 192 milliseconds ago.<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_181]<br>    at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_181]<br>    ……………………………..<br>    ……………………………..<br>    … 154 common frames omitted<br>Caused by: java.security.cert.CertPathValidatorException: Path does not chain with any of the trust anchors<br>    at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:154) ~[na:1.8.0_181]<br>    at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:80) ~[na:1.8.0_181]<br>    at java.security.cert.CertPathValidator.validate(CertPathValidator.java:292) ~[na:1.8.0_181]<br>    at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(ExportControlled.java:295) ~[mysql-connector-java-5.1.46.jar!/:5.1.46]<br>    … 156 common frames omitted</p>
-<p>‘’’<br>经查询(<a href="https://www.jianshu.com/p/b3151ca89def" target="_blank" rel="noopener">https://www.jianshu.com/p/b3151ca89def</a> ）发现是因为SSL配置的原因（暂时没有细究），在源代码 application.yml 文件中将useSSL=true 改为 false即可，重新打包，scp，运行</p>
+<p>The last packet successfully received from the server was 199 milliseconds ago.  The last packet sent successfully to the server was 192 milliseconds ago.<br>
+at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_181]<br>
+at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_181]<br>
+…<br>
+…<br>
+… 154 common frames omitted<br>
+Caused by: java.security.cert.CertPathValidatorException: Path does not chain with any of the trust anchors<br>
+at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:154) ~[na:1.8.0_181]<br>
+at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:80) ~[na:1.8.0_181]<br>
+at java.security.cert.CertPathValidator.validate(CertPathValidator.java:292) ~[na:1.8.0_181]<br>
+at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(ExportControlled.java:295) ~[mysql-connector-java-5.1.46.jar!/:5.1.46]<br>
+… 156 common frames omitted</p>
+<p>‘’’<br>
+经查询(<a href="https://www.jianshu.com/p/b3151ca89def" target="_blank" rel="noopener">https://www.jianshu.com/p/b3151ca89def</a> ）发现是因为SSL配置的原因（暂时没有细究），在源代码 application.yml 文件中将useSSL=true 改为 false即可，重新打包，scp，运行</p>
 <p>在查询过程中发现之后可能会出现的另一个问题，即在长时间未连接mysql时会报类似的 Communications link failure 错误，不过这里是因为mysql默认配置 无连接最长等待时间是8小时，可以通过修改配置文件 mysql.ini 去解决这个错误</p>
-<p>在此之前需要在服务器安装mysql<br>按照官网教程(下面的是Ubuntu下的，如果安装在redhat上，会有一些区别 ，具体参照官方教程 <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/</a>)</p>
+<p>在此之前需要在服务器安装mysql<br>
+按照官网教程(下面的是Ubuntu下的，如果安装在redhat上，会有一些区别 ，具体参照官方教程 <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/</a>)</p>
 <ul>
 <li>wget <a href="https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</a></li>
 <li>也可以选择检查 文件传输中是否出错 md5sum mysql-apt-config_0.8.13-1_all.deb</li>

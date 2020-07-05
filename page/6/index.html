@@ -95,7 +95,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -193,16 +193,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,10 +332,17 @@
       
         
           
-            <p>##stack：<br>    先进后出；有压栈，出栈等操作<br>    算法题：判断输入字符创是否符合规范，比如“【（）】”和“【（{”，利用栈去做比较好（需要存储正确对应的Map，比如 map={“{“:”}”}）,还可以选择重复循环消除“{}”、“（）”、“【】”等组合</p>
-<p>##Queue：<br>    先进先出；</p>
-<p>如何用stack实现queue 以及如何使用Queue 实现stack<br>    思路：负负得正；两个stack实现 Queue<br>    利用两个栈的之间的元素的转移，实现元素顺序的反转</p>
-<p>##Priority Queue<br>    正常进入，按照优先级出<br>    实现机制：Heap（二叉堆、多项式堆、斐波拉契堆）、二叉搜索树</p>
+            <p>##stack：<br>
+先进后出；有压栈，出栈等操作<br>
+算法题：判断输入字符创是否符合规范，比如“【（）】”和“【（{”，利用栈去做比较好（需要存储正确对应的Map，比如 map={&quot;{&quot;:&quot;}&quot;}）,还可以选择重复循环消除“{}”、“（）”、“【】”等组合</p>
+<p>##Queue：<br>
+先进先出；</p>
+<p>如何用stack实现queue 以及如何使用Queue 实现stack<br>
+思路：负负得正；两个stack实现 Queue<br>
+利用两个栈的之间的元素的转移，实现元素顺序的反转</p>
+<p>##Priority Queue<br>
+正常进入，按照优先级出<br>
+实现机制：Heap（二叉堆、多项式堆、斐波拉契堆）、二叉搜索树</p>
 
           
         
@@ -465,7 +462,10 @@
       
         
           
-            <p>链表相关问题<br>双链表 反转<br>链表交换相邻元素<br>判断链表是否有环</p>
+            <p>链表相关问题<br>
+双链表 反转<br>
+链表交换相邻元素<br>
+判断链表是否有环</p>
 <ul>
 <li>暴力遍历，如果陷入循环中，那么永远无法结束（设置时间1s即可）</li>
 <li>利用多余的数据结构判断是否经过同一个节点</li>
@@ -591,8 +591,12 @@
       
         
           
-            <p>算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积<br>第一种方法：染色（我更愿意理解为聚类删除）<br> 即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除<br>第二种方法：并查集<br> 遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合；</p>
-<p> 应用：朋友圈</p>
+            <p>算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积<br>
+第一种方法：染色（我更愿意理解为聚类删除）<br>
+即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除<br>
+第二种方法：并查集<br>
+遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合；</p>
+<p>应用：朋友圈</p>
 
           
         
@@ -712,8 +716,12 @@
       
         
           
-            <p>极客时间<br>哈希函数：将key隐射到一维数组的特殊位置（很少有错）<br>即使有错也可以 采取二维数组，减小错误率<br>类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联）</p>
-<p>布隆过滤器：将key分解为若干元素组成，比如说连续的二进制<br>每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）</p>
+            <p>极客时间<br>
+哈希函数：将key隐射到一维数组的特殊位置（很少有错）<br>
+即使有错也可以 采取二维数组，减小错误率<br>
+类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联）</p>
+<p>布隆过滤器：将key分解为若干元素组成，比如说连续的二进制<br>
+每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）</p>
 
           
         
@@ -833,7 +841,8 @@
       
         
           
-            <p>隐藏马尔科夫模型<br>EM算法 （迭代计算）</p>
+            <p>隐藏马尔科夫模型<br>
+EM算法 （迭代计算）</p>
 
           
         
@@ -953,11 +962,12 @@
       
         
           
-            <p>上机器学习课程时候，检索的网站，备注一下，以后需要学习<br><a href="https://blog.csdn.net/qq_33273962/article/details/83547342" target="_blank" rel="noopener">https://blog.csdn.net/qq_33273962/article/details/83547342</a></p>
+            <p>上机器学习课程时候，检索的网站，备注一下，以后需要学习<br>
+<a href="https://blog.csdn.net/qq_33273962/article/details/83547342" target="_blank" rel="noopener">https://blog.csdn.net/qq_33273962/article/details/83547342</a></p>
 <p><a href="https://www.cnblogs.com/baiting/p/6101981.html" target="_blank" rel="noopener">https://www.cnblogs.com/baiting/p/6101981.html</a></p>
 <p><a href="https://m.leiphone.com/news/201902/biIqSBpehsaXFwpN.html?uniqueCode=OTEsp9649VqJfUcO" target="_blank" rel="noopener">https://m.leiphone.com/news/201902/biIqSBpehsaXFwpN.html?uniqueCode=OTEsp9649VqJfUcO</a></p>
 <p><a href="https://blog.csdn.net/u014665013/article/details/78970184" target="_blank" rel="noopener">https://blog.csdn.net/u014665013/article/details/78970184</a></p>
-<p><a href="https://m.baidu.com/from=1019471a/s?word=k+s+%E6%A3%80%E9%AA%8C++%E6%8B%9F%E5%90%88&amp;sa=bb&amp;ts=8918111&amp;t_kt=0&amp;ie=utf-8&amp;rsv_t=9789dDDxyBbDgg8gANiHbFLNiH9iyPv%252FBZ08a7iihLsR2SpKsNsS0G5sZ3o5A14&amp;rsv_pq=8183285748722183729&amp;ss=110&amp;tj=1&amp;rqlang=zh&amp;rsv_sug4=7460&amp;inputT=334&amp;oq=k%2Bs%2B%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener">https://m.baidu.com/from=1019471a/s?word=k+s+%E6%A3%80%E9%AA%8C++%E6%8B%9F%E5%90%88&amp;sa=bb&amp;ts=8918111&amp;t_kt=0&amp;ie=utf-8&amp;rsv_t=9789dDDxyBbDgg8gANiHbFLNiH9iyPv%252FBZ08a7iihLsR2SpKsNsS0G5sZ3o5A14&amp;rsv_pq=8183285748722183729&amp;ss=110&amp;tj=1&amp;rqlang=zh&amp;rsv_sug4=7460&amp;inputT=334&amp;oq=k%2Bs%2B%E6%A3%80%E9%AA%8C</a></p>
+<p><a href="https://m.baidu.com/from=1019471a/s?word=k+s+%E6%A3%80%E9%AA%8C++%E6%8B%9F%E5%90%88&amp;sa=bb&amp;ts=8918111&amp;t_kt=0&amp;ie=utf-8&amp;rsv_t=9789dDDxyBbDgg8gANiHbFLNiH9iyPv%252FBZ08a7iihLsR2SpKsNsS0G5sZ3o5A14&amp;rsv_pq=8183285748722183729&amp;ss=110&amp;tj=1&amp;rqlang=zh&amp;rsv_sug4=7460&amp;inputT=334&amp;oq=k%2Bs%2B%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener">https://m.baidu.com/from=1019471a/s?word=k+s+检验++拟合&amp;sa=bb&amp;ts=8918111&amp;t_kt=0&amp;ie=utf-8&amp;rsv_t=9789dDDxyBbDgg8gANiHbFLNiH9iyPv%2FBZ08a7iihLsR2SpKsNsS0G5sZ3o5A14&amp;rsv_pq=8183285748722183729&amp;ss=110&amp;tj=1&amp;rqlang=zh&amp;rsv_sug4=7460&amp;inputT=334&amp;oq=k%2Bs%2B检验</a></p>
 <p><a href="https://www.cnblogs.com/yunfeifei/p/4019504.html" target="_blank" rel="noopener">https://www.cnblogs.com/yunfeifei/p/4019504.html</a></p>
 <p><a href="https://blog.csdn.net/qq_42686550/article/details/81514233" target="_blank" rel="noopener">https://blog.csdn.net/qq_42686550/article/details/81514233</a></p>
 <p><a href="https://www.cnblogs.com/zackstang/p/8232921.html" target="_blank" rel="noopener">https://www.cnblogs.com/zackstang/p/8232921.html</a></p>
@@ -1081,7 +1091,8 @@
       
         
           
-            <p>今天搭建对于kong log读取的系统，来源与师兄的经验，一些坑就可以避免了<br>这套系统由4部分组成</p>
+            <p>今天搭建对于kong log读取的系统，来源与师兄的经验，一些坑就可以避免了<br>
+这套系统由4部分组成</p>
 <p>Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch</p>
 <p>Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Lucene 基础上的搜索引擎，Elastricsearch 不仅包括全文搜索功能，还可以进行</p>
 <ul>
@@ -1096,59 +1107,47 @@
 <p><font size="6">kong</font></p>
 <p>Log format</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log_format json_log escape=json &apos;&#123; &quot;@timestamp&quot;: &quot;$time_iso8601&quot;, &apos;  &apos;&quot;remote_addr&quot;: &quot;$remote_addr&quot;, &apos;  &apos;&quot;referer&quot;: &quot;$http_referer&quot;, &apos;  &apos;&quot;request&quot;: &quot;$request&quot;, &apos;  &apos;&quot;status&quot;: $status, &apos;  &apos;&quot;bytes&quot;:$body_bytes_sent, &apos;  &apos;&quot;agent&quot;: &quot;$http_user_agent&quot;, &apos;  &apos;&quot;user&quot;: &quot;$http_username&quot;, &apos; &apos;&quot;x_forwarded&quot;: &quot;$http_x_forwarded_for&quot;, &apos;  &apos;&quot;upstr_addr&quot;: &quot;$upstream_addr&quot;,&apos;  &apos;&quot;upstr_host&quot;: &quot;$upstream_http_host&quot;,&apos;  &apos;&quot;ups_resp_time&quot;: &quot;$upstream_response_time&quot; &#125;&apos;;</span><br><span class="line">access_log logs/access.log json_log;</span><br></pre></td></tr></table></figure>
-
 <p>在配置logstash时，配置数据输入为json ；之后配置filebeat 时同样配置输入json格式数据，之后出现乱码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">syslog &#123;</span><br><span class="line">     type =&gt; &quot;logs&quot;</span><br><span class="line">     port =&gt; 9044</span><br><span class="line">       &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-
 <p>之后出现乱码，例如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;message&quot; =&gt; &quot;%P\\u001A(%\\xBDi\\t\\x83,\\u001FϘ\\xF5H\\x8E$ofw\\x98\\x9F\\xDD\\xFB\\\&quot;&#123;f7\\x9B\\r%W\\u0003\\x9A\\xE3\\xA3\\xF3\\u&#123;7CBF2&#125;\\xDFnnn\\xBE\\xBB\\xB9\\xF9\\xFE\\xDF\\u0013\\xBC&gt;`P\\x9D\\n&quot;,</span><br></pre></td></tr></table></figure>
-
-<p>错误提示 </p>
+<p>错误提示</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[0] &quot;_grokparsefailure_sysloginput&quot;,</span><br><span class="line">[1] &quot;_jsonparsefailure&quot;</span><br><span class="line">An unexpected error occurred! &#123;:error=&gt;#&lt;Errno::EBADF: Bad file descriptor - Bad file descriptor&gt;, :backtrace=&gt;[&quot;org/jruby/RubyIO.java:3565:in `each&apos;&quot;, &quot;/home/LAB/chengr/ELK/logstash-5.6.3/vendor/bundle/jruby/1.9/gems/logstash-input-syslog-3.2.2/lib/logstash/inputs/syslog.rb:182:in `tcp_receiver&apos;&quot;, &quot;/home/LAB/chengr/ELK/logstash-5.6.3/vendor/bundle/jruby/1.9/gems/logstash-input-syslog-3.2.2/lib/logstash/inputs/syslog.rb:167:in `tcp_listener&apos;&quot;]&#125;</span><br></pre></td></tr></table></figure>
-
-<p>本来以为是因为 配置filebeat时，对于json输入的配置与logstash的配置出现冲突，以及 FIleBeat中encoding配置的问题，修改之后无效，查看错误时候发现 logstash输入类型和filebeat输出不一致，解析出错(<a href="https://blog.csdn.net/momoudong/article/details/82017852" target="_blank" rel="noopener">https://blog.csdn.net/momoudong/article/details/82017852</a>)<br>最终 logstash 配置 test.conf|filebeat_kong.conf</p>
+<p>本来以为是因为 配置filebeat时，对于json输入的配置与logstash的配置出现冲突，以及 FIleBeat中encoding配置的问题，修改之后无效，查看错误时候发现 logstash输入类型和filebeat输出不一致，解析出错(<a href="https://blog.csdn.net/momoudong/article/details/82017852" target="_blank" rel="noopener">https://blog.csdn.net/momoudong/article/details/82017852</a>)<br>
+最终 logstash 配置 test.conf|filebeat_kong.conf</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">   # file &#123;</span><br><span class="line">   #         path =&gt; &quot;/home/LAB/chengr/kong_log/file.log&quot;</span><br><span class="line">   #      &#125;</span><br><span class="line">   beats &#123;</span><br><span class="line">        type =&gt; &quot;nginx-log&quot; #&quot;logs&quot;</span><br><span class="line">        port =&gt; 9044</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">filter&#123;</span><br><span class="line">    json&#123; #获取nginx log日志</span><br><span class="line">        source =&gt; &quot;message&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    mutate&#123;# 删去logstash转化后保留的messegae字段</span><br><span class="line">            remove_field =&gt; [&quot;message&quot;]</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">output&#123;</span><br><span class="line">    stdout &#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; [&quot;10.1.1.46:9200&quot;]</span><br><span class="line">        index =&gt; &quot;system-syslog-%&#123;+YYYY.MM&#125;&quot;</span><br><span class="line">        #document_type =&gt; &quot;logs&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>开启 logstash 命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ELK目录下</span><br><span class="line">ELK/logstash-5.6.3/bin/logstash -f /usr/local/ELK/logstash-5.6.3/config/test.conf(或filebeat_kong.conf)</span><br></pre></td></tr></table></figure>
-
-<p>错误2：<br>更改完上一个错误后 发现报如下错误</p>
+<p>错误2：<br>
+更改完上一个错误后 发现报如下错误</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2019-04-01T21:45:13,592][WARN ][logstash.outputs.elasticsearch] Could not index event to Elasticsearch. &#123;:status=&gt;400, :action=&gt;[&quot;index&quot;, &#123;:_id=&gt;nil, :_index=&gt;&quot;system-syslog-2019.04&quot;, :_type=&gt;&quot;log&quot;, :_routing=&gt;nil&#125;, 2019-04-01T13:45:00.925Z bd46 %&#123;message&#125;], :response=&gt;&#123;&quot;index&quot;=&gt;&#123;&quot;_index&quot;=&gt;&quot;system-syslog-2019.04&quot;, &quot;_type&quot;=&gt;&quot;log&quot;, &quot;_id&quot;=&gt;&quot;Cf0l2WkB8VUaRp2hlmvH&quot;, &quot;status&quot;=&gt;400, &quot;error&quot;=&gt;&#123;&quot;type&quot;=&gt;&quot;illegal_argument_exception&quot;, &quot;reason&quot;=&gt;&quot;Rejecting mapping update to [system-syslog-2019.04] as the final mapping would have more than 1 type: [log, logs]&quot;&#125;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
-
 <p>百度后有人是因logstash输出类型与elasticsearch 要求不同导致，即更改logstash输出类型</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document_type =&gt; &quot;logs&quot;</span><br></pre></td></tr></table></figure>
-
 <p>filebeat 配置filebeat.yml</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">filebeat.prospectors:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- input_type: log</span><br><span class="line"> # encoding: UTF-8</span><br><span class="line">  paths:</span><br><span class="line">    - /home/LAB/chengr/kong_log/file.log</span><br><span class="line">  json.keys_under_root: true #在一次部署中发现这一行不能识别，最终注释之解决</span><br><span class="line">  #json.add_error_key: true</span><br><span class="line">  #json.message_key: log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">output.logstash:</span><br><span class="line">  #The Logstash hosts</span><br><span class="line">  hosts: [&quot;10.1.1.46:9044&quot;]</span><br></pre></td></tr></table></figure>
-
 <p>开启filebeat 命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ELK/filebeat-5.6.4-linux-x86_64/filebeat -path.config /usr/local/ELK/filebeat-5.6.4-linux-x86_64/</span><br></pre></td></tr></table></figure>
-
 <p>elastcisearch 配置 config/elasticsearch.yml</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cluster.name: my-es-cluster</span><br><span class="line">node.name: es-node-1</span><br><span class="line">path.data: /home/LAB/chengr/ELK/data/data-es</span><br><span class="line">path.logs: /home/LAB/chengr/ELK/log/log-es</span><br><span class="line">network.host: 10.1.1.46</span><br><span class="line">http.port: 9200</span><br></pre></td></tr></table></figure>
-
 <p>开启 elastcisearch 命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ELK/elasticsearch-6.4.2/bin/elasticsearch</span><br></pre></td></tr></table></figure>
-
 <p>kibana 配置 config/kibana.yml</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">server.port: 5601</span><br><span class="line">elasticsearch.url: &quot;http://10.1.1.46:9200&quot;</span><br></pre></td></tr></table></figure>
-
 <p>开启 kibana 命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ELK/kibana-6.4.2-linux-x86_64/bin/kibana</span><br></pre></td></tr></table></figure>
-
-<p>10.1.1.45   10.1.1.46 两台服务器以及192.168.1.242 主机（可显示）搭配<br>filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash ，logstash指向10.1.1.46上的elasticsearch ，指向 192.168.1.242上的kibana</p>
-<p>2019-5-8<br>部署在实际机器上时将配置中ip改为对应的IP</p>
-<p>kibana 添加邮件预警 </p>
+<p>10.1.1.45   10.1.1.46 两台服务器以及192.168.1.242 主机（可显示）搭配<br>
+filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash ，logstash指向10.1.1.46上的elasticsearch ，指向 192.168.1.242上的kibana</p>
+<p>2019-5-8<br>
+部署在实际机器上时将配置中ip改为对应的IP</p>
+<p>kibana 添加邮件预警</p>
 <ul>
 <li><a href="http://www.cnblogs.com/small-k/p/8551960.html" target="_blank" rel="noopener">http://www.cnblogs.com/small-k/p/8551960.html</a></li>
 <li><a href="https://blog.51cto.com/10546390/2051676" target="_blank" rel="noopener">https://blog.51cto.com/10546390/2051676</a></li>
 </ul>
-<p>2019-5-19 Error </p>
+<p>2019-5-19 Error</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">2019-05-19 16:46:00.000	high	email html alarm	watcher_title	ActionError: html email action : obligatory options in email: from and to	 </span><br><span class="line">&#123;</span><br><span class="line">  &quot;@timestamp&quot;: &quot;2019-05-19T08:46:00.031Z&quot;,</span><br><span class="line">  &quot;error&quot;: true,</span><br><span class="line">  &quot;report&quot;: false,</span><br><span class="line">  &quot;watcher&quot;: &quot;watcher_title&quot;,</span><br><span class="line">  &quot;action&quot;: &quot;email html alarm&quot;,</span><br><span class="line">  &quot;level&quot;: &quot;high&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;ActionError: html email action : obligatory options in email: from and to&quot;,</span><br><span class="line">  &quot;type&quot;: &quot;sentinl-alarm&quot;,</span><br><span class="line">  &quot;_index&quot;: &quot;watcher_alarms-2019.05.19&quot;,</span><br><span class="line">  &quot;id&quot;: &quot;ClxEz2oBFTrgm4Wv5XBg&quot;</span><br><span class="line">#原因：这是由于在action 的Email属性中没有指明 to与 from 的邮箱</span><br></pre></td></tr></table></figure>
-
 <p>配置kong日志格式更改  /etc/kong/kong.conf</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">nigin_http_log_format= log_json &apos;&#123; &quot;@timestamp&quot;: &quot;$time_iso8601&quot;, &apos;</span><br><span class="line">&apos;&quot;remote_addr&quot;: &quot;$remote_addr&quot;, &apos;</span><br><span class="line">&apos;&quot;referer&quot;: &quot;$http_referer&quot;, &apos;</span><br><span class="line">&apos;&quot;request&quot;: &quot;$request&quot;, &apos;</span><br><span class="line">&apos;&quot;status&quot;: $status, &apos;</span><br><span class="line">&apos;&quot;bytes&quot;:$body_bytes_sent, &apos;</span><br><span class="line">&apos;&quot;agent&quot;: &quot;$http_user_agent&quot;, &apos;</span><br><span class="line">&apos;&quot;x_forwarded&quot;: &quot;$http_x_forwarded_for&quot;, &apos;</span><br><span class="line">&apos;&quot;upstr_addr&quot;: &quot;$upstream_addr&quot;,&apos;</span><br><span class="line">&apos;&quot;upstr_host&quot;: &quot;$upstream_http_host&quot;,&apos;</span><br><span class="line">&apos;&quot;ups_resp_time&quot;: &quot;$upstream_response_time&quot; &#125;&apos;;</span><br><span class="line"></span><br><span class="line">nginx_proxy_access_log logs/access.log log_json;</span><br></pre></td></tr></table></figure>
-
 <p>ps:<a href="https://docs.konghq.com/0.13.x/configuration/?_ga=2.242544130.102618566.1558236281-1173907870.1558236281#proxy_access_log" target="_blank" rel="noopener">kong 相关配置文件</a></p>
 
           
@@ -1269,52 +1268,79 @@
       
         
           
-            <h2 id="Kong"><a href="#Kong" class="headerlink" title="Kong"></a>Kong</h2><p><a href="https://konghq.com/" target="_blank" rel="noopener">官网</a></p>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><p>consumer </p>
-<blockquote>
-</blockquote>
+            <h2><span id="kong">Kong</span></h2>
+<p><a href="https://konghq.com/" target="_blank" rel="noopener">官网</a></p>
+<h2><span id="相关概念">相关概念</span></h2>
+<p>consumer</p>
+<blockquote></blockquote>
 <p>service</p>
-<blockquote>
-</blockquote>
+<blockquote></blockquote>
 <p>route</p>
-<blockquote>
-</blockquote>
+<blockquote></blockquote>
 <p>upstream</p>
-<blockquote>
-</blockquote>
+<blockquote></blockquote>
 <p>plugin</p>
 <blockquote>
-<p><a href="https://docs.konghq.com/hub/" target="_blank" rel="noopener">官网</a> 包含 官方插件以及第三方插件<br><a href="https://github.com/walkdeadtobe/my_kong_plugin" target="_blank" rel="noopener">个人自定义插件</a></p>
+<p><a href="https://docs.konghq.com/hub/" target="_blank" rel="noopener">官网</a> 包含 官方插件以及第三方插件<br>
+<a href="https://github.com/walkdeadtobe/my_kong_plugin" target="_blank" rel="noopener">个人自定义插件</a></p>
 </blockquote>
-<h2 id="相关操作"><a href="#相关操作" class="headerlink" title="相关操作"></a>相关操作</h2><p>创造 consumers  </p>
+<h2><span id="相关操作">相关操作</span></h2>
+<p>创造 consumers</p>
 <blockquote>
-<p>curl -i -X POST  –url <a href="http://localhost:8001/consumers" target="_blank" rel="noopener">http://localhost:8001/consumers</a> –data “username=dzk”<br>给相应consumer 添加 basic-auth<br>curl -i -X POST  –url <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth</a> –data “username=dzk” –data “password=dzk”<br>添加 ACL<br>curl -X POST <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls</a> –data “group=group2”</p>
+<p>curl -i -X POST  --url <a href="http://localhost:8001/consumers" target="_blank" rel="noopener">http://localhost:8001/consumers</a> --data “username=dzk”<br>
+给相应consumer 添加 basic-auth<br>
+curl -i -X POST  --url <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth</a> --data “username=dzk” --data “password=dzk”<br>
+添加 ACL<br>
+curl -X POST <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls</a> --data “group=group2”</p>
 </blockquote>
 <p>给相应服务添加 basic-auth ACL</p>
 <blockquote>
-<p>curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> –data “name=basic-auth” –data “config.hide_credentials=true”<br>curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> –data “name=acl” –data “config.whitelist=group1” –data “config.hide_groups_header=true”</p>
+<p>curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> --data “name=basic-auth” --data “config.hide_credentials=true”<br>
+curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> --data “name=acl” --data “config.whitelist=group1” --data “config.hide_groups_header=true”</p>
 </blockquote>
-<p>为kong添加 访问 admin 的外部服务 </p>
+<p>为kong添加 访问 admin 的外部服务</p>
 <blockquote>
-<p><a href="https://docs.gelato.io/guides/advanced-kong-integration" target="_blank" rel="noopener">https://docs.gelato.io/guides/advanced-kong-integration</a><br>curl -i -X POST  –url <a href="http://localhost:8001/services/" target="_blank" rel="noopener">http://localhost:8001/services/</a>  –data ‘name=admin’ –data ‘url=<a href="http://localhost:8001&#39;" target="_blank" rel="noopener">http://localhost:8001&#39;</a><br>curl -i -X POST   –url <a href="http://localhost:8001/services/admin/routes" target="_blank" rel="noopener">http://localhost:8001/services/admin/routes</a>  –data ‘paths=/admin’ –data ‘strip_path=true’</p>
+<p><a href="https://docs.gelato.io/guides/advanced-kong-integration" target="_blank" rel="noopener">https://docs.gelato.io/guides/advanced-kong-integration</a><br>
+curl -i -X POST  --url <a href="http://localhost:8001/services/" target="_blank" rel="noopener">http://localhost:8001/services/</a>  --data ‘name=admin’ --data ‘url=http://localhost:8001’<br>
+curl -i -X POST   --url <a href="http://localhost:8001/services/admin/routes" target="_blank" rel="noopener">http://localhost:8001/services/admin/routes</a>  --data ‘paths=/admin’ --data ‘strip_path=true’</p>
 </blockquote>
 <p>kong发送的信息不含用户consumer信息，使用datadog的log功能进行统计</p>
 <p>datadog-agent 相关命令</p>
 <blockquote>
-<p>/etc/init.d/datadog-agent restart、stop<br>sudo datadog-agent check kong/status<br>systemctl start datadog-agent</p>
+<p>/etc/init.d/datadog-agent restart、stop<br>
+sudo datadog-agent check kong/status<br>
+systemctl start datadog-agent</p>
 </blockquote>
 <p>kong 数据库操作</p>
 <blockquote>
-<p>su - postgres<br>pslq<br>\c kong 切换数据库kong<br>select * from pg_tables 查看当前数据库所有的表</p>
+<p>su - postgres<br>
+pslq<br>
+\c kong 切换数据库kong<br>
+select * from pg_tables 查看当前数据库所有的表</p>
 </blockquote>
-<p>更新 2019-4-18<br>给服务ACL 服务whitelist 添加 多个 group<br>出现问题，提交bug，kong开发大佬解决 ，附链接 <a href="https://github.com/Kong/kong/issues/4523" target="_blank" rel="noopener">https://github.com/Kong/kong/issues/4523</a><br>给插件 CORS 添加多个header<br>curl -X PATCH <a href="http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1" target="_blank" rel="noopener">http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1</a> <br>–data “config.headers=Origin” <br>–data “config.headers=X-Requested-With” <br>–data “config.headers=Content-Type” <br>–data “config.headers=Authorization” <br>–data “config.headers=Accept” <br>–data “config.headers=Accept-Version” <br>–data “config.headers=Content-Length” <br>–data “config.headers=Content-MD5” <br>–data “config.headers=Date” <br>–data “config.headers=X-Auth-Token”</p>
-<p>更新 2019-6-22<br>在查询kong的服务数目时，发现postgresql数据库的services数目与 curl <a href="http://localhost:8001/services" target="_blank" rel="noopener">http://localhost:8001/services</a> 数目不同，最后在github源码中发现 在api中设置最大返回值为100;唔在考虑从源码编译修改，但是安装会很蛋疼</p>
-<h2 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h2><p>kong_datadog_agent</p>
+<p>更新 2019-4-18<br>
+给服务ACL 服务whitelist 添加 多个 group<br>
+出现问题，提交bug，kong开发大佬解决 ，附链接 <a href="https://github.com/Kong/kong/issues/4523" target="_blank" rel="noopener">https://github.com/Kong/kong/issues/4523</a><br>
+给插件 CORS 添加多个header<br>
+curl -X PATCH <a href="http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1" target="_blank" rel="noopener">http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1</a> <br>
+–data “config.headers=Origin” <br>
+–data “config.headers=X-Requested-With” <br>
+–data “config.headers=Content-Type” <br>
+–data “config.headers=Authorization” <br>
+–data “config.headers=Accept” <br>
+–data “config.headers=Accept-Version” <br>
+–data “config.headers=Content-Length” <br>
+–data “config.headers=Content-MD5” <br>
+–data “config.headers=Date” <br>
+–data “config.headers=X-Auth-Token”</p>
+<p>更新 2019-6-22<br>
+在查询kong的服务数目时，发现postgresql数据库的services数目与 curl <a href="http://localhost:8001/services" target="_blank" rel="noopener">http://localhost:8001/services</a> 数目不同，最后在github源码中发现 在api中设置最大返回值为100;唔在考虑从源码编译修改，但是安装会很蛋疼</p>
+<h2><span id="插件使用">插件使用</span></h2>
+<p>kong_datadog_agent</p>
 <blockquote>
 <p>更爱配置文件后出现</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2019/03/27 22:48:13 config.load While parsing config: yaml: line 291: did not find expected key</span><br><span class="line">Cannot setup config, exiting: unable to load Datadog config file: While parsing config: yaml: line 291: did not find expected key</span><br><span class="line">Error: unable to load Datadog config file: While parsing config: yaml: line 291: did not find expected key</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>最终发现是因为 更改配置时，没有对齐行开始（坑爹）</p>
 </blockquote>
@@ -1438,7 +1464,9 @@
         
           
             <p>fisher +感知器  属于   线性分类器</p>
-<p>人工神经网络（DP）  对比    径向基函数（RBF：神经元不只是感知器）<br>LSTM<br>模式识别 思考题 5000男+5000女 特征 分类</p>
+<p>人工神经网络（DP）  对比    径向基函数（RBF：神经元不只是感知器）<br>
+LSTM<br>
+模式识别 思考题 5000男+5000女 特征 分类</p>
 
           
         
@@ -1558,7 +1586,11 @@
       
         
           
-            <p>ABAC:Attribute Based Access Control<br>abaC 介绍视频： <a href="https://www.youtube.com/watch?v=cgTa7YnGfHA" target="_blank" rel="noopener">https://www.youtube.com/watch?v=cgTa7YnGfHA</a><br>+<br><a href="https://www.youtube.com/watch?v=gskKUIa0_6A" target="_blank" rel="noopener">https://www.youtube.com/watch?v=gskKUIa0_6A</a><br>An Attribute Based Access Control Model for RESTful Service：一篇相关论文，其视频：<a href="https://www.youtube.com/watch?v=hDlr66-4paI" target="_blank" rel="noopener">https://www.youtube.com/watch?v=hDlr66-4paI</a></p>
+            <p>ABAC:Attribute Based Access Control<br>
+abaC 介绍视频： <a href="https://www.youtube.com/watch?v=cgTa7YnGfHA" target="_blank" rel="noopener">https://www.youtube.com/watch?v=cgTa7YnGfHA</a><br>
++<br>
+<a href="https://www.youtube.com/watch?v=gskKUIa0_6A" target="_blank" rel="noopener">https://www.youtube.com/watch?v=gskKUIa0_6A</a><br>
+An Attribute Based Access Control Model for RESTful Service：一篇相关论文，其视频：<a href="https://www.youtube.com/watch?v=hDlr66-4paI" target="_blank" rel="noopener">https://www.youtube.com/watch?v=hDlr66-4paI</a></p>
 <p>相关概念延伸：XACML</p>
 
           

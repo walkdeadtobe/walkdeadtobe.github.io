@@ -99,7 +99,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -196,16 +196,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -341,9 +331,13 @@
       
 
       
-        <h2 id="How-Kong-generate-api-key-in-plugin-key-auth"><a href="#How-Kong-generate-api-key-in-plugin-key-auth" class="headerlink" title="How Kong  generate api key in plugin key-auth"></a>How Kong  generate api key in plugin key-auth</h2><p> 在 github <a href="https://github.com/Kong/kong" target="_blank" rel="noopener">https://github.com/Kong/kong</a> ，我们可以看到关于Kong的代码<br> 在<a href="https://github.com/eyolas/kong-plugin-key-auth-referer/blob/master/kong/plugins/key-auth-referer/daos.lua" target="_blank" rel="noopener">https://github.com/eyolas/kong-plugin-key-auth-referer/blob/master/kong/plugins/key-auth-referer/daos.lua</a> 上，我们可以看到其中包含代码<br> <code>local utils = require &quot;kong.tools.utils&quot;</code><br> <code>key = {type = &quot;string&quot;, required = false, unique = true, default = utils.random_string}</code><br> 按照目录搜索<code>https://github.com/Kong/kong/blob/master/kong/tools/utils.lua</code>，从中可以查询到函数<code>random_string</code></p>
+        <h2><span id="how-kong-generate-api-key-in-plugin-key-auth">How Kong  generate api key in plugin key-auth</span></h2>
+<p>在 github <a href="https://github.com/Kong/kong" target="_blank" rel="noopener">https://github.com/Kong/kong</a> ，我们可以看到关于Kong的代码<br>
+在https://github.com/eyolas/kong-plugin-key-auth-referer/blob/master/kong/plugins/key-auth-referer/daos.lua 上，我们可以看到其中包含代码<br>
+<code>local utils = require &quot;kong.tools.utils&quot;</code><br>
+<code> key = {type = &quot;string&quot;, required = false, unique = true, default = utils.random_string}</code><br>
+按照目录搜索<code>https://github.com/Kong/kong/blob/master/kong/tools/utils.lua</code>，从中可以查询到函数<code>random_string</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">local function random_string()</span><br><span class="line">    -- get 24 bytes, which will return a 32 char string after encoding</span><br><span class="line">    -- this is done in attempt to maintain backwards compatibility as</span><br><span class="line">    -- much as possible while improving the strength of this function</span><br><span class="line">    return encode_base64(get_rand_bytes(24, true))</span><br><span class="line">           :gsub(&quot;/&quot;, char(rand(48, 57)))  -- 0 - 10</span><br><span class="line">           :gsub(&quot;+&quot;, char(rand(65, 90)))  -- A - Z</span><br><span class="line">           :gsub(&quot;=&quot;, char(rand(97, 122))) -- a - z</span><br><span class="line">  end</span><br></pre></td></tr></table></figure>
-
 <p>由此可知，当使用key-auth插件，但不指明key值时，就会默认自动生成 24位字符，对于产生的特殊字符进行替换</p>
 
       
@@ -500,7 +494,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-Kong-generate-api-key-in-plugin-key-auth"><span class="nav-number">1.</span> <span class="nav-text">How Kong  generate api key in plugin key-auth</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">How Kong  generate api key in plugin key-auth</span></a></li></ol></div>
             
 
           </div>

@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="spring security 和 oauth 认证中涉及的环节‘’’UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，然后生成的Aut">
+<meta name="description" content="spring security 和 oauth 认证中涉及的环节 ‘’’ UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication 所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)， 然后生成">
 <meta name="keywords" content="oauth + spring security">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring security 和 oauth 认证中涉及的环节">
 <meta property="og:url" content="http://yoursite.com/2019/05/15/spring security 和 oauth 认证中涉及的环节/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="spring security 和 oauth 认证中涉及的环节‘’’UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，然后生成的Aut">
+<meta property="og:description" content="spring security 和 oauth 认证中涉及的环节 ‘’’ UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication 所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)， 然后生成">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2019-09-19T10:12:52.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring security 和 oauth 认证中涉及的环节">
-<meta name="twitter:description" content="spring security 和 oauth 认证中涉及的环节‘’’UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，然后生成的Aut">
+<meta name="twitter:description" content="spring security 和 oauth 认证中涉及的环节 ‘’’ UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication 所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)， 然后生成">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,7 +332,16 @@
       
 
       
-        <p>spring security 和 oauth 认证中涉及的环节<br>‘’’<br>UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication<br>所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，<br>然后生成的Authentication会被交由AuthenticationManager来进行管理<br>而AuthenticationManager管理一系列的AuthenticationProvider，<br>而每一个Provider都会通UserDetailsService和UserDetail来返回一个<br>以UsernamePasswordAuthenticationToken实现的带用户名和密码以及权限的Authentication<br>url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" rel="noopener">https://www.cnblogs.com/softidea/p/6716807.html</a><br>‘’’</p>
+        <p>spring security 和 oauth 认证中涉及的环节<br>
+‘’’<br>
+UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication<br>
+所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，<br>
+然后生成的Authentication会被交由AuthenticationManager来进行管理<br>
+而AuthenticationManager管理一系列的AuthenticationProvider，<br>
+而每一个Provider都会通UserDetailsService和UserDetail来返回一个<br>
+以UsernamePasswordAuthenticationToken实现的带用户名和密码以及权限的Authentication<br>
+url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" rel="noopener">https://www.cnblogs.com/softidea/p/6716807.html</a><br>
+‘’’</p>
 
       
     </div>

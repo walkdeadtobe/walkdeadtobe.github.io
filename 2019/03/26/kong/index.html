@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Kong官网 相关概念consumer    service   route   upstream   plugin  官网 包含 官方插件以及第三方插件个人自定义插件  相关操作创造 consumers    curl -i -X POST  –url http://localhost:8001/consumers –data “username=dzk”给相应consumer 添加 basic">
+<meta name="description" content="Kong 官网 相关概念 consumer  service  route  upstream  plugin  官网 包含 官方插件以及第三方插件 个人自定义插件  相关操作 创造 consumers  curl -i -X POST  --url http://localhost:8001/consumers --data “username=dzk” 给相应consumer 添加 basic">
 <meta name="keywords" content="kong plugin consumer service route">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Kong">
 <meta property="og:url" content="http://yoursite.com/2019/03/26/kong/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Kong官网 相关概念consumer    service   route   upstream   plugin  官网 包含 官方插件以及第三方插件个人自定义插件  相关操作创造 consumers    curl -i -X POST  –url http://localhost:8001/consumers –data “username=dzk”给相应consumer 添加 basic">
+<meta property="og:description" content="Kong 官网 相关概念 consumer  service  route  upstream  plugin  官网 包含 官方插件以及第三方插件 个人自定义插件  相关操作 创造 consumers  curl -i -X POST  --url http://localhost:8001/consumers --data “username=dzk” 给相应consumer 添加 basic">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-01-10T06:35:12.684Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kong">
-<meta name="twitter:description" content="Kong官网 相关概念consumer    service   route   upstream   plugin  官网 包含 官方插件以及第三方插件个人自定义插件  相关操作创造 consumers    curl -i -X POST  –url http://localhost:8001/consumers –data “username=dzk”给相应consumer 添加 basic">
+<meta name="twitter:description" content="Kong 官网 相关概念 consumer  service  route  upstream  plugin  官网 包含 官方插件以及第三方插件 个人自定义插件  相关操作 创造 consumers  curl -i -X POST  --url http://localhost:8001/consumers --data “username=dzk” 给相应consumer 添加 basic">
 
 
 
@@ -100,7 +100,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -197,16 +197,6 @@
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-search">
-          <a href="/搜索" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Search
           </a>
         </li>
       
@@ -342,52 +332,79 @@
       
 
       
-        <h2 id="Kong"><a href="#Kong" class="headerlink" title="Kong"></a>Kong</h2><p><a href="https://konghq.com/" target="_blank" rel="noopener">官网</a></p>
-<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><p>consumer </p>
-<blockquote>
-</blockquote>
+        <h2><span id="kong">Kong</span></h2>
+<p><a href="https://konghq.com/" target="_blank" rel="noopener">官网</a></p>
+<h2><span id="相关概念">相关概念</span></h2>
+<p>consumer</p>
+<blockquote></blockquote>
 <p>service</p>
-<blockquote>
-</blockquote>
+<blockquote></blockquote>
 <p>route</p>
-<blockquote>
-</blockquote>
+<blockquote></blockquote>
 <p>upstream</p>
-<blockquote>
-</blockquote>
+<blockquote></blockquote>
 <p>plugin</p>
 <blockquote>
-<p><a href="https://docs.konghq.com/hub/" target="_blank" rel="noopener">官网</a> 包含 官方插件以及第三方插件<br><a href="https://github.com/walkdeadtobe/my_kong_plugin" target="_blank" rel="noopener">个人自定义插件</a></p>
+<p><a href="https://docs.konghq.com/hub/" target="_blank" rel="noopener">官网</a> 包含 官方插件以及第三方插件<br>
+<a href="https://github.com/walkdeadtobe/my_kong_plugin" target="_blank" rel="noopener">个人自定义插件</a></p>
 </blockquote>
-<h2 id="相关操作"><a href="#相关操作" class="headerlink" title="相关操作"></a>相关操作</h2><p>创造 consumers  </p>
+<h2><span id="相关操作">相关操作</span></h2>
+<p>创造 consumers</p>
 <blockquote>
-<p>curl -i -X POST  –url <a href="http://localhost:8001/consumers" target="_blank" rel="noopener">http://localhost:8001/consumers</a> –data “username=dzk”<br>给相应consumer 添加 basic-auth<br>curl -i -X POST  –url <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth</a> –data “username=dzk” –data “password=dzk”<br>添加 ACL<br>curl -X POST <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls</a> –data “group=group2”</p>
+<p>curl -i -X POST  --url <a href="http://localhost:8001/consumers" target="_blank" rel="noopener">http://localhost:8001/consumers</a> --data “username=dzk”<br>
+给相应consumer 添加 basic-auth<br>
+curl -i -X POST  --url <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth</a> --data “username=dzk” --data “password=dzk”<br>
+添加 ACL<br>
+curl -X POST <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls</a> --data “group=group2”</p>
 </blockquote>
 <p>给相应服务添加 basic-auth ACL</p>
 <blockquote>
-<p>curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> –data “name=basic-auth” –data “config.hide_credentials=true”<br>curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> –data “name=acl” –data “config.whitelist=group1” –data “config.hide_groups_header=true”</p>
+<p>curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> --data “name=basic-auth” --data “config.hide_credentials=true”<br>
+curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> --data “name=acl” --data “config.whitelist=group1” --data “config.hide_groups_header=true”</p>
 </blockquote>
-<p>为kong添加 访问 admin 的外部服务 </p>
+<p>为kong添加 访问 admin 的外部服务</p>
 <blockquote>
-<p><a href="https://docs.gelato.io/guides/advanced-kong-integration" target="_blank" rel="noopener">https://docs.gelato.io/guides/advanced-kong-integration</a><br>curl -i -X POST  –url <a href="http://localhost:8001/services/" target="_blank" rel="noopener">http://localhost:8001/services/</a>  –data ‘name=admin’ –data ‘url=<a href="http://localhost:8001&#39;" target="_blank" rel="noopener">http://localhost:8001&#39;</a><br>curl -i -X POST   –url <a href="http://localhost:8001/services/admin/routes" target="_blank" rel="noopener">http://localhost:8001/services/admin/routes</a>  –data ‘paths=/admin’ –data ‘strip_path=true’</p>
+<p><a href="https://docs.gelato.io/guides/advanced-kong-integration" target="_blank" rel="noopener">https://docs.gelato.io/guides/advanced-kong-integration</a><br>
+curl -i -X POST  --url <a href="http://localhost:8001/services/" target="_blank" rel="noopener">http://localhost:8001/services/</a>  --data ‘name=admin’ --data ‘url=http://localhost:8001’<br>
+curl -i -X POST   --url <a href="http://localhost:8001/services/admin/routes" target="_blank" rel="noopener">http://localhost:8001/services/admin/routes</a>  --data ‘paths=/admin’ --data ‘strip_path=true’</p>
 </blockquote>
 <p>kong发送的信息不含用户consumer信息，使用datadog的log功能进行统计</p>
 <p>datadog-agent 相关命令</p>
 <blockquote>
-<p>/etc/init.d/datadog-agent restart、stop<br>sudo datadog-agent check kong/status<br>systemctl start datadog-agent</p>
+<p>/etc/init.d/datadog-agent restart、stop<br>
+sudo datadog-agent check kong/status<br>
+systemctl start datadog-agent</p>
 </blockquote>
 <p>kong 数据库操作</p>
 <blockquote>
-<p>su - postgres<br>pslq<br>\c kong 切换数据库kong<br>select * from pg_tables 查看当前数据库所有的表</p>
+<p>su - postgres<br>
+pslq<br>
+\c kong 切换数据库kong<br>
+select * from pg_tables 查看当前数据库所有的表</p>
 </blockquote>
-<p>更新 2019-4-18<br>给服务ACL 服务whitelist 添加 多个 group<br>出现问题，提交bug，kong开发大佬解决 ，附链接 <a href="https://github.com/Kong/kong/issues/4523" target="_blank" rel="noopener">https://github.com/Kong/kong/issues/4523</a><br>给插件 CORS 添加多个header<br>curl -X PATCH <a href="http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1" target="_blank" rel="noopener">http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1</a> <br>–data “config.headers=Origin” <br>–data “config.headers=X-Requested-With” <br>–data “config.headers=Content-Type” <br>–data “config.headers=Authorization” <br>–data “config.headers=Accept” <br>–data “config.headers=Accept-Version” <br>–data “config.headers=Content-Length” <br>–data “config.headers=Content-MD5” <br>–data “config.headers=Date” <br>–data “config.headers=X-Auth-Token”</p>
-<p>更新 2019-6-22<br>在查询kong的服务数目时，发现postgresql数据库的services数目与 curl <a href="http://localhost:8001/services" target="_blank" rel="noopener">http://localhost:8001/services</a> 数目不同，最后在github源码中发现 在api中设置最大返回值为100;唔在考虑从源码编译修改，但是安装会很蛋疼</p>
-<h2 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h2><p>kong_datadog_agent</p>
+<p>更新 2019-4-18<br>
+给服务ACL 服务whitelist 添加 多个 group<br>
+出现问题，提交bug，kong开发大佬解决 ，附链接 <a href="https://github.com/Kong/kong/issues/4523" target="_blank" rel="noopener">https://github.com/Kong/kong/issues/4523</a><br>
+给插件 CORS 添加多个header<br>
+curl -X PATCH <a href="http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1" target="_blank" rel="noopener">http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1</a> <br>
+–data “config.headers=Origin” <br>
+–data “config.headers=X-Requested-With” <br>
+–data “config.headers=Content-Type” <br>
+–data “config.headers=Authorization” <br>
+–data “config.headers=Accept” <br>
+–data “config.headers=Accept-Version” <br>
+–data “config.headers=Content-Length” <br>
+–data “config.headers=Content-MD5” <br>
+–data “config.headers=Date” <br>
+–data “config.headers=X-Auth-Token”</p>
+<p>更新 2019-6-22<br>
+在查询kong的服务数目时，发现postgresql数据库的services数目与 curl <a href="http://localhost:8001/services" target="_blank" rel="noopener">http://localhost:8001/services</a> 数目不同，最后在github源码中发现 在api中设置最大返回值为100;唔在考虑从源码编译修改，但是安装会很蛋疼</p>
+<h2><span id="插件使用">插件使用</span></h2>
+<p>kong_datadog_agent</p>
 <blockquote>
 <p>更爱配置文件后出现</p>
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2019/03/27 22:48:13 config.load While parsing config: yaml: line 291: did not find expected key</span><br><span class="line">Cannot setup config, exiting: unable to load Datadog config file: While parsing config: yaml: line 291: did not find expected key</span><br><span class="line">Error: unable to load Datadog config file: While parsing config: yaml: line 291: did not find expected key</span><br></pre></td></tr></table></figure>
-
 <blockquote>
 <p>最终发现是因为 更改配置时，没有对齐行开始（坑爹）</p>
 </blockquote>
@@ -556,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kong"><span class="nav-number">1.</span> <span class="nav-text">Kong</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关概念"><span class="nav-number">2.</span> <span class="nav-text">相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关操作"><span class="nav-number">3.</span> <span class="nav-text">相关操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件使用"><span class="nav-number">4.</span> <span class="nav-text">插件使用</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">Kong</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">相关概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">相关操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">插件使用</span></a></li></ol></div>
             
 
           </div>
