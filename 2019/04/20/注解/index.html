@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="@Bean (@Set @Get) @AutoWire public class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量  @Component(“name”)  目前的了解是，加上该注解，就无需告">
+<meta name="description" content="元注解  可以用于修饰注解的注解,称之为元注解  @Retention(RetentionPolicy.VALUE)  确定所修饰注解的生命周期范围   @Retention(RetentionPolicy.CLASS)修饰的注解，表示注解的信息被保留在class文件(字节码文件)中当程序编译时，但不会被虚拟机读取在运行的时候； @Retention(RetentionPolicy.SOURCE">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="注解">
 <meta property="og:url" content="http://yoursite.com/2019/04/20/注解/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="@Bean (@Set @Get) @AutoWire public class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量  @Component(“name”)  目前的了解是，加上该注解，就无需告">
+<meta property="og:description" content="元注解  可以用于修饰注解的注解,称之为元注解  @Retention(RetentionPolicy.VALUE)  确定所修饰注解的生命周期范围   @Retention(RetentionPolicy.CLASS)修饰的注解，表示注解的信息被保留在class文件(字节码文件)中当程序编译时，但不会被虚拟机读取在运行的时候； @Retention(RetentionPolicy.SOURCE">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-09T11:21:28.975Z">
+<meta property="og:updated_time" content="2020-07-07T08:45:29.643Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="注解">
-<meta name="twitter:description" content="@Bean (@Set @Get) @AutoWire public class cla/public void set(class cla)  自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量  @Component(“name”)  目前的了解是，加上该注解，就无需告">
+<meta name="twitter:description" content="元注解  可以用于修饰注解的注解,称之为元注解  @Retention(RetentionPolicy.VALUE)  确定所修饰注解的生命周期范围   @Retention(RetentionPolicy.CLASS)修饰的注解，表示注解的信息被保留在class文件(字节码文件)中当程序编译时，但不会被虚拟机读取在运行的时候； @Retention(RetentionPolicy.SOURCE">
 
 
 
@@ -307,8 +307,8 @@
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2019-11-09T19:21:28+08:00" content="2019-11-09">
-                2019-11-09
+              <time itemprop="dateUpdated" datetime="2020-07-07T16:45:29+08:00" content="2020-07-07">
+                2020-07-07
               </time>
             </span>
           
@@ -341,7 +341,33 @@
       
 
       
-        <p>@Bean<br>
+        <h2 id="元注解">元注解</h2>
+<blockquote>
+<p>可以用于修饰注解的注解,称之为元注解</p>
+</blockquote>
+<p>@Retention(RetentionPolicy.VALUE)</p>
+<blockquote>
+<p>确定所修饰注解的生命周期范围</p>
+</blockquote>
+<ul>
+<li>@Retention(RetentionPolicy.CLASS)修饰的注解，表示注解的信息被保留在class文件(字节码文件)中当程序编译时，但不会被虚拟机读取在运行的时候；</li>
+<li>@Retention(RetentionPolicy.SOURCE )修饰的注解,表示注解的信息会被编译器抛弃，不会留在class文件中，注解的信息只会留在源文件中；</li>
+<li>@Retention(RetentionPolicy.RUNTIME )修饰的注解，表示注解的信息被保留在class文件(字节码文件)中当程序编译时，会被虚拟机保留在运行时，所以他们可以用反射的方式读取。RetentionPolicy.RUNTIME 可以让你从JVM中读取Annotation注解的信息，以便在分析程序的时候使用.</li>
+</ul>
+<p>@Traget({ElementType.VALUE,… })</p>
+<blockquote>
+<p>确定所修饰的注解 修饰的对象范围</p>
+</blockquote>
+<ul>
+<li>ElementType.CONSTRUCTOR:用于描述构造器</li>
+<li>ElementType.FIELD:用于描述域</li>
+<li>ElementType.LOCAL_VARIABLE:用于描述局部变量</li>
+<li>ElementType.METHOD:用于描述方法</li>
+<li>ElementType.PACKAGE:用于描述包</li>
+<li>ElementType.PARAMETER:用于描述参数</li>
+<li>ElementType.TYPE:用于描述类、接口(包括注解类型) 或enum声明</li>
+</ul>
+<p>@Bean<br>
 (@Set @Get)</p>
 <p>@AutoWire<br>
 public class cla/public void set(class cla)</p>
@@ -366,6 +392,43 @@ public class cla/public void set(class cla)</p>
 <p>@ContextConfiguration(classes=*.class)</p>
 <ul>
 <li>从指明的class里加载配置</li>
+</ul>
+<p>@interface</p>
+<blockquote>
+<p>@interface Annotation{ } 定义一个注解 @Annotation，一个注解是一个类</p>
+</blockquote>
+<p>@Pointcut(表达式)</p>
+<blockquote>
+<p>Pointcut表示式(expression)和Pointcut签名(signature),signature 可用于 需要的注解找到该pointcut<br>
+//Pointcut表示式<br>
+@Pointcut(“execution(* com.savage.aop.MessageSender.*(…))”)<br>
+//Point签名<br>
+private void log(){}</p>
+</blockquote>
+<p>Pointcut 表达式</p>
+<ul>
+<li>execution：用于匹配方法执行的连接点；</li>
+<li>within：用于匹配指定类型内的方法执行；</li>
+<li>this：用于匹配当前AOP代理对象类型的执行方法；注意是AOP代理对象的类型匹配，这样就可能包括引入接口也类型匹配；</li>
+<li>target：用于匹配当前目标对象类型的执行方法；注意是目标对象的类型匹配，这样就不包括引入接口也类型匹配；</li>
+<li>args：用于匹配当前执行的方法传入的参数为指定类型的执行方法；</li>
+<li>@within：用于匹配所以持有指定注解类型内的方法；</li>
+<li>@target：用于匹配当前目标对象类型的执行方法，其中目标对象持有指定的注解；</li>
+<li>@args：用于匹配当前执行的方法传入的参数持有指定注解的执行；</li>
+<li>@annotation：用于匹配当前执行方法持有指定注解的方法；</li>
+</ul>
+<blockquote>
+<p>execution 表达式<br>
+@Pointcut(execution(modifiers-pattern? ret-type-pattern declaring-type-pattern? name-pattern(param-pattern)throws-pattern?) )</p>
+</blockquote>
+<ul>
+<li>修饰符匹配（modifier-pattern?）:public/private</li>
+<li>返回值匹配（ret-type-pattern）可以为*表示任何返回值,全路径的类名等</li>
+<li>类路径匹配（declaring-type-pattern?）</li>
+<li>方法名匹配（name-pattern）可以指定方法名 或者 <em>代表所有, set</em> 代表以set开头的所有方法</li>
+<li>参数匹配（(param-pattern)）可以指定具体的参数类型，多个参数间用“,”隔开，各个参数也可以用“<em>”来表示匹配任意类型的参数，如(String)表示匹配一个String参数的方法；(</em>,String) 表示匹配有两个参数的方法，第一个参数可以是任意类型，而第二个参数是String类型；可以用(…)表示零个或多个任意参数</li>
+<li>异常类型匹配（throws-pattern?）</li>
+<li>其中后面跟着“?”的是可选项</li>
 </ul>
 <p>2019-6-27 更新<br>
 今天在给spring 添加新restful接口时，发现无法访问；最后发现，接口如果不设置访问方法。默认访问方式是GET，奇怪的是，如果设置为POST方式，那么将无法访问，重定位回登录页面？？</p>
@@ -466,8 +529,17 @@ public class cla/public void set(class cla)</p>
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -482,7 +554,7 @@ public class cla/public void set(class cla)</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -495,7 +567,7 @@ public class cla/public void set(class cla)</p>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -518,6 +590,22 @@ public class cla/public void set(class cla)</p>
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#元注解"><span class="nav-number">1.</span> <span class="nav-text">元注解</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

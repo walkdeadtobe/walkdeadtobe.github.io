@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充  目">
+<meta name="description" content="简介 GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充">
 <meta name="keywords" content="git  file">
 <meta property="og:type" content="article">
 <meta property="og:title" content="git 学习">
 <meta property="og:url" content="http://yoursite.com/2019/07/22/Git/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充  目">
+<meta property="og:description" content="简介 GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-05T08:40:45.330Z">
+<meta property="og:updated_time" content="2020-07-05T16:34:34.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 学习">
-<meta name="twitter:description" content="GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充  目">
+<meta name="twitter:description" content="简介 GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充">
 
 
 
@@ -307,8 +307,8 @@
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-07-05T16:40:45+08:00" content="2020-07-05">
-                2020-07-05
+              <time itemprop="dateUpdated" datetime="2020-07-06T00:34:34+08:00" content="2020-07-06">
+                2020-07-06
               </time>
             </span>
           
@@ -341,13 +341,14 @@
       
 
       
-        <p>GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)</p>
+        <h3 id="简介">简介</h3>
+<p>GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)</p>
 <blockquote>
 <p>在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容<br>
 远程内容待补充</p>
 </blockquote>
-<p>目录解析<br>
-.git<br>
+<h3 id="目录解析">目录解析</h3>
+<p>.git<br>
 ├── COMMIT_EDITMSG<br>
 ├── FETCH_HEAD<br>
 ├── HEAD<br>
@@ -416,10 +417,33 @@ tag: 根据我查看的文件结构与commit相同,但引用博客中说没有�
 .git/refs/tags<br>
 .git/refs/remotes 记录远程各分支最新状态(文件中存储git object 的SHA-1值),同样指向本地的git object(每次fetch或者pull会拉去远程的更新)</p>
 </blockquote>
-<p>常见命令的实际流程：</p>
+<h3 id="常见命令及其解析">常见命令及其解析：</h3>
+<h4 id="git-addcommitpushfetchconfig">git add/commit/push/fetch/config</h4>
 <blockquote>
-<p>git add/commit<br>
-git push</p>
+<p>git add <filename></filename></p>
+</blockquote>
+<h4 id="git-checkout">git checkout</h4>
+<blockquote>
+<p><code>git checkout &lt;branch-name&gt;</code> 更改分支</p>
+</blockquote>
+<h4 id="git-reset">git reset</h4>
+<blockquote>
+<p>git reset --hard/mixed/soft</p>
+</blockquote>
+<h4 id="git-log">git log</h4>
+<blockquote></blockquote>
+<h4 id="git-cat-files">git cat-files</h4>
+<blockquote></blockquote>
+<h3 id="常见git场景">常见git场景</h3>
+<h4 id="撤销修改">撤销修改</h4>
+<blockquote>
+<p>已修改,未 <code>git add</code> : <code>git checkout  -- &lt;filepathname&gt;</code> 撤销 某文件未 git add提交的缓存,例如 <code>git checkout --</code> .撤销当前目录所有文件的未add 缓存</p>
+</blockquote>
+<blockquote>
+<p>已 <code>git add</code>,未 <code>git commit</code>: <code>git reset HEAD filepathname</code> 可以撤销 <code>git add</code>命令，回退到 已修改,未 <code>git add</code> 状态</p>
+</blockquote>
+<blockquote>
+<p>已 <code>git commit</code>,未 <code>git push</code>: <code>git reset --hard HEAD^</code> 可回退到上次commit的的状态,也可以使用 <code>git reset --hard  &lt;commitid&gt;</code> 回退到任意版本</p>
 </blockquote>
 <p>跟随态 VS 游离态</p>
 <p>参考：<br>
@@ -520,8 +544,17 @@ git push</p>
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -536,7 +569,7 @@ git push</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-count">80</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -549,7 +582,7 @@ git push</p>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">43</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -572,6 +605,22 @@ git push</p>
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录解析"><span class="nav-number">2.</span> <span class="nav-text">目录解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见命令及其解析"><span class="nav-number">3.</span> <span class="nav-text">常见命令及其解析：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git-addcommitpushfetchconfig"><span class="nav-number">3.1.</span> <span class="nav-text">git add/commit/push/fetch/config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-checkout"><span class="nav-number">3.2.</span> <span class="nav-text">git checkout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-reset"><span class="nav-number">3.3.</span> <span class="nav-text">git reset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-log"><span class="nav-number">3.4.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-cat-files"><span class="nav-number">3.5.</span> <span class="nav-text">git cat-files</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见git场景"><span class="nav-number">4.</span> <span class="nav-text">常见git场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#撤销修改"><span class="nav-number">4.1.</span> <span class="nav-text">撤销修改</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="剑指offer,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="优化时间和空间效率 面试题29：数组中出现次数超过一半的数字  题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组 {1，2，3，2，2，2，5，4，2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。  解析 其实对于一个排序数组来说，要找出这个数字是很简单的，只用遍历一次数组来计数就可以了。但是要排序的话时间复杂度至少也是O(n*lo">
+<meta name="keywords" content="剑指offer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer">
+<meta property="og:url" content="http://yoursite.com/2020/07/06/剑指offer/05optimization/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="优化时间和空间效率 面试题29：数组中出现次数超过一半的数字  题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组 {1，2，3，2，2，2，5，4，2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。  解析 其实对于一个排序数组来说，要找出这个数字是很简单的，只用遍历一次数组来计数就可以了。但是要排序的话时间复杂度至少也是O(n*lo">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-07-06T03:35:01.779Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="剑指offer">
+<meta name="twitter:description" content="优化时间和空间效率 面试题29：数组中出现次数超过一半的数字  题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组 {1，2，3，2，2，2，5，4，2}。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。  解析 其实对于一个排序数组来说，要找出这个数字是很简单的，只用遍历一次数组来计数就可以了。但是要排序的话时间复杂度至少也是O(n*lo">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/06/剑指offer/05optimization/">
+
+
+
+
+
+  <title>剑指offer | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/06/剑指offer/05optimization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">剑指offer</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-06T11:11:41+08:00">
+                2020-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-07-06T11:35:01+08:00" content="2020-07-06">
+                2020-07-06
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="优化时间和空间效率">优化时间和空间效率</h1>
+<h2 id="面试题29数组中出现次数超过一半的数字">面试题29：数组中出现次数超过一半的数字</h2>
+<blockquote>
+<p>题目：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。例如输入一个长度为9的数组 <code>{1，2，3，2，2，2，5，4，2}</code>。由于数字2在数组中出现了5次，超过数组长度的一半，因此输出2。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>其实对于一个排序数组来说，要找出这个数字是很简单的，只用遍历一次数组来计数就可以了。但是要排序的话时间复杂度至少也是O(n*logn)，有没有O(n)的方法呢？</p>
+<p>有的，首先介绍一种基于partition函数的方法。partition函数用于在快排中把一个数字放到合适的位置上，使得这个数字的左边都比它小，右边都比它大。题目要求找出出现次数超过一半的数字，那么这个数字在排序数组中有什么特点呢？答案是<strong>出现次数超过数组长度的一半的数字必然会是中位数</strong>。</p>
+<p>于是，我们就可以通过多次调用partition函数来找这个数。partition函数随机选取范围内的一个数放到合适的位置，如果位置比中位数前，那就缩小范围到这个数和数组末尾之间；如果比中位数后，那就缩小范围到数组开头到这个数之间；如果这个位置恰是中位数的位置，那就成功找到了。</p>
+<p>注意，上面只是一种<strong>快速找到中位数</strong>的方法，出现次数有没有超过数组长度的一半，还得遍历一次数组对这个数的出现次数进行计数。</p>
+<p>基于partition函数的方法算法复杂度分析有一定困难，但总的来说还是可以认为是O(n)的算法。有一个缺点是<strong>需要改变数组</strong>，这在实际任务中不一定被允许。</p>
+<p>下面再介绍另一种更直观的O(n)解法。</p>
+<p>所谓“出现的次数超过数组长度的一半”，其实可以理解为<strong>这个数字出现的次数比其他全部数字出现次数的总和还要多</strong>。基于这个思路，我们可以想出下面的解法：</p>
+<ol>
+<li>初始化变量result为数组的第一个元素，初始化变量times为1</li>
+<li>遍历数组
+<ul>
+<li>如果times为0，把result换为当前数字</li>
+<li>如果result不等于当前数字，则times-1</li>
+<li>如果result等于当前数字，则times+1</li>
+</ul>
+</li>
+<li>检查result出现次数是否超过数组长度的一半</li>
+</ol>
+<p>如果数组中真的存在一个数出现的次数超过数组长度的一半，那么它必定会是最后的result。但是，注意了，是不是最后的result一定就是题目要求的数字呢？并不是的！有可能数组根本就没有这样的数字，所以类似上一种解法，我们最后要进行一次遍历检查。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> g_bInputInvalid = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">CheckInvalidArray</span><span class="params">(<span class="keyword">int</span>* numbers, <span class="keyword">int</span> length)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    g_bInputInvalid = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">NULL</span> &amp;&amp; length &lt;= <span class="number">0</span>)</span><br><span class="line">        g_bInputInvalid = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> g_bInputInvalid;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">CheckMoreThanHalf</span><span class="params">(<span class="keyword">int</span>* numbers, <span class="keyword">int</span> length, <span class="keyword">int</span> number)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> times = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(numbers[i] == number)</span><br><span class="line">            times++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> isMoreThanHalf = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span>(times * <span class="number">2</span> &lt;= length)</span><br><span class="line">    &#123;</span><br><span class="line">        g_bInputInvalid = <span class="literal">true</span>;</span><br><span class="line">        isMoreThanHalf = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> isMoreThanHalf;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题30最小的k个数">面试题30：最小的k个数</h2>
+<blockquote>
+<p>题目：输入n个整数，找出其中最小的k个数。例如输入4、5、1、6、2、7、3、8这8个数字，则最小的4个数字是1、2、3、4。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>和上一题那样，我们可以使用O(n)的基于partition函数的解法，因为题目只要求找出最小的k个数，没有说这k个数还得排序好返回。所以只要partition函数返回的下标是k-1就结束了，如果不是就根据情况缩小范围即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====================方法1====================</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetLeastNumbers_Solution1</span><span class="params">(<span class="keyword">int</span>* input, <span class="keyword">int</span> n, <span class="keyword">int</span>* output, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(input == <span class="literal">NULL</span> || output == <span class="literal">NULL</span> || k &gt; n || n &lt;= <span class="number">0</span> || k &lt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> end = n - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> index = Partition(input, n, start, end);</span><br><span class="line">    <span class="keyword">while</span>(index != k - <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(index &gt; k - <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            end = index - <span class="number">1</span>;</span><br><span class="line">            index = Partition(input, n, start, end);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            start = index + <span class="number">1</span>;</span><br><span class="line">            index = Partition(input, n, start, end);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; ++i)</span><br><span class="line">        output[i] = input[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>基于partition函数求解一个不好的地方就是会改变数组。有没有一种不改变数组但又时间复杂度相对小的解法呢？有的，就是<strong>基于最大堆</strong>的算法，复杂度为O(n logk)，k设定为堆的大小。</p>
+<p>具体来说，我们依次读入数组的n个整数。如果最大堆中已有的数字少于k个，则直接把这次读入的整数放入容器中；如果最大堆中已经满了，则把堆顶（最大元素）和这次读入的整数作比较，如果堆顶较小则不需修改，堆顶较大则删除堆顶，并且插入这次读入的整数。</p>
+<p>这里不讨论怎样实现最大堆，直接使用C++中的multiset来实现（multiset与set都是<strong>基于红黑树实现</strong>的，区别在于<strong>multiset允许有重复元素</strong>），可以把它看成一个序列，插入/删除都能在O(logk)的时间内完成，而且<strong>能时刻保证序列中的数是有序的</strong>。</p>
+<p>基于最大堆的解法比基于partition的解法要慢一些，但是！这种解法不仅不需要改变原数组（所有操作都在堆里进行），而且<strong>适合处理海量数据</strong>。因为数据太多时无法一次载入内存，只能从辅助存储空间（比如硬盘）分批读入，而基于最大堆的解法就允许我们每次读入一个数字，直到遍历完毕也就处理完了（当然，k还是不能超出内存的限制的）。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====================方法2====================</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">multiset</span>&lt;<span class="keyword">int</span>, greater&lt;<span class="keyword">int</span>&gt; &gt;            intSet;</span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">multiset</span>&lt;<span class="keyword">int</span>, greater&lt;<span class="keyword">int</span>&gt; &gt;::iterator  setIterator;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetLeastNumbers_Solution2</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; data, intSet&amp; leastNumbers, <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    leastNumbers.clear();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(k &lt; <span class="number">1</span> || data.size() &lt; k)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::const_iterator iter = data.begin();</span><br><span class="line">    <span class="keyword">for</span>(; iter != data.end(); ++ iter)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>((leastNumbers.size()) &lt; k)</span><br><span class="line">            leastNumbers.insert(*iter);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            setIterator iterGreatest = leastNumbers.begin();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(*iter &lt; *(leastNumbers.begin()))</span><br><span class="line">            &#123;</span><br><span class="line">                leastNumbers.erase(iterGreatest);</span><br><span class="line">                leastNumbers.insert(*iter);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题31连续子数组的最大和">面试题31：连续子数组的最大和</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>输入一个整型数组，数组里有正数也有负数。数组中一个或连续的多个整数组成一个子数组。求所有子数组的和的最大值。要求时间复杂度为O(n)。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这题初看之下，似乎有些难度。但实际上思路是很简单的，使用两个变量存储当前子数组的和（初始化为0）以及最大的和（初始化为0x80000000，即int类型的最小负数），求解的过程可以分为以下几种情况：</p>
+<ol>
+<li>
+<p>当前和为负，此时如果把新的数字并入连续子数组，所得的和还没有这个数字本身大。所以后续再并入其它数字组成数组的和要比单独这个数字并入后续数字组成数组的和小。于是把当前连续子数组舍弃掉，然后往空数组并入新的数字即可（也即把当前子数组的和设为新数字的值）；</p>
+</li>
+<li>
+<p>当前和非负，这时直接累加新数字就可以了，即使新数字是负数，后续加入其它数字连成的数组也有可能产生更大的和；</p>
+</li>
+<li>
+<p>如果新产生的和比最大和要大，那就更新最大和。</p>
+</li>
+</ol>
+<p>最后，应该注意，<strong>输入不合法时应返回什么</strong>。这里设定返回0，并且为了和最大和为0的情况区分开，采用了一个全局标志来进行标识。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> g_InvalidInput = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">FindGreatestSumOfSubArray</span><span class="params">(<span class="keyword">int</span> *pData, <span class="keyword">int</span> nLength)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>((pData == <span class="literal">NULL</span>) || (nLength &lt;= <span class="number">0</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        g_InvalidInput = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    g_InvalidInput = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> nCurSum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> nGreatestSum = <span class="number">0x80000000</span>; <span class="comment">// 初始化为最小负数</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nLength; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(nCurSum &lt;= <span class="number">0</span>)</span><br><span class="line">            nCurSum = pData[i];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            nCurSum += pData[i];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(nCurSum &gt; nGreatestSum)</span><br><span class="line">            nGreatestSum = nCurSum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> nGreatestSum;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题32从1到n整数中1出现的次数">面试题32：从1到n整数中1出现的次数</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>输入一个整数n，求从1到n这n个整数的十进制表示中1出现的次数。例如输入12，从1到12这些整数中包含1的数字有1，10，11和12，1一共出现了5次。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>不考虑时间复杂度，最简单的方法就是逐个数字判断，每次判断完各位是否1之后把数字除以10，当数字变为0时结束。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====================方法一====================</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NumberOf1</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NumberOf1Between1AndN_Solution1</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++ i)</span><br><span class="line">        number += NumberOf1(i);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> number;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NumberOf1</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> number = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(n) <span class="comment">// 当n不为0时</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(n % <span class="number">10</span> == <span class="number">1</span>)</span><br><span class="line">            number ++;</span><br><span class="line"></span><br><span class="line">        n = n / <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> number;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里介绍一种考虑数字规律的O(log n)方法，也即复杂度视输入数字n的位数（等于log10(n)+1下取整）而定。</p>
+<p>将求从1到n这n个整数的十进制表示中1出现的次数这个任务分为三个子任务来完成：</p>
+<ol>
+<li>统计 n去掉最高位+1 ~ n 这段范围内最高位出现的1</li>
+<li>统计 n去掉最高位+1 ~ n 这段范围内除最高位之外出现的1</li>
+<li>统计 1 ~ n去掉最高位 这段范围内出现的1</li>
+</ol>
+<p>那么具体来说怎么完成呢？</p>
+<p>首先，对于 n去掉最高位+1 ~ n 这段范围内最高位出现的1，有两种情况：</p>
+<ol>
+<li>最高位大于1，此时所有最高位为1的情况都包含了，最高位为1的次数等于 <code>10^(位数-1)</code>
+<ul>
+<li>比如22，十位为1的10~19全部都被包含了，十位为1的次数是 <code>10^(2-1)=10（次）</code></li>
+</ul>
+</li>
+<li>最高位等于1，此时最高位为1的次数等于 <code>n去掉最高位+1</code>
+<ul>
+<li>比如12，去掉十位是2，十位为1的次数是 <code>2+1=3（次）</code></li>
+</ul>
+</li>
+</ol>
+<p>然后，对于 n去掉最高位+1 ~ n 这段范围内除最高位之外出现的1，我们使用公式 <code>最高位*（位数-1）*10^(位数-2)</code> 次方。</p>
+<p>首先，假设最高位数字为k，则 n去掉最高位+1 ~ n 这段范围可以被等分为k份。例如n=3721，则k=3，此时 722~3721 可以等分为3份，也即 722~1721，1722~2721 以及 2722~3721。又因为对于这3段范围来说，除最高位外出现1的次数都是相同的（最高位已经在第一个子任务中算好了，这里不用管），所以我们只需要算出其中一段就可以了，这是公式第一项的意义。</p>
+<p>然后，假设n是一个d位数，则在去掉最高位后剩下的就是d-1位数字，我们在d-1位数字中选择一位固定为1，有d-1种选择，这是公式第二项的意义。</p>
+<p>最后，在固定了其中一位数字为1之后，剩余的d-2位数字按照排列组合，每位数字都可以选择0~9中的一个，所以一共有 <code>10^(d-2)</code> 中组合，这是公式第三项的意义。</p>
+<p>看到这里可能还有小小的迷糊，按照上面排列组合的方法计算，那么3111这个数在子任务2中不就被计算了3次吗？事实上，这并没有错，因为题目求得是1出现的次数，而不是出现1的数字有多少个？所以，除最高位外3111出现了3个1，在子任务2中计数为3是正确的。</p>
+<p>最后的最后，我们还要求子任务3，统计 1 ~ n去掉最高位 这段范围内出现的1，这个使用递归求解就可以了，也即把n去掉最高位作为下一次递归传入的n。注意设置好终止条件，最好到达个位数时就停止了。若个位为0，则返回0；若各位大于0，则返回1。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ====================方法二====================</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NumberOf1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* strN)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">PowerBase10</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NumberOf1Between1AndN_Solution2</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> strN[<span class="number">50</span>];</span><br><span class="line">    <span class="built_in">sprintf</span>(strN, <span class="string">"%d"</span>, n); <span class="comment">//int转字符串</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> NumberOf1(strN);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NumberOf1</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* strN)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!strN || *strN &lt; <span class="string">'0'</span> || *strN &gt; <span class="string">'9'</span> || *strN == <span class="string">'\0'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> first = *strN - <span class="string">'0'</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> length = <span class="keyword">static_cast</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">int</span>&gt;(<span class="built_in">strlen</span>(strN));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(length == <span class="number">1</span> &amp;&amp; first == <span class="number">0</span>) <span class="comment">// 个位为0</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(length == <span class="number">1</span> &amp;&amp; first &gt; <span class="number">0</span>) <span class="comment">// 个位为1</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 假设strN是"21345"</span></span><br><span class="line">    <span class="comment">// numFirstDigit是数字10000-19999的第一个位中1的数目</span></span><br><span class="line">    <span class="keyword">int</span> numFirstDigit = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(first &gt; <span class="number">1</span>)</span><br><span class="line">        numFirstDigit = PowerBase10(length - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(first == <span class="number">1</span>)</span><br><span class="line">        numFirstDigit = atoi(strN + <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// numOtherDigits是01346-21345除了第一位之外的数位中1的数目</span></span><br><span class="line">    <span class="keyword">int</span> numOtherDigits = first * (length - <span class="number">1</span>) * PowerBase10(length - <span class="number">2</span>);</span><br><span class="line">    <span class="comment">// numRecursive是1-1345中1的数目</span></span><br><span class="line">    <span class="keyword">int</span> numRecursive = NumberOf1(strN + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> numFirstDigit + numOtherDigits + numRecursive;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">PowerBase10</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> result = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++ i)</span><br><span class="line">        result *= <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题33把数组排成最小的数">面试题33：把数组排成最小的数</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>输入一个正整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接处的所有数字中最小的一个。例如输入数组 <code>{3,32,321}</code>，则打印出这3个数字能排成的最小数字321323.</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这题如果我们采用全排列的方式，n个数字就有n!个排列，时间复杂度相当大。</p>
+<p>那么这条题目实际我们做什么呢？其实是希望我们<strong>实现一个比较函数</strong>。</p>
+<p>在这里我们并不是简单地比较两个数字的大小，而是要比较它们拼接的时候谁排在前面能产生更小的数。要实现这样的功能，我们可以先将两个数字转换为字符串，然后使用strcat来进行拼接，使用strcmp来进行比较。</p>
+<p>实现了比较函数之后，我们可以使用qsort快速排序在O(n logn)的时间内完成排序，此时按顺序输出数组的数字得到的就是最小的数。</p>
+<p>在这里简单再减少以下几个函数：</p>
+<ol>
+<li><code>sprintf(a, &quot;%d&quot;, b)</code> 将int<em>类型的b转换为char</em>类型的a，也即整数数组转字符串；</li>
+<li><code>strcpy(a,b)</code> 将b复制到a；</li>
+<li><code>strcat(a,b)</code> 将b拼接到a后面；</li>
+<li><code>strcmp(a,b)</code> 对a和b两个字符串从左向右逐个字符相比（按ASCII值大小相比较），直到出现不同的字符或遇’\0’为止。若a&gt;b则返回正数，a&lt;b则返回负数，相同则返回0。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// int型整数用十进制表示最多只有10位</span></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> g_MaxNumberLength = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span>* g_StrCombine1 = <span class="keyword">new</span> <span class="keyword">char</span>[g_MaxNumberLength * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line"><span class="keyword">char</span>* g_StrCombine2 = <span class="keyword">new</span> <span class="keyword">char</span>[g_MaxNumberLength * <span class="number">2</span> + <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">PrintMinNumber</span><span class="params">(<span class="keyword">int</span>* numbers, <span class="keyword">int</span> length)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">NULL</span> || length &lt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span>** strNumbers = (<span class="keyword">char</span>**)(<span class="keyword">new</span> <span class="keyword">int</span>[length]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        strNumbers[i] = <span class="keyword">new</span> <span class="keyword">char</span>[g_MaxNumberLength + <span class="number">1</span>];</span><br><span class="line">        <span class="built_in">sprintf</span>(strNumbers[i], <span class="string">"%d"</span>, numbers[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    qsort(strNumbers, length, <span class="keyword">sizeof</span>(<span class="keyword">char</span>*), compare);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; ++i)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%s"</span>, strNumbers[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; ++i)</span><br><span class="line">        <span class="keyword">delete</span>[] strNumbers[i];</span><br><span class="line">    <span class="keyword">delete</span>[] strNumbers;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果[strNumber1][strNumber2] &gt; [strNumber2][strNumber1], 返回值大于0</span></span><br><span class="line"><span class="comment">// 如果[strNumber1][strNumber2] = [strNumber2][strNumber1], 返回值等于0</span></span><br><span class="line"><span class="comment">// 如果[strNumber1][strNumber2] &lt; [strNumber2][strNumber1], 返回值小于0</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>* strNumber1, <span class="keyword">const</span> <span class="keyword">void</span>* strNumber2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// [strNumber1][strNumber2]</span></span><br><span class="line">    <span class="built_in">strcpy</span>(g_StrCombine1, *(<span class="keyword">const</span> <span class="keyword">char</span>**)strNumber1);</span><br><span class="line">    <span class="built_in">strcat</span>(g_StrCombine1, *(<span class="keyword">const</span> <span class="keyword">char</span>**)strNumber2);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// [strNumber2][strNumber1]</span></span><br><span class="line">    <span class="built_in">strcpy</span>(g_StrCombine2, *(<span class="keyword">const</span> <span class="keyword">char</span>**)strNumber2);</span><br><span class="line">    <span class="built_in">strcat</span>(g_StrCombine2, *(<span class="keyword">const</span> <span class="keyword">char</span>**)strNumber1);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">strcmp</span>(g_StrCombine1, g_StrCombine2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题34丑数">面试题34：丑数</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>我们把只包含因子2、3和5的数称作丑数（Ugly Number）。求按小到大的顺序的第1500个丑数。例如6、8都是丑数，但14不是，因为它包含因子7。习惯上我们把1当做第一个丑数。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>最简单的解法，写一个函数用于判断是否丑数（需要求模和做除法），然后从1开始依次判断是否丑数，直到得到1500个丑数时停止。这种方法的时间开销很大，因为即使一个数不是丑数，我们仍然要对它进行判断，做求模和除法这些开销较大的操作。</p>
+<p>在允许使用额外空间时，我们不妨<strong>用空间换时间</strong>。按照丑数的定义，<strong>丑数应该是另一个丑数乘以2、3或者5的结果（1除外）</strong>。所以我们可以创建一个数组，里面的数字是排好序的丑数，每个丑数都是前面的丑数乘以2、3或者5得到的。</p>
+<p>现在关键在于<strong>怎么确保数组里的丑数是排好序的</strong>？</p>
+<p>假设我们有一个排好序的丑数数组，最大的一个丑数为M，则我们在生成下一个丑数时，我们会把已有丑数都乘2，乘3和乘5，这会产生一些小于等于M的数字，但由于我们是按序生成的，所以我们并不care这些数字。要继续有序生成，我们需要找到第一个比M大的数字。对于乘2操作来说，把第一个比M大的数字的数字记为M2；对于乘3操作来说，把第一个比M大的数字的数字记为M3；对于乘5操作来说，把第一个比M大的数字的数字记为M5。那么数组的下一个丑数必然是M2，M3，M5这三个数中的最小者。</p>
+<p>在实现的时候，我们可以用三个指针来分别记录M2/2，M3/3和M5/5的坐标，在下一次产生丑数时，我们就不需要再从1开始逐个数乘2，乘3和乘5了，因为下一个丑数必然是这三个指针以后的数乘2，乘3或乘5产生的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetUglyNumber_Solution2</span><span class="params">(<span class="keyword">int</span> index)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(index &lt;= <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> *pUglyNumbers = <span class="keyword">new</span> <span class="keyword">int</span>[index];</span><br><span class="line">    pUglyNumbers[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> nextUglyIndex = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> *pMultiply2 = pUglyNumbers;</span><br><span class="line">    <span class="keyword">int</span> *pMultiply3 = pUglyNumbers;</span><br><span class="line">    <span class="keyword">int</span> *pMultiply5 = pUglyNumbers;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(nextUglyIndex &lt; index)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> min = Min(*pMultiply2 * <span class="number">2</span>, *pMultiply3 * <span class="number">3</span>, *pMultiply5 * <span class="number">5</span>);</span><br><span class="line">        pUglyNumbers[nextUglyIndex] = min;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(*pMultiply2 * <span class="number">2</span> &lt;= pUglyNumbers[nextUglyIndex])</span><br><span class="line">            ++pMultiply2;</span><br><span class="line">        <span class="keyword">while</span>(*pMultiply3 * <span class="number">3</span> &lt;= pUglyNumbers[nextUglyIndex])</span><br><span class="line">            ++pMultiply3;</span><br><span class="line">        <span class="keyword">while</span>(*pMultiply5 * <span class="number">5</span> &lt;= pUglyNumbers[nextUglyIndex])</span><br><span class="line">            ++pMultiply5;</span><br><span class="line"></span><br><span class="line">        ++nextUglyIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> ugly = pUglyNumbers[nextUglyIndex - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">delete</span>[] pUglyNumbers;</span><br><span class="line">    <span class="keyword">return</span> ugly;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Min</span><span class="params">(<span class="keyword">int</span> number1, <span class="keyword">int</span> number2, <span class="keyword">int</span> number3)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> min = (number1 &lt; number2) ? number1 : number2;</span><br><span class="line">    min = (min &lt; number3) ? min : number3;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> min;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题35第一个只出现一次的字符">面试题35：第一个只出现一次的字符</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>在字符串中找出第一个只出现一次的字符。如输入 <code>&quot;abaccdeff&quot;</code>，则输出 <code>'b'</code>。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>对于统计次数的题目，我们很容易想到使用哈希表来实现。c++的标准模版库中并没有哈希表的实现，当我们可以利用一个int型数组来实现，因为char类型中每个字符是8bits的，也即有256种可能，我们可以用一个长度为256的数组来模拟。</p>
+<p>有了哈希表，我们只需要扫描2次字符串就可以实现题目要求了，也即时间复杂度为O(n)。具体来说，第一次扫描，我们统计每个字符的次数；第二次扫描则搜索哈希表中的次数，第一次出现次数为1时就代表找到了。</p>
+<p>特别注意一下，哈希表要进行初始化，另外，如果没有只出现1次的字符，要明确该返回什么。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">char</span> <span class="title">FirstNotRepeatingChar</span><span class="params">(<span class="keyword">char</span>* pString)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pString == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'\0'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">int</span> tableSize = <span class="number">256</span>;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> hashTable[tableSize];</span><br><span class="line">    <span class="comment">// 初始化哈希表</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i&lt;tableSize; ++ i)</span><br><span class="line">        hashTable[i] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一次扫描字符串</span></span><br><span class="line">    <span class="comment">// 统计各字符的出现数目</span></span><br><span class="line">    <span class="keyword">char</span>* pHashKey = pString;</span><br><span class="line">    <span class="keyword">while</span>(*(pHashKey) != <span class="string">'\0'</span>)</span><br><span class="line">        hashTable[*(pHashKey++)] ++;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二次扫描字符串</span></span><br><span class="line">    <span class="comment">// 依次把字符作为key检索哈希表</span></span><br><span class="line">    pHashKey = pString;</span><br><span class="line">    <span class="keyword">while</span>(*pHashKey != <span class="string">'\0'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(hashTable[*pHashKey] == <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> *pHashKey;</span><br><span class="line"></span><br><span class="line">        pHashKey++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">'\0'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题36数组中的逆序对">面试题36：数组中的逆序对</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>在数组中的两个数字如果前面一个数字大于后面的数字，则这两个数字组成一个逆序对。输入一个数组，求出这个数组中的逆序对的总数。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>最简单的解法是逐个扫描数组的数字，对每个数字都检查其后的所有数字来统计逆序对，复杂度是O(n^2)。</p>
+<p>但是，这种解法显然太过耗费时间。有没有更快的方法呢？有的，采用<strong>归并排序</strong>的思想，我们可以借助一个和原数组等长的辅助数组来实现O(n logn)时间复杂度的解法。</p>
+<p>具体来说，过程如下：</p>
+<ol>
+<li>
+<p>把原数组对半分为两个子数组，对子数组继续对半分，直到子数组只包含单个数字，然后开始对相邻的子数组进行合并。</p>
+</li>
+<li>
+<p>在合并时，我们从两个子数组的最后一位开始往前扫描（两个子数组都是递增数组），每次选择较大的一位放入辅助数组（从辅助数组的最后开始赋值，保证生成的也是递增数组）。</p>
+<ul>
+<li>如果靠前的子数组数字较大，那就代表这合并后它会和靠后子数组剩余的数字（都比它小）构成逆序对，此时总逆序对数目应加上靠后子数组剩余数字的数目。</li>
+<li>如果靠后的子数组数字较大，就代表不构成逆序对，直接合并到辅助数组就可以了。</li>
+</ul>
+</li>
+<li>
+<p>如此经过多轮的分拆和合并，最后就能得到一个递增排序的辅助数组，同时统计好了逆序对的数目。</p>
+</li>
+</ol>
+<p>再举个简单例子来捋顺思路吧，假设我们要统计数组 <code>7,5,6,4</code> 的逆序对数目，步骤如下：</p>
+<ol>
+<li>对半分数组 <code>7,5,6,4</code>，得到子数组 <code>7,5</code> 和 <code>6,4</code>；</li>
+<li>对半分数组 <code>7,5</code>，得到子数组 <code>7</code> 和 <code>5</code>；</li>
+<li>合并子数组 <code>7</code> 和 <code>5</code>，7比5大，逆序对加一，7放入辅助数组，子数组1空了，把子数组2的数字也放入辅助数组，得到辅助数组 <code>5,7</code>；</li>
+<li>对半分数组 <code>6,4</code>，得到子数组 <code>6</code> 和 <code>4</code>；</li>
+<li>合并子数组 <code>6</code> 和 <code>4</code>，6比4大，逆序对加一，6放入辅助数组，子数组1空了，把子数组2的数字也放入辅助数组，得到辅助数组 <code>4,6</code>；</li>
+<li>子数组 <code>5,7</code> 和 <code>4,6</code>，7比6大，<strong>逆序对加二</strong>，7放入辅助数组。5比6小，6放入辅助数组。5比4大，逆序对加一，5放入辅助 数组，子数组1空了，把子数组2的数字也放入辅助数组，得到辅助数组 <code>4,5,6,7</code>；</li>
+<li>合并完成，得到递增数组 <code>4,5,6,7</code>，逆序对数目为 <code>1+1+2+1=5（个）</code>。</li>
+</ol>
+<p>当然最好还是自己拿着纸举例分析来体验一下。假设我们把每一次归并中，用于合并的两个子数组称为数据数组，合并好的数组称为辅助数组。那么在转化为代码的过程中，<strong>合并出这一轮辅助数组用的是在获取这一轮两个数据数组时用的辅助数组</strong>。比方说上面例子中，步骤6用的两个数据数组其实就是步骤3和步骤5中得到的辅助数组 <code>5,7</code> 和辅助数组 <code>4,6</code>。</p>
+<p><strong>那我们是否需要使用多个长度不一的辅助数组呢</strong>？不是的，我们用一个和输入数组等长的辅助数组就够了，只是用的方式有一点巧妙。在传递参数时，把子数组在原数组中start和end的索引也作为参数传递就可以了，这样相当于截取了原数组的一段。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">InversePairs</span><span class="params">(<span class="keyword">int</span>* data, <span class="keyword">int</span> length)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(data == <span class="literal">NULL</span> || length &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span>* copy = <span class="keyword">new</span> <span class="keyword">int</span>[length];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; ++ i)</span><br><span class="line">        copy[i] = data[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> count = InversePairsCore(data, copy, <span class="number">0</span>, length - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">delete</span>[] copy;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">InversePairsCore</span><span class="params">(<span class="keyword">int</span>* data, <span class="keyword">int</span>* copy, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 当分割到子数组只剩1个数字时，直接合并入辅助数组，逆序对数目为0</span></span><br><span class="line">    <span class="keyword">if</span>(start == end)</span><br><span class="line">    &#123;</span><br><span class="line">        copy[start] = data[start];</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把当前数组分割成两部分</span></span><br><span class="line">    <span class="comment">// 注意data和copy作为参数的位置是换过来的</span></span><br><span class="line">    <span class="comment">// 因为这一轮用于归并的数据数组是两个子数组归并好的的结果（它们那一轮的辅助数组）</span></span><br><span class="line">    <span class="keyword">int</span> length = (end - start) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span> left = InversePairsCore(copy, data, start, start + length);</span><br><span class="line">    <span class="keyword">int</span> right = InversePairsCore(copy, data, start + length + <span class="number">1</span>, end);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// i初始化为前半段最后一个数字的下标</span></span><br><span class="line">    <span class="keyword">int</span> i = start + length;</span><br><span class="line">    <span class="comment">// j初始化为后半段最后一个数字的下标</span></span><br><span class="line">    <span class="keyword">int</span> j = end;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 辅助数组的指针初始化在最后</span></span><br><span class="line">    <span class="keyword">int</span> indexCopy = end;</span><br><span class="line">    <span class="comment">// 逆序对数目初始化为0</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">// 合并两个子数组到辅助数组，从末尾开始比较，到达其中一方的头部时停止</span></span><br><span class="line">    <span class="keyword">while</span>(i &gt;= start &amp;&amp; j &gt;= start + length + <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(data[i] &gt; data[j])</span><br><span class="line">        &#123;</span><br><span class="line">            copy[indexCopy--] = data[i--];</span><br><span class="line">            count += j - start - length;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            copy[indexCopy--] = data[j--];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 把另一方余下的数字也合并到辅助数组中</span></span><br><span class="line">    <span class="keyword">for</span>(; i &gt;= start; --i)</span><br><span class="line">        copy[indexCopy--] = data[i];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(; j &gt;= start + length + <span class="number">1</span>; --j)</span><br><span class="line">        copy[indexCopy--] = data[j];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 逆序对总数由三部分组成，两个子数组各自的逆序对数目加上合并它们产生的逆序对数目</span></span><br><span class="line">    <span class="keyword">return</span> left + right + count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题37两个链表的第一个公共结点">面试题37：两个链表的第一个公共结点</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>输入两个链表，找出它们的第一个公共结点。链表结点定义如下：</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span>       m_nValue;</span><br><span class="line">    ListNode* m_pNext;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="解析">解析</h3>
+<p>最呆萌的做法就是依次遍历其中一个链表的结点，每访问一个结点就遍历一次另一个链表，知道找到两个链表的公共结点。如果两个链表长度分别为m和n，这种方法的时间复杂度就是O(mn)。</p>
+<p>当然不用这么笨的方法… 我们先观察一下两个有公共结点的链表有什么特点：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> -&gt; <span class="number">2</span> -&gt; <span class="number">3</span></span><br><span class="line">           \</span><br><span class="line">            <span class="number">6</span> -&gt; <span class="number">7</span></span><br><span class="line">           /</span><br><span class="line">     <span class="number">4</span> -&gt; <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>不难发现，<strong>两个有公共结点的链表从第一个公共结点到链表尾都是一样的</strong>。而且，如果两个链表相差k步，我们在长链表上先走k步，然后再同时遍历两个链表，就能很容易地找到第一个公共结点（如果没有则会一起走到链表尾的NULL）。</p>
+<p>基于这个思路，实现代码并不难：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">FindFirstCommonNode</span><span class="params">( ListNode *pHead1, ListNode *pHead2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 得到两个链表的长度</span></span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> nLength1 = GetListLength(pHead1);</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> nLength2 = GetListLength(pHead2);</span><br><span class="line">    <span class="keyword">int</span> nLengthDif = nLength1 - nLength2;</span><br><span class="line"></span><br><span class="line">    ListNode* pListHeadLong = pHead1;</span><br><span class="line">    ListNode* pListHeadShort = pHead2;</span><br><span class="line">    <span class="keyword">if</span>(nLength2 &gt; nLength1)</span><br><span class="line">    &#123;</span><br><span class="line">        pListHeadLong = pHead2;</span><br><span class="line">        pListHeadShort = pHead1;</span><br><span class="line">        nLengthDif = nLength2 - nLength1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 先在长链表上走几步，再同时在两个链表上遍历</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nLengthDif; ++ i)</span><br><span class="line">        pListHeadLong = pListHeadLong-&gt;m_pNext;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>((pListHeadLong != <span class="literal">NULL</span>) &amp;&amp;</span><br><span class="line">        (pListHeadShort != <span class="literal">NULL</span>) &amp;&amp;</span><br><span class="line">        (pListHeadLong != pListHeadShort))</span><br><span class="line">    &#123;</span><br><span class="line">        pListHeadLong = pListHeadLong-&gt;m_pNext;</span><br><span class="line">        pListHeadShort = pListHeadShort-&gt;m_pNext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 得到第一个公共结点</span></span><br><span class="line">    ListNode* pFisrtCommonNode = pListHeadLong;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pFisrtCommonNode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">GetListLength</span><span class="params">(ListNode* pHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> nLength = <span class="number">0</span>;</span><br><span class="line">    ListNode* pNode = pHead;</span><br><span class="line">    <span class="keyword">while</span>(pNode != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        ++ nLength;</span><br><span class="line">        pNode = pNode-&gt;m_pNext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> nLength;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/剑指offer/" rel="tag"># 剑指offer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/06/剑指offer/03high_quality_code/" rel="next" title="剑指offer">
+                <i class="fa fa-chevron-left"></i> 剑指offer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/06/剑指offer/08additional_interview_questions/" rel="prev" title="剑指offer">
+                剑指offer <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chengr</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#优化时间和空间效率"><span class="nav-number">1.</span> <span class="nav-text">优化时间和空间效率</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题29数组中出现次数超过一半的数字"><span class="nav-number">1.1.</span> <span class="nav-text">面试题29：数组中出现次数超过一半的数字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.1.1.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题30最小的k个数"><span class="nav-number">1.2.</span> <span class="nav-text">面试题30：最小的k个数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.2.1.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题31连续子数组的最大和"><span class="nav-number">1.3.</span> <span class="nav-text">面试题31：连续子数组的最大和</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.3.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题32从1到n整数中1出现的次数"><span class="nav-number">1.4.</span> <span class="nav-text">面试题32：从1到n整数中1出现的次数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.4.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.4.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题33把数组排成最小的数"><span class="nav-number">1.5.</span> <span class="nav-text">面试题33：把数组排成最小的数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.5.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.5.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题34丑数"><span class="nav-number">1.6.</span> <span class="nav-text">面试题34：丑数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.6.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.6.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题35第一个只出现一次的字符"><span class="nav-number">1.7.</span> <span class="nav-text">面试题35：第一个只出现一次的字符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.7.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.7.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题36数组中的逆序对"><span class="nav-number">1.8.</span> <span class="nav-text">面试题36：数组中的逆序对</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.8.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.8.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题37两个链表的第一个公共结点"><span class="nav-number">1.9.</span> <span class="nav-text">面试题37：两个链表的第一个公共结点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.9.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.9.2.</span> <span class="nav-text">解析</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chengr</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="剑指offer,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="英文版新增面试题 面试题51：数组中重复的数字 题目  在一个长度为n的数组里的所有数字都在0到n-1的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。例如，如果输入长度为7的数组 {2,3,1,0,2,5,3}，那么对应的输出是重复的数字2或者3。  解析 这里介绍一个复杂度O(n)的方法，思想和借助哈希表排序类似，但是由于题">
+<meta name="keywords" content="剑指offer">
+<meta property="og:type" content="article">
+<meta property="og:title" content="剑指offer">
+<meta property="og:url" content="http://yoursite.com/2020/07/06/剑指offer/08additional_interview_questions/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="英文版新增面试题 面试题51：数组中重复的数字 题目  在一个长度为n的数组里的所有数字都在0到n-1的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。例如，如果输入长度为7的数组 {2,3,1,0,2,5,3}，那么对应的输出是重复的数字2或者3。  解析 这里介绍一个复杂度O(n)的方法，思想和借助哈希表排序类似，但是由于题">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://github.com/familyld/Coding_Interviews/blob/master/graph/52_ArrayConstruction.jpg?raw=true">
+<meta property="og:image" content="https://github.com/familyld/Coding_Interviews/blob/master/graph/56_EntryNodeInListLoop.jpg?raw=true">
+<meta property="og:updated_time" content="2020-07-06T03:35:25.697Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="剑指offer">
+<meta name="twitter:description" content="英文版新增面试题 面试题51：数组中重复的数字 题目  在一个长度为n的数组里的所有数字都在0到n-1的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。例如，如果输入长度为7的数组 {2,3,1,0,2,5,3}，那么对应的输出是重复的数字2或者3。  解析 这里介绍一个复杂度O(n)的方法，思想和借助哈希表排序类似，但是由于题">
+<meta name="twitter:image" content="https://github.com/familyld/Coding_Interviews/blob/master/graph/52_ArrayConstruction.jpg?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/07/06/剑指offer/08additional_interview_questions/">
+
+
+
+
+
+  <title>剑指offer | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/06/剑指offer/08additional_interview_questions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">剑指offer</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-07-06T11:11:41+08:00">
+                2020-07-06
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-07-06T11:35:25+08:00" content="2020-07-06">
+                2020-07-06
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="英文版新增面试题">英文版新增面试题</h1>
+<h2 id="面试题51数组中重复的数字">面试题51：数组中重复的数字</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>在一个长度为n的数组里的所有数字都在0到n-1的范围内。数组中某些数字是重复的，但不知道有几个数字重复了，也不知道每个数字重复了几次。请找出数组中任意一个重复的数字。例如，如果输入长度为7的数组 <code>{2,3,1,0,2,5,3}</code>，那么对应的输出是重复的数字2或者3。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这里介绍一个复杂度O(n)的方法，思想和借助哈希表排序类似，但是由于题目给了非常棒的前提条件，在<strong>长度为n</strong>的数组里的<strong>所有数字都在0到n-1的范围内</strong>，如果没有重复元素，那么必定每个数字都能被放入自己对应的位置上，我们不需要额外的辅助内容。</p>
+<p>具体来说，我们依次遍历数组，当数字i不在位置i上时，把它交换到位置i上；如果发现位置i上的数等于数字i，就说明找到重复元素了。</p>
+<p>为什么这种方法遍历一次数组必然就能找到重复元素呢？因为如果存在两个重复数字，那么在把前面那一个放到正确位置上后，遍历到后面那一个时会再一次检查到这个位置，此时必然能发现数字的重复。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">duplicate</span><span class="params">(<span class="keyword">int</span> numbers[], <span class="keyword">int</span> length, <span class="keyword">int</span>* duplication)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(numbers == <span class="literal">NULL</span> || length &lt;= <span class="number">0</span>) <span class="comment">// 合法性检验</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; ++i)    <span class="comment">// 合法性检验</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(numbers[i] &lt; <span class="number">0</span> || numbers[i] &gt; length - <span class="number">1</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>(numbers[i] != i) <span class="comment">// 如果数字已经和序号一致就不用处理了</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 如果发现数字和对应位置上的数相等，就说明已经找到重复元素了</span></span><br><span class="line">            <span class="keyword">if</span>(numbers[i] == numbers[numbers[i]])</span><br><span class="line">            &#123;</span><br><span class="line">                *duplication = numbers[i];</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果不相等，就把数字交换到它正确的位置上</span></span><br><span class="line">            <span class="keyword">int</span> temp = numbers[i];</span><br><span class="line">            numbers[i] = numbers[temp];</span><br><span class="line">            numbers[temp] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题52构建乘积数组">面试题52：构建乘积数组</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>给定一个数组 <code>A[0,1,...,n-1]</code>，请构建一个数组 <code>B[0,1,...,n-1]</code>，其中B中的元素 <code>B[i] = A[0] × A[1] × ... × A[i-1] × A[i+1] × ... × A[n-1]</code>。不能使用除法。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>一定要看清楚题目，这题要求数组B的每一个元素B[i]等于数组A除A[i]以外所有元素的积。</p>
+<p>不能用除法，但是我们不妨从另外一个角度去想这个问题。<strong>B[i]根据i的位置可以划分为两部分来求解</strong>，它等于数组A中位置i之前的元素之积 * 数组A中位置i之后的元素之积。可以画出下图这样的矩阵：</p>
+<p><img src="https://github.com/familyld/Coding_Interviews/blob/master/graph/52_ArrayConstruction.jpg?raw=true" alt="matrix"></p>
+<p>矩阵第i行对应着B[i]乘积的各个因子，其中位置i用1来代替。按照上面说的那样，我们可以把B[i]分成两部分，假设B[i] = C[i] * D[i]。那么C就对应着数组A中位置i之前的元素之积，D就对应着数组A中位置i之后的元素之积（1同时算入C和D中）。</p>
+<p>我们可以从上往下计算出C[i]，初始化 <code>C[0] = 1</code>，有通项公式 <code>C[i] = C[i-1] *A[i]</code>;</p>
+<p>我们可以从下往上计算出D[i]，初始化 <code>D[n-1] = 1</code>，有通项公式 <code>D[i] = D[i+1] *A[i+1]</code>;</p>
+<p>写成代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">multiply</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&amp; array1, <span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt;&amp; array2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> length1= array1.size();</span><br><span class="line">    <span class="keyword">int</span> length2 = array2.size();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 只有两数组长度相等，且数组长度大于1才是合法输入</span></span><br><span class="line">    <span class="keyword">if</span>(length1 == length2 &amp;&amp; length2 &gt; <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        array2[<span class="number">0</span>] = <span class="number">1</span>; <span class="comment">// 初始化C[0]</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; length1; ++i)</span><br><span class="line">        &#123;   <span class="comment">// 对应从上往下计算出C[i]</span></span><br><span class="line">            array2[i] = array2[i - <span class="number">1</span>] * array1[i - <span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">double</span> temp = <span class="number">1</span>; <span class="comment">// 初始化D[n-1]</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = length1 - <span class="number">2</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">        &#123;</span><br><span class="line">            temp *= array1[i + <span class="number">1</span>]; <span class="comment">// 对应从下往上计算出D[i]</span></span><br><span class="line">            array2[i] *= temp;     <span class="comment">// 对应B[i] = C[i] * D[i]</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题53正则表达式匹配">面试题53：正则表达式匹配</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>请实现一个函数用来匹配包含 <code>'.'</code> 和 <code>'*'</code> 的正则表达式。模式中的字符 <code>'.'</code> 表示任意一个字符，而 <code>'*'</code> 表示它前面的字符可以出现任意次（含0次）。在本题中，匹配是指字符串的所有字符匹配整个模式。例如字符串 <code>&quot;aaa&quot;</code> 与模式 <code>&quot;a.a&quot;</code> 和 <code>&quot;ab*ac*a&quot;</code> 匹配，但与 <code>&quot;aa.a&quot;</code> 及 <code>&quot;ab*a&quot;</code> 均不匹配。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这题其实还是蛮好分析的，我们用两个指针分别指向字符串和模式，如果两个指针都走到最后，也即同时遇到结束符 <code>'\0</code> 则匹配成功；如果模式用完了，字符串还有未匹配上的部分，就匹配失败；两个指针都未到达最后时，我们需要注意以下 <code>'.'</code> 和 <code>'*'</code> 的处理。<code>'.'</code> 比较简单，因为想匹配什么都可以； <code>'*'</code> 的处理就复杂一点，因为我们有多种选择。每一轮匹配的流程可以概括如下：</p>
+<hr>
+<p>判断模式的下一位字符是否 <code>'*'</code> 号：</p>
+<ul>
+<li>是
+<ul>
+<li>当前字符可以匹配
+<ol>
+<li>模式的当前字符仅匹配一次（也即当*号不存在，字符串指针和模式指针各往后移一步）</li>
+<li>模式的当前字符匹配多次（字符串指针往后移，模式指针不动）</li>
+<li>模式的当前字符匹配零次（同时忽略模式当前字符和*号，字符串指针不动，模式指针后移两步）</li>
+</ol>
+</li>
+<li>当前字符不能匹配
+<ol>
+<li>模式的当前字符匹配零次（同时忽略模式当前字符和*号，字符串指针不动，模式指针后移两步）</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>否
+<ul>
+<li>当前字符可以匹配
+<ol>
+<li>继续下一次匹配（字符串指针和模式指针各往后移一步）</li>
+</ol>
+</li>
+<li>当前字符不能匹配
+<ol>
+<li>返回匹配失败</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>使用递归的方式来实现即可，特别注意一点，虽然 <code>'.'</code> 可以匹配字符串的任意字符，但是结束符 <code>'\0'</code> 是不属于字符串的内容部分的，在写判断条件时必须把这一点加上。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">match</span><span class="params">(<span class="keyword">char</span>* str, <span class="keyword">char</span>* pattern)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(str == <span class="literal">NULL</span> || pattern == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> matchCore(str, pattern);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">matchCore</span><span class="params">(<span class="keyword">char</span>* str, <span class="keyword">char</span>* pattern)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 字符串和模式同时到达尾部，匹配成功</span></span><br><span class="line">    <span class="keyword">if</span>(*str == <span class="string">'\0'</span> &amp;&amp; *pattern == <span class="string">'\0'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模式已经到了最后，字符串还有未匹配的字符，匹配失败</span></span><br><span class="line">    <span class="keyword">if</span>(*str != <span class="string">'\0'</span> &amp;&amp; *pattern == <span class="string">'\0'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模式的下一位是*号</span></span><br><span class="line">    <span class="keyword">if</span>(*(pattern + <span class="number">1</span>) == <span class="string">'*'</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 模式能匹配当前字符，则分三种情况：匹配一个，匹配多个，匹配零个</span></span><br><span class="line">        <span class="keyword">if</span>(*pattern == *str || (*pattern == <span class="string">'.'</span> &amp;&amp; *str != <span class="string">'\0'</span>))</span><br><span class="line">                   <span class="comment">// move on the next state</span></span><br><span class="line">            <span class="keyword">return</span> matchCore(str + <span class="number">1</span>, pattern + <span class="number">2</span>)</span><br><span class="line">                   <span class="comment">// stay on the current state</span></span><br><span class="line">                || matchCore(str + <span class="number">1</span>, pattern)</span><br><span class="line">                   <span class="comment">// ignore a '*'</span></span><br><span class="line">                || matchCore(str, pattern + <span class="number">2</span>);</span><br><span class="line">        <span class="comment">// 模式不能匹配当前字符，忽略*号</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">                   <span class="comment">// ignore a '*'</span></span><br><span class="line">            <span class="keyword">return</span> matchCore(str, pattern + <span class="number">2</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模式的下一位不是*号，但是能匹配当前字符，就继续匹配</span></span><br><span class="line">    <span class="keyword">if</span>(*str == *pattern || (*pattern == <span class="string">'.'</span> &amp;&amp; *str != <span class="string">'\0'</span>))</span><br><span class="line">        <span class="keyword">return</span> matchCore(str + <span class="number">1</span>, pattern + <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 模式的下一位不是*号，而且匹配不了当前字符，直接返回匹配失败</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题54表示数值的字符串">面试题54：表示数值的字符串</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。例如，字符串<code>&quot;+100&quot;</code>、<code>&quot;5e2&quot;</code>、<code>&quot;-123&quot;</code>、<code>&quot;3.1416&quot;</code>及<code>&quot;-1E-16&quot;</code>都表示数值，但<code>&quot;12e&quot;</code>、<code>&quot;1a3.14&quot;</code>、<code>&quot;1.2.3&quot;</code>、<code>&quot;+-5&quot;</code>及<code>&quot;12e+5.4&quot;</code>都不是。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>我们首先弄清楚怎样的字符串才表示数值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[符号位] 整数部分 [.小数部分] [e|E [符号位] 指数部分]</span><br></pre></td></tr></table></figure>
+<p>可以概括如下：</p>
+<ul>
+<li>最前面一位可以是符号位，但不是必需的；</li>
+<li>整数部分是最基础的，但<strong>一些小数可以不需要整数部分</strong>（比如：<code>.5</code>）；</li>
+<li>整数部分后可以接小数点和小数部分，它们不是必需的，但<strong>出现了小数点就必须有小数部分</strong>；</li>
+<li>整数部分后可以接指数符号和指数部分，它们不是必需的，但<strong>出现了指数符号就必须有指数部分</strong>；</li>
+<li>指数部分最前面一位可以是符号位，但不是必需的；</li>
+<li>除了正负号、数字、小数点、大小写指数符号外不能出现其他字符；</li>
+<li>小数点、大小写指数符号最多出现一次，正负号在整数部分和指数部分也各最多出现一次。</li>
+</ul>
+<p>没有什么诀窍，按着这些规则编写代码，仔细检查有没有漏掉的情况就可以了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isNumeric</span><span class="params">(<span class="keyword">char</span>* str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (str == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 存在符号位就先跳过</span></span><br><span class="line">    <span class="keyword">if</span> (*str == <span class="string">'+'</span> || *str == <span class="string">'-'</span>)</span><br><span class="line">        ++str;</span><br><span class="line">    <span class="comment">// 如果只有符号位，则不是数值</span></span><br><span class="line">    <span class="keyword">if</span> (*str == <span class="string">'\0'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> numeric = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">bool</span> hasDigits = scanDigits(&amp;str); <span class="comment">// 跳过整数部分</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (*str != <span class="string">'\0'</span>) <span class="comment">// 如果整数部分后还有字符</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 检测到小数点</span></span><br><span class="line">        <span class="keyword">if</span> (*str == <span class="string">'.'</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            ++str; <span class="comment">// 跳过小数点</span></span><br><span class="line">            <span class="keyword">if</span> (*str == <span class="string">'e'</span> || *str == <span class="string">'E'</span>) <span class="comment">// 小数点后直接接指数部分，非数值</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">if</span> (!hasDigits &amp;&amp; *str == <span class="string">'\0'</span>) <span class="comment">// 没有整数部分也没有小数部分，非数值</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">            scanDigits(&amp;str); <span class="comment">// 跳过小数部分</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// 检测到指数符号</span></span><br><span class="line">            <span class="keyword">if</span> (*str == <span class="string">'e'</span> || *str == <span class="string">'E'</span>)</span><br><span class="line">                numeric = isExponential(&amp;str);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检测到指数符号</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (*str == <span class="string">'e'</span> || *str == <span class="string">'E'</span>)</span><br><span class="line">            numeric = isExponential(&amp;str);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 检测到非法字符</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            numeric = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一直到字符串最后都没有出现非法字符</span></span><br><span class="line">    <span class="comment">// 如果出现了非法字符必然不会扫描到结束符</span></span><br><span class="line">    <span class="keyword">return</span> numeric &amp;&amp; *str == <span class="string">'\0'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">scanDigits</span><span class="params">(<span class="keyword">char</span>** str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span>* pBefore = *str;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 跳过数字部分</span></span><br><span class="line">    <span class="keyword">while</span> (**str != <span class="string">'\0'</span> &amp;&amp; **str &gt;= <span class="string">'0'</span> &amp;&amp; **str &lt;= <span class="string">'9'</span>)</span><br><span class="line">        ++(*str);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 返回是否存在数字部分（如果指针发生了移动就说明存在）</span></span><br><span class="line">    <span class="keyword">return</span> *str &gt; pBefore;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isExponential</span><span class="params">(<span class="keyword">char</span>** str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (**str != <span class="string">'e'</span> &amp;&amp; **str != <span class="string">'E'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    ++(*str); <span class="comment">// 跳过指数符号</span></span><br><span class="line">    <span class="comment">// 如果存在符号位就提哦啊过符号位</span></span><br><span class="line">    <span class="keyword">if</span> (**str == <span class="string">'+'</span> || **str == <span class="string">'-'</span>)</span><br><span class="line">        ++(*str);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 符号位后没有数字，也即没有指数部分，非数值</span></span><br><span class="line">    <span class="keyword">if</span> (**str == <span class="string">'\0'</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 跳过指数部分</span></span><br><span class="line">    scanDigits(str);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 如果指数部分后面还有其它字符则非数值</span></span><br><span class="line">    <span class="keyword">return</span> (**str == <span class="string">'\0'</span>) ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题55字符流中第一个不重复的字符">面试题55：字符流中第一个不重复的字符</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>请实现一个函数用来找出字符流中第一个只出现一次的字符。例如，但从字符流中制度处前两个字符 <code>&quot;go&quot;</code> 时，第一个只出现一次的字符是 <code>'g'</code>。当从该字符流中读出前六个字符 <code>&quot;gooogle&quot;</code> 时，第一个只出现一次的字符是 <code>'l'</code>。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这题其实不难，输入是数据流，所以也可以把它看作是一道大数据的题目，非常有意思。</p>
+<p>这里我们实现一个类，通过维护一个哈希表和索引来实现题目的功能。因为是字符流，而字符只有256种可能，所以我们开一个长度为256的哈希表就可以了，索引则用来记录当前流过的字符在字符流中的位置。</p>
+<p>哈希表的每一个格子对应一个字符的不同状态，比如做以下设定：</p>
+<ol>
+<li>字符未出现过，则哈希值为-1；</li>
+<li>字符出现超过一次，则哈希值为-2；</li>
+<li>字符仅出现了一次，哈希值为它在字符流中的位置（大于0）。</li>
+</ol>
+<p>这样，当我们从字符流中取得一个字符时，我们可以用O(1)时间来检查一下字符的哈希值，哈希值为-2则不再关心，只对索引进行更新（索引加一）；哈希值为-1则把哈希值更新为当前索引，然后索引加一。</p>
+<p>当我们要求第一个只出现一次的字符时，我们同样可以用O(1)时间找到答案（与输入规模，也即字符流的长度无关）。我们只需要遍历一次哈希表，找到只出现一次，且出现位置最前（索引值最小）的那个字符就可以了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CharStatistics</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    CharStatistics() : index (<span class="number">0</span>) <span class="comment">// 构造时index初始化为0</span></span><br><span class="line">    &#123;   <span class="comment">// 哈希表全部初始化为-1，即未出现过</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; ++i)</span><br><span class="line">            occurrence[i] = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(<span class="keyword">char</span> ch)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 未出现过则把哈希表对应的值更新为在字符串中出现的位置</span></span><br><span class="line">        <span class="keyword">if</span>(occurrence[ch] == <span class="number">-1</span>)</span><br><span class="line">            occurrence[ch] = index;</span><br><span class="line">        <span class="comment">// 已经出现过则更新为-2，不再关心</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(occurrence[ch] &gt;= <span class="number">0</span>)</span><br><span class="line">            occurrence[ch] = <span class="number">-2</span>;</span><br><span class="line"></span><br><span class="line">        index++; <span class="comment">// 没插入一个字符，索引加一</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">char</span> <span class="title">FirstAppearingOnce</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">char</span> ch = <span class="string">'\0'</span>; <span class="comment">// 初始化为终止符</span></span><br><span class="line">        <span class="comment">// 把最小索引初始化为int型能表示的最大整数</span></span><br><span class="line">        <span class="keyword">int</span> minIndex = numeric_limits&lt;<span class="keyword">int</span>&gt;::max();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">256</span>; ++i) <span class="comment">// 遍历一次整个哈希表</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 每次找到一个只出现一次的数并且在字符串中位置比最小索引前</span></span><br><span class="line">            <span class="comment">// 就更新字符和最小索引</span></span><br><span class="line">            <span class="keyword">if</span>(occurrence[i] &gt;= <span class="number">0</span> &amp;&amp; occurrence[i] &lt; minIndex)</span><br><span class="line">            &#123;</span><br><span class="line">                ch = (<span class="keyword">char</span>)i; <span class="comment">// 从ASCII码值转换回字符</span></span><br><span class="line">                minIndex = occurrence[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ch;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// occurrence[i]: A character with ASCII value i;</span></span><br><span class="line">    <span class="comment">// occurrence[i] = -1: The character has not found;</span></span><br><span class="line">    <span class="comment">// occurrence[i] = -2: The character has been found for mutlple times</span></span><br><span class="line">    <span class="comment">// occurrence[i] &gt;= 0: The character has been found only once</span></span><br><span class="line">    <span class="keyword">int</span> occurrence[<span class="number">256</span>]; <span class="comment">// 哈希表</span></span><br><span class="line">    <span class="keyword">int</span> index;           <span class="comment">// 索引，当前处于字符串的位置，或者说目前字符流的长度</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题56链表中环的入口结点">面试题56：链表中环的入口结点</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>一个链表中包含环，如何找出环的入口结点？例如，在图8.3的链表中，环的入口结点是结点3。</p>
+</blockquote>
+<p><img src="https://github.com/familyld/Coding_Interviews/blob/master/graph/56_EntryNodeInListLoop.jpg?raw=true" alt="ring"></p>
+<h3 id="解析">解析</h3>
+<p>这题可以分为三个步骤来完成：</p>
+<ol>
+<li>判断链表中有没有环</li>
+<li>计算环的结点数</li>
+<li>找到环的入口结点</li>
+</ol>
+<p>先分析第一步，判断链表中有没有环，可以用一快一慢两个指针来实现。为什么可以这样做不妨看看知乎上的一个问题：<a href="https://www.zhihu.com/question/23208893" target="_blank" rel="noopener">为什么用快慢指针找链表的环，快指针和慢指针一定会相遇？</a>，还是挺有意思的。如果链表中存在环，那么快指针必然会从后追上慢指针，发生相遇；如果链表中没有环，那么快指针就会走到尾结点。</p>
+<p>接下来，如果存在环，我们就计算一下环中结点的数目。怎么办到呢？其实很简单，我们同样使用两个指针，一个指针固定不动在第一步快慢指针相遇的地方，另一个指针一边往前移动一边计数，那么当这两个指针再次相遇时，所得的计数就是环中结点的数目了。</p>
+<p>最后，怎么找到环的入口结点呢？其实可能有人还没想明白第二步的作用，可以回忆一下<a href="https://github.com/familyld/Coding_Interviews/blob/master/C%2B%2B/15_KthNodeFromEnd/README.md" target="_blank" rel="noopener">面试题15：链表中的倒数第k个结点</a>。其实我们统计环中结点的数目就是为第三步服务的！要找到环的入口结点，实际上和这一题有异曲同工之妙。</p>
+<p>假设我们把环的入口结点看作环的第一个结点（例子中的3），那么环的最后一个结点（例子中的6）就是环中连接到入口结点的那个结点，我们可以把它看作链表的最后一个结点。这时如果我们把环拿掉，其实这道题就变得跟面试题15一模一样了。</p>
+<p>假设环中结点数为k，那么我们现在要找的就是整个链表的倒数第k个结点。同样使用两个指针，第一个指针先走k步，然后第二个指针再走，此时两个指针之间隔着k-1个结点。当第一个指针和第二个指针相遇时，它们指向的结点就是环的入口结点了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ListNode* <span class="title">MeetingNode</span><span class="params">(ListNode* pHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pHead == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    ListNode* pSlow = pHead-&gt;m_pNext;</span><br><span class="line">    <span class="keyword">if</span>(pSlow == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    ListNode* pFast = pSlow-&gt;m_pNext;</span><br><span class="line">    <span class="keyword">while</span>(pFast != <span class="literal">NULL</span> &amp;&amp; pSlow != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(pFast == pSlow) <span class="comment">// 返回相遇的结点</span></span><br><span class="line">            <span class="keyword">return</span> pFast;</span><br><span class="line"></span><br><span class="line">        pSlow = pSlow-&gt;m_pNext; <span class="comment">// 慢指针走一步</span></span><br><span class="line"></span><br><span class="line">        pFast = pFast-&gt;m_pNext; <span class="comment">// 快指针走两步</span></span><br><span class="line">        <span class="keyword">if</span>(pFast != <span class="literal">NULL</span>)       <span class="comment">// 注意判断第二步是否能走</span></span><br><span class="line">            pFast = pFast-&gt;m_pNext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 不存在环，返回NULL</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ListNode* <span class="title">EntryNodeOfLoop</span><span class="params">(ListNode* pHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ListNode* meetingNode = MeetingNode(pHead);</span><br><span class="line">    <span class="keyword">if</span>(meetingNode == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取环中结点的数目</span></span><br><span class="line">    <span class="keyword">int</span> nodesInLoop = <span class="number">1</span>;</span><br><span class="line">    ListNode* pNode1 = meetingNode;</span><br><span class="line">    <span class="keyword">while</span>(pNode1-&gt;m_pNext != meetingNode)</span><br><span class="line">    &#123;</span><br><span class="line">        pNode1 = pNode1-&gt;m_pNext;</span><br><span class="line">        ++nodesInLoop;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 让指针1先走nodesInLoop步</span></span><br><span class="line">    pNode1 = pHead;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nodesInLoop; ++i)</span><br><span class="line">        pNode1 = pNode1-&gt;m_pNext;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 指针1、2同时移动</span></span><br><span class="line">    ListNode* pNode2 = pHead;</span><br><span class="line">    <span class="keyword">while</span>(pNode1 != pNode2) <span class="comment">// 相遇时停止</span></span><br><span class="line">    &#123;</span><br><span class="line">        pNode1 = pNode1-&gt;m_pNext;</span><br><span class="line">        pNode2 = pNode2-&gt;m_pNext;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pNode1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题57删除链表中重复的结点">面试题57：删除链表中重复的结点</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>在一个排序的链表中，如何删除重复的结点？例如：</p>
+</blockquote>
+<p>删除前：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 -&gt; 2 -&gt; 3 -&gt; 3 -&gt; 4 -&gt; 4 -&gt; 5</span><br></pre></td></tr></table></figure>
+<p>删除后：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1 -&gt; 2 -&gt; 5</span><br></pre></td></tr></table></figure>
+<h3 id="解析">解析</h3>
+<p>这题我们需要注意的就是删除重复结点前，需要记住前面的那一个非重复结点，保证删除完毕后，前一个个非重复结点依然能连接到下一个非重复结点，链表不会发生锻炼。</p>
+<p>另一个需要注意的点就是，头结点是有可能被删除的，所以调用函数时要按引用传递头结点指针，否则无法进行修改和删除。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteDuplication</span><span class="params">(ListNode** pHead)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pHead == <span class="literal">NULL</span> || *pHead == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    ListNode* pPreNode = <span class="literal">NULL</span>; <span class="comment">// 前一结点初始为NULL，因为头结点没有前一结点</span></span><br><span class="line">    ListNode* pNode = *pHead;</span><br><span class="line">    <span class="keyword">while</span>(pNode != <span class="literal">NULL</span>) <span class="comment">// 遍历链表直到到达尾部</span></span><br><span class="line">    &#123;</span><br><span class="line">        ListNode *pNext = pNode-&gt;m_pNext; <span class="comment">// 取得下一结点</span></span><br><span class="line">        <span class="keyword">bool</span> needDelete = <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">// 如果下一结点和当前结点值相同，就说明需要删除</span></span><br><span class="line">        <span class="keyword">if</span>(pNext != <span class="literal">NULL</span> &amp;&amp; pNext-&gt;m_nValue == pNode-&gt;m_nValue)</span><br><span class="line">            needDelete = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 不用删除的话就继续遍历下一结点</span></span><br><span class="line">        <span class="comment">// 把前一结点更新为当前结点</span></span><br><span class="line">        <span class="keyword">if</span>(!needDelete)</span><br><span class="line">        &#123;</span><br><span class="line">            pPreNode = pNode;</span><br><span class="line">            pNode = pNode-&gt;m_pNext;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 删除结点</span></span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 从当前结点开始删除值相同的结点</span></span><br><span class="line">            <span class="keyword">int</span> value = pNode-&gt;m_nValue;</span><br><span class="line">            ListNode* pToBeDel = pNode;</span><br><span class="line">            <span class="keyword">while</span>(pToBeDel != <span class="literal">NULL</span> &amp;&amp; pToBeDel-&gt;m_nValue == value)</span><br><span class="line">            &#123;</span><br><span class="line">                pNext = pToBeDel-&gt;m_pNext;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">delete</span> pToBeDel;</span><br><span class="line">                pToBeDel = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">                pToBeDel = pNext;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 如果发现是头结点被删除了，则把头结点改为（删除完重复结点后的）下一结点</span></span><br><span class="line">            <span class="keyword">if</span>(pPreNode == <span class="literal">NULL</span>)</span><br><span class="line">                *pHead = pNext;</span><br><span class="line">            <span class="comment">// 否则就把前一结点的next指针指向（删除完重复结点后的）下一结点</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                pPreNode-&gt;m_pNext = pNext;</span><br><span class="line"></span><br><span class="line">            pNode = pNext; <span class="comment">// 继续遍历下一结点，前一结点不需移动</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题58二叉树的下一个结点">面试题58：二叉树的下一个结点</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>给定一棵二叉树和其中的一个结点，如何找出中序遍历顺序的下一个结点？树中的结点除了有两个分别指向左右子结点的指针以外，还有一个指向父结点的指针。</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">BinaryTreeNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span>                    m_nValue;</span><br><span class="line">    BinaryTreeNode*        m_pLeft;</span><br><span class="line">    BinaryTreeNode*        m_pRight;</span><br><span class="line">    BinaryTreeNode*        m_pParent;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="解析">解析</h3>
+<p>所谓中序遍历，也即对于每个结点来说，首先访问左子树，然后再访问自身，最后访问右子树。在写代码时我们考虑一下三种情况：</p>
+<ol>
+<li>结点有右子树：下一结点为右子树的最左子结点</li>
+<li>结点无右子树：
+<ul>
+<li>该结点是父结点的左子结点：下一结点为父结点</li>
+<li>该结点是父结点的右子结点：需要一直往上搜索，直到找到一个结点是其父结点的左子结点，则其父结点就是下一结点。若不存在则说明遍历结束。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BinaryTreeNode* <span class="title">GetNext</span><span class="params">(BinaryTreeNode* pNode)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pNode == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    BinaryTreeNode* pNext = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span>(pNode-&gt;m_pRight != <span class="literal">NULL</span>)</span><br><span class="line">    &#123; <span class="comment">// 有右子树则下一结点为右子树的最左子结点</span></span><br><span class="line">        BinaryTreeNode* pRight = pNode-&gt;m_pRight;</span><br><span class="line">        <span class="keyword">while</span>(pRight-&gt;m_pLeft != <span class="literal">NULL</span>)</span><br><span class="line">            pRight = pRight-&gt;m_pLeft;</span><br><span class="line"></span><br><span class="line">        pNext = pRight;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(pNode-&gt;m_pParent != <span class="literal">NULL</span>)</span><br><span class="line">    &#123; <span class="comment">// 没有右子树但是有父结点就说明仍然可以找到下一结点</span></span><br><span class="line">        BinaryTreeNode* pCurrent = pNode;</span><br><span class="line">        BinaryTreeNode* pParent = pNode-&gt;m_pParent;</span><br><span class="line">        <span class="keyword">while</span>(pParent != <span class="literal">NULL</span> &amp;&amp; pCurrent == pParent-&gt;m_pRight)</span><br><span class="line">        &#123; <span class="comment">// 往上找直到找到一个结点属于父结点的左子树，则下一结点为父结点</span></span><br><span class="line">            pCurrent = pParent;</span><br><span class="line">            pParent = pParent-&gt;m_pParent;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        pNext = pParent;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> pNext;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题59对称的二叉树">面试题59：对称的二叉树</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。例如：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     8</span><br><span class="line">   /   \</span><br><span class="line">  6     6</span><br><span class="line"> / \   / \</span><br><span class="line">5   7 7   5</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>是一棵对称二叉树。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>前序遍历、中序遍历、后序遍历都是先访问左子结点再访问右子结点，而如果我们想要判断一棵树是否对称二叉树，我们可以创造一种遍历方式是先访问右子结点再访问左子结点的。如果使用两种对应遍历方式所得的遍历序列都相同，就说明这棵树是对称二叉树。</p>
+<p>书中以前序遍历为例编写代码，但实际上中序遍历和后序遍历也是可以的~</p>
+<p>特别注意，一种特殊情况如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     <span class="number">7</span></span><br><span class="line">   /   \</span><br><span class="line">  <span class="number">7</span>     <span class="number">7</span></span><br><span class="line"> / \   /</span><br><span class="line"><span class="number">7</span>   <span class="number">7</span> <span class="number">7</span></span><br></pre></td></tr></table></figure>
+<p>这种情况如果我们只是按上面的方式来比较是无法正确判断出的，怎么应对呢？我们只需要把NULL也考虑进来就可以了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSymmetrical</span><span class="params">(BinaryTreeNode* pRoot)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> isSymmetrical(pRoot, pRoot);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isSymmetrical</span><span class="params">(BinaryTreeNode* pRoot1, BinaryTreeNode* pRoot2)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 同为NULL，则仍然认为是一样的，并且因为到达底部而返回</span></span><br><span class="line">    <span class="keyword">if</span>(pRoot1 == <span class="literal">NULL</span> &amp;&amp; pRoot2 == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一方为NULL，而另一方不是，说明不对称，返回false</span></span><br><span class="line">    <span class="keyword">if</span>(pRoot1 == <span class="literal">NULL</span> || pRoot2 == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 结点值不同，说明不对称，返回false</span></span><br><span class="line">    <span class="keyword">if</span>(pRoot1-&gt;m_nValue != pRoot2-&gt;m_nValue)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 结点值相同，继续进行比较，树1先访问左结点再访问右结点，树2则相反</span></span><br><span class="line">    <span class="keyword">return</span> isSymmetrical(pRoot1-&gt;m_pLeft, pRoot2-&gt;m_pRight)</span><br><span class="line">        &amp;&amp; isSymmetrical(pRoot1-&gt;m_pRight, pRoot2-&gt;m_pLeft);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题60把二叉树打印成多行">面试题60：把二叉树打印成多行</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>从上到下按层打印二叉树，同一层的结点按从左到右的顺序打印，每一层打印到一行。例如，打印下面的二叉树：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     8</span><br><span class="line">   /   \</span><br><span class="line">  6     10</span><br><span class="line"> / \   /  \</span><br><span class="line">5   7 9    11</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>结果是：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">6   10</span><br><span class="line">5   7   9   11</span><br></pre></td></tr></table></figure>
+<h3 id="解析">解析</h3>
+<p>这题思路很简单，就是考查BFS的，逐层遍历一棵树只需要用队列模拟就可以了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">(BinaryTreeNode* pRoot)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pRoot == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">queue</span>&lt;BinaryTreeNode*&gt; nodes;</span><br><span class="line">    nodes.push(pRoot);</span><br><span class="line">    <span class="keyword">int</span> nextLevel = <span class="number">0</span>;   <span class="comment">// 下一层需要打印的结点数</span></span><br><span class="line">    <span class="keyword">int</span> toBePrinted = <span class="number">1</span>; <span class="comment">// 当前层需要打印的结点数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!nodes.empty()) <span class="comment">// 整棵树打印完毕时停止</span></span><br><span class="line">    &#123;</span><br><span class="line">        BinaryTreeNode* pNode = nodes.front();</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, pNode-&gt;m_nValue);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(pNode-&gt;m_pLeft != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            nodes.push(pNode-&gt;m_pLeft);</span><br><span class="line">            ++nextLevel;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(pNode-&gt;m_pRight != <span class="literal">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            nodes.push(pNode-&gt;m_pRight);</span><br><span class="line">            ++nextLevel;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 首结点出队，当前层需要打印的结点数减一</span></span><br><span class="line">        nodes.pop();</span><br><span class="line">        --toBePrinted;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 若当前层打印完毕，则进行换行，开始打印下一层</span></span><br><span class="line">        <span class="keyword">if</span>(toBePrinted == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">            toBePrinted = nextLevel;</span><br><span class="line">            nextLevel = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题61按之字形顺序打印二叉树">面试题61：按之字形顺序打印二叉树</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三层再按照从左到右的顺序打印，其他行以此类推。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这题和上一题比难度就上升了，显然这不是一个简单的BFS，我们要使用什么容器和往容器中存放结点的顺序都需要认真去考虑。</p>
+<p>这里使用两个栈再加上一点小trick来实现，注意栈的特性的先进后出，后进先出。</p>
+<p>我们注意当奇数层是顺着打印，偶数层是倒着打印。所以！<strong>奇数层应该倒着入栈，偶数层则顺着入栈</strong>。</p>
+<p>明白这一点之后就好办了，我们使用两个栈来存放，一个栈用来存放当前打印的那一层，另一个栈用来存放下一层的结点值。如果只使用一个栈是不行的，当层数更高时会发生顺序的错乱。使用两个栈时我们只需要判断一下当前栈是否为空就知道这一层是否打印完毕要转换到另一个栈了。</p>
+<p>具体来说，举个例子，比如下面这棵树：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">         1</span><br><span class="line">      /      \</span><br><span class="line">    2          3</span><br><span class="line">  /  \       /   \</span><br><span class="line"> 4    5     6     7</span><br><span class="line">/ \  / \   / \   / \</span><br><span class="line">8 9 10 11 12 13 14 15</span><br></pre></td></tr></table></figure>
+<p>| 步骤 | 操作 | Stack1中的结点 | Stack2中的结点 |<br>
+|: - :|: - :|: - :|: - :|<br>
+| 1 | 打印结点1 | 2,3 |  |<br>
+| 2 | 打印结点3 | 2 | 7,6 |<br>
+| 3 | 打印结点2 |  | 7,6,5,4 |<br>
+| 4 | 打印结点4 | 8,9 | 7,6,5 |<br>
+| 5 | 打印结点5 | 8,9,10,11 | 7,6 |<br>
+| 6 | 打印结点6 | 8,9,10,11,12,13 | 7 |<br>
+| 7 | 打印结点6 | 8,9,10,11,12,13,14,15 |  |</p>
+<p>对于奇数层的结点而言，下一层要逆着打，所以先存左子结点，再存右子结点，这样下一层就会先打印右子结点再打印左子结点；</p>
+<p>对于偶数层的结点而言，下一层要顺着打，所以先存右子结点，再存左子结点，这样下一层就会先打印左子结点再打印右子结点；</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Print</span><span class="params">(BinaryTreeNode* pRoot)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pRoot == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用两个栈，0号栈存的必然是奇数层结点，1号栈存的必然是偶数层结点</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">stack</span>&lt;BinaryTreeNode*&gt; levels[<span class="number">2</span>];</span><br><span class="line">    <span class="keyword">int</span> current = <span class="number">0</span>; <span class="comment">// 指示存放当前层结点值的栈</span></span><br><span class="line">    <span class="keyword">int</span> next = <span class="number">1</span>;    <span class="comment">// 指示存放下一层结点值的栈</span></span><br><span class="line"></span><br><span class="line">    levels[current].push(pRoot);</span><br><span class="line">    <span class="comment">// 两个栈都为空时，说明整棵树已经打印完毕</span></span><br><span class="line">    <span class="keyword">while</span>(!levels[<span class="number">0</span>].empty() || !levels[<span class="number">1</span>].empty())</span><br><span class="line">    &#123;</span><br><span class="line">        BinaryTreeNode* pNode = levels[current].top();</span><br><span class="line">        levels[current].pop();</span><br><span class="line"></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, pNode-&gt;m_nValue);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(current == <span class="number">0</span>)</span><br><span class="line">        &#123; <span class="comment">// 当前打印的是0号栈，则下一层为偶数层，先存左子结点，再存右子结点</span></span><br><span class="line">            <span class="keyword">if</span>(pNode-&gt;m_pLeft != <span class="literal">NULL</span>)</span><br><span class="line">                levels[next].push(pNode-&gt;m_pLeft);</span><br><span class="line">            <span class="keyword">if</span>(pNode-&gt;m_pRight != <span class="literal">NULL</span>)</span><br><span class="line">                levels[next].push(pNode-&gt;m_pRight);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123; <span class="comment">// 当前打印的是1号栈，则下一层为奇数层，先存右子结点，再存左子结点</span></span><br><span class="line">            <span class="keyword">if</span>(pNode-&gt;m_pRight != <span class="literal">NULL</span>)</span><br><span class="line">                levels[next].push(pNode-&gt;m_pRight);</span><br><span class="line">            <span class="keyword">if</span>(pNode-&gt;m_pLeft != <span class="literal">NULL</span>)</span><br><span class="line">                levels[next].push(pNode-&gt;m_pLeft);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 当前层打印完毕，打印下一层</span></span><br><span class="line">        <span class="keyword">if</span>(levels[current].empty())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">            current = <span class="number">1</span> - current;</span><br><span class="line">            next = <span class="number">1</span> - next;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题62序列化二叉树">面试题62：序列化二叉树</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>请实现两个函数，分别用来序列化和反序列化二叉树。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>首先要理解一下什么是序列化，什么是反序列化？</p>
+<p>其实，我们谈论到的很多数据结构比方说树，甚至一些更复杂的自定定义的对象，是没法直接保存或传输的，只有程序运行时可以用。当我们需要保存到硬盘或者进行传输时就必须进行序列化，然后要放入程序时就要重新反序列化解析出来。可以如下定义：</p>
+<ul>
+<li>序列化： 将数据结构或对象转换成二进制串的过程。</li>
+<li>反序列化：将在序列化过程中所生成的二进制串转换成数据结构或者对象的过程。</li>
+</ul>
+<p>不过这题我们在程序中只需要把二叉树转换为字符串就可以了。</p>
+<p>前面有一道题是通过前序遍历序列和中序遍历序列构造出一棵二叉树的，这里其实也可以用这样的思路，把二叉树序列化成前序遍历序列和中序遍历序列这两个序列来存储，然后反序列化时按这两个序列重新构造二叉树就可以了。但这种思路有两个很大的缺点就是：（1）不能有数值重复的结点；（2）要整个序列读出来才可以进行反序列化。</p>
+<p>事实上不用这么复杂，我们只需要选择一种遍历方式就可以了，关键是用一个特殊的符号来表示NULL，这样在反序列化时我们就可以知道什么时候到达底部了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Serialize</span><span class="params">(BinaryTreeNode* pRoot, ostream&amp; stream)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pRoot == <span class="literal">NULL</span>) <span class="comment">// 使用$标识NULL</span></span><br><span class="line">    &#123;</span><br><span class="line">        stream &lt;&lt; <span class="string">"$,"</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 前序遍历</span></span><br><span class="line">    stream &lt;&lt; pRoot-&gt;m_nValue &lt;&lt; <span class="string">','</span>; <span class="comment">// 序列化当前结点，以逗号为分隔</span></span><br><span class="line">    Serialize(pRoot-&gt;m_pLeft, stream);</span><br><span class="line">    Serialize(pRoot-&gt;m_pRight, stream);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从输入流中每次读出一个结点的值</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">ReadStream</span><span class="params">(istream&amp; stream, <span class="keyword">int</span>* number)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(stream.eof())</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> buffer[<span class="number">32</span>];</span><br><span class="line">    buffer[<span class="number">0</span>] = <span class="string">'\0'</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> ch;</span><br><span class="line">    stream &gt;&gt; ch;</span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!stream.eof() &amp;&amp; ch != <span class="string">','</span>)</span><br><span class="line">    &#123; <span class="comment">// 遇到EOF表示序列已读完，而遇到逗号则说明这个结点的值读完了</span></span><br><span class="line">        buffer[i++] = ch;</span><br><span class="line">        stream &gt;&gt; ch;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判断读出的是否数字，并进行相应的转换</span></span><br><span class="line">    <span class="keyword">bool</span> isNumeric = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; buffer[<span class="number">0</span>] != <span class="string">'$'</span>)</span><br><span class="line">    &#123; <span class="comment">// i大于0说明上一步有读出过内容，读出内容不为$即结点是数值，进行转换</span></span><br><span class="line">        *number = atoi(buffer);</span><br><span class="line">        isNumeric = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> isNumeric;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Deserialize</span><span class="params">(BinaryTreeNode** pRoot, istream&amp; stream)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> number;</span><br><span class="line">    <span class="keyword">if</span>(ReadStream(stream, &amp;number))</span><br><span class="line">    &#123; <span class="comment">// 如果读出数字就构造结点，否则表示已到达底部，递归返回</span></span><br><span class="line">        *pRoot = <span class="keyword">new</span> BinaryTreeNode();</span><br><span class="line">        (*pRoot)-&gt;m_nValue = number;</span><br><span class="line">        (*pRoot)-&gt;m_pLeft = <span class="literal">NULL</span>;</span><br><span class="line">        (*pRoot)-&gt;m_pRight = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">        Deserialize(&amp;((*pRoot)-&gt;m_pLeft), stream);</span><br><span class="line">        Deserialize(&amp;((*pRoot)-&gt;m_pRight), stream);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这题特别注意一下传参的方式，一些参数是需要使用指针传递/引用传递的（修改实参而非形参的值），否则会无法正确修改它在内存中的值，从而导致错误。不妨看看这篇文章：<a href="http://www.cnblogs.com/Romi/archive/2012/08/09/2630014.html" target="_blank" rel="noopener">C/C++中函数参数传递详解</a>。参数中带<code>&amp;</code>表示按引用传递。</p>
+<h2 id="面试题63二叉树搜索树的第k个结点">面试题63：二叉树搜索树的第k个结点</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>给定一棵二叉搜索树，请找出其中的第k大的结点。例如：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">     5</span><br><span class="line">   /   \</span><br><span class="line">  3     7</span><br><span class="line"> / \   / \</span><br><span class="line">2   4 6   8</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这棵二叉搜索树里，按结点数值大小顺序第三个结点是4。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这题思路很简单，对于一棵BST搜索第k大的结点，只需要用前序遍历来检索就可以了，前序遍历访问到的第k个结点就是题目所求。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BinaryTreeNode* <span class="title">KthNode</span><span class="params">(BinaryTreeNode* pRoot, <span class="keyword">unsigned</span> <span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(pRoot == <span class="literal">NULL</span> || k == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> KthNodeCore(pRoot, k);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">BinaryTreeNode* <span class="title">KthNodeCore</span><span class="params">(BinaryTreeNode* pRoot, <span class="keyword">unsigned</span> <span class="keyword">int</span>&amp; k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    BinaryTreeNode* target = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(pRoot-&gt;m_pLeft != <span class="literal">NULL</span>) <span class="comment">// 先访问左子结点</span></span><br><span class="line">        target = KthNodeCore(pRoot-&gt;m_pLeft, k);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(target == <span class="literal">NULL</span>) <span class="comment">// 然后访问当前结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(k == <span class="number">1</span>) <span class="comment">// 若此时k已为1，则当前结点为所求</span></span><br><span class="line">            target = pRoot;</span><br><span class="line"></span><br><span class="line">        k--;       <span class="comment">// 每次访问完后k值减一</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(target == <span class="literal">NULL</span> &amp;&amp; pRoot-&gt;m_pRight != <span class="literal">NULL</span>) <span class="comment">// 若当前结点不是，继续访问右子结点</span></span><br><span class="line">        target = KthNodeCore(pRoot-&gt;m_pRight, k);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> target;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题64数据流中的中位数">面试题64：数据流中的中位数</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>如何得到一个数据流中的中位数？如果从数据流中读出奇数个数值，那么中位数就是所有数值排序之后位于中间的数值。如果从数据流中读出偶数个数值，那么中位数就是所有数值排序之后中间两个数的平均值。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这条题目其实和第5章的 面试题30：最小的k个数 有一点联系，面试题30通过维持一个大小为k的最大堆来实现从数据流中确定最小k个数的功能。而这一题要求得到数据流的中位数，这要更难一些。一是我们没有办法确定堆的大小；二是有可能从数据流中读出了偶数个数值，此时需要所有数值排序之后中间两个数的平均值。</p>
+<p>无法确定堆的大小，其实更准确一点来说，假设我们要找出从数据流中读取k个数时的中位数，我们必须把前面的k-1个数都保存下来因为我们并不知道k的取值，任意一个数字都可能会是取某个k值时的中位数，不能丢掉。</p>
+<p>而为了更有效地插入新数字（O(log n)复杂度）和查询中位数（O(1)复杂度），我们可以同时维护两个堆，一个最大堆，一个最小堆，以中位数划分，最大堆保存排序后数组的前半部分，最小堆则保存后半部分。我们要注意保持数据平均地分到这两个堆中，也即堆的大小相差不超过1。当从数据流中读取了奇数个数值时，取最小堆的顶部为中位数；当从数据流中读取了偶数个数值时，取最大堆顶部和最小堆顶部两个数值的平均值为中位数。</p>
+<p>为了保证正确取得中位数我们要保证最大堆里的数都比最小堆里的小，这就对插入操作有所要求。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="class"><span class="keyword">class</span> <span class="title">DynamicArray</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Insert</span><span class="params">(T num)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(((min.size() + max.size()) &amp; <span class="number">1</span>) == <span class="number">0</span>)</span><br><span class="line">        &#123; <span class="comment">// 此时从数据流中读取了奇数个数值</span></span><br><span class="line">            <span class="keyword">if</span>(max.size() &gt; <span class="number">0</span> &amp;&amp; num &lt; max[<span class="number">0</span>])</span><br><span class="line">            &#123; <span class="comment">// 保证要加入最小堆的数字比最大堆的所有数字都更大</span></span><br><span class="line">                max.push_back(num);</span><br><span class="line">                push_heap(max.begin(), max.end(), less&lt;T&gt;());</span><br><span class="line"></span><br><span class="line">                num = max[<span class="number">0</span>]; <span class="comment">// 如果新数字没有堆顶大，就会交换两者的值</span></span><br><span class="line"></span><br><span class="line">                pop_heap(max.begin(), max.end(), less&lt;T&gt;());</span><br><span class="line">                max.pop_back();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 把新数字加入最小堆</span></span><br><span class="line">            min.push_back(num);</span><br><span class="line">            push_heap(min.begin(), min.end(), greater&lt;T&gt;());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123; <span class="comment">// 此时从数据流中读取了偶数个数值</span></span><br><span class="line">            <span class="keyword">if</span>(min.size() &gt; <span class="number">0</span> &amp;&amp; min[<span class="number">0</span>] &lt; num)</span><br><span class="line">            &#123;</span><br><span class="line">                min.push_back(num);</span><br><span class="line">                push_heap(min.begin(), min.end(), greater&lt;T&gt;());</span><br><span class="line"></span><br><span class="line">                num = min[<span class="number">0</span>]; <span class="comment">// 如果新数字没有堆顶小，就会交换两者的值</span></span><br><span class="line"></span><br><span class="line">                pop_heap(min.begin(), min.end(), greater&lt;T&gt;());</span><br><span class="line">                min.pop_back();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 把新数字加入最大堆</span></span><br><span class="line">            max.push_back(num);</span><br><span class="line">            push_heap(max.begin(), max.end(), less&lt;T&gt;());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">T <span class="title">GetMedian</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> size = min.size() + max.size();</span><br><span class="line">        <span class="keyword">if</span>(size == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> exception(); <span class="comment">//"No numbers are available"</span></span><br><span class="line"></span><br><span class="line">        T median = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span>((size &amp; <span class="number">1</span>) == <span class="number">1</span>)</span><br><span class="line">            median = min[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            median = (min[<span class="number">0</span>] + max[<span class="number">0</span>]) / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> median;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="built_in">vector</span>&lt;T&gt; min;</span><br><span class="line">    <span class="built_in">vector</span>&lt;T&gt; max;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>注意这里实现堆结构的方式和第30题不同，这里使用STL的 <code>push_heap</code>，<code>pop_heap</code> 函数以及vector来实现堆，并且以比较仿函数less和greater来实现最大堆和最小堆。</p>
+<h2 id="面试题65滑动窗口的最大值">面试题65：滑动窗口的最大值</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>给定一个数组和滑动窗口的大小，请找出所有滑动窗口里的最大值。例如，如果输入数组 <code>{2,3,4,2,6,2,5,1}</code> 及滑动窗口的大小3，那么一共存在6个滑动窗口，它们的最大值分别为 <code>{4,4,6,6,6,5}</code>。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这题其实也挺有意思的，稍微修改一下题目就可以用来考查数据流、大数据处理这样的问题了。这题的关键其实是要我们明白哪些数字有可能成为滑动窗口里的最大值（应当保存），哪些数字则不会（应当舍弃）。简单来说，有以下几个问题需要考虑：</p>
+<ol>
+<li>使用什么数据结构进行存储？（方便删除，插入和比较）</li>
+<li>一个在当前滑动窗口非最大值的数字是否仍有可能成为另一个滑动窗口的最大值？</li>
+<li>新加入滑动窗口的数字可能对已存储的数字带来什么影响？</li>
+<li>怎样确定数字超出了滑动窗口的范围？</li>
+</ol>
+<p>针对问题1，我们可以使用一个两端开口的队列（deque）来存储那些滑动窗口内可能的最大值，前后都可以pop，并且可以使用 <code>front()</code> 函数和 <code>back()</code> 函数容易地取得队首和队尾，非常方便。注意，这个队列存储的是<strong>可能的最大值</strong>，也可以理解为它是一个中转站。我们还需要用另一个数据结构来存储<strong>真正的每个滑动窗口的最大值</strong>，这个数据结构要求就没有那么高，用vector就可以了。</p>
+<p>针对问题2，当前滑动窗口非最大值的数字是有可能成为另一个滑动窗口的最大值的。举个例子，序列 <code>{6,5,4}</code>，窗口大小为2，那么第一个滑动窗口 <code>{6,5}</code> 里面最大值是6，但5也应当被存储下来，因为在下一个滑动窗口 <code>{5,4}</code> 中5就是最大值。</p>
+<p>针对问题3，可以分两种情况讨论，一是窗口内存在比新数字小的数；二是窗口内存在的数都比新数字大。在情况一中，那些比新数字小的数我们可以都pop掉，因为它们比新数字小所以肯定不可能是当前窗口的最大值了，而往后滑动时，它们存在于窗口时新数字也一定在，所以依然不可能成为窗口内的最大值，因此可以把它们都扔掉；但在情况二中，尽管新数字比当前窗口内的数字都小，在窗口往后滑动时，新数字依然有可能成为窗口内的最大值，比方说上一段举出的例子，因此这种情况下依然要把新数字入队。考虑好这两种情况就能<strong>保证队列的队首永远是当前窗口的最大值</strong>。</p>
+<p>针对问题4，我们在队列中存储时可以不要存数值，而是存储它在数组中的索引。这样当往后移动窗口，加入新数字时，我们只需要把队列中索引值小于 新数字索引-窗口大小 的索引值出队就可以了。</p>
+<p>想清楚以上四个问题后，不难写出以下代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; maxInWindows(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; num, <span class="keyword">unsigned</span> <span class="keyword">int</span> size)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; maxInWindows;</span><br><span class="line">    <span class="keyword">if</span>(num.size() &gt;= size &amp;&amp; size &gt;= <span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">deque</span>&lt;<span class="keyword">int</span>&gt; index;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 索引队列的初始化</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span>(!index.empty() &amp;&amp; num[i] &gt;= num[index.back()])</span><br><span class="line">                index.pop_back();</span><br><span class="line"></span><br><span class="line">            index.push_back(i);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 往后移动滑动窗口，直到到达数组尾部，i为新加入数字（窗口尾部）的索引</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">unsigned</span> <span class="keyword">int</span> i = size; i &lt; num.size(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 索引队列的队首是当前窗口的最大值，存入maxInWindows数组中</span></span><br><span class="line">            maxInWindows.push_back(num[index.front()]);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 把索引队列里比窗口尾部数字小的都pop掉，它们不可能成为最大值了</span></span><br><span class="line">            <span class="keyword">while</span>(!index.empty() &amp;&amp; num[i] &gt;= num[index.back()])</span><br><span class="line">                index.pop_back();</span><br><span class="line">            <span class="comment">// 把滑出了滑动窗口的也pop掉</span></span><br><span class="line">            <span class="keyword">if</span>(!index.empty() &amp;&amp; index.front() &lt;= (<span class="keyword">int</span>)(i - size))</span><br><span class="line">                index.pop_front();</span><br><span class="line"></span><br><span class="line">            index.push_back(i); <span class="comment">// 把新数字（当前窗口尾部）的索引加入索引队列</span></span><br><span class="line">        &#125;</span><br><span class="line">        maxInWindows.push_back(num[index.front()]); <span class="comment">// 最后一个滑动窗口的最大值</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> maxInWindows;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题66矩阵中的路径">面试题66：矩阵中的路径</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>请设计一个函数，用来判断在一个矩阵中是否存在一条包含某字符串所有字符的路径。路径可以从矩阵中任意一格开始，每一步可以在矩阵中向左、右、上、下移动一格。如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如下面的矩阵：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a    b    c    e</span><br><span class="line">s    f    c    s</span><br><span class="line">a    d    e    e</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>包含了一条字符串 <code>&quot;bcced&quot;</code> 的路径。但矩阵中不包含字符串 <code>&quot;abcb&quot;</code> 的路径，因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入这个格子。</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这题其实思路相当简单，我们可以直接枚举以矩阵的每一个格子作为路径开头进行深搜的情况，直到能完整匹配字符串就停止。特别注意要使用和输入矩阵同规模的visited矩阵来标记走过的路径，避免重复走过一个格子两次的情况。</p>
+<p>使用一个二重循环来实现枚举就可以了，注意每一次深搜时除了要注意是否匹配，还要注意边界的判断。当发现路径不合适要递归返回时，必须把路径长度减一并且设置好visited矩阵对应的值，这样才算把当前格子移出了路径。另外，搜索的时候，我们是往上下左右四个方向搜索，只要其中一个方向能成功匹配就算找到了。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPath</span><span class="params">(<span class="keyword">char</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">char</span>* str)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(matrix == <span class="literal">NULL</span> || rows &lt; <span class="number">1</span> || cols &lt; <span class="number">1</span> || str == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> *visited = <span class="keyword">new</span> <span class="keyword">bool</span>[rows * cols];</span><br><span class="line">    <span class="built_in">memset</span>(visited, <span class="number">0</span>, rows * cols);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> pathLength = <span class="number">0</span>; <span class="comment">// 初始路径长度为0</span></span><br><span class="line">    <span class="comment">// 使用一个二重循环来枚举以矩阵的每一个格子作为路径开头进行深搜的情况</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> row = <span class="number">0</span>; row &lt; rows; ++row)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> col = <span class="number">0</span>; col &lt; cols; ++col)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(hasPathCore(matrix, rows, cols, row, col, str,</span><br><span class="line">                pathLength, visited))</span><br><span class="line">            &#123; <span class="comment">// 只要有一次找到了就算成功，直接返回</span></span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] visited;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">hasPathCore</span><span class="params">(<span class="keyword">char</span>* matrix, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">char</span>* str, <span class="keyword">int</span>&amp; pathLength, <span class="keyword">bool</span>* visited)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(str[pathLength] == <span class="string">'\0'</span>) <span class="comment">// 字符串匹配完成，返回true</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">bool</span> hasPath = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span>(row &gt;= <span class="number">0</span> &amp;&amp; row &lt; rows &amp;&amp; col &gt;= <span class="number">0</span> &amp;&amp; col &lt; cols</span><br><span class="line">            &amp;&amp; matrix[row * cols + col] == str[pathLength]</span><br><span class="line">            &amp;&amp; !visited[row * cols + col])</span><br><span class="line">    &#123; <span class="comment">// 前四个判断条件用于防止溢出边界，后两个判断条件则是当前格子</span></span><br><span class="line">      <span class="comment">// 与当前字符是否匹配，当前格子是否未使用</span></span><br><span class="line">        ++pathLength;</span><br><span class="line">        visited[row * cols + col] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 只要有一个方向匹配完整就算成功</span></span><br><span class="line">        hasPath = hasPathCore(matrix, rows, cols, row, col - <span class="number">1</span>,</span><br><span class="line">                    str, pathLength, visited)</span><br><span class="line">                || hasPathCore(matrix, rows, cols, row - <span class="number">1</span>, col,</span><br><span class="line">                    str, pathLength, visited)</span><br><span class="line">                || hasPathCore(matrix, rows, cols, row, col + <span class="number">1</span>,</span><br><span class="line">                    str, pathLength, visited)</span><br><span class="line">                || hasPathCore(matrix, rows, cols, row + <span class="number">1</span>, col,</span><br><span class="line">                    str, pathLength, visited);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!hasPath)</span><br><span class="line">        &#123; <span class="comment">// 匹配失败时要把格子移出路径，以便进行下一次搜索</span></span><br><span class="line">            --pathLength;</span><br><span class="line">            visited[row * cols + col] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> hasPath;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="面试题67机器人的运动范围">面试题67：机器人的运动范围</h2>
+<h3 id="题目">题目</h3>
+<blockquote>
+<p>地上有一个m行n列的方格。一个机器人从坐标(0,0)的格子开始移动，它每一次可以向左、右、上、下移动一格，但不能进入行坐标和列坐标的数位之和大于k的格子。例如，当k为18时，机器人能够进入方格(35,37)，因为 <code>3+5+3+7=18</code>。但它不能进入方格(35,38)，因为 <code>3+5+3+8=19</code>。请问该机器人能够到达多少个格子？</p>
+</blockquote>
+<h3 id="解析">解析</h3>
+<p>这题比上一题稍微简单一些，不需要枚举矩阵的所有格子，只需要从(0,0)开始，进行一次深搜就可以了。要注意好不能重复计算同一个格子，所以同样使用一个和输入矩阵同规模的visited矩阵来标记。过程主要用递归来实现就可以了：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 计算一个数字的各数位之和</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getDigitSum</span><span class="params">(<span class="keyword">int</span> number)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(number &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        sum += number % <span class="number">10</span>;</span><br><span class="line">        number /= <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> sum;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 判断机器人能否进入坐标为(row,col)的方格</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">bool</span>* visited)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(row &gt;=<span class="number">0</span> &amp;&amp; row &lt; rows &amp;&amp; col &gt;= <span class="number">0</span> &amp;&amp; col &lt; cols      <span class="comment">// 满足四个边界条件</span></span><br><span class="line">        &amp;&amp; getDigitSum(row) + getDigitSum(col) &lt;= threshold <span class="comment">// 行列坐标数位之和小于阈值</span></span><br><span class="line">        &amp;&amp; !visited[row* cols + col])                       <span class="comment">// 并且未计算过</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">movingCountCore</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">bool</span>* visited)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(check(threshold, rows, cols, row, col, visited))</span><br><span class="line">    &#123; <span class="comment">// 当前格子满足条件，标记并继续往四个方向进行移动</span></span><br><span class="line">        visited[row * cols + col] = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">        count = <span class="number">1</span> + movingCountCore(threshold, rows, cols,</span><br><span class="line">                    row - <span class="number">1</span>, col, visited)</span><br><span class="line">                + movingCountCore(threshold, rows, cols,</span><br><span class="line">                    row, col - <span class="number">1</span>, visited)</span><br><span class="line">                + movingCountCore(threshold, rows, cols,</span><br><span class="line">                    row + <span class="number">1</span>, col, visited)</span><br><span class="line">                + movingCountCore(threshold, rows, cols,</span><br><span class="line">                    row, col + <span class="number">1</span>, visited);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">movingCount</span><span class="params">(<span class="keyword">int</span> threshold, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">bool</span> *visited = <span class="keyword">new</span> <span class="keyword">bool</span>[rows * cols];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; rows * cols; ++i)</span><br><span class="line">        visited[i] = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> count = movingCountCore(threshold, rows, cols,</span><br><span class="line">                    <span class="number">0</span>, <span class="number">0</span>, visited);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] visited;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/剑指offer/" rel="tag"># 剑指offer</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/07/06/剑指offer/05optimization/" rel="next" title="剑指offer">
+                <i class="fa fa-chevron-left"></i> 剑指offer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/06/剑指offer/06skills_for_interviews/" rel="prev" title="剑指offer">
+                剑指offer <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chengr</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#英文版新增面试题"><span class="nav-number">1.</span> <span class="nav-text">英文版新增面试题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题51数组中重复的数字"><span class="nav-number">1.1.</span> <span class="nav-text">面试题51：数组中重复的数字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.1.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.1.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题52构建乘积数组"><span class="nav-number">1.2.</span> <span class="nav-text">面试题52：构建乘积数组</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.2.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.2.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题53正则表达式匹配"><span class="nav-number">1.3.</span> <span class="nav-text">面试题53：正则表达式匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.3.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.3.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题54表示数值的字符串"><span class="nav-number">1.4.</span> <span class="nav-text">面试题54：表示数值的字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.4.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.4.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题55字符流中第一个不重复的字符"><span class="nav-number">1.5.</span> <span class="nav-text">面试题55：字符流中第一个不重复的字符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.5.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.5.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题56链表中环的入口结点"><span class="nav-number">1.6.</span> <span class="nav-text">面试题56：链表中环的入口结点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.6.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.6.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题57删除链表中重复的结点"><span class="nav-number">1.7.</span> <span class="nav-text">面试题57：删除链表中重复的结点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.7.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.7.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题58二叉树的下一个结点"><span class="nav-number">1.8.</span> <span class="nav-text">面试题58：二叉树的下一个结点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.8.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.8.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题59对称的二叉树"><span class="nav-number">1.9.</span> <span class="nav-text">面试题59：对称的二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.9.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.9.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题60把二叉树打印成多行"><span class="nav-number">1.10.</span> <span class="nav-text">面试题60：把二叉树打印成多行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.10.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.10.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题61按之字形顺序打印二叉树"><span class="nav-number">1.11.</span> <span class="nav-text">面试题61：按之字形顺序打印二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.11.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.11.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题62序列化二叉树"><span class="nav-number">1.12.</span> <span class="nav-text">面试题62：序列化二叉树</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.12.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.12.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题63二叉树搜索树的第k个结点"><span class="nav-number">1.13.</span> <span class="nav-text">面试题63：二叉树搜索树的第k个结点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.13.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.13.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题64数据流中的中位数"><span class="nav-number">1.14.</span> <span class="nav-text">面试题64：数据流中的中位数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.14.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.14.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题65滑动窗口的最大值"><span class="nav-number">1.15.</span> <span class="nav-text">面试题65：滑动窗口的最大值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.15.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.15.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题66矩阵中的路径"><span class="nav-number">1.16.</span> <span class="nav-text">面试题66：矩阵中的路径</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.16.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.16.2.</span> <span class="nav-text">解析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#面试题67机器人的运动范围"><span class="nav-number">1.17.</span> <span class="nav-text">面试题67：机器人的运动范围</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#题目"><span class="nav-number">1.17.1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.17.2.</span> <span class="nav-text">解析</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chengr</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
