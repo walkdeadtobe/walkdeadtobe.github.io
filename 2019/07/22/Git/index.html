@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="简介 GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-05T16:34:34.140Z">
+<meta property="og:updated_time" content="2020-07-15T12:35:55.807Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 学习">
 <meta name="twitter:description" content="简介 GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充">
@@ -307,8 +307,8 @@
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-07-06T00:34:34+08:00" content="2020-07-06">
-                2020-07-06
+              <time itemprop="dateUpdated" datetime="2020-07-15T20:35:55+08:00" content="2020-07-15">
+                2020-07-15
               </time>
             </span>
           
@@ -418,21 +418,59 @@ tag: 根据我查看的文件结构与commit相同,但引用博客中说没有�
 .git/refs/remotes 记录远程各分支最新状态(文件中存储git object 的SHA-1值),同样指向本地的git object(每次fetch或者pull会拉去远程的更新)</p>
 </blockquote>
 <h3 id="常见命令及其解析">常见命令及其解析：</h3>
-<h4 id="git-addcommitpushfetchconfig">git add/commit/push/fetch/config</h4>
+<ul>
+<li>git &lt;命令&gt; --help</li>
+</ul>
 <blockquote>
-<p>git add <filename></filename></p>
+<p>git 查看该命令以及相关参数说明</p>
 </blockquote>
-<h4 id="git-checkout">git checkout</h4>
+<ul>
+<li>git add/commit/push/fetch/merge/pull/config</li>
+</ul>
 <blockquote>
-<p><code>git checkout &lt;branch-name&gt;</code> 更改分支</p>
+<p>git add <filename><br>
+<code>git fetch origin [branchName]</code><br>
+拉取远程分支的最新commit记录到本地，并把FETCH_HEAD 设置为 最新的commit，等待merge<br>
+<code>git merge </code> <a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging" target="_blank" rel="noopener">解析</a></filename></p>
 </blockquote>
-<h4 id="git-reset">git reset</h4>
+<ul>
+<li>
+<p>本地分支 和 合并分支 是前后继 的关系：Git 指针移动即可</p>
+</li>
+<li>
+<p>本地分支 和 合并分支 不是前后继的关系：例如master与branch1,此处有两个快照(snapshots) 分别为master和branch1的最新节点以及两者的共同最近祖先,祖先依照时间(一次观察是如此,未找到其他依据)接受 master 和 branch1 相对与祖先的修改,如果master与branch1的修改没有冲突,就形成了一个新快照,Git 会自动创建一次commit 指向它,同时其的祖先节点有两个分别为 master和branch1的最新节点;如果 有冲突,GIT暂时不提供智能化合并,需要手工操作</p>
+</li>
+<li></li>
+<li>
+<p>git checkout</p>
+</li>
+</ul>
 <blockquote>
-<p>git reset --hard/mixed/soft</p>
+<p><code>git checkout &lt;branch-name&gt;</code> 更改分支<br>
+<code>git check -- &lt;path&gt;</code> 将路径下所有文件重置回index状态/最近的commit状态</p>
 </blockquote>
-<h4 id="git-log">git log</h4>
-<blockquote></blockquote>
-<h4 id="git-cat-files">git cat-files</h4>
+<ul>
+<li>git clean</li>
+</ul>
+<blockquote>
+<p>从工作目录中删除所有没有track过的文件,常与git reset --hard 一起用</p>
+</blockquote>
+<ul>
+<li>git reset</li>
+</ul>
+<blockquote>
+<p>reset 只影响 被track的文件<br>
+<code>git reset --hard/mixed/soft</code>???</p>
+</blockquote>
+<ul>
+<li>git log</li>
+</ul>
+<blockquote>
+<p>查看 git commit 的历史记录及其 HASH ID</p>
+</blockquote>
+<ul>
+<li>git cat-files</li>
+</ul>
 <blockquote></blockquote>
 <h3 id="常见git场景">常见git场景</h3>
 <h4 id="撤销修改">撤销修改</h4>
@@ -445,7 +483,20 @@ tag: 根据我查看的文件结构与commit相同,但引用博客中说没有�
 <blockquote>
 <p>已 <code>git commit</code>,未 <code>git push</code>: <code>git reset --hard HEAD^</code> 可回退到上次commit的的状态,也可以使用 <code>git reset --hard  &lt;commitid&gt;</code> 回退到任意版本</p>
 </blockquote>
+<h4 id="分支相关">分支相关</h4>
+<blockquote>
+<p>增加分支<br>
+删除分支<br>
+更新远程分支git remote update origin -p<br>
+更新远程分支状态<br>
+<code>git fetch --all</code> 追踪所有远程分支<br>
+<code>git fetch -p/--prune</code> 对远程分支中已删除的,本地同样删除</p>
+</blockquote>
 <p>跟随态 VS 游离态</p>
+<ul>
+<li>跟随态：test</li>
+<li>游离态:test</li>
+</ul>
 <p>参考：<br>
 1.<a href="https://www.siteground.com/tutorials/git/directory-structure/" target="_blank" rel="noopener">Git Directory</a><br>
 2.<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-References" target="_blank" rel="noopener">Git Ref</a><br>
@@ -480,8 +531,8 @@ tag: 根据我查看的文件结构与commit相同,但引用博客中说没有�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/10/lua/" rel="next" title="lua">
-                <i class="fa fa-chevron-left"></i> lua
+              <a href="/2019/07/10/dp/" rel="next" title="动态规划学习">
+                <i class="fa fa-chevron-left"></i> 动态规划学习
               </a>
             
           </div>
@@ -615,7 +666,7 @@ tag: 根据我查看的文件结构与commit相同,但引用博客中说没有�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录解析"><span class="nav-number">2.</span> <span class="nav-text">目录解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见命令及其解析"><span class="nav-number">3.</span> <span class="nav-text">常见命令及其解析：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#git-addcommitpushfetchconfig"><span class="nav-number">3.1.</span> <span class="nav-text">git add/commit/push/fetch/config</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-checkout"><span class="nav-number">3.2.</span> <span class="nav-text">git checkout</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-reset"><span class="nav-number">3.3.</span> <span class="nav-text">git reset</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-log"><span class="nav-number">3.4.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-cat-files"><span class="nav-number">3.5.</span> <span class="nav-text">git cat-files</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见git场景"><span class="nav-number">4.</span> <span class="nav-text">常见git场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#撤销修改"><span class="nav-number">4.1.</span> <span class="nav-text">撤销修改</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录解析"><span class="nav-number">2.</span> <span class="nav-text">目录解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见命令及其解析"><span class="nav-number">3.</span> <span class="nav-text">常见命令及其解析：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见git场景"><span class="nav-number">4.</span> <span class="nav-text">常见git场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#撤销修改"><span class="nav-number">4.1.</span> <span class="nav-text">撤销修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分支相关"><span class="nav-number">4.2.</span> <span class="nav-text">分支相关</span></a></li></ol></li></ol></div>
             
 
           </div>
