@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="简介 GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-15T12:35:55.807Z">
+<meta property="og:updated_time" content="2020-07-22T07:00:09.724Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 学习">
 <meta name="twitter:description" content="简介 GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)  在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容 远程内容待补充">
@@ -307,8 +307,8 @@
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-07-15T20:35:55+08:00" content="2020-07-15">
-                2020-07-15
+              <time itemprop="dateUpdated" datetime="2020-07-22T15:00:09+08:00" content="2020-07-22">
+                2020-07-22
               </time>
             </span>
           
@@ -472,6 +472,10 @@ tag: 根据我查看的文件结构与commit相同,但引用博客中说没有�
 <li>git cat-files</li>
 </ul>
 <blockquote></blockquote>
+<ul>
+<li>回退分支 git checkout VS git reset</li>
+</ul>
+<blockquote></blockquote>
 <h3 id="常见git场景">常见git场景</h3>
 <h4 id="撤销修改">撤销修改</h4>
 <blockquote>
@@ -481,7 +485,7 @@ tag: 根据我查看的文件结构与commit相同,但引用博客中说没有�
 <p>已 <code>git add</code>,未 <code>git commit</code>: <code>git reset HEAD filepathname</code> 可以撤销 <code>git add</code>命令，回退到 已修改,未 <code>git add</code> 状态</p>
 </blockquote>
 <blockquote>
-<p>已 <code>git commit</code>,未 <code>git push</code>: <code>git reset --hard HEAD^</code> 可回退到上次commit的的状态,也可以使用 <code>git reset --hard  &lt;commitid&gt;</code> 回退到任意版本</p>
+<p>已 <code>git commit</code>,未 <code>git push</code>: <code>git reset --soft HEAD^</code> 可回退到上次commit的的状态,保持git add 的状态,也可以使用 <code>git reset --soft  &lt;commitid&gt;</code> 回退到任意版本,但是如果使用<code>git reset --hard &lt;commitid&gt;</code> 会丢失之前的修改信息,文件内容直接回退到commitid版本所对应的状态</p>
 </blockquote>
 <h4 id="分支相关">分支相关</h4>
 <blockquote>
