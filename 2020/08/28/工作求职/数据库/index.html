@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="数据库 Reids 基础数据类型：  string，hash，list，set及有序集合（每个元素都关联一个分数，通过分数排序）  Redis持久化：  持久化就是把内存的数据写到磁盘中去，防止服务宕机了内存数据丢失 两种持久化方式:RDB（Redis DataBase；默认；定期备份；把内存中数据写到磁盘以及把文件读到内存；制定的时间间隔生成数据集的快） 和AOF(Append-only fil">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库">
+<meta property="og:url" content="http://yoursite.com/2020/08/28/工作求职/数据库/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="数据库 Reids 基础数据类型：  string，hash，list，set及有序集合（每个元素都关联一个分数，通过分数排序）  Redis持久化：  持久化就是把内存的数据写到磁盘中去，防止服务宕机了内存数据丢失 两种持久化方式:RDB（Redis DataBase；默认；定期备份；把内存中数据写到磁盘以及把文件读到内存；制定的时间间隔生成数据集的快） 和AOF(Append-only fil">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-08-30T05:22:36.491Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库">
+<meta name="twitter:description" content="数据库 Reids 基础数据类型：  string，hash，list，set及有序集合（每个元素都关联一个分数，通过分数排序）  Redis持久化：  持久化就是把内存的数据写到磁盘中去，防止服务宕机了内存数据丢失 两种持久化方式:RDB（Redis DataBase；默认；定期备份；把内存中数据写到磁盘以及把文件读到内存；制定的时间间隔生成数据集的快） 和AOF(Append-only fil">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/08/28/工作求职/数据库/">
+
+
+
+
+
+  <title>数据库 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/28/工作求职/数据库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-08-28T18:59:47+08:00">
+                2020-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:22:36+08:00" content="2020-08-30">
+                2020-08-30
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="数据库">数据库</h1>
+<h2 id="reids">Reids</h2>
+<h3 id="基础数据类型">基础数据类型：</h3>
+<blockquote>
+<p>string，hash，list，set及有序集合（每个元素都关联一个分数，通过分数排序）</p>
+</blockquote>
+<h3 id="redis持久化">Redis持久化：</h3>
+<blockquote>
+<p>持久化就是把内存的数据写到磁盘中去，防止服务宕机了内存数据丢失<br>
+两种持久化方式:RDB（Redis DataBase；默认；定期备份；把内存中数据写到磁盘以及把文件读到内存；制定的时间间隔生成数据集的快） 和AOF(Append-only file;写入保存两个步骤；WRITE：根据条件，将 aof_buf 中的缓存写入到 AOF 文件 ；SAVE：根据条件，调用 fsync 或 fdatasync 函数，将 AOF 文件保存到磁盘中。持久化记录服务器执行的所有写命令到日志文件，并在服务器重启时，重新执行这些命令来恢复数据)</p>
+<blockquote>
+<p>两种区别就是，一个是持续的用日志记录写操作，crash后利用日志恢复；一个是平时写操作的时候不触发写，只有手动提交save命令，或者是关闭命令时，才触发备份操作。<br>
+选择的标准，就是看系统是愿意牺牲一些性能，换取更高的缓存一致性（aof），还是愿意写操作频繁的时候，不启用备份来换取更高的性能，待手动运行save的时候，再做备份（rdb）。rdb这个就更有些 eventually consistent的意思了。</p>
+</blockquote>
+</blockquote>
+<h3 id="过期策略定期删除惰性删除内存淘汰机制">过期策略：定期删除+惰性删除+内存淘汰机制</h3>
+<blockquote>
+<p>定期删除：redis 默认是每隔 100ms 就随机抽取一些设置了过期时间的 key，检查其是否过期，如果过期就删除</p>
+</blockquote>
+<blockquote>
+<p>惰性删除：当访问key时，检测key是否过期，过期则不返回</p>
+</blockquote>
+<blockquote>
+<p>内存淘汰机制：当内存不足以写入新数据时，什么都不做，写入报错/移除随机key/移除最近最少使用的key/随机（或者选择最先过期 ）移除有过期时间的key/移除有过期的key中最近最少使用的/</p>
+</blockquote>
+<h3 id="redis的架构模式">Redis的架构模式</h3>
+<blockquote>
+<p>单机版（存储，处理有限，无法高可用）</p>
+</blockquote>
+<blockquote>
+<p>主从复制（读写分离；更新同步；但是master写的压力存在，高可用不行）</p>
+</blockquote>
+<blockquote>
+<p>哨兵（监控主从模式，遇到故障自动迁移；解决高可用，但master写仍存在）</p>
+</blockquote>
+<blockquote>
+<p>集群（proxy 型）：利用哈希进行数据分布，分布到多个主从集群+哨兵</p>
+</blockquote>
+<blockquote>
+<p>集群（直连型）：</p>
+<blockquote>
+<p>集群（直连型）:<a href="https://blog.csdn.net/z15732621582/article/details/79121213" target="_blank" rel="noopener">简介</a>  和 <a href="https://www.cnblogs.com/lpfuture/p/5796398.html" target="_blank" rel="noopener">一致性Hash算法</a><br>
+Redis集群预分好16384个桶，当需要在 Redis 集群中放置一个 key-value 时，根据 CRC16(key) mod 16384的值，决定将一个key放到哪个桶中<br>
+节点的fail是通过集群中超过半数的节点检测失效时才生效</p>
+</blockquote>
+</blockquote>
+<h3 id="相关概念">相关概念</h3>
+<h4 id="缓存雪崩">缓存雪崩</h4>
+<blockquote>
+<p>描述：大量相同过期时间的缓存，同时失效，导致大量的并发访问失败并访问磁盘；<br>
+解决：使用加锁（ 最多的解决方案）或者队列的方式保证来保证不会有大量的线程对数据库一次性进行读写</p>
+</blockquote>
+<h4 id="缓存穿透">缓存穿透</h4>
+<blockquote>
+<p>描述：用户在查询一个持久层数据库也没有的数据时，会出现缓存未命中，且访问持久层无果的情况，大量这种类型的访问会给持久层数据库带来很大压力<br>
+解决：利用布隆过滤器判断对象是否一定不存在；缓存空对象</p>
+</blockquote>
+<h4 id="缓存击穿">缓存击穿</h4>
+<blockquote>
+<p>描述；指一个key非常热点，在不停的扛着大并发，大并发集中对这一个点进行访问，当这个key在失效的瞬间，持续的大并发就穿破缓存，直接请求数据库，就像在一个屏障上凿开了一个洞</p>
+</blockquote>
+<h4 id="缓存预热">缓存预热</h4>
+<blockquote>
+<p>描述：相关的缓存数据直接加载到缓存系</p>
+</blockquote>
+<h4 id="缓存更新">缓存更新</h4>
+<blockquote>
+<p>除了缓存失效策略（定义失效时间）外，还有定时去清理过期的缓存策略（判断是否失效）以及访问时才判断是否失效</p>
+</blockquote>
+<h4 id="缓存降级">缓存降级</h4>
+<blockquote>
+<p>当访问量剧增、服务出现问题（如响应时间慢或不响应）或非核心服务影响到核心流程的性能时，仍然需要保证服务还是可用的，即使是有损服务。系统可以根据一些关键数据进行自动降级，也可以配置开关实现人工降级，保证核心服务可用</p>
+</blockquote>
+<h4 id="热点数据和冷数据">热点数据和冷数据：</h4>
+<blockquote>
+<p>频繁访问修改的数据称之为热点数据；冷数据指访问间隔很长的数据（出现只访问一次，就被挤出内存的情况）</p>
+</blockquote>
+<h4 id="单线程的redis为什么这么快">单线程的redis为什么这么快</h4>
+<blockquote>
+<p>(1)纯内存操作<br>
+(2)单线程操作，避免了频繁的上下文切换<br>
+(3)采用了非阻塞I/O多路复用机制</p>
+</blockquote>
+<h4 id="memcache-vs-redis">Memcache VS Redis</h4>
+<blockquote>
+<p>(1)存储方式 ：Memecache把数据全部存在内存之中，断电后会挂掉，数据不能超过内存大小。 Redis有部份存在硬盘上，redis可以持久化其数据<br><br>
+(2)数据支持类型 memcached所有的值均是简单的字符串，redis作为其替代者，支持更为丰富的数据类型 ，提供list，set，zset，hash等数据结构的存储<br><br>
+(3)使用底层模型不同 它们之间底层实现方式 以及与客户端之间通信的应用协议不一样。 Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求。<br><br>
+(4)value 值大小不同：Redis 最大可以达到 512M；memcache 只有 1mb。<br><br>
+(5)redis的速度比memcached快很多<br><br>
+(6)Redis支持数据的备份，即master-slave模式的数据备份。<br><br>
+Redis key和value的大小限制：512MB</p>
+</blockquote>
+<h4 id="redis数据库的数据一致性">Redis数据库的数据一致性</h4>
+<blockquote>
+<p>主从同步：从服务器启动，会向主服务器发起sync命令；主服务器收到后会在后台保存快照（RDB操作），并缓存保存期间的命令；结束后，会将快照和缓存命令传递给从数据库，从数据库接收到后，会载入快照并执行缓存命令；</p>
+<p>哈希槽算法：与一致性哈希算法相似，一个节点根据其存储量，分为若干个槽</p>
+<p>全量复制，增量复制，异步复制</p>
+</blockquote>
+<h4 id="哨兵模式"><a href="https://blog.csdn.net/sz85850597/article/details/86751215" target="_blank" rel="noopener">哨兵模式</a></h4>
+<blockquote>
+<p>主观下线-&gt;客观下线<br>
+sential leader 选举：当每一个发现redis master 的sential节点都可以向其他节点发送选举信号，每个接收到该信号的节点如果没有投票，可以投它，当达到最低票数时，正式成为sential leader；否则进行下一轮；<br>
+redis master 选举：由 sential leader 选择redis集群中的某个节点作为master</p>
+<blockquote>
+<p>a.排除故障节点</p>
+</blockquote>
+<blockquote>
+<p>b.选择节点中slave-priority最大的从节点作为主节点</p>
+</blockquote>
+<blockquote>
+<p>c.选择择复制偏移量（数据写入量的字节，记录写了多少数据。主服务器会把偏移量同步给从服务器，当主从的偏移量一致，则数据是完全同步）最大的从节点作为主节点</p>
+</blockquote>
+<blockquote>
+<p>d.选择runid（redis每次启动的时候生成随机的runid作为redis的标识）最小的从节点作为主节点</p>
+</blockquote>
+</blockquote>
+<h4 id="redis-集群选举">redis <a href="https://www.cnblogs.com/nijunyang/p/12508098.html" target="_blank" rel="noopener">集群选举</a></h4>
+<blockquote>
+<p>背景：利用hash桶算法进行数据的分隔布置到多个主从模式服务器去<br>
+选举：slave发现master Fail之后，就尝试选举</p>
+<blockquote>
+<p>a.增加currentEpoch加1，并广播FAILOVER_AUTH_REQUEST信息</p>
+</blockquote>
+<blockquote>
+<p>b.收到信息的Master节点会判断请求者的合法性，并发&gt;送FAILOVER_AUTH_ACK，对每一个epoch只发送一次ack</p>
+</blockquote>
+<blockquote>
+<p>c.尝试failover的slave收集FAILOVER_AUTH_ACK;超过半数后变成新Master;广播Pong通知其他集群节点</p>
+</blockquote>
+</blockquote>
+<h2 id="mysql">Mysql</h2>
+<h3 id="事务的基本要素">事务的基本要素</h3>
+<blockquote>
+<p>原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。<br><br>
+一致性（Consistency）：事务开始前和结束后，数据库的完整性约束没有被破坏。<br><br>
+隔离性（Isolation）：同一时间，只允许一个事务请求同一数据，不同的事务之间彼此没有任何干扰。<br><br>
+持久性（Durability）：事务完成后，事务对数据库的所有更新将被保存到数据库，不能回滚</p>
+</blockquote>
+<h3 id="事务的并发问题">事务的并发问题</h3>
+<blockquote>
+<p>脏读：事务A读取了事务B更新的数据，然后B回滚操作，那么A读取到的数据是脏数据<br><br>
+不可重复读：事务 A 多次读取同一数据，事务 B 在事务A多次读取的过程中，对数据作了更新并提交，导致事务A多次读取同一数据时，结果 不一致。<br><br>
+幻读：系统管理员A将数据库中所有学生的成绩从具体分数改为ABCDE等级，但是系统管理员B就在这个时候插入了一条具体分数的记录，当系统管理员A改结束后发现还有一条记录没有改过来，就好像发生了幻觉一样，这就叫幻读.<br><br>
+小结：不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表<br></p>
+</blockquote>
+<h3 id="事物隔离级别">事物隔离级别</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">事务隔离级别</th>
+<th style="text-align:right">脏读</th>
+<th style="text-align:right">不可重复</th>
+<th style="text-align:right">幻读</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">读未提交（read-uncommitted）</td>
+<td style="text-align:right">是</td>
+<td style="text-align:right">是</td>
+<td style="text-align:right">是</td>
+</tr>
+<tr>
+<td style="text-align:left">读未提交（read-uncommitted）</td>
+<td style="text-align:right">否</td>
+<td style="text-align:right">是</td>
+<td style="text-align:right">是</td>
+</tr>
+<tr>
+<td style="text-align:left">可重复读（默认，repeatable-read）</td>
+<td style="text-align:right">否</td>
+<td style="text-align:right">否</td>
+<td style="text-align:right">是</td>
+</tr>
+<tr>
+<td style="text-align:left">串行化（serializable）</td>
+<td style="text-align:right">否</td>
+<td style="text-align:right">否</td>
+<td style="text-align:right">否</td>
+</tr>
+</tbody>
+</table>
+<h3 id="存储引擎">存储引擎</h3>
+<blockquote>
+<p>存储引擎是数据库管理系统用来从数据库创建、读取和更新数据的软件模块<br>
+mysql5.5之后默认使用事务性存储引擎 InnoDB(这是MySQL 5.5或更高版本的默认存储引擎。它提供了事务安全(ACID兼容)表，支持外键引用完整性约束。它支持提交、回滚和紧急恢复功能来保护数据。它还支持行级锁定。当在多用户环境中使用时，它的“一致非锁定读取”提高了性能。它将数据存储在集群索引中，从而减少了基于主键的查询的I/O)</p>
+</blockquote>
+<h4 id="innodb">InnoDB</h4>
+<blockquote>
+<p>在 InnoDB 存储引擎中，所有的数据都被逻辑地存放在表空间中，表空间（tablespace）是存储引擎中最高的存储逻辑单位，在表空间的下面又包括段（segment）、区（extent）、页（page）<br><br>
+MySQL 使用 InnoDB 存储表时，会将表的定义和数据索引等信息分开存储，其中前者存储在 .frm文件中，后者存储在 .ibd 文件中<br></p>
+</blockquote>
+<h3 id="索引">索引</h3>
+<blockquote>
+<p>索引优化是对查询性能优化的最有效手段<br>
+InnoDB 存储引擎在绝大多数情况下使用 B+ 树建立索引，这是关系型数据库中查找最为常用和有效的索引</p>
+</blockquote>
+<blockquote>
+<p>一张表一定包含一个聚集索引构成的 B+ 树以及若干辅助索引的构成的 B+ 树（辅助索引的存在并不会影响聚集索引，因为聚集索引构成的 B+ 树是数据实际存储的形式，而辅助索引只用于加速数据的查找，所以一张表上往往有多个辅助索引以此来提升数据库的性能。）</p>
+</blockquote>
+<h4 id="聚集索引-和-辅助索引">聚集索引  和  辅助索引</h4>
+<blockquote>
+<p>聚合索引可以理解为基于主键的索引，是实际存储的位置；而附注索引是对于其他键的索引，最终叶子节点内容为指向基于主键的索引；<br><br>
+主键(指定主键或者选择费控的合适键或者隐藏键uuid)</p>
+</blockquote>
+<h3 id="数据库主从同步">数据库主从同步</h3>
+<blockquote>
+<p><a href="https://www.cnblogs.com/syncnavigator/p/10189597.html" target="_blank" rel="noopener">流程参考</a><br>
+首先必须打开master端的binlog (mysql-bin.xxxxxx)日志功能，否则无法实现mysql的主从复制。因为mysql的整个主从复制过程实际上就是：slave端从 master端获取binlog日志，然后再在自己身上完全顺序的执行该日志中所记录的各种SQL操作</p>
+<blockquote>
+<p>1.master在执行sql之后，记录二进制log文件（bin-log）。<br>
+2.slave连接master，并从master获取binlog，存于本地relay-log中，然后从上次记住的位置起执行SQL语句，一旦遇到错误则停止同步。</p>
+</blockquote>
+</blockquote>
+<h3 id="主从复制的数据一致性">主从复制的数据一致性</h3>
+<p><a href="https://www.jianshu.com/p/790a158d9eb3" target="_blank" rel="noopener">参考链接</a></p>
+<blockquote>
+<p>三种主从复制模式：异步复制、半同步复制、全同步复制<br>
+异步复制:Mysql 默认同步模式,主库在执行完客户端提交的事物之后会直接将结果返回给客户端,不管 从库是否接收同步并成功处理,在这种情况下,主库如果crash掉,从库提升为主库,那么可能出现从库数据不完备的现象<br>
+半同步复制:在前者的基础上要求 至少一个从库同步成功,才会将保存在binlog中的操作,提交到存储引擎,返回结果给客户端<br>
+全同步复制:在异步复制的基础上,要求 所有从库 都同步成功,才真正执行事物，返回给客户端<br>
+相对于异步复制，半同步复制提高了数据的安全性，同时它也造成了一定程度的延迟，这个延迟最少是一个TCP/IP往返的时间。所以，半同步复制最好在低延时的网络中使用。<br>
+半同步复制和全同步复制 可能会出现 从库执行成功而 主库 执行失败的情况，导致 数据不一致</p>
+</blockquote>
+<h3 id="mvcc">MVCC</h3>
+<blockquote>
+<p>待完善<br>
+<a href="https://blog.csdn.net/weixin_41835916/article/details/81633072?depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3&amp;utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3" target="_blank" rel="noopener">参考博客1</a></p>
+</blockquote>
+<h3 id="最左匹配原则">最左匹配原则</h3>
+<blockquote>
+<p>索引的简历是从左开始的</p>
+</blockquote>
+<h3 id="myisam与innodb">MyISAM与InnoDB</h3>
+<blockquote>
+<p>1.对事务的的支持<br>
+2.对外键的支持<br>
+3.InnoDB是聚集索引（主索引存储数据文件，辅助索引指向主键），MyISAM 是非聚集索引（主键索引和辅助索引都指向文件指针）<br>
+4.InnoDB支持表、行(默认)级锁，而MyISAM支持表级锁<br>
+5.InnoDB表必须有主键（用户没有指定的话会自己找或生产一个主键），而Myisam可以没有</p>
+</blockquote>
+<h3 id="postgresql-vs-mysql">PostgreSQL  VS MySQL</h3>
+<blockquote>
+<p>待完善</p>
+</blockquote>
+<h3 id="主键索引和唯一索引区别">主键索引和唯一索引区别</h3>
+<blockquote>
+<p>待完善</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/28/工作求职/面经收集/" rel="next" title="面经收集">
+                <i class="fa fa-chevron-left"></i> 面经收集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/08/29/基础知识/工具网站/" rel="prev" title="工具网站">
+                工具网站 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chengr</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">1.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#reids"><span class="nav-number">1.1.</span> <span class="nav-text">Reids</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础数据类型"><span class="nav-number">1.1.1.</span> <span class="nav-text">基础数据类型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis持久化"><span class="nav-number">1.1.2.</span> <span class="nav-text">Redis持久化：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#过期策略定期删除惰性删除内存淘汰机制"><span class="nav-number">1.1.3.</span> <span class="nav-text">过期策略：定期删除+惰性删除+内存淘汰机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#redis的架构模式"><span class="nav-number">1.1.4.</span> <span class="nav-text">Redis的架构模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关概念"><span class="nav-number">1.1.5.</span> <span class="nav-text">相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存雪崩"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">缓存雪崩</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存穿透"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">缓存穿透</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存击穿"><span class="nav-number">1.1.5.3.</span> <span class="nav-text">缓存击穿</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存预热"><span class="nav-number">1.1.5.4.</span> <span class="nav-text">缓存预热</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存更新"><span class="nav-number">1.1.5.5.</span> <span class="nav-text">缓存更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#缓存降级"><span class="nav-number">1.1.5.6.</span> <span class="nav-text">缓存降级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#热点数据和冷数据"><span class="nav-number">1.1.5.7.</span> <span class="nav-text">热点数据和冷数据：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单线程的redis为什么这么快"><span class="nav-number">1.1.5.8.</span> <span class="nav-text">单线程的redis为什么这么快</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#memcache-vs-redis"><span class="nav-number">1.1.5.9.</span> <span class="nav-text">Memcache VS Redis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis数据库的数据一致性"><span class="nav-number">1.1.5.10.</span> <span class="nav-text">Redis数据库的数据一致性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哨兵模式"><span class="nav-number">1.1.5.11.</span> <span class="nav-text">哨兵模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redis-集群选举"><span class="nav-number">1.1.5.12.</span> <span class="nav-text">redis 集群选举</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">1.2.</span> <span class="nav-text">Mysql</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的基本要素"><span class="nav-number">1.2.1.</span> <span class="nav-text">事务的基本要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事务的并发问题"><span class="nav-number">1.2.2.</span> <span class="nav-text">事务的并发问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事物隔离级别"><span class="nav-number">1.2.3.</span> <span class="nav-text">事物隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储引擎"><span class="nav-number">1.2.4.</span> <span class="nav-text">存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#innodb"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">InnoDB</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">1.2.5.</span> <span class="nav-text">索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#聚集索引-和-辅助索引"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">聚集索引  和  辅助索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库主从同步"><span class="nav-number">1.2.6.</span> <span class="nav-text">数据库主从同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主从复制的数据一致性"><span class="nav-number">1.2.7.</span> <span class="nav-text">主从复制的数据一致性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mvcc"><span class="nav-number">1.2.8.</span> <span class="nav-text">MVCC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最左匹配原则"><span class="nav-number">1.2.9.</span> <span class="nav-text">最左匹配原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#myisam与innodb"><span class="nav-number">1.2.10.</span> <span class="nav-text">MyISAM与InnoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#postgresql-vs-mysql"><span class="nav-number">1.2.11.</span> <span class="nav-text">PostgreSQL  VS MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主键索引和唯一索引区别"><span class="nav-number">1.2.12.</span> <span class="nav-text">主键索引和唯一索引区别</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chengr</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

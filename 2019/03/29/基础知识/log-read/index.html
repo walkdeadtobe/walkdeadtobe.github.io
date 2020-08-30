@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="今天搭建对于kong log读取的系统，来源与师兄的经验，一些坑就可以避免了 这套系统由4部分组成 Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Luce">
+<meta property="og:type" content="article">
+<meta property="og:title" content="log_read">
+<meta property="og:url" content="http://yoursite.com/2019/03/29/基础知识/log-read/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="今天搭建对于kong log读取的系统，来源与师兄的经验，一些坑就可以避免了 这套系统由4部分组成 Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Luce">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-08-30T05:19:27.585Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="log_read">
+<meta name="twitter:description" content="今天搭建对于kong log读取的系统，来源与师兄的经验，一些坑就可以避免了 这套系统由4部分组成 Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Luce">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/03/29/基础知识/log-read/">
+
+
+
+
+
+  <title>log_read | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/29/基础知识/log-read/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">log_read</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-29T15:22:46+08:00">
+                2019-03-29
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:19:27+08:00" content="2020-08-30">
+                2020-08-30
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>今天搭建对于kong log读取的系统，来源与师兄的经验，一些坑就可以避免了<br>
+这套系统由4部分组成</p>
+<p>Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch</p>
+<p>Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Lucene 基础上的搜索引擎，Elastricsearch 不仅包括全文搜索功能，还可以进行</p>
+<ul>
+<li>分布式实时文件存储，将每一个字段都编入索引，使之可以被搜索</li>
+<li>实时分析的分布式搜索引擎</li>
+<li>可以扩展到上百台服务器上，处理PB级别的结果或者非结构化数据</li>
+</ul>
+<p>FIleBeat  是一个日志文件托运工具，在服务器安装客户端后，FIlebeat可以监控日志目录或者指定的日志文件，追踪读取这些文件（追踪文件的变化，不停的读），并且转发这些信息到elasticsearch或者logstarsh中存放。</p>
+<p>Metricbeat可以定期收集操作系统和服务器的运行指标（CPU，内存，硬盘，IO,读写速度，进程等等），Metricbeat可以将收集到的指标和数据发送到你指定的输出，比如：elasticsearch，最终达成监视服务器的目标。</p>
+<p>Kibana是一个开源的分析和可视化平台，设计用于和Elasticsearch一起工作。你用Kibana来搜索，查看，并和存储在Elasticsearch索引中的数据进行交互。你可以轻松地执行高级数据分析，并且以各种图标、表格和地图的形式可视化数据。Kibana使得理解大量数据变得很容易。它简单的、基于浏览器的界面使你能够快速创建和共享动态仪表板，实时显示Elasticsearch查询的变化。</p>
+<p>在安装的过程中，踩了一些坑，备注一下</p>
+<p><font size="6">kong</font></p>
+<p>Log format</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log_format json_log escape=json &apos;&#123; &quot;@timestamp&quot;: &quot;$time_iso8601&quot;, &apos;  &apos;&quot;remote_addr&quot;: &quot;$remote_addr&quot;, &apos;  &apos;&quot;referer&quot;: &quot;$http_referer&quot;, &apos;  &apos;&quot;request&quot;: &quot;$request&quot;, &apos;  &apos;&quot;status&quot;: $status, &apos;  &apos;&quot;bytes&quot;:$body_bytes_sent, &apos;  &apos;&quot;agent&quot;: &quot;$http_user_agent&quot;, &apos;  &apos;&quot;user&quot;: &quot;$http_username&quot;, &apos; &apos;&quot;x_forwarded&quot;: &quot;$http_x_forwarded_for&quot;, &apos;  &apos;&quot;upstr_addr&quot;: &quot;$upstream_addr&quot;,&apos;  &apos;&quot;upstr_host&quot;: &quot;$upstream_http_host&quot;,&apos;  &apos;&quot;ups_resp_time&quot;: &quot;$upstream_response_time&quot; &#125;&apos;;</span><br><span class="line">access_log logs/access.log json_log;</span><br></pre></td></tr></table></figure>
+<p>在配置logstash时，配置数据输入为json ；之后配置filebeat 时同样配置输入json格式数据，之后出现乱码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">syslog &#123;</span><br><span class="line">     type =&gt; &quot;logs&quot;</span><br><span class="line">     port =&gt; 9044</span><br><span class="line">       &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>之后出现乱码，例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;message&quot; =&gt; &quot;%P\\u001A(%\\xBDi\\t\\x83,\\u001FϘ\\xF5H\\x8E$ofw\\x98\\x9F\\xDD\\xFB\\\&quot;&#123;f7\\x9B\\r%W\\u0003\\x9A\\xE3\\xA3\\xF3\\u&#123;7CBF2&#125;\\xDFnnn\\xBE\\xBB\\xB9\\xF9\\xFE\\xDF\\u0013\\xBC&gt;`P\\x9D\\n&quot;,</span><br></pre></td></tr></table></figure>
+<p>错误提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[0] &quot;_grokparsefailure_sysloginput&quot;,</span><br><span class="line">[1] &quot;_jsonparsefailure&quot;</span><br><span class="line">An unexpected error occurred! &#123;:error=&gt;#&lt;Errno::EBADF: Bad file descriptor - Bad file descriptor&gt;, :backtrace=&gt;[&quot;org/jruby/RubyIO.java:3565:in `each&apos;&quot;, &quot;/home/LAB/chengr/ELK/logstash-5.6.3/vendor/bundle/jruby/1.9/gems/logstash-input-syslog-3.2.2/lib/logstash/inputs/syslog.rb:182:in `tcp_receiver&apos;&quot;, &quot;/home/LAB/chengr/ELK/logstash-5.6.3/vendor/bundle/jruby/1.9/gems/logstash-input-syslog-3.2.2/lib/logstash/inputs/syslog.rb:167:in `tcp_listener&apos;&quot;]&#125;</span><br></pre></td></tr></table></figure>
+<p>本来以为是因为 配置filebeat时，对于json输入的配置与logstash的配置出现冲突，以及 FIleBeat中encoding配置的问题，修改之后无效，查看错误时候发现 logstash输入类型和filebeat输出不一致，解析出错(<a href="https://blog.csdn.net/momoudong/article/details/82017852" target="_blank" rel="noopener">https://blog.csdn.net/momoudong/article/details/82017852</a>)<br>
+最终 logstash 配置 test.conf|filebeat_kong.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">input&#123;</span><br><span class="line">   # file &#123;</span><br><span class="line">   #         path =&gt; &quot;/home/LAB/chengr/kong_log/file.log&quot;</span><br><span class="line">   #      &#125;</span><br><span class="line">   beats &#123;</span><br><span class="line">        type =&gt; &quot;nginx-log&quot; #&quot;logs&quot;</span><br><span class="line">        port =&gt; 9044</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">filter&#123;</span><br><span class="line">    json&#123; #获取nginx log日志</span><br><span class="line">        source =&gt; &quot;message&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    mutate&#123;# 删去logstash转化后保留的messegae字段</span><br><span class="line">            remove_field =&gt; [&quot;message&quot;]</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">output&#123;</span><br><span class="line">    stdout &#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; [&quot;10.1.1.46:9200&quot;]</span><br><span class="line">        index =&gt; &quot;system-syslog-%&#123;+YYYY.MM&#125;&quot;</span><br><span class="line">        #document_type =&gt; &quot;logs&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>开启 logstash 命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ELK目录下</span><br><span class="line">ELK/logstash-5.6.3/bin/logstash -f /usr/local/ELK/logstash-5.6.3/config/test.conf(或filebeat_kong.conf)</span><br></pre></td></tr></table></figure>
+<p>错误2：<br>
+更改完上一个错误后 发现报如下错误</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2019-04-01T21:45:13,592][WARN ][logstash.outputs.elasticsearch] Could not index event to Elasticsearch. &#123;:status=&gt;400, :action=&gt;[&quot;index&quot;, &#123;:_id=&gt;nil, :_index=&gt;&quot;system-syslog-2019.04&quot;, :_type=&gt;&quot;log&quot;, :_routing=&gt;nil&#125;, 2019-04-01T13:45:00.925Z bd46 %&#123;message&#125;], :response=&gt;&#123;&quot;index&quot;=&gt;&#123;&quot;_index&quot;=&gt;&quot;system-syslog-2019.04&quot;, &quot;_type&quot;=&gt;&quot;log&quot;, &quot;_id&quot;=&gt;&quot;Cf0l2WkB8VUaRp2hlmvH&quot;, &quot;status&quot;=&gt;400, &quot;error&quot;=&gt;&#123;&quot;type&quot;=&gt;&quot;illegal_argument_exception&quot;, &quot;reason&quot;=&gt;&quot;Rejecting mapping update to [system-syslog-2019.04] as the final mapping would have more than 1 type: [log, logs]&quot;&#125;&#125;&#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>百度后有人是因logstash输出类型与elasticsearch 要求不同导致，即更改logstash输出类型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">document_type =&gt; &quot;logs&quot;</span><br></pre></td></tr></table></figure>
+<p>filebeat 配置filebeat.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">filebeat.prospectors:</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- input_type: log</span><br><span class="line"> # encoding: UTF-8</span><br><span class="line">  paths:</span><br><span class="line">    - /home/LAB/chengr/kong_log/file.log</span><br><span class="line">  json.keys_under_root: true #在一次部署中发现这一行不能识别，最终注释之解决</span><br><span class="line">  #json.add_error_key: true</span><br><span class="line">  #json.message_key: log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">output.logstash:</span><br><span class="line">  #The Logstash hosts</span><br><span class="line">  hosts: [&quot;10.1.1.46:9044&quot;]</span><br></pre></td></tr></table></figure>
+<p>开启filebeat 命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ELK/filebeat-5.6.4-linux-x86_64/filebeat -path.config /usr/local/ELK/filebeat-5.6.4-linux-x86_64/</span><br></pre></td></tr></table></figure>
+<p>elastcisearch 配置 config/elasticsearch.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cluster.name: my-es-cluster</span><br><span class="line">node.name: es-node-1</span><br><span class="line">path.data: /home/LAB/chengr/ELK/data/data-es</span><br><span class="line">path.logs: /home/LAB/chengr/ELK/log/log-es</span><br><span class="line">network.host: 10.1.1.46</span><br><span class="line">http.port: 9200</span><br></pre></td></tr></table></figure>
+<p>开启 elastcisearch 命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ELK/elasticsearch-6.4.2/bin/elasticsearch</span><br></pre></td></tr></table></figure>
+<p>kibana 配置 config/kibana.yml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">server.port: 5601</span><br><span class="line">elasticsearch.url: &quot;http://10.1.1.46:9200&quot;</span><br></pre></td></tr></table></figure>
+<p>开启 kibana 命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ELK/kibana-6.4.2-linux-x86_64/bin/kibana</span><br></pre></td></tr></table></figure>
+<p>10.1.1.45   10.1.1.46 两台服务器以及192.168.1.242 主机（可显示）搭配<br>
+filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash ，logstash指向10.1.1.46上的elasticsearch ，指向 192.168.1.242上的kibana</p>
+<p>2019-5-8<br>
+部署在实际机器上时将配置中ip改为对应的IP</p>
+<p>kibana 添加邮件预警</p>
+<ul>
+<li><a href="http://www.cnblogs.com/small-k/p/8551960.html" target="_blank" rel="noopener">http://www.cnblogs.com/small-k/p/8551960.html</a></li>
+<li><a href="https://blog.51cto.com/10546390/2051676" target="_blank" rel="noopener">https://blog.51cto.com/10546390/2051676</a></li>
+</ul>
+<p>2019-5-19 Error</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">2019-05-19 16:46:00.000	high	email html alarm	watcher_title	ActionError: html email action : obligatory options in email: from and to	 </span><br><span class="line">&#123;</span><br><span class="line">  &quot;@timestamp&quot;: &quot;2019-05-19T08:46:00.031Z&quot;,</span><br><span class="line">  &quot;error&quot;: true,</span><br><span class="line">  &quot;report&quot;: false,</span><br><span class="line">  &quot;watcher&quot;: &quot;watcher_title&quot;,</span><br><span class="line">  &quot;action&quot;: &quot;email html alarm&quot;,</span><br><span class="line">  &quot;level&quot;: &quot;high&quot;,</span><br><span class="line">  &quot;message&quot;: &quot;ActionError: html email action : obligatory options in email: from and to&quot;,</span><br><span class="line">  &quot;type&quot;: &quot;sentinl-alarm&quot;,</span><br><span class="line">  &quot;_index&quot;: &quot;watcher_alarms-2019.05.19&quot;,</span><br><span class="line">  &quot;id&quot;: &quot;ClxEz2oBFTrgm4Wv5XBg&quot;</span><br><span class="line">#原因：这是由于在action 的Email属性中没有指明 to与 from 的邮箱</span><br></pre></td></tr></table></figure>
+<p>配置kong日志格式更改  /etc/kong/kong.conf</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">nigin_http_log_format= log_json &apos;&#123; &quot;@timestamp&quot;: &quot;$time_iso8601&quot;, &apos;</span><br><span class="line">&apos;&quot;remote_addr&quot;: &quot;$remote_addr&quot;, &apos;</span><br><span class="line">&apos;&quot;referer&quot;: &quot;$http_referer&quot;, &apos;</span><br><span class="line">&apos;&quot;request&quot;: &quot;$request&quot;, &apos;</span><br><span class="line">&apos;&quot;status&quot;: $status, &apos;</span><br><span class="line">&apos;&quot;bytes&quot;:$body_bytes_sent, &apos;</span><br><span class="line">&apos;&quot;agent&quot;: &quot;$http_user_agent&quot;, &apos;</span><br><span class="line">&apos;&quot;x_forwarded&quot;: &quot;$http_x_forwarded_for&quot;, &apos;</span><br><span class="line">&apos;&quot;upstr_addr&quot;: &quot;$upstream_addr&quot;,&apos;</span><br><span class="line">&apos;&quot;upstr_host&quot;: &quot;$upstream_http_host&quot;,&apos;</span><br><span class="line">&apos;&quot;ups_resp_time&quot;: &quot;$upstream_response_time&quot; &#125;&apos;;</span><br><span class="line"></span><br><span class="line">nginx_proxy_access_log logs/access.log log_json;</span><br></pre></td></tr></table></figure>
+<p>ps:<a href="https://docs.konghq.com/0.13.x/configuration/?_ga=2.242544130.102618566.1558236281-1173907870.1558236281#proxy_access_log" target="_blank" rel="noopener">kong 相关配置文件</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/26/基础知识/kong/" rel="next" title="Kong">
+                <i class="fa fa-chevron-left"></i> Kong
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/31/基础知识/machine-learning-website/" rel="prev" title="machine_learning_website">
+                machine_learning_website <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chengr</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chengr</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
