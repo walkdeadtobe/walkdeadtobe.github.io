@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="spring security 和 oauth 认证中涉及的环节 ‘’’ UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication 所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)， 然后生成">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-30T05:29:24.191Z">
+<meta property="og:updated_time" content="2020-09-01T08:42:04.482Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring">
 <meta name="twitter:description" content="spring security 和 oauth 认证中涉及的环节 ‘’’ UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication 所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)， 然后生成">
@@ -307,8 +307,8 @@
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:29:24+08:00" content="2020-08-30">
-                2020-08-30
+              <time itemprop="dateUpdated" datetime="2020-09-01T16:42:04+08:00" content="2020-09-01">
+                2020-09-01
               </time>
             </span>
           
@@ -351,6 +351,32 @@ UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authen
 以UsernamePasswordAuthenticationToken实现的带用户名和密码以及权限的Authentication<br>
 url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" rel="noopener">https://www.cnblogs.com/softidea/p/6716807.html</a><br>
 ‘’’</p>
+<p>Spring Aop</p>
+<blockquote>
+<p><a href="https://www.jianshu.com/p/5b9a0d77f95f" target="_blank" rel="noopener">参考1</a><br>
+面向切面编程，在程序开发中主要用来解决一些系统层面上的问题即公用模块，比如日志，事务，权限等待，Struts2的拦截器设计就是基于AOP的思想;在不改变原有的逻辑的基础上，增加一些额外的功能。代理也是这个功能，读写分离也能用aop来做<br>
+应用(注解)：Authentication logging, tracing,Transactions</p>
+</blockquote>
+<p>注解的实现</p>
+<p>Spring IOC/DI</p>
+<blockquote>
+<p>Inversion of Control 控制反转 依赖注入<br>
+IOC ，就是由 Spring IOC 容器来负责对象的生命周期和对象之间的关系<br>
+Mybatic<a href="https://www.w3cschool.cn/mybatis/" target="_blank" rel="noopener">参考</a><br>
+支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。<br>
+dao mapper<br>
+Mybatis的功能架构分为三层：</p>
+</blockquote>
+<ul>
+<li>API接口层：提供给外部使用的接口API，开发人员通过这些本地API来操纵数据库。接口层一接收到调用请求就会调用数据处理层来完成具体的数据处理。</li>
+<li>数据处理层：负责具体的SQL查找、SQL解析、SQL执行和执行结果映射处理等。它主要的目的是根据调用的请求完成一次数据库操作。</li>
+<li>基础支撑层：负责最基础的功能支撑，包括连接管理、事务管理、配置加载和缓存处理，这些都是共用的东西，将他们抽取出来作为最基础的组件。为上层的数据处理层提供最基础的支撑。</li>
+</ul>
+<p>Filter过滤器 VS Interceptor拦截器 VS AOP</p>
+<ul>
+<li>过滤器拦截web访问url地址。 严格意义上讲，filter只是适用于web中，依赖于Servlet容器，利用Java的回调机制进行实现</li>
+<li>拦截器拦截以 .action结尾的url，拦截Action的访问。 Interfactor是基于Java的反射机制（APO思想）进行实现，不依赖Servlet容器</li>
+</ul>
 
       
     </div>
@@ -461,7 +487,7 @@ url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" r
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-count">93</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -474,7 +500,7 @@ url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" r
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">50</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
