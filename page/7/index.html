@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/基础知识/微服务授权/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/19/基础知识/centos/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chengr">
@@ -280,7 +280,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/22/基础知识/微服务授权/" itemprop="url">微服务授权</a></h1>
+                <a class="post-title-link" href="/2019/09/19/基础知识/centos/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-22T21:08:04+08:00">
-                2019-05-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-19T18:12:52+08:00">
+                2019-09-19
               </time>
             
 
@@ -305,7 +305,7 @@
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:18:55+08:00" content="2020-08-30">
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:00+08:00" content="2020-08-30">
                 2020-08-30
               </time>
             </span>
@@ -341,202 +341,14 @@
       
         
           
-            <p>目前准备使用外部授权认证服务与kong结合，kong可能制作简单的限流任务；<br>
-经过查询，发现kong在这里提供两个插件<br>
-<a href="https://docs.konghq.com/hub/kong-inc/oauth2/" target="_blank" rel="noopener">OAuth 2.0 Authentication</a><br>
-和 <a href="https://docs.konghq.com/hub/kong-inc/oauth2-introspection/" target="_blank" rel="noopener">OAuth 2.0 Introspection</a><br>
-前者主要可以提供Oauth 认证服务，而后者支持第三方的授权认证服务器，不过仅支持企业版<br>
-最后找到一个github同仁自己基于 lua开发的相关插件，<a href="https://github.com/mogui/kong-external-oauth" target="_blank" rel="noopener">链接</a></p>
-<p>安装 这个额外插件，重新启动kong 时，luarock 需要luacrypto 去完成加密相关操作，故直接即可  sudo luarocks install luacrypto（从源码配置有点麻烦）</p>
-<p>Spring Security 源码分析系列博客<br>
-<a href="https://niocoder.com/categories/#Security" target="_blank" rel="noopener">链接1</a><br>
-<a href="http://www.liuhaihua.cn/%E5%8F%B2%E4%B8%8A%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84-springcloud-%E6%95%99%E7%A8%8B" target="_blank" rel="noopener">链接2</a></p>
-<p>spring 讲解<br>
-<a href="https://www.cnblogs.com/RunForLove/p/4641672.html" target="_blank" rel="noopener">链接1</a></p>
-<p>spring 默认配置<br>
-<a href="https://www.jianshu.com/p/b02691ff4093" target="_blank" rel="noopener">链接1</a></p>
-<p>springboot+springsecurity+oauth2整合(并用mysql数据库实现持久化客户端数据 <a href="https://blog.csdn.net/Victor_An/article/details/81510874" target="_blank" rel="noopener">链接1</a></p>
-<p>spring登录认证 与 token<br>
-<a href="https://www.huangyunkun.com/2016/03/02/spring-security-form-to-token/" target="_blank" rel="noopener">链接1</a><br>
-<a href="https://www.jianshu.com/p/19059060036b" target="_blank" rel="noopener">链接2</a><br>
-<a href="https://www.jianshu.com/p/68779236aa23" target="_blank" rel="noopener">链接3</a><br>
-<a href="https://www.cnblogs.com/xifengxiaoma/p/10043173.html" target="_blank" rel="noopener">链接4 个人觉得最详细</a><br>
-access_token 获取过程 <a href="https://www.cnblogs.com/lexiaofei/p/7152326.html?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="noopener">链接1</a></p>
-<p>access_token 更改返回 <a href="https://www.jianshu.com/p/d9a35facff6f" target="_blank" rel="noopener">链接1</a></p>
-<p>oauth2数据库 表的说明 <a href="https://www.cnblogs.com/donglu/articles/10218348.html" target="_blank" rel="noopener">链接1</a><br>
-<a href="https://www.bbsmax.com/A/qVdeeNmndP/" target="_blank" rel="noopener">链接2</a><br>
-<a href="http://www.andaily.com/spring-oauth-server/db_table_description.html" target="_blank" rel="noopener">链接3</a></p>
-<p>oauth2 授权过程说明 来自知乎<a href="https://www.zhihu.com/question/19781476" target="_blank" rel="noopener">链接1</a><br>
-<a href="http://andaily.com/spring-oauth-server/db_table_description.html" target="_blank" rel="noopener">链接2</a></p>
-<p>接口测试链接(备用)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">POST http://localhost:8082/oauth/token?grant_type=client_credentials&amp;client_id=curl_client&amp;client_secret=user</span><br><span class="line"></span><br><span class="line">GET http://localhost:8082/oauth/check_token?grant_type=client_credentials&amp;token=445d302d-4fa1-49c4-8800-617bd72dd1e9</span><br></pre></td></tr></table></figure>
-<p>在直接使用JdbcClientDetailsService 直接查询数据时，出现变量为null<br>
-即在非controller 层使用 @AUtowired时，无法取得变量<br>
-使用 如下方法 解决  <a href="https://blog.csdn.net/u013294097/article/details/84192367" target="_blank" rel="noopener">链接</a></p>
-<p>error</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data too long for oauth_code column &apos;authentication&apos;</span><br><span class="line">这是在oauth服务器中获取oauth_code时往数据库插入值时，发生的意外，在网上找到许多奇奇怪怪的方法，行不通，最后发现自己在数据库oauth建表是oauth_code 表 authentication 表项为 VARBINARY 而实际应该是 LONG VARBINARY</span><br></pre></td></tr></table></figure>
-<p>2019-5-21</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">目前，打算借助oauth2 实现SSO ,利用client_credential 来识别不同系统或者应用，只不过比较困惑的是如何定义用户的权限(目前做demou先不考虑)</span><br></pre></td></tr></table></figure>
-<p>2019-5-23<br>
-认证流程<br>
-1.系统A检测是否有token，没有跳转</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8082/oauth/authorize?client_id=test&amp;redirect_uri=http://127.0.0.1&amp;response_type=code&amp;scope=read</span><br></pre></td></tr></table></figure>
-<p>2.填写用户名与密码（图片不对，待更换）<br>
-<img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="登录_png"><br>
-3.返回相应code 到系统A，系统A根据code到授权服务器申请token（部分图片错误，待更改）</p>
-<blockquote>
-<p>获取code<br>
-<img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="获取code_png"></p>
-</blockquote>
-<blockquote>
-<p>根据code获取token<br>
-<img src="https://github.com/walkdeadtobe/picture/raw/master/code_token.png" alt="获取token_png"></p>
-</blockquote>
-<p>4.系统检测到token后，需要到授权系统检测该token对应的用户权限</p>
-<blockquote>
-<p>获取token所对应用户权限<br>
-<img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="检测token_png"></p>
-</blockquote>
-<p>2019-7-24<br>
-最近涉及到单点登陆系统记住用户所登陆的系统，下次访问默认登陆,经过思考可以在cookie里面添加tag字段,在接受登陆请求之后标志所登陆的系统,下次登陆时可以以此作为标志,此外应当保证登陆另外一个系统时，字段值更改(js),这就需要后端向前端传值,由于sprig boot里传递的是modelandview 所以不采用在url链接链接里附上参数的方法，转而 controller层通过Model对象传值到对应的返回页面，返回页面获得相应的参数来做处理;<br>
-前端页面我 使用 thymeleaf模板引擎 渲染,其也有相应的方法取值<br>
-后端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/login&quot;)</span><br><span class="line">    public ModelAndView loginPage(HttpServletRequest request, HttpServletResponse response) &#123;</span><br><span class="line">        RequestCache requestCache= new HttpSessionRequestCache();</span><br><span class="line">        SavedRequest savedrequest = requestCache.getRequest(request,response);</span><br><span class="line">        ModelAndView model = new ModelAndView(&quot;login&quot;);</span><br><span class="line">        model.addObject(&quot;from&quot;, &quot;all&quot;);</span><br><span class="line">       return model;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>前端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">var s_from = [[$&#123;from&#125;]];</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;p  th:text=&quot;#&#123;from&#125;&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>此外，由于需要获得服务启动时服务本身的端口号，需要配置读取 Application.yml 的配置信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># @ConfigurationProperties 注解依赖</span><br><span class="line">&lt;dependency&gt;  </span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  </span><br><span class="line">    &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;  </span><br><span class="line">    &lt;optional&gt;true&lt;/optional&gt;  </span><br><span class="line">&lt;/dependency&gt;  </span><br><span class="line"></span><br><span class="line">#Application.yml 部分内容</span><br><span class="line">server:</span><br><span class="line">  port: 80</span><br><span class="line">  address: 0.0.0.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 配置类</span><br><span class="line">package com.aak.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">@ConfigurationProperties(prefix=&quot;server&quot;) //接收application.yml中的server下面的属性</span><br><span class="line">public class MyApplication &#123;</span><br><span class="line">    public String address;</span><br><span class="line">    public String port;</span><br><span class="line">    public String getUrl() &#123;</span><br><span class="line">        return address;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUrl(String Url) &#123;</span><br><span class="line">        this.address = Url;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getPort() &#123;</span><br><span class="line">        return port;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setPort(String port) &#123;</span><br><span class="line">        this.port = port;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#使用</span><br><span class="line">@Autowired</span><br><span class="line">private MyApplication myApplication ;</span><br><span class="line">String port=myApplication.getPort();</span><br><span class="line">log.info(&quot;port:&quot;+port);</span><br></pre></td></tr></table></figure>
-<p>2019-8-5<br>
-spring security oauth2 authorization code模式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[Spring Security Oauth 相关配置默认实现](https://docs.spring.io/spring-security/oauth/apidocs/org/springframework/security/oauth2/provider/endpoint/package-summary.html),其中包含(后期重新排版)</span><br><span class="line">AuthorizationEndpoint:Implementation of the Authorization Endpoint from the OAuth2 specification.</span><br><span class="line">CheckTokenEndpoint:Controller which decodes access tokens for clients who are not able to do so (or where opaque token values are used).</span><br><span class="line">DefaultRedirectResolver:Default implementation for a redirect resolver.</span><br><span class="line">ExactMatchRedirectResolver:Strict implementation for a redirect resolver which requires an exact match between the registered and requested redirect_uri.</span><br><span class="line">FrameworkEndpointHandlerMapping:A handler mapping for framework endpoints (those annotated with @FrameworkEndpoint).</span><br><span class="line">TokenEndpoint:Endpoint for token requests as described in the OAuth2 spec.</span><br><span class="line">TokenEndpointAuthenticationFilter:An optional authentication filter for the TokenEndpoint.</span><br><span class="line">TokenKeyEndpoint:OAuth2 token services that produces JWT encoded token values.</span><br><span class="line">WhitelabelApprovalEndpoint:Controller for displaying the approval page for the authorization server.</span><br><span class="line">WhitelabelErrorEndpoint:Controller for displaying the error page for the authorization server.</span><br><span class="line"></span><br><span class="line">最近需要在单点登录系统中实现在登录完成之后.跳转回系统跳转登录的页面</span><br><span class="line">code 模式下, </span><br><span class="line">1.跳转 http://localhost:8080/oauth/authorize?client_id=test2&amp;redirect_uri=http://127.0.0.1/oauth/code&amp;response_type=code&amp;scope=read</span><br><span class="line">2.登录成功之后返回code即重定向至http://127.0.0.1/oauth/code?code=CODE</span><br><span class="line">3.http://127.0.0.1/oauth/code?code=CODE获取code,传至后端,后端由此可以根据code获取token以Set-Cookie的方式返回response到页面</span><br><span class="line"></span><br><span class="line">AuthorizationEndpoint 实现 /oauth/authorize 接口,[实现流程](https://www.cnblogs.com/xifengxiaoma/p/10043173.html)中首先检验相关信息正确,之后在code模式下会生成code,并跳转回 redirect_uri?code=CODE</span><br><span class="line">最初以为需要重写 [AuthorizationEndpoint 实现](http://www.javased.com/?source_dir=spring-security-oauth/spring-security-oauth2/src/main/java/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java) 下面 /oauth/authorize 接口,使得最终重定向到redirect_uri后在链接中添加上跳转发生时来源的网址.经过调查没有找到重写 AuthorizationEndpoint 类的方法(spring security 没有提供接口,使得重写类覆盖默认类, 发生作用)</span><br><span class="line">后来发现 跳转时 是 由 window.location.href 实现的,但是无法像request请求一样 拥有 referer header ,即使能够重写 AuthorizationEndpoint 类,也不能从保存的请求中获取 相关header,只能在跳转链接中附上相关信息(暂时没有调研,是否可以在跳转的同时携带相关信息);</span><br><span class="line">问题在于 跳转回redirect_uri是在AuthorizationEndpoint 实现的,具体的地址已经配置好,而且没有找到相关的filter可以在这处理发生后拦截,进行相关逻辑处理,之后想到可以把 redirect_u redirect_uri 中,即redirect_uri=/oauth/code?back_to=原本处理code的地址</span><br><span class="line">以及可以在 跳转链接上 附上 window.location 信息(refer=window.location),然后在 login 中保存相关信息到 当前session,然后在接口中/oauth/code 接口实现中,提取出back_to和 code值,以及附上从session 获得的refer,返回,告知back_to获得token 后应当跳转的地址</span><br><span class="line">完整链接如下:</span><br><span class="line">window.location.href=&apos;http://localhost:8080/oauth/authorize?client_id=test2&amp;redirect_uri=/oauth/code?back_to=http://127.0.0.1/oauth/code&amp;response_type=code&amp;scope=read&amp;refer=&apos;+window.location</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/21/基础知识/watch_dog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/21/基础知识/watch_dog/" itemprop="url">watch_dog</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-21T16:12:45+08:00">
-                2019-05-21
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:37+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>由于需要某些程序一直运行，或者能够自动重启，由此接触到看门狗程序这一概念</p>
+            <p>centos  安装  psycopg2</p>
+<p>直接 pip install psycopg2报错，根据错误 还需要安装 pip install psycopg2-binary/setuptools,以及  yum install gcc<br>
+可能还需要安装</p>
+<ul>
+<li>sudo yum install postgresql-libs</li>
+<li>sudo yum install postgresql-devel</li>
+<li>sudo yum install python-devel</li>
+</ul>
 
           
         
@@ -585,7 +397,7 @@ spring security oauth2 authorization code模式</p>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/基础知识/运维/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/19/README/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chengr">
@@ -604,7 +416,7 @@ spring security oauth2 authorization code模式</p>
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/15/基础知识/运维/" itemprop="url">运维</a></h1>
+                <a class="post-title-link" href="/2019/09/19/README/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -616,8 +428,8 @@ spring security oauth2 authorization code模式</p>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-15T17:03:39+08:00">
-                2019-05-15
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-19T18:12:52+08:00">
+                2019-09-19
               </time>
             
 
@@ -629,7 +441,144 @@ spring security oauth2 authorization code模式</p>
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:24+08:00" content="2020-08-30">
+              <time itemprop="dateUpdated" datetime="2020-09-02T11:53:58+08:00" content="2020-09-02">
+                2020-09-02
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="myblog">myblog</h1>
+<h3 id="plugin">plugin</h3>
+<ul>
+<li>hexo-generator-search</li>
+<li>hexo-renderer-markdown-it</li>
+</ul>
+<h3 id="path">path</h3>
+<p>hexo 配置文件 : “D:\Document\Github_Blog\hexo\config.yml”</p>
+<p>my_github_blog in markdown</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/17/基础知识/Raft/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/17/基础知识/Raft/" itemprop="url">Raft算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-17T11:18:56+08:00">
+                2019-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:20:52+08:00" content="2020-08-30">
                 2020-08-30
               </time>
             </span>
@@ -665,245 +614,910 @@ spring security oauth2 authorization code模式</p>
       
         
           
-            <p>为了测试整个系统的稳定性，写了一个脚本，模仿整个登录过程，中间出错就报错<br>
-了解到一个好工具 selenium<br>
-<a href="https://blog.csdn.net/wkb342814892/article/details/81591394" target="_blank" rel="noopener">如何在centos上安装使用selenium-1</a><br>
-<a href="https://www.bbsmax.com/A/A2dmRBKWze/" target="_blank" rel="noopener">如何在centos上安装使用selenium-2</a></p>
-<p>为了更为精确的监控网页，考虑使用selenium模拟打开每个页面去检查其中网络请求是否正常获得，最终的目标是获取类似chrome开发者模式中Network中的效果，但是经调查发现，selenium中没有对这部分进行实现(或者与其最初目标无关，不考虑实现)，找到的可行的方案是使用 selenium + browsermob-proxy,<br>
-<a href="https://browsermob-proxy-py.readthedocs.io/en/latest/" target="_blank" rel="noopener">browsermob-proxy 官方文档</a><br>
-<a href="https://github.com/webmetrics/browsermob-proxy/downloads" target="_blank" rel="noopener">browsermob-proxy 下载</a></p>
-<p><a href="https://stackoverflow.com/questions/48979520/chrome-headless-proxy-server" target="_blank" rel="noopener">示例代码</a></p>
-<p>记录下中间遇到的问题：</p>
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/09/04/工具/Windows_terminal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/09/04/工具/Windows_terminal/" itemprop="url">windows terminal</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-09-04T22:33:44+08:00">
+                2019-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:26:46+08:00" content="2020-08-30">
+                2020-08-30
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>开始尝试使用windows terminal ,遇到有些问题记录下来<br>
+1.在termianl 进入Ubuntu 继续使用 windows安装的程序</p>
+<ul>
+<li>首先在 ~/.bashrc 中添加可执行程序的路径所在</li>
+<li>使用 chmod +x 标识 可执行程序 可执行</li>
+</ul>
+<p>2.配置 <a href="https://www.addictivetips.com/windows-tips/powershell-command-history-windows-10/" target="_blank" rel="noopener">命令补全</a></p>
+<ul>
+<li>借助 PSReadline</li>
+<li>在 powershell profile 文件中 配置自动化脚本</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/基础知识/Paxos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/08/12/基础知识/Paxos/" itemprop="url">Paxos</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-12T13:40:30+08:00">
+                2019-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:20:52+08:00" content="2020-08-30">
+                2020-08-30
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>博客列表：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/hugb/p/8955505.html" target="_blank" rel="noopener">图解分布式一致性协议Paxos</a></li>
+</ul>
+<p>相关概念</p>
+<ul>
+<li>拜占庭模型:
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">wiki 拜占庭问题</a></li>
+<li>分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。</li>
+</ul>
+</li>
+<li>非拜占庭模型：
+<ul>
+<li>指可能出现故障，但是不会伪造信息的情况(即，要么收不到信息，要么收到真实的信息)</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/工具/Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/22/工具/Git/" itemprop="url">git 学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-22T15:42:16+08:00">
+                2019-07-22
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:26:55+08:00" content="2020-08-30">
+                2020-08-30
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="简介">简介</h3>
+<p>GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)</p>
 <blockquote>
+<p>在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容<br>
+远程内容待补充</p>
+</blockquote>
+<h3 id="目录解析">目录解析</h3>
+<p>.git<br>
+├── COMMIT_EDITMSG<br>
+├── FETCH_HEAD<br>
+├── HEAD<br>
+├── config<br>
+├── description<br>
+├── index<br>
+├── hooks//以下是文件夹<br>
+├── info<br>
+├── logs<br>
+├── objects<br>
+└── refs</p>
+<p>1.git/COMMIT_EDITMSG</p>
+<blockquote>
+<p>记录commit附带的说明，经测试只记录最新的commit 说明</p>
+</blockquote>
+<p>2.git/FETCH_HEAD</p>
+<blockquote>
+<p>记录从远程仓库fetch的各分支的Head</p>
+</blockquote>
+<p>3.git/HEAD</p>
+<blockquote>
+<p>表示当前分支的Head</p>
+</blockquote>
+<p>4.git/config</p>
+<blockquote>
+<p>当前 git仓库的配置文件。保存这 git仓库的远程地址,远程仓库分支等</p>
+</blockquote>
+<p>5.git/index</p>
+<blockquote>
+<p>暂存区:存储时间戳,文件名,文件的SHA值等元数据<br>
+每当我们执行 git add操作的时候， git会给添加的每个文件的内容创建一个对象，然后把这个文件的路径和生成的对象进行映射，存放到 .git/index文件中。等到后期新的命令（比如：git add、 git rm或者 git mv）执行的时候，又会重新更新索引。</p>
+</blockquote>
+<p>6.git/hook</p>
+<blockquote>
+<p>伴随着git的命令所触发的处理脚本,通常在 git init 时拷贝到新目录<br>
+具体脚本可分为客户端和服务端两种,待补充</p>
+</blockquote>
+<p>7.git/info</p>
+<blockquote>
+<p>关于仓库的的其他信息<br>
+例如.git/info/exclude 可以排除本地本人不想提交的文件,只与自己相关,该文件也不会上传,可用于排除私人的某些配置等,注意与全局的 .gitignore 文件区别</p>
+</blockquote>
+<p>8.git/logs</p>
+<blockquote>
+<p>记录仓库各分支上提交的commit操作/修改,可以通过 git log 查看</p>
+</blockquote>
+<p>9.git/objects</p>
+<blockquote>
+<p>真正保存代码的地方。其中分成两种类型的文件，一种是 pack，另外的是 blob文件。其中 pack是根据定位内容非常相似的全部文件，然后为他们之一存储整个内容。之后计算相似文件之间的差异并且只存储差异。而 blob文件就是记录差异。blob是“二进制大对象”（ binary largeobject）的简写，是计算机领域常用术语，用来指代某些可以包含任意数据的变量或文件<br>
+.git/objects:三种类型</p>
+<blockquote>
+<p>blob :实际存储的文件,<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-Objects" target="_blank" rel="noopener">具体详情</a><br>
+tree : 当前project的一个快照,存储多个实体/数据结构(由blob object的git mode,类型,SHA-1值,文件名构成),记录了当前tree下所有文件所指向的blob object<br>
+commit: 记录所产生的tree object,作者,时间,commit msg,上一个commit object<br>
+tag: 根据我查看的文件结构与commit相同,但引用博客中说没有记录tree object,而记录创建tag 所在的commit object,是因为更新了？</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>.git/objects/info 关于object的其他信息<br>
+.git/objects/pack 在git gc  或者 git push 时,git 会将松散的object文件打包压缩,降低存储空间 <a href="https://www.git-scm.com/book/en/v2/Git-Internals-Packfiles" target="_blank" rel="noopener">详情</a></p>
+</blockquote>
+<p>10.git/refs</p>
+<blockquote>
+<p>引用文件<br>
+.git/refs/heads 记录本地各分支最新状态(文件中存储git object 的SHA-1值),即指向最后一次commit提交只有产生的git object<br>
+.git/refs/tags<br>
+.git/refs/remotes 记录远程各分支最新状态(文件中存储git object 的SHA-1值),同样指向本地的git object(每次fetch或者pull会拉去远程的更新)</p>
+</blockquote>
+<h3 id="常见命令及其解析">常见命令及其解析：</h3>
+<ul>
+<li>git &lt;命令&gt; --help</li>
+</ul>
+<blockquote>
+<p>git 查看该命令以及相关参数说明</p>
+</blockquote>
+<ul>
+<li>git add/commit/push/fetch/merge/pull/config</li>
+</ul>
+<blockquote>
+<p>git add <filename><br>
+<code>git fetch origin [branchName]</code><br>
+拉取远程分支的最新commit记录到本地，并把FETCH_HEAD 设置为 最新的commit，等待merge<br>
+<code>git merge </code> <a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging" target="_blank" rel="noopener">解析</a></filename></p>
+</blockquote>
+<ul>
+<li>
+<p>本地分支 和 合并分支 是前后继 的关系：Git 指针移动即可</p>
+</li>
+<li>
+<p>本地分支 和 合并分支 不是前后继的关系：例如master与branch1,此处有两个快照(snapshots) 分别为master和branch1的最新节点以及两者的共同最近祖先,祖先依照时间(一次观察是如此,未找到其他依据)接受 master 和 branch1 相对与祖先的修改,如果master与branch1的修改没有冲突,就形成了一个新快照,Git 会自动创建一次commit 指向它,同时其的祖先节点有两个分别为 master和branch1的最新节点;如果 有冲突,GIT暂时不提供智能化合并,需要手工操作</p>
+</li>
+<li></li>
+<li>
+<p>git checkout</p>
+</li>
+</ul>
+<blockquote>
+<p><code>git checkout &lt;branch-name&gt;</code> 更改分支<br>
+<code>git check -- &lt;path&gt;</code> 将路径下所有文件重置回index状态/最近的commit状态</p>
+</blockquote>
+<ul>
+<li>git clean</li>
+</ul>
+<blockquote>
+<p>从工作目录中删除所有没有track过的文件,常与git reset --hard 一起用</p>
+</blockquote>
+<ul>
+<li>git reset</li>
+</ul>
+<blockquote>
+<p>reset 只影响 被track的文件<br>
+<code>git reset --hard/mixed/soft</code>???</p>
+</blockquote>
+<ul>
+<li>git log</li>
+</ul>
+<blockquote>
+<p>查看 git commit 的历史记录及其 HASH ID</p>
+</blockquote>
+<ul>
+<li>git cat-files</li>
+</ul>
+<blockquote></blockquote>
+<ul>
+<li>回退分支 git checkout VS git reset</li>
+</ul>
+<blockquote></blockquote>
+<h3 id="常见git场景">常见git场景</h3>
+<h4 id="撤销修改">撤销修改</h4>
+<blockquote>
+<p>已修改,未 <code>git add</code> : <code>git checkout  -- &lt;filepathname&gt;</code> 撤销 某文件未 git add提交的缓存,例如 <code>git checkout --</code> .撤销当前目录所有文件的未add 缓存</p>
+</blockquote>
+<blockquote>
+<p>已 <code>git add</code>,未 <code>git commit</code>: <code>git reset HEAD filepathname</code> 可以撤销 <code>git add</code>命令，回退到 已修改,未 <code>git add</code> 状态</p>
+</blockquote>
+<blockquote>
+<p>已 <code>git commit</code>,未 <code>git push</code>: <code>git reset --soft HEAD^</code> 可回退到上次commit的的状态,保持git add 的状态,也可以使用 <code>git reset --soft  &lt;commitid&gt;</code> 回退到任意版本,但是如果使用<code>git reset --hard &lt;commitid&gt;</code> 会丢失之前的修改信息,文件内容直接回退到commitid版本所对应的状态</p>
+</blockquote>
+<h4 id="分支相关">分支相关</h4>
+<blockquote>
+<p>增加分支<br>
+删除分支<br>
+更新远程分支git remote update origin -p<br>
+更新远程分支状态<br>
+<code>git fetch --all</code> 追踪所有远程分支<br>
+<code>git fetch -p/--prune</code> 对远程分支中已删除的,本地同样删除</p>
+</blockquote>
+<p>跟随态 VS 游离态</p>
+<ul>
+<li>跟随态：test</li>
+<li>游离态:test</li>
+</ul>
+<p>参考：<br>
+1.<a href="https://www.siteground.com/tutorials/git/directory-structure/" target="_blank" rel="noopener">Git Directory</a><br>
+2.<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-References" target="_blank" rel="noopener">Git Ref</a><br>
+3.<a href="https://www.git-scm.com/docs/githooks" target="_blank" rel="noopener">Git hooks</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/基础知识/lua/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/10/基础知识/lua/" itemprop="url">lua</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-10T20:20:19+08:00">
+                2019-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:19:27+08:00" content="2020-08-30">
+                2020-08-30
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><br>因为决定学习开发网关kong的插件，所以需要学习lua语言，正在从<a href="https://www.runoob.com/lua/" target="_blank" rel="noopener">Lua 菜鸟教程</a>学习<br>
+<br>关于kong插件开发的博客 <a href="https://www.jianshu.com/p/68457b42b84f" target="_blank" rel="noopener">链接1</a><br>
+<br>发现一个很有意思的lua 模块  :openresty 的lua-resty-template 模块，提供模板渲染的功能<br>
+<br>准备在网关处进行对于token的检验工作，由于没有使用已有的oauth server 插件，所以需要自己写个额外插件<br>
+在这个插件中主要需要完成的工作是从cookie 中 提取出 token ,并以此为凭借到oauth  server 进行相关检验，如果检验成功，应当返回id 以及这个token的ttl ,网关处获得id 应当 将之体现在日志里(插件逻辑处新建header,在nginx日志处自定义日志格式,指明该id或者在网关处建立与oauth server相同的用户体系，起码账户名一致，这样根据id 可以从数据库中提取出相应的consumer credential ,这样的话可以用于后续的基于用户的限流等操作)<br>
+主要点在于1.Lua中进行http 操作  ,<a href="https://github.com/ledgetech/lua-resty-http#request" target="_blank" rel="noopener">Github 源码文档</a><br>
+2.考虑对token进行缓存,[‘token’,‘id’,ttl],这样无需多次存取(可能带来的问题有，注销登录后如何通知网关注销token：这又分为两种注销后不再登录和重新登陆，对于后者可以下次请求经过网关时,注销相同id的键值对)<br>
+<a href="https://github.com/openresty/lua-resty-redis/" target="_blank" rel="noopener">Github lua-resty-redis</a><br>
+<a href="https://github.com/Kong/kong/blob/master/kong/plugins/rate-limiting/policies/init.lua" target="_blank" rel="noopener">Kong rate-limiting 插件</a>中涉及对于redis的操作,可以观摩下</p>
+<p><br>目前在网关处验证用户身份成功后，在后端为避免再次检验身份的需要，因此需要网关提供给后端身份凭据，认可这次身份凭据，同时应当提供某种验证手段，让后端验证请求是否身份凭据是否是真的/是否是伪造<br>
+方案1 ：利用某种对称加密算法,网关对用户身份进行加密,后端以相同的密钥进行解密,得到身份<br>
+确定使用AES算法<a href="https://github.com/openresty/lua-resty-string/" target="_blank" rel="noopener">Github 示例</a>,在网关处使用CBC加密，相同的偏移向量,结果转化为hex格式，传输到python后端，对结果转发，解密，但是解密始终得不到正确的结果，怀疑是<a href="https://blog.csdn.net/diodosu/article/details/51923670" target="_blank" rel="noopener">博客</a>中提到的问题，但是我在测试中设置的加密字段,加密密钥，偏移向量都是16位的，看起来应该不会有填充的问题才对，但是解密仍然失败<br>
+方案2 ：采取非对称加密算法，在网关处向后端传递两个header：userid,encrypted 在网关处按照某种方法加密得到 encrypt header,后端使用同样的方法加密，如果结果相同，则认为 userid 经过了网关的认证，同时加密内容应当是网关与后端之间相互约定的动态的内容</p>
+<p><br>2020-1-10 代码更新，把硬编码信息改为插件的配置输入<br>
+curl -i -X POST <a href="http://localhost:8001/plugins" target="_blank" rel="noopener">http://localhost:8001/plugins</a> <br>
+–data “name=kong-plugin-myplugin” <br>
+–data “config.sso_domain=SS0_DOMAIN” <br>
+–data “config.check_path=CHECK_PATH” <br>
+–data “config.front_domain=FRONT_DOMAIN” <br>
+–data “config.client=CLIENT_JSON”</p>
+<p>其中需要注意的是，kong网关对于插件配置的输入中对于字符 ‘&amp;’ 的支持不好，而使用’\&amp;‘的话，网关处接收后会转化为’\\&amp;’,看起来很不舒服，然后我 使用 ‘\a’ 字符代表 ‘&amp;’,在插件处理逻辑处再替换回来(需要注意的是如果单个的’'存在，会影响 string 转化为 json)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/基础知识/dp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/07/10/基础知识/dp/" itemprop="url">动态规划学习</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-10T20:20:19+08:00">
+                2019-07-10
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:00+08:00" content="2020-08-30">
+                2020-08-30
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>参考资料：</p>
+<ul>
+<li><a href="https://wenku.baidu.com/view/cd5dc88ef80f76c66137ee06eff9aef8951e4854.html" target="_blank" rel="noopener">百度文库资料</a></li>
+<li><a href="https://www.cnblogs.com/Renyi-Fan/p/9285495.html" target="_blank" rel="noopener">博客</a></li>
+</ul>
+<p>动态规划(dynamic programming)<br>
+条件：</p>
 <ol>
-<li>端口冲突，报错</li>
+<li>最优子问题结构</li>
+<li>子问题重叠性质</li>
+<li>无后效性</li>
 </ol>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 160, in &lt;module&gt;</span><br><span class="line">    selenium_example()</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 81, in selenium_example</span><br><span class="line">    proxy=server.create_proxy()</span><br><span class="line">  File &quot;/root/anaconda3/lib/python3.7/site-packages/browsermobproxy/server.py&quot;, line 40, in create_proxy</span><br><span class="line">    client = Client(self.url[7:], params)</span><br><span class="line">  File &quot;/root/anaconda3/lib/python3.7/site-packages/browsermobproxy/client.py&quot;, line 38, in __init__</span><br><span class="line">    self.port = jcontent[&apos;port&apos;]</span><br><span class="line">KeyError: &apos;port&apos;</span><br></pre></td></tr></table></figure>
-<p>经过查看源码，大约猜测是网络端口的问题(后来发现在产生的server.log 中把问题说的很清楚 ( ╯□╰ ))，查看相关文档确定 browsermob-proxy 启动的端口默认是8080 <a href="https://cloud.tencent.com/developer/news/365789" target="_blank" rel="noopener">相关文档</a> ,而服务器中已经使用的端口包括这个，考虑更改其启动的配置参数，按照上述文档的方法下修改，无效报错，经过查看与browsermob-proxy 版本对应 的官方文档<a href="https://browsermob-proxy-py.readthedocs.io/en/latest/server.html" target="_blank" rel="noopener">Server 初始化</a> 以及相应解析源码，重新修改配置<br>
-为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server=Server(&quot;/root/download/browsermob-proxy-2.0-beta-6/bin/browsermob-proxy&quot;,&#123;&quot;host&quot;:&quot;localhost&quot;,&quot;port&quot;:9000&#125;)</span><br></pre></td></tr></table></figure>
-<p>成功</p>
-<blockquote>
-<ol start="2">
-<li>文件引用问题</li>
-</ol>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Traceback (most recent call last):</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 159, in &lt;module&gt;</span><br><span class="line">    selenium_example()</span><br><span class="line">  File &quot;use_for_temporary.py&quot;, line 79, in selenium_example</span><br><span class="line">    server.start()</span><br><span class="line">  File &quot;/root/anaconda3/lib/python3.7/site-packages/browsermobproxy/server.py&quot;, line 122, in start</span><br><span class="line">    raise ProxyServerError(message)</span><br><span class="line">browsermobproxy.exceptions.ProxyServerError: The Browsermob-Proxy server process failed to start. Check &lt;_io.TextIOWrapper name=&apos;/root/py_auto/Gateway_auto/server.log&apos; mode=&apos;w&apos; encoding=&apos;UTF-8&apos;&gt;for a helpful error message.</span><br><span class="line"># server.log</span><br><span class="line">错误: 找不到或无法加载主类 org.browsermob.proxy.Main</span><br></pre></td></tr></table></figure>
-<p>原因：我将browsermob-proxy解压后，将其中bin目录下browsermobproxy专门提取出来，放在一个专门目录下(以为是可执行文件)，引用之，后来发现它和windows下使用的browsermobproxy.bat 一样都是个脚本文件，需要在项目的固定位置<br>
-解决：将引用目录指向目录文件下的browsermobproxy</p>
-<blockquote>
-<ol start="3">
-<li>工具版本适配问题</li>
-</ol>
-</blockquote>
-<p>问题：使用browsermob-proxy +selenium 时候，出现网络请求异常，在查看browsermob-proxy 产生的har记录文件时发现某些网路请求异常，返回-999(no response)或者0,不是正常的返回，但是单独用requests 模块去做请求时，又没有问题，于是考虑是因为webdriver结束过早，考虑过强制sleep,以及 driver.implict_wait(),但是都起不到作用，或者不够明显。<br>
-后来思考了下，我想要做的事情是判断页面是否加载正常，静态数据大多没有太多问题，主要是动态数据，即我所关注或者担心的大部属分请求都是ajax异步请求，前面那些方法可能没有太多作用，于是查找是否有有相关手段使selenium 等待所有ajax请求结束，其中提到了selenium的三种等待方式：强制等待(sleep等方法)，隐式等待(driver.implict_wait(),全局效果)，显式等待(在一定时间内等待某一元素的出现)<br>
-最终采取的是第三种方法，</p>
-<blockquote>
-<p>WebDriverWait(driver, 30).until(lambda s: s.execute_script(“return jQuery.active == 0”))</p>
-</blockquote>
-<p>参考<a href="https://www.cnblogs.com/aoyede/articles/5804184.html" target="_blank" rel="noopener">博客</a></p>
-<p>但是在centos服务器上加上这行代码会出现<br>
-jQuery/$(如果使用 $.active)  no defined<br>
-最开始考虑类似与之前的方法，是因为这段脚本在jQuery加载之前执行引起的错误，后来尝试过强制等待后添加这行代码，无论等待多长时间都没有效果 ,开始怀疑是因为服务器环境的特殊性，于是在window笔记本,ubuntu台式机上尝试都没有异常，然后开始怀疑是环境配置的问题，其中包含的环境配置主要有selenium ,chromdriver,google-chrome,browsermob-proxy<br>
-由于selenium都是用pip安装的最新的，不考虑<br>
-然后发现centos服务器上的google-chrome是最新版76.0.3809.12   ,而windows上是75.0.3770.8，ubuntu上chromium是 v74.0.3729.6然后依据windowsde 配置调整了chromdriver,google-chrome的配置，但是仍然没有效果，最后发现centos 上的browsermob-proxy 是2.0-beta版本，而其他两个是2.14版本，最后调整之后，发现运行没有问题(暂时弄不明白为什么)<br>
-记录下正确的版本配置：<br>
-selenium: 3.141.0<br>
-chromdriver:75.0.3770.90<br>
-google-chrome: 75.0.3770.142<br>
-browsermob-proxy:2.1.4</p>
-<blockquote>
-<p>日志增长的问题</p>
-</blockquote>
-<p>考虑到网关日志增长过大的可能性，考虑到使用脚本定期定量切割日志,重命名，创建新文件，后来发现linux系统中有现成工具 logrotate 可以对日志进行切割，里面的配置完全可以满足个人需求<br>
-可以使用 man  logrotate 查看配置信息 或者  <a href="https://linux.die.net/man/8/logrotate" target="_blank" rel="noopener">logrotate Linxu 官网档案</a></p>
-<blockquote>
-<p>个人配置</p>
-</blockquote>
-<pre><code>位置：/etc/logrotate.d/kong
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/kong/logs/access.log &#123;</span><br><span class="line">    missingok</span><br><span class="line">    rotate 200</span><br><span class="line">    size 10M</span><br><span class="line">    compress</span><br><span class="line">    delaycompress</span><br><span class="line">    notifempty</span><br><span class="line">    create 644 root root</span><br><span class="line">    dateext</span><br><span class="line">    sharedscripts</span><br><span class="line">    postrotate</span><br><span class="line">            if [ -f /var/run/nginx.pid ]; then</span><br><span class="line">                    kill -USR1 `cat /usr/local/kong/pids/nginx.pid`</span><br><span class="line"></span><br><span class="line">            fi</span><br><span class="line">    endscript</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</code></pre>
-<p>原本为 cat /var/run/nginx.pid 后来发现,kong的pid信息存放在/usr/local/kong/pids/nginx.pid<br>
-kill -USR1 在这里指重新加载配置信息，重新建立对日志文件的连接<br>
-详情 man kill/kill -l 或者查看 <a href="http://www.man7.org/linux/man-pages/man2/kill.2.html" target="_blank" rel="noopener">Linux kill 文档</a>  [Linux  signal 文档](<a href="http://www.man7.org/linux/man-pages/man7/signal.7.html" target="_blank" rel="noopener">http://www.man7.org/linux/man-pages/man7/signal.7.html</a></p>
-<p>包装 elastisearch API接口，简化经网关转发提供给外部使用<a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.0/index.html" target="_blank" rel="noopener">Elastisearch 官网开放API 文档</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">获取某一时间 ddj 服务的访问次数</span><br><span class="line">GET /_count</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">      &quot;bool&quot;:&#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">                &quot;range&quot;: &#123;</span><br><span class="line">                  &quot;@timestamp&quot;: &#123;</span><br><span class="line">                    &quot;gte&quot;: &quot;now-100h/h&quot;,</span><br><span class="line">                    &quot;lte&quot;: &quot;now/h&quot;,</span><br><span class="line">                    &quot;format&quot;: &quot;epoch_millis&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ,</span><br><span class="line">        &quot;must&quot;: &#123;</span><br><span class="line">                &quot;match&quot;: &#123;</span><br><span class="line">                  &quot;request&quot;: &#123;</span><br><span class="line">                    &quot;query&quot;: &quot;*ddj*&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">获取某一时间 ddj 服务的访问信息，相比于上者更为详细</span><br><span class="line">GET /_search</span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">      &quot;bool&quot;:&#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">                &quot;range&quot;: &#123;</span><br><span class="line">                  &quot;@timestamp&quot;: &#123;</span><br><span class="line">                    &quot;gte&quot;: &quot;now-100h/h&quot;,</span><br><span class="line">                    &quot;lte&quot;: &quot;now/h&quot;,</span><br><span class="line">                    &quot;format&quot;: &quot;epoch_millis&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ,</span><br><span class="line">        &quot;must&quot;: &#123;</span><br><span class="line">                &quot;match&quot;: &#123;</span><br><span class="line">                  &quot;request&quot;: &#123;</span><br><span class="line">                    &quot;query&quot;: &quot;*ddj*&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,&quot;aggs&quot;: &#123;</span><br><span class="line">            &quot;dateAgg&quot;: &#123;</span><br><span class="line">              &quot;date_histogram&quot;: &#123;</span><br><span class="line">                &quot;field&quot;: &quot;@timestamp&quot;,</span><br><span class="line">                &quot;time_zone&quot;: &quot;Europe/Amsterdam&quot;,</span><br><span class="line">                &quot;interval&quot;: &quot;1m&quot;,</span><br><span class="line">                &quot;min_doc_count&quot;: 1</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>本来想自己开发一个插件，似乎<a href="https://docs.konghq.com/hub/" target="_blank" rel="noopener">Kong Hub</a>上提供的第三方插件 <a href="https://docs.konghq.com/hub/stone-payments/kong-plugin-template-transformer/" target="_blank" rel="noopener">Template Transformer</a> 可以满足需要，<a href="https://github.com/stone-payments/kong-plugin-template-transformer" target="_blank" rel="noopener">源码</a>可以观摩下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST http://localhost:8001/routes/4f240596-9f55-4b90-a2be-2329be72391e/plugins --data &quot;name=kong-plugin-template-transformer&quot;   --data &quot;config.request_template=&apos; &#123;</span><br><span class="line">    &quot;query&quot;: &#123;</span><br><span class="line">      &quot;bool&quot;: &#123;</span><br><span class="line">      &quot;filter&quot;: &#123;</span><br><span class="line">                &quot;range&quot;: &#123;</span><br><span class="line">                  &quot;@timestamp&quot;: &#123;</span><br><span class="line">                    &quot;gte&quot;: &quot;now-&#123;&#123;headers.gt&#125;&#125;h/h&quot;,</span><br><span class="line">                    &quot;lte&quot;: &quot;now/h&quot;,</span><br><span class="line">                    &quot;format&quot;: &quot;epoch_millis&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ,</span><br><span class="line">        &quot;must&quot;: &#123;</span><br><span class="line">                &quot;match&quot;: &#123;</span><br><span class="line">                  &quot;request&quot;: &#123;</span><br><span class="line">                    &quot;query&quot;: &quot;*&#123;&#123;headers.department&#125;&#125;*&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&quot;</span><br><span class="line">&#123;&quot;query&quot;:&#123;&quot;bool&quot;:&#123;&quot;filter&quot;: &#123;&quot;range&quot;: &#123;&quot;@timestamp&quot;:&#123;&quot;gte&quot;: &quot;now-&#123;&#123;headers.gt&#125;&#125;h/h&quot;,&quot;lte&quot;: &quot;now/h&quot;,&quot;format&quot;: &quot;epoch_millis&quot;&#125;&#125;&#125;&#125;&#125;,&quot;size&quot;:0,&quot;aggs&quot;:&#123;&quot;test&quot;:&#123;&quot;terms&quot;:&#123; &quot;field&quot;: &quot;user.keyword&quot;,&quot;size&quot;:&#123;&#123;headers.size&#125;&#125;&#125;&#125;&#125;&#125;&quot;</span><br><span class="line">/api/v1/data/es/list_user</span><br><span class="line">curl -X POST http://localhost:8001/routes/&#123;route&#125;/plugins --data &quot;name=kong-plugin-template-transformer&quot;   --data</span><br><span class="line">&quot;config.request_template=&#123;</span><br><span class="line">      \&quot;query\&quot;: &#123;</span><br><span class="line">        \&quot;bool\&quot;: &#123;</span><br><span class="line">          \&quot;filter\&quot;: &#123;</span><br><span class="line">            \&quot;range\&quot;: &#123;</span><br><span class="line">              \&quot;@timestamp\&quot;: &#123;</span><br><span class="line">                \&quot;gte\&quot;: \&quot;now-&#123;&#123;headers.gt&#125;&#125;h/h\&quot;,</span><br><span class="line">                \&quot;lte\&quot;: \&quot;now/h\&quot;,</span><br><span class="line">                \&quot;format\&quot;: \&quot;epoch_millis\&quot;</span><br><span class="line">                &#125;</span><br><span class="line">               &#125;</span><br><span class="line">              &#125;</span><br><span class="line">             &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">      \&quot;size\&quot;:0,  </span><br><span class="line">      \&quot;aggs\&quot;: &#123;</span><br><span class="line">        \&quot;test\&quot;:&#123;</span><br><span class="line">          \&quot;terms\&quot;:&#123; </span><br><span class="line">          \&quot;field\&quot;: \&quot;user.keyword\&quot;,</span><br><span class="line">          \&quot;size\&quot;:&#123;&#123;headers.size&#125;&#125;</span><br><span class="line">          &#125; </span><br><span class="line">         &#125;  </span><br><span class="line">        &#125;</span><br><span class="line">      &#125;&quot;</span><br><span class="line"></span><br><span class="line">/api\/v1\/data\/es\/history</span><br><span class="line">curl -X POST http://localhost:8001/routes/&#123;route&#125;/plugins --data &quot;name=kong-plugin-template-transformer&quot;   --data</span><br><span class="line">&quot;config.request_template=&#123;</span><br><span class="line">  \&quot;size\&quot;: &#123;&#123;headers.size&#125;&#125;,</span><br><span class="line">  \&quot;query\&quot;: &#123;</span><br><span class="line">    \&quot;bool\&quot;: &#123;</span><br><span class="line">      \&quot;must\&quot;: [</span><br><span class="line">        &#123; \&quot;match\&quot;: &#123;  \&quot;user\&quot;: \&quot;&#123;&#123;headers.name&#125;&#125;\&quot;  &#125; &#125;, </span><br><span class="line">        &#123; \&quot;match\&quot;: &#123; \&quot;_index\&quot;:\&quot;system-syslog*\&quot; &#125; &#125;]    </span><br><span class="line">        &#125;  </span><br><span class="line">      &#125;,</span><br><span class="line">  \&quot;_source\&quot;: &#123;</span><br><span class="line">    \&quot;includes\&quot;: [\&quot;@timestamp\&quot;,\&quot;referer\&quot;,\&quot;request\&quot;,\&quot;user\&quot;]</span><br><span class="line">    &#125;,  </span><br><span class="line">  \&quot;sort\&quot;: [</span><br><span class="line">    &#123;\&quot;@timestamp\&quot;:&#123;\&quot;order\&quot;:\&quot;desc\&quot; ,\&quot;unmapped_type\&quot;:\&quot;date\&quot; &#125; &#125;,    </span><br><span class="line">    &#123;\&quot;_score\&quot;:&#123;\&quot;order\&quot;:\&quot;asc\&quot; &#125; &#125;  </span><br><span class="line">    ]</span><br><span class="line">    &#125;&quot;</span><br></pre></td></tr></table></figure>
-<p>2019-9-24  更改为</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">curl -i -X POST   --url http://localhost:8001/services/-search/routes  --data &apos;paths=/api/v1/data/es/history&apos;</span><br><span class="line">curl -X POST http://localhost:8001/routes/&#123;route_id&#125;/plugins --data &quot;name=kong-plugin-template-transformer&quot;   --data &quot;config.request_template=&#123;</span><br><span class="line">    \&quot;query\&quot;: &#123;</span><br><span class="line">      \&quot;bool\&quot;: &#123;</span><br><span class="line">      \&quot;filter\&quot;: &#123;</span><br><span class="line">                \&quot;range\&quot;: &#123;</span><br><span class="line">                  \&quot;@timestamp\&quot;: &#123;</span><br><span class="line">                    \&quot;gte\&quot;: \&quot;now-&#123;&#123;headers.gt&#125;&#125;h/h\&quot;,</span><br><span class="line">                    \&quot;lte\&quot;: \&quot;now/h\&quot;,</span><br><span class="line">                    \&quot;format\&quot;: \&quot;epoch_millis\&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            ,</span><br><span class="line">        \&quot;must\&quot;: &#123;</span><br><span class="line">                \&quot;match\&quot;: &#123;</span><br><span class="line">                  \&quot;request\&quot;: &#123;</span><br><span class="line">                    \&quot;query\&quot;: \&quot;*&#123;&#123;headers.department&#125;&#125;*\&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">curl -i -X POST   --url http://localhost:8001/services/-search/routes  --data &apos;paths=/api/v1/data/es/history&apos;</span><br><span class="line">&#123;</span><br><span class="line">  \&quot;size\&quot;: &#123;&#123;headers.size&#125;&#125;,</span><br><span class="line">  \&quot;query\&quot;: &#123;</span><br><span class="line">   \&quot;bool\&quot;: &#123;</span><br><span class="line">      \&quot;must\&quot;: [</span><br><span class="line">        &#123; \&quot;match\&quot;: &#123;  \&quot;user\&quot;: \&quot;&#123;&#123;headers.name&#125;&#125;\&quot;  &#125; &#125;,</span><br><span class="line">        &#123; \&quot;match\&quot;: &#123; \&quot;_index\&quot;:\&quot;system-syslog*\&quot; &#125; &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  \&quot;_source\&quot;: &#123;</span><br><span class="line">    \&quot;includes\&quot;: [</span><br><span class="line">     \&quot;@timestamp\&quot;,</span><br><span class="line">      \&quot;referer\&quot;,</span><br><span class="line">      \&quot;request\&quot;,</span><br><span class="line">      \&quot;user\&quot;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  \&quot;sort\&quot;: [</span><br><span class="line">    &#123;\&quot;@timestamp\&quot;:&#123;\&quot;order\&quot;:\&quot;desc\&quot; ,\&quot;unmapped_type\&quot;:\&quot;date\&quot; &#125; &#125;,</span><br><span class="line">    &#123;\&quot;_score\&quot;:&#123;\&quot;order\&quot;:\&quot;asc\&quot; &#125; &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">curl -i -X POST   --url http://localhost:8001/services/-search/routes  --data &apos;paths=/api/v1/data/es/list_user&apos;</span><br><span class="line">curl -X POST http://localhost:8001/routes/ad0226f7-0877-4557-b81b-f30cd227cf61/plugins --data &quot;name=kong-plugin-template-transformer&quot;   --data &quot;config.request_template=&#123;</span><br><span class="line">    \&quot;query\&quot;: &#123;</span><br><span class="line">      \&quot;bool\&quot;: &#123;</span><br><span class="line">      \&quot;filter\&quot;: &#123;</span><br><span class="line">                \&quot;range\&quot;: &#123;</span><br><span class="line">                  \&quot;@timestamp\&quot;: &#123;</span><br><span class="line">                    \&quot;gte\&quot;: \&quot;now-&#123;&#123;headers.gt&#125;&#125;h/h\&quot;,</span><br><span class="line">                    \&quot;lte\&quot;: \&quot;now/h\&quot;,</span><br><span class="line">                    \&quot;format\&quot;: \&quot;epoch_millis\&quot;</span><br><span class="line">                  &#125;</span><br><span class="line">                &#125;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">  \&quot;size\&quot;:0,</span><br><span class="line">  \&quot;aggs\&quot;: &#123;</span><br><span class="line">    \&quot;test\&quot;: &#123;</span><br><span class="line">      \&quot;terms\&quot;: &#123;</span><br><span class="line">        \&quot;field\&quot;: \&quot;user.keyword\&quot;,</span><br><span class="line">        \&quot;size\&quot;:&#123;&#123;headers.size&#125;&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;&quot;</span><br></pre></td></tr></table></figure>
-<p>luarocks make<br>
-luarocks pack kong-plugin-myplugin 0.1.0-1<br>
-luarocks install kong-plugin-myplugin-0.1.0-1.all.rock<br>
-kong restart</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/15/工作求职/Spring/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/15/工作求职/Spring/" itemprop="url">Spring</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-15T17:03:39+08:00">
-                2019-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-09-01T16:42:04+08:00" content="2020-09-01">
-                2020-09-01
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>spring security 和 oauth 认证中涉及的环节<br>
-‘’’<br>
-UsernamePasswordAuthenticationToken继承AbstractAuthenticationToken实现Authentication<br>
-所以当在页面中输入用户名和密码之后首先会进入到UsernamePasswordAuthenticationToken验证(Authentication)，<br>
-然后生成的Authentication会被交由AuthenticationManager来进行管理<br>
-而AuthenticationManager管理一系列的AuthenticationProvider，<br>
-而每一个Provider都会通UserDetailsService和UserDetail来返回一个<br>
-以UsernamePasswordAuthenticationToken实现的带用户名和密码以及权限的Authentication<br>
-url= <a href="https://www.cnblogs.com/softidea/p/6716807.html" target="_blank" rel="noopener">https://www.cnblogs.com/softidea/p/6716807.html</a><br>
-‘’’</p>
-<p>Spring Aop</p>
-<blockquote>
-<p><a href="https://www.jianshu.com/p/5b9a0d77f95f" target="_blank" rel="noopener">参考1</a><br>
-面向切面编程，在程序开发中主要用来解决一些系统层面上的问题即公用模块，比如日志，事务，权限等待，Struts2的拦截器设计就是基于AOP的思想;在不改变原有的逻辑的基础上，增加一些额外的功能。代理也是这个功能，读写分离也能用aop来做<br>
-应用(注解)：Authentication logging, tracing,Transactions</p>
-</blockquote>
-<p>注解的实现</p>
-<p>Spring IOC/DI</p>
-<blockquote>
-<p>Inversion of Control 控制反转 依赖注入<br>
-IOC ，就是由 Spring IOC 容器来负责对象的生命周期和对象之间的关系<br>
-Mybatic<a href="https://www.w3cschool.cn/mybatis/" target="_blank" rel="noopener">参考</a><br>
-支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。<br>
-dao mapper<br>
-Mybatis的功能架构分为三层：</p>
-</blockquote>
+<p>动态规划分类</p>
 <ul>
-<li>API接口层：提供给外部使用的接口API，开发人员通过这些本地API来操纵数据库。接口层一接收到调用请求就会调用数据处理层来完成具体的数据处理。</li>
-<li>数据处理层：负责具体的SQL查找、SQL解析、SQL执行和执行结果映射处理等。它主要的目的是根据调用的请求完成一次数据库操作。</li>
-<li>基础支撑层：负责最基础的功能支撑，包括连接管理、事务管理、配置加载和缓存处理，这些都是共用的东西，将他们抽取出来作为最基础的组件。为上层的数据处理层提供最基础的支撑。</li>
+<li>线性型
+<ul>
+<li>简介：在线性空间上的递推dp</li>
+<li>思路：</li>
+<li>例子：最长上升子序列(LIS)、最长公共子序列(LCS)、最大子序列和</li>
 </ul>
-<p>Filter过滤器 VS Interceptor拦截器 VS AOP</p>
+</li>
+<li>区间型
 <ul>
-<li>过滤器拦截web访问url地址。 严格意义上讲，filter只是适用于web中，依赖于Servlet容器，利用Java的回调机制进行实现</li>
-<li>拦截器拦截以 .action结尾的url，拦截Action的访问。 Interfactor是基于Java的反射机制（APO思想）进行实现，不依赖Servlet容器</li>
+<li>简介：区间dp就是在区间上进行动态规划，求解一段区间上的最优解。可以是二维的也可以是三维的，一般情况下为二维；</li>
+<li>思路：主要是通过合并小区间的 最优解进而得出整个大区间上最优解的dp算法</li>
+<li>例子：</li>
+</ul>
+</li>
+<li>背包型
+<ul>
+<li>简介：</li>
+<li>思路：</li>
+<li>例子：0-1背包、完全背包、分组背包、多重背包</li>
+</ul>
+</li>
+<li>树型
+<ul>
+<li>简介：建立在树这种数据结构上的dp</li>
+<li>思路：一般可以通过dfs维护从根到叶子或从叶子到根的状态转移</li>
+</ul>
+</li>
+<li>其他
+<ul>
+<li>矩阵型</li>
+<li>序列型</li>
+<li>双序列型</li>
+<li>划分型</li>
+<li>状态压缩型</li>
+</ul>
+</li>
 </ul>
 
           
@@ -953,7 +1567,7 @@ Mybatis的功能架构分为三层：</p>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/基础知识/authen-server/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/09/基础知识/regex/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chengr">
@@ -972,7 +1586,7 @@ Mybatis的功能架构分为三层：</p>
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/14/基础知识/authen-server/" itemprop="url">authen_server</a></h1>
+                <a class="post-title-link" href="/2019/07/09/基础知识/regex/" itemprop="url">regex</a></h1>
         
 
         <div class="post-meta">
@@ -984,8 +1598,8 @@ Mybatis的功能架构分为三层：</p>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-14T17:11:39+08:00">
-                2019-05-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-09T10:27:42+08:00">
+                2019-07-09
               </time>
             
 
@@ -997,7 +1611,7 @@ Mybatis的功能架构分为三层：</p>
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:21:09+08:00" content="2020-08-30">
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:23:03+08:00" content="2020-08-30">
                 2020-08-30
               </time>
             </span>
@@ -1033,44 +1647,17 @@ Mybatis的功能架构分为三层：</p>
       
         
           
-            <p>2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录<br>
-如何用idea 打包 maven项目<br>
-‘’’<br>
-用idea中maven 打开项目，点击idea 右侧的 Maven Projects，<br>
-点击 LIfecycle -&gt; install -&gt; run maven build 即可<br>
-‘’’<br>
-之后 将该项目scp至服务器<br>
-使用 java -jar *.jar 运行<br>
-在运行时出现一些错误，如下</p>
-<p>‘’’<br>
-2019-05-14 17:06:35.986 ERROR 1180706 — [ost-startStop-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.</p>
-<p>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</p>
-<p>The last packet successfully received from the server was 199 milliseconds ago.  The last packet sent successfully to the server was 192 milliseconds ago.<br>
-at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_181]<br>
-at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_181]<br>
-…<br>
-…<br>
-… 154 common frames omitted<br>
-Caused by: java.security.cert.CertPathValidatorException: Path does not chain with any of the trust anchors<br>
-at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:154) ~[na:1.8.0_181]<br>
-at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:80) ~[na:1.8.0_181]<br>
-at java.security.cert.CertPathValidator.validate(CertPathValidator.java:292) ~[na:1.8.0_181]<br>
-at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(ExportControlled.java:295) ~[mysql-connector-java-5.1.46.jar!/:5.1.46]<br>
-… 156 common frames omitted</p>
-<p>‘’’<br>
-经查询(<a href="https://www.jianshu.com/p/b3151ca89def" target="_blank" rel="noopener">https://www.jianshu.com/p/b3151ca89def</a> ）发现是因为SSL配置的原因（暂时没有细究），在源代码 application.yml 文件中将useSSL=true 改为 false即可，重新打包，scp，运行</p>
-<p>在查询过程中发现之后可能会出现的另一个问题，即在长时间未连接mysql时会报类似的 Communications link failure 错误，不过这里是因为mysql默认配置 无连接最长等待时间是8小时，可以通过修改配置文件 mysql.ini 去解决这个错误</p>
-<p>在此之前需要在服务器安装mysql<br>
-按照官网教程(下面的是Ubuntu下的，如果安装在redhat上，会有一些区别 ，具体参照官方教程 <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/</a>)</p>
-<ul>
-<li>wget <a href="https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</a></li>
-<li>也可以选择检查 文件传输中是否出错 md5sum mysql-apt-config_0.8.13-1_all.deb</li>
-<li>之后运行 dpkg -i mysql-apt-config_0.8.13-1_all.deb，选择你所需要安装的mysql版本，程序会将之添加到apt源中</li>
-<li>运行 sudo apt-get update （–fix-missing）</li>
-<li>自动下载之后需要配置用户名与密码，需要与你在spring程序中配置的一致</li>
-</ul>
-<p>进入数据库 mysql -u root -p ,之后输入密码</p>
-
+            <p>最近需要从nginx header中提取出变量，需要学习正则表达式相关知识<br>
+<a href="https://www.runoob.com/regexp/regexp-tutorial.html" target="_blank" rel="noopener">菜鸟教程 正则表达式</a></p>
+<blockquote>
+<p>可以使用 $1 $2 $3等来表示匹配的变量<br>
+例如 对于字符串  A90B3C  ,正则表达式  /A(\d+)B(\d+)C/  匹配的 $1=90 $2=3<br>
+亦或者 对于正则表达式 /A((\d+)B)(\d+)C/  匹配的 $1=90B  $2=90  $3=3</p>
+</blockquote>
+<br>
+>对实际应用可以匹配  $http_cookie ~ token=([a-z0-9]*);api_key=([a-z0-9]*)
+在实际搜素中发现有人使用 {variable}以及<variable> 来匹配变量 variable ，但是在查询文档中没有发现这种用法，也欸有试过是否能用
+</variable>
           
         
       
@@ -1118,7 +1705,7 @@ at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(Ex
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/01/基础知识/Machine_learning_course/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/29/基础知识/nginx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chengr">
@@ -1137,7 +1724,7 @@ at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(Ex
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/01/基础知识/Machine_learning_course/" itemprop="url">Machine_learning_course</a></h1>
+                <a class="post-title-link" href="/2019/06/29/基础知识/nginx/" itemprop="url">nginx</a></h1>
         
 
         <div class="post-meta">
@@ -1149,8 +1736,8 @@ at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(Ex
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-01T10:43:46+08:00">
-                2019-05-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-06-29T17:31:56+08:00">
+                2019-06-29
               </time>
             
 
@@ -1162,7 +1749,7 @@ at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(Ex
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:23:59+08:00" content="2020-08-30">
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:00+08:00" content="2020-08-30">
                 2020-08-30
               </time>
             </span>
@@ -1198,608 +1785,37 @@ at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(Ex
       
         
           
-            <p>2019-5-10<br>
-机器学习布置作业，6-15前交，内容未知<br>
-基于主成分分析方法的人脸识别方法</p>
-<ul>
-<li>之前是寻找空间特征，某一局部点</li>
-<li>人脸识别的核心问题是提取特征(人脸的相关性打，冗余信息多？如何去除：主成分分析，如何将一个矩阵变成一个向量)</li>
-<li>PCA方法的优缺点：从压缩能量的角度，PCA是最有效率的，可以用于维度压缩</li>
-<li>PCA  FisherDiscriminant analysis or LDA</li>
-<li>kErnel PCA</li>
-<li>KFDA</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/28/基础知识/NLP/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/28/基础知识/NLP/" itemprop="url">NLP</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-28T16:42:56+08:00">
-                2019-04-28
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:23:04+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2019-4-28 周日下午<br>
-NLP aligment</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/基础知识/人脸识别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/27/基础知识/人脸识别/" itemprop="url">人脸识别</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-27T22:00:32+08:00">
-                2019-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:24+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>PCA方法学习：解释得比较清楚<br>
-<a href="https://blog.csdn.net/qq_32865355/article/details/80809835" target="_blank" rel="noopener">https://blog.csdn.net/qq_32865355/article/details/80809835</a></p>
-<p>github 开源方案<br>
-<a href="https://github.com/ahhda/Face-Recogntion" target="_blank" rel="noopener">https://github.com/ahhda/Face-Recogntion</a><br>
-<a href="https://github.com/ageitgey/face_recognition" target="_blank" rel="noopener">https://github.com/ageitgey/face_recognition</a></p>
-<p>相关论文<br>
-<a href="https://blog.csdn.net/tMb8Z9Vdm66wH68VX1/article/details/83155487" target="_blank" rel="noopener">https://blog.csdn.net/tMb8Z9Vdm66wH68VX1/article/details/83155487</a></p>
-<p>CNN 实现 人脸识别<br>
-<a href="https://blog.csdn.net/u012162613/article/details/43277187" target="_blank" rel="noopener">https://blog.csdn.net/u012162613/article/details/43277187</a><br>
-<a href="https://blog.csdn.net/zouxy09/article/details/8781543" target="_blank" rel="noopener">https://blog.csdn.net/zouxy09/article/details/8781543</a></p>
-<p>相关github 代码<br>
-<a href="https://github.com/wepe/MachineLearning" target="_blank" rel="noopener">https://github.com/wepe/MachineLearning</a></p>
-<p>faceCascade.detectMultiScale 从图像中找出人脸<br>
-theano.shared可以看作是将变量设置为全局变量，其值可以在多个函数中共用<br>
-theano.tensor.dot(X, Y) 简单的看做XY 矩阵相乘 或者说 内积<br>
-maxpooling 、average_pooling ？？</p>
-<p>tensor库函数解释<br>
-<a href="http://deeplearning.net/software/theano/library/tensor/basic.html" target="_blank" rel="noopener">http://deeplearning.net/software/theano/library/tensor/basic.html</a></p>
-<p>损失函数的分类（交叉熵） <a href="https://www.jianshu.com/p/47172eb86b39" target="_blank" rel="noopener">https://www.jianshu.com/p/47172eb86b39</a></p>
-<p>神经网络 数学公式 表达 <a href="https://blog.csdn.net/sinat_35821976/article/details/80615612" target="_blank" rel="noopener">https://blog.csdn.net/sinat_35821976/article/details/80615612</a></p>
-<p>分类器用的是softmax  <a href="https://www.cnblogs.com/python-frog/p/9380290.html" target="_blank" rel="noopener">https://www.cnblogs.com/python-frog/p/9380290.html</a><br>
-，LeNet5用的是rbf？？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/基础知识/决策树/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/27/基础知识/决策树/" itemprop="url">决策树</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-27T11:26:38+08:00">
-                2019-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:24+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天上课提及了决策树，随机森林，Dropout，Deepforest(周志华)<br>
-目前而言，决策树指对于一个集合，依此以某种确定特征作为分类标准，从而将该集合分为若干类(每个节点都代表一个分类或者一种决策标准)<br>
-随机森林，指在每个节点，随机选择某个特征从而构建一个线性分类器，将样本分为几部分</p>
-<p>Boosted Cascades VS 随机森林<br>
-前者是一个不平衡的树，适合不均匀的分类问题</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/基础知识/数据结构/map_and_set/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/23/基础知识/数据结构/map_and_set/" itemprop="url">map_and_set</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-23T19:31:56+08:00">
-                2019-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:24:29+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>
-List VS Map VS Set</p>
-<ul>
-<li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li>
-<li>Map ：键值对Key-value</li>
-<li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li>
-</ul>
-<p>HashMap VS TreeMap<br>
-HashSet VS TreeSet<br>
-在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>
-但是 哈希表的实现是无序的，而树的实现是有序的</p>
-<p>题目：242（Leetcode） Valid Anagrant<br>
-题意：对给定的两个字符串，判断是否是同一单词的错位变换</p>
-<ul>
-<li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>
-$$ O(Nlog^N) $$</li>
-<li>方法2：构造Map，比较Map是否相同算法复杂度<br>
-$$ O(N) $$</li>
-</ul>
-<p>题目：Two Sum(Three Sum)<br>
-题意：给定一个数组，以及value，输出数组中和为value的元素下标</p>
-<ul>
-<li>方法1：暴力方法时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-<li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>
-$$<br>
-O(N)<br>
-$$</li>
-</ul>
-<p>那么对于ThreeSum</p>
-<ul>
-<li>方法1：暴力 时间复杂度<br>
-$$<br>
-O(N^3)<br>
-$$</li>
-<li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-<li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-<li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-</ul>
+            <blockquote>
+<p>rewrite规则必须匹配对应的域名才能生效，比如是server_name <a href="http://xn--aa-tz2c.com" target="_blank" rel="noopener">为aa.com</a> 下的rewrite 规则，则必须访问时前缀是 <a href="http://aa.com" target="_blank" rel="noopener">aa.com</a> ，rewrite规则才能生效</p>
+</blockquote>
+<p>在 nginx 反向代理处直接拒绝不携带token的请求</p>
+<blockquote>
+<p>在 server 内 ，loaction 前对于所有请求 判断cookie内是否携带token(先不管token是否有效)，其中排除对包含code/oauth/static的请求，如果不携带，则使之跳转到授权服务器，登录后自动跳转到首页</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// if ( $request_uri ~* (.*)210.14.118.96(.*))</span><br><span class="line"> // &#123;  rewrite ^/(.*)$  http://localhost:80/$1 break; &#125;</span><br><span class="line">  set $flag 1;</span><br><span class="line"></span><br><span class="line">  if ( $http_cookie ~* (.*)token=(.*) )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)code=(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)oauth(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)static(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)/js/(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $request_uri ~* (.*)/css/(.*))</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $http_referer = &quot;http://210.14.118.96/&quot; )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $http_referer = &quot;&quot; )</span><br><span class="line">  &#123; set $flag 0; &#125;</span><br><span class="line"></span><br><span class="line">  if ( $flag = 1)&#123;</span><br><span class="line">  //rewrite ^(.*)$ http://111.203.146.69/oauth/authorize?client_id=kexie&amp;redirect_uri=http://210.14.118.96/ep/cookie.html&amp;response_type=code&amp;scope=read permanent;# redirect;</span><br><span class="line">  return 301  http://111.203.146.69/oauth/authorize?client_id=kexie&amp;redirect_uri=http://210.14.118.96/ep/cookie.html&amp;response_type=code&amp;scope=read;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>需要注意的是 从网上博客看，/etc/nginx/nginx.conf 的优先级比 /etc/nginx/conf.d/* 以及/etc/nginx/sites-enables/*优先级高，  但是如果后面的配置中标明了default_server，那么优先级应该是更高的(实际效果，没有去网上查找核实);导致后者的server_name:_  覆盖了前者的server_name:210.14.118.96</p>
+</blockquote>
+<p>在vue项目中 ，全局配置使得请求携带cookie<br>
+修改 ./src/main.js 添加 <a href="https://github.com/pagekit/vue-resource/issues/191" target="_blank" rel="noopener">相关问题连接</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &quot;vue&quot;;</span><br><span class="line">import VueAwesomeSwiper from &apos;vue-awesome-swiper&apos;</span><br><span class="line">import &apos;swiper/dist/css/swiper.css&apos;</span><br><span class="line">import App from &quot;./App.vue&quot;;</span><br><span class="line">import router from &quot;@/router/index&quot;;</span><br><span class="line">import store from &quot;@/store/index&quot;;</span><br><span class="line">import ElementUI from &quot;element-ui&quot;</span><br><span class="line">import &apos;element-ui/lib/theme-chalk/index.css&apos;</span><br><span class="line">import echarts from &quot;echarts&quot;;</span><br><span class="line">import &#123; debounce &#125; from &quot;@/assets/scripts/util&quot;;</span><br><span class="line">import starSky from &quot;@/assets/scripts/common/canvas.js&quot;;</span><br><span class="line">import echartTheme from &quot;@/constant/chalk.project.json&quot;</span><br><span class="line">//添加内容-开始</span><br><span class="line">import VueResource from &apos;vue-resource&apos;</span><br><span class="line">Vue.use(VueResource)</span><br><span class="line">Vue.http.options.xhr = &#123; withCredentials: true &#125;;</span><br><span class="line">//添加内容-结束</span><br><span class="line">echarts.registerTheme(&quot;chalk&quot;, echartTheme);</span><br><span class="line">Vue.config.productionTip = false;</span><br><span class="line">Vue.use(VueAwesomeSwiper)</span><br><span class="line">Vue.use(ElementUI)</span><br><span class="line">Vue.prototype.$charts = echarts;</span><br><span class="line">Vue.prototype.$debounce = debounce;</span><br><span class="line">Vue.prototype.$starSky = starSky;</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  render: h =&gt; h(App)</span><br><span class="line">&#125;).$mount(&quot;#app&quot;);</span><br></pre></td></tr></table></figure>
+<p>此外报错，需要安装插件</p>
+<blockquote>
+<p>npm install --save vue-resource</p>
+</blockquote>
+<blockquote>
+<p>清除cookie 使用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">document.cookie = &quot;token=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/&quot;; </span><br><span class="line">document.cookie = &quot;token=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/ep&quot;;</span><br></pre></td></tr></table></figure>
+<p>而 setCookie()不能删除不同域下cookie</p>
+<blockquote>
+<p>当使用 upstream 代指 上游 多个可用服务器，nginx会根据 error  timeout 来自动替换选择 可用服务器，但是不支持对于有状态码的返回，此外我们可以配置自动检查后端情况以及相应处理 ,<a href="https://www.nginx.com/resources/wiki/modules/healthcheck/" target="_blank" rel="noopener">Nginx ngx_http_healthcheck_module</a>  <a href="https://github.com/cep21/healthcheck_nginx_upstreams/blob/master/README" target="_blank" rel="noopener">Github healthcheck_nginx_upstreams</a><br>
+而在目前项目中，由于前端nginx调用后面网关 ，所以需要已具有某些状态码来决定是否轮替， 例如</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">upstream backends &#123;</span><br><span class="line">server 192.2.0.1;</span><br><span class="line">server 192.2.0.2;</span><br><span class="line">…</span><br><span class="line">&#125;</span><br><span class="line">server&#123;</span><br><span class="line">  location / &#123;</span><br><span class="line">  proxy_pass http://backends;</span><br><span class="line">  proxy_next_upstream error timeout http_404 http_502 http_500;#依据状态码确定轮替，此外在 多个nginx转发情况下使用 timeout，会导致其它一些问题，简单的方式是除去timeout </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>出于实际需要，需要在kong网关处进行添加自定义插件，其中逻辑需要添加自定义header，使用 ngx.request.set_header(name,value)<br>
+但是发现自己在网关处添加的header无法传递到(Django)后端,遍历httprequest.MEAT也没有发现，最终经过查询发现 nginx 默认(可以通过配置 underscores_in_headers  on)不允许 header name 中携带 下划线,可以除去下划线或者用’-‘代替’<em>’,但是好奇的是在网关处 带下划线的header 仍然可以使用<br>
+可以使用 ngx.req.get_header(name) 查询，以及在日志中也可以配置 http_name得到值，或许只是不能够传出去??</em></p>
 
           
         
@@ -1839,7 +1855,7 @@ $$</li>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1885,7 +1901,7 @@ $$</li>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">108</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1898,7 +1914,7 @@ $$</li>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

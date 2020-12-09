@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JAVA 泛型 java为什么要用类型擦除实现泛型？详解 泛型是将类型作为参数,实现代码复用可以保证  定义一次类,可以被各种类使用 具体使用时,只保存自己定义类型,而不是object引用  C++ 实现 利用宏定义实现代码替换,来实现模板类,在编译期对不同类型基于模板类生成不同的代码,代码冗余 JAVA java 泛型在底层利用Object引用实现泛型,编译时做类型检查，在运行时擦除 java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试常见题全面分析">
+<meta property="og:url" content="http://yoursite.com/2020/09/10/工作求职/面试常见题全面分析/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="JAVA 泛型 java为什么要用类型擦除实现泛型？详解 泛型是将类型作为参数,实现代码复用可以保证  定义一次类,可以被各种类使用 具体使用时,只保存自己定义类型,而不是object引用  C++ 实现 利用宏定义实现代码替换,来实现模板类,在编译期对不同类型基于模板类生成不同的代码,代码冗余 JAVA java 泛型在底层利用Object引用实现泛型,编译时做类型检查，在运行时擦除 java">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-10-08T11:31:16.293Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试常见题全面分析">
+<meta name="twitter:description" content="JAVA 泛型 java为什么要用类型擦除实现泛型？详解 泛型是将类型作为参数,实现代码复用可以保证  定义一次类,可以被各种类使用 具体使用时,只保存自己定义类型,而不是object引用  C++ 实现 利用宏定义实现代码替换,来实现模板类,在编译期对不同类型基于模板类生成不同的代码,代码冗余 JAVA java 泛型在底层利用Object引用实现泛型,编译时做类型检查，在运行时擦除 java">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/10/工作求职/面试常见题全面分析/">
+
+
+
+
+
+  <title>面试常见题全面分析 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/10/工作求职/面试常见题全面分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面试常见题全面分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-10T14:13:31+08:00">
+                2020-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-10-08T19:31:16+08:00" content="2020-10-08">
+                2020-10-08
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="java">JAVA</h2>
+<h3 id="泛型">泛型</h3>
+<p><a href="http://www.itxm.cn/post/4185.html" target="_blank" rel="noopener">java为什么要用类型擦除实现泛型？详解</a><br>
+泛型是将类型作为参数,实现代码复用可以保证</p>
+<ul>
+<li>定义一次类,可以被各种类使用</li>
+<li>具体使用时,只保存自己定义类型,而不是object引用</li>
+</ul>
+<h4 id="c-实现">C++ 实现</h4>
+<p>利用宏定义实现代码替换,来实现模板类,在编译期对不同类型基于模板类生成不同的代码,代码冗余</p>
+<h4 id="java">JAVA</h4>
+<p>java 泛型在底层利用Object引用实现泛型,编译时做类型检查，在运行时擦除<br>
+java 泛型在对象进和出的时候强制对象类型转换为Object和目标对象,仅仅是引用的转换</p>
+<h3 id="重写的实现">重写的实现</h3>
+<p><a href="https://www.cnblogs.com/kexinxin/p/10147209.html" target="_blank" rel="noopener">参考1</a><br>
+<a href="http://zhongmingmao.me/2018/12/17/jvm-basic-invoke/" target="_blank" rel="noopener">参考2</a><br>
+字节码中包含4中对方法的调用</p>
+<ul>
+<li>invokevirtual为最常见的情况，包含virtual dispatch机制；</li>
+<li>invokerspecial是作为对private和构造方法的调用，绕过了virtual dispatch;</li>
+<li>invokeinterface的实现跟invokevirtual类似；</li>
+<li>invokestatic是对静态方法的调用</li>
+</ul>
+<p>其中invokevirtual 实现了虚分配  完成重写方法的调用<br>
+虚分配机制</p>
+<blockquote>
+<p>该机制会首先从调用对象中寻找该方法的实现,如果没有,就到父类接口寻找,直至找到或者抛出异常,并不依赖于引用的定义类型<br>
+在虚分派机制下如何调用父类被覆盖的方法?<br>
+使用virtualspecial指令,字节码在定义时会执行父类对象及其方法</p>
+</blockquote>
+<p>在JVM 中使用方法表实现虚分派机制</p>
+<blockquote>
+<p>方法表值不记录静态函数,私有函数,final,构造函数;方法表与类class相关<br>
+JVM中的一种实现是</p>
+<ul>
+<li>表中每项对应一个实例方法(方法的实际代码)的索引</li>
+<li>父类比子类先得到解析,即父类的方法放在方法表前列(根据方法名参数类型顺序构成的唯一标识,子类发现重复即覆盖索引)</li>
+<li>如果子类重写父类的方法,那么父类方法的索引将更改指向为该类的相应实例方法</li>
+<li>JVM 遇到一个方法时首先根据它在方法表中的偏移量类访问</li>
+</ul>
+</blockquote>
+<p>invokeinterface与invokevirtual的比较</p>
+<blockquote>
+<p>当使用invokeinterface来调用方法时，由于不同的类可以实现同一interface,我们无法确定在某个类中的interface中的方法处在哪个位置。于是，也就无法解释CONSTANT_interfaceMethodref-info为直接索引，而必须每次都执行一次在methodtable中的搜索了。所以，在这种实现中，通过invokeinterface访问方法比通过invokevirtual访问明显慢很多。</p>
+</blockquote>
+<h3 id="解析和分派">解析和分派</h3>
+<p>编译期符号引用会在加载时被解析成实际引用<br>
+虚方法表一般在类加载的连接阶段进行初始化，准备了类的变量初始值后，虚拟机会把该类的虚方法表也一同初始化完毕</p>
+<h3 id="基本数据类型和类">基本数据类型和类</h3>
+<p>int  Integer  atomicInteger<br>
+int 是基本数据类型,有默认值,但是编译器可能提醒需要初始化才能使用<br>
+Integer 是final class  继承Number 和compartor,包含final修饰的int变量 value,MIN,MAX; 里面包含 object 的基本方法(hashcode equals toString);Integer.valueOf()等等<br>
+integer ++ 相当于新生成了变量</p>
+<p>atomicInteger 并发场景下,利用volatile修饰int,保持变量的可见性</p>
+<h3 id="automic-分析">automic 分析</h3>
+<h2 id="jvm">JVM</h2>
+<ol>
+<li>垃圾回收 和 G1<br>
+垃圾回收的原因 对象利用<br>
+判断垃圾的方法：可达分析 和 引用计数(循环引用的问题难以解决)<br>
+垃圾回收算法：标记清除 标记整理 复制  分代收集(标记清除+复制)<br>
+垃圾回收器的分类 ：针对年轻代 和针对老年代的<br>
+分配担保以及老年代不足引起的fullgc<br>
+3色标记 黑灰白<br>
+四种引用 强软弱虚<br>
+CMS VS G1<br>
+垃圾回收的阶段初始标记 并发标记 重新标记(对象消失 浮动垃圾 写屏障) 并发清除<br>
+GC root的概念卡表 以及如何加快,和如何应对出现的伪共享问题<br>
+oopmap<br>
+参考：<br>
+<a href="https://cloud.tencent.com/developer/article/1599225" target="_blank" rel="noopener"></a></li>
+</ol>
+<h3 id="gc-优化">GC 优化</h3>
+<p>首先监控GC状态：jstat -gc<br>
+然后根据结果GC(MIRROgc/FULLGC) 时间和频率 如果频率相对高而且时间长那么需要优化<br>
+优化方法:</p>
+<ul>
+<li>代码分析</li>
+<li>增加内存</li>
+<li>更改老年代年轻代比例</li>
+</ul>
+<h2 id="mysql">MYSQL</h2>
+<h3 id="数据同步">数据同步</h3>
+<p>mysql 多副本保持数据一致性,需要同步;有两种选择多写以及复制</p>
+<ul>
+<li>多写：主收到写命令后,需要向从数据库发送写命令 根据返回结果确认是否完成该次写操作(涉及分布式事务的提交,引出二段式提交以及三段式提交) 异步 半同步  全同步</li>
+<li>复制 ：首先进行 全量复制(线下人工可靠;线上:利用工具 队列 流式数据写入) 之后进行增量复复制：读写分离
+<ul>
+<li>首先要保证master端的bnglog 和slave端的relay日志功能开启</li>
+<li>master端在执行完命令后悔记录在binlog中</li>
+<li>slave端发出IO请求到master端 要求同步指定位置之后的数据</li>
+<li>master端接收到IO请求,会返回数据以及本地同步的终点位置,可以用于下一次同步</li>
+<li>slave端接收到数据会写进自己的relay日志中,slave端检测到relay日志发生变化就会读取更新然后写进数据库</li>
+</ul>
+</li>
+</ul>
+<h3 id="索引">索引</h3>
+<p>mysql 索引</p>
+<ul>
+<li>主键索引 聚簇索引 范围查询 局部性好</li>
+<li>唯一索引的使用需要谨慎 :因为插入和更新时需要加载所有数据到缓冲池(缓冲池的概念和用处 缓冲池的淘汰策略)去,不能有效的利用写缓冲</li>
+<li>主键 建议使用 自增ID 这样在添加记录的时候不会造成页的分裂</li>
+<li>为什么不适用红黑树 b+树多路查找树可以有效降低树的高度,提高查询效率,而且非叶子交接点没有数据相同的空间可以更有效的利用索引</li>
+</ul>
+<p>mysql 双写的原因和解决方法;索引的插入导致页的分裂和合并</p>
+<blockquote></blockquote>
+<h3 id="mysql-事务">mysql 事务</h3>
+<p>mysql的四个事务隔离级别<br>
+利用MVCC 可以满足读已提交和可重复读(偏向update)的要求,配合间隙锁避免幻读<br>
+间隙所</p>
+<h3 id="举例">举例</h3>
+<h4 id="读写事务并发">读写事务并发</h4>
+<p>读写事务的顺序可以有4种</p>
+<ul>
+<li>读后写</li>
+<li>写后读</li>
+<li>读中间发生写</li>
+<li>写中间发生读</li>
+</ul>
+<p>对于前两种,不需要进行控制,后两种需要利用利用,MVCC 加以控制<br>
+innodb在行记录添加了隐藏字段 包括修改记录的事务ID字段 比如update/insert/delete 和 指向当前记录上一版本的回滚指针(利用undolog实现,可以实现未提交事务的原子性)<br>
+在可重复读的事务隔离级别下,读操作共享一个readview,readview是一个数据结构,包含创建其的事务ID,创建时活跃的事务ID列表,以及该列表的最小ID和创建时未分配的最小ID<br>
+在读时使用算法去读取行记录或者undolog中的历史链记录来实现update层次的可重复读<br>
+从当前行记录可以获得,该记录的修改写事务ID</p>
+<ul>
+<li>如果其小于readview的最小值,意味着 该写事务必然在读事务之前发生且已经结束,那么尽管读</li>
+<li>如果事务ID 等于 readview的所属事务ID ,那么是自己改的,可以读</li>
+<li>如果在readview范围内,那么要寻找该事物是否在readview的活跃列表里,如果在,那么意味着该写事务仍在进行,所以不能读未提交,需要沿着历史链继续寻找可以读的记录;如果不在,意味着该写事物在读操作发生之前已经结束,所以可以读已提交</li>
+<li>如果其大于readview的最大值,意味着 该行记录是在读事务发生后更改的,那么不能读,要沿着undolog的历史版本链去找可以读的</li>
+</ul>
+<h4 id="写写事务并发">写写事务并发</h4>
+<h4 id="幻读">幻读</h4>
+<h4 id="insert-从代码层次到数据库执行的流程">insert 从代码层次到数据库执行的流程</h4>
+<ul>
+<li>spring 事务管理:事务传播机制</li>
+<li>mybatic 动态sql</li>
+<li>mysql server
+<ul>
+<li>命令优化</li>
+<li>存储引擎 innodb
+<ul>
+<li>遵循二段锁提交协议,首先对表添加写意向锁,在没有对表添加读锁的情况可以实现</li>
+<li>如果是自增主键,那么需要自增锁生成ID,随后对主键索引添加间隙锁,insert之后对于记录添加写锁</li>
+<li>由于是对主键索引/唯一索引操作所以无法使用写缓冲,将页读入缓存,写入,然后双写刷回</li>
+<li>如果没有其他事务,就会逐一释放锁</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="checkpoint"><a href="https://blog.51cto.com/10170308/1678302" target="_blank" rel="noopener">checkpoint</a></h4>
+<h4 id="串行化">串行化</h4>
+<ol start="3">
+<li>redis<br>
+redis 数据结构及其原理<br>
+redis 主从部署 哨兵模式 选举机制 读写分离<br>
+缓存穿透/雪崩/击穿/降级/熔断<br>
+缓存击穿的解决方法</li>
+</ol>
+<ul>
+<li>在业务端利用reids SETNX 互斥的获得锁,去更新键值</li>
+<li>检查高频字段是否超时,快超时时加长过期时间</li>
+<li>使用消息队列，让流量在消息队列中囤积下，逐个消费，缓解后端压力。<br>
+redis 缓存和数据库双写一致性<br>
+redis IO多路复用<br>
+redis 分布式
+<ul>
+<li>redis 集群</li>
+<li>redis 分布式锁</li>
+</ul>
+</li>
+</ul>
+<p>redis 锁</p>
+<ul>
+<li>setnx(key,1) + expire(key,30) =set(key，1，30，NX) del(key);避免多线程操作导致删除了别人的锁,可以把threadId作为key值<br>
+分布式锁的单点故障问题:在redis集群模式下可以尝试获取大多数master 的锁,超过一般才算,避免死锁可以按照一定顺序去获得锁<br>
+zookeeper分布式锁</li>
+</ul>
+<p>发布订阅功能</p>
+<ol start="4">
+<li>并发 编程</li>
+</ol>
+<ul>
+<li>伪共享 影响并发效率</li>
+</ul>
+<p>http 请求到完成的过程</p>
+<blockquote>
+<p>DNS系统迭代查询域名对应的ip;<br>
+TCP 3次握手建立连接;发送报文请求<br>
+发送端从顶层到底层的报文封装;从底层(信道集线器)到ip层(路由器)的数据传输;接收端从底层到顶层的解封</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/07/工作求职/面试环节/" rel="next" title="面试环节">
+                <i class="fa fa-chevron-left"></i> 面试环节
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/11/工作求职/求职准备/" rel="prev" title="求职准备">
+                求职准备 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chengr</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#java"><span class="nav-number">1.</span> <span class="nav-text">JAVA</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型"><span class="nav-number">1.1.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#c-实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">C++ 实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java"><span class="nav-number">1.1.2.</span> <span class="nav-text">JAVA</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重写的实现"><span class="nav-number">1.2.</span> <span class="nav-text">重写的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析和分派"><span class="nav-number">1.3.</span> <span class="nav-text">解析和分派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本数据类型和类"><span class="nav-number">1.4.</span> <span class="nav-text">基本数据类型和类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#automic-分析"><span class="nav-number">1.5.</span> <span class="nav-text">automic 分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jvm"><span class="nav-number">2.</span> <span class="nav-text">JVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gc-优化"><span class="nav-number">2.1.</span> <span class="nav-text">GC 优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mysql"><span class="nav-number">3.</span> <span class="nav-text">MYSQL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据同步"><span class="nav-number">3.1.</span> <span class="nav-text">数据同步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#索引"><span class="nav-number">3.2.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mysql-事务"><span class="nav-number">3.3.</span> <span class="nav-text">mysql 事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例"><span class="nav-number">3.4.</span> <span class="nav-text">举例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读写事务并发"><span class="nav-number">3.4.1.</span> <span class="nav-text">读写事务并发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#写写事务并发"><span class="nav-number">3.4.2.</span> <span class="nav-text">写写事务并发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#幻读"><span class="nav-number">3.4.3.</span> <span class="nav-text">幻读</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#insert-从代码层次到数据库执行的流程"><span class="nav-number">3.4.4.</span> <span class="nav-text">insert 从代码层次到数据库执行的流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#checkpoint"><span class="nav-number">3.4.5.</span> <span class="nav-text">checkpoint</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#串行化"><span class="nav-number">3.4.6.</span> <span class="nav-text">串行化</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chengr</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="Nginx 主从模式 负载均衡 Kong 网关 限流 目前 Kong网关 可以通过安装插件 基于 内存操作或者 redis 实现限流,但是不能实现集群内的分布式限流 分布式限流 参考1  限流算法: 计数器,令牌桶算法,漏桶算法     限流算法 算法思想 速率限制     令牌桶 以固定速率产生令牌,按照请求的字节数消耗令牌数,如果令牌不足,缓存或者拒绝请求 限制了平均流入速度,允许一定程度的突">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-31T09:52:53.210Z">
+<meta property="og:updated_time" content="2020-11-03T06:19:34.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="项目">
 <meta name="twitter:description" content="Nginx 主从模式 负载均衡 Kong 网关 限流 目前 Kong网关 可以通过安装插件 基于 内存操作或者 redis 实现限流,但是不能实现集群内的分布式限流 分布式限流 参考1  限流算法: 计数器,令牌桶算法,漏桶算法     限流算法 算法思想 速率限制     令牌桶 以固定速率产生令牌,按照请求的字节数消耗令牌数,如果令牌不足,缓存或者拒绝请求 限制了平均流入速度,允许一定程度的突">
@@ -306,8 +306,8 @@
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-31T17:52:53+08:00" content="2020-08-31">
-                2020-08-31
+              <time itemprop="dateUpdated" datetime="2020-11-03T14:19:34+08:00" content="2020-11-03">
+                2020-11-03
               </time>
             </span>
           
@@ -375,6 +375,367 @@
 <li>限流方式: 限制总并发数(数据库连接池,线程池),限制瞬时并发数(Nginx 的limit_conn),限制总接口访问量,限制调用速率</li>
 <li>分布式限流 : <a href="https://github.com/all4you/sentinel-tutorial" target="_blank" rel="noopener">Sentinel</a> 集群限流工具</li>
 </ul>
+<h2 id="oauth2认证和jwt机制">OAuth2认证和jwt机制</h2>
+<ol start="7">
+<li>
+<p>网关的作用：请求异步化</p>
+</li>
+<li>
+<p>网格计算<br>
+分布式计算的一种,将计算任务分发到多个有计算资源的机器上,然后将他们计算的结果统一整理</p>
+</li>
+<li>
+<p>mysql uuid 和自增id</p>
+</li>
+</ol>
+<blockquote>
+<p>在插入式 按照b+树,自增id 的插入是顺序,告诉快捷;而uuid是乱序的,可能需要从磁盘加载到缓存 产生随机IO,可能导致频繁的页分裂(以为新的行分配空间)<br>
+自增id的缺点:不安全,id有规律;高并发时涉及自增锁的争夺,影响效率;</p>
+</blockquote>
+<ol start="10">
+<li>LVS(linux virtual server)</li>
+</ol>
+<blockquote>
+<p>LVS集群采用三层结构，其主要组成部分为：</p>
+<ul>
+<li>负载均衡调度器(load balancer)，它是整个集群对外面的前端机，负责将客户的请求发送到一组服务器上执行，而客户认为服务是来自一个IP地址(我们可称之为虚拟IP地址)上的。</li>
+<li>服务器池(server pool)，是一组真正执行客户请求的服务器，执行的服务有WEB、MAIL、FTP和DNS等。</li>
+<li>共享存储(shared storage)，它为服务器池提供一个共享的存储区，这样很容易使得服务器池拥有相同的内容，提供相同的服务。</li>
+</ul>
+</blockquote>
+<p>分布式事务</p>
+<blockquote>
+<p>应用 微服务架构</p>
+</blockquote>
+<ul>
+<li>2PC：Two-Phase Commit</li>
+<li>3PC：Three-Phase Commit</li>
+<li>TCC</li>
+</ul>
+<h3 id="2pc">2PC</h3>
+<blockquote>
+<p>两段式提交协议：将事务分为两个阶段来处理：准备阶段和提交阶段;<br>
+其中事务的发起者称之为协调者,事务的执行者称之为参与者<br>
+准备阶段：</p>
+</blockquote>
+<ul>
+<li>事务询问：向各参与者发送事务预处理请求,等待回应</li>
+<li>事务执行：各参与者在本地执行事物,写入undo和redo日志,但不会执行,并向协调者回复是否可以提交事务</li>
+<li>协调者接收到各参与者回复,如果全是yes,那么事务可以执行,如果有一个no那么就无法执行事务<br>
+提交/执行阶段：</li>
+<li>所有参与者返回YES
+<ul>
+<li>协调者向所有参与者发送commit请求</li>
+<li>事务提交：参与者收到commit请求,提交本地事务,并释放资源</li>
+</ul>
+</li>
+<li>参与者至少有一个返回No,或者等待超时
+<ul>
+<li>协调者向所有参与者发送滚回请求</li>
+<li>事务回滚：各参与者接收到请求,回滚本地事务</li>
+</ul>
+</li>
+</ul>
+<p>不足</p>
+<ul>
+<li>性能问题:在第一第二阶段参与者协调者的资源都是锁住的,长时间得不到释放</li>
+<li>单点故障:
+<ul>
+<li>协调者正常,参与者宕机:
+<ul>
+<li>后果：在第一阶段导致 协调者 阻塞,其他参与者无法释放资源;第二阶段 导致数据不一致</li>
+<li>解决方案：针对第一个情况,在协调者端引入超时机制,超时则终止</li>
+</ul>
+</li>
+<li>协调者宕机,参与者正常：
+<ul>
+<li>后果：所有参与者执行事务单位提交,陷入阻塞;</li>
+<li>解决：引入协调者备份,备份需要同步协调者记录;检测到宕机之后,取代协调者,继续操作;参与者引入超时机制,回滚业务并通知协调者</li>
+</ul>
+</li>
+<li>协调者宕机和参与者部分宕机
+<ul>
+<li>第一阶段:协调者备份检测超时并发出回滚指令</li>
+<li>第二阶段未发送：协调者备份继续操作</li>
+<li>第二阶段已发送：数据不一致</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3pc">3PC</h3>
+<blockquote>
+<p>三阶段提交协议主要是为了解决二阶段的问题,主要有两个改进点</p>
+<ul>
+<li>在协调者和参与者中都引入超时机制：使得参与者可以在超时时释放自己的资源</li>
+<li>增加canCommit阶段,确保段之前的个各参与者状态一致：<br>
+三阶段分为 canCommit preCommit doCommit</li>
+</ul>
+</blockquote>
+<ul>
+<li>canCommit:获取数据库脸解锁
+<ul>
+<li>事务问询：协调者向参与者发送canCommit请求,询问是否可以提交事务</li>
+<li>相应反馈：参与者接收到canCommit请求之后,认为自己可以执行事务则返回yes,否则no</li>
+</ul>
+</li>
+<li>preCommit:都返回yes之后进入到类似2pc的准备阶段,但参与者引入了超时机制
+<ul>
+<li>协调者向所有参与者发送事务预处理请求,等待回应</li>
+<li>参与者接收到预处理请求,执行事务,并写入undo和redo日志,但未提交,并返回执行结果</li>
+</ul>
+</li>
+<li>doCommit：都成功之后进入到类似于阶段3,否则发送回滚指令
+<ul>
+<li>协调者向所有参与者发送commit请求</li>
+<li>参与者接收到请求,提交事务,并返回ACK</li>
+<li>协调者如果在时限内不能接收到所有参与者的ACK或返回No,那么向所有参与者发送abort指令要求回滚,参与者收到后执行并反馈</li>
+</ul>
+</li>
+</ul>
+<p>2PC VS 3PC</p>
+<ul>
+<li>优点:增加canComit和超时机制,降低阻塞的可能性;在最后阶段,避免了协调者单点故障,超时等待之后,会提交事务</li>
+<li>缺点:在最后阶段,可能出现参与者不能接收到协调者的回滚指令而超时提交事务,导致 数据不一致</li>
+</ul>
+<p><a href="https://www.cnblogs.com/xybaby/p/7153755.html" target="_blank" rel="noopener">带着问题学习分布式系统之中心化复制集</a><br>
+<a href="https://www.cnblogs.com/xybaby/p/10124083.html" target="_blank" rel="noopener">一文搞懂Raft算法</a></p>
+<h3 id="raft">Raft</h3>
+<p>raft是基于leader的共识算法,其目的在于提高分布式系统的容错性<br>
+raft协议主要有两个问题 集群选举以及日志复制问题</p>
+<h4 id="集群选举">集群选举</h4>
+<p>raft协议中,任意一个节点处于三种状态之一(leader,follower,candidate)<br>
+所有节点在最开始时都处于follower状态;在一段时间内没有收到leader的心跳,认为leader掉线,就会转换状态为candidate,开启选举</p>
+<blockquote>
+<p>选举开始条件:如果follower在election timeout时间内没有接到leader的心跳(leader 真挂了,leader follower之间网络断开,选举已经开始,还未选出leader),则主动发起选举</p>
+</blockquote>
+<ul>
+<li>增加节点本地的current term,切换到candidate状态</li>
+<li>投自己一票</li>
+<li>发送给其他节点requestVote Rpcs,等其他节点回复<br>
+可能有3种结果</li>
+<li>收到majority的票,赢得选举,成为leader</li>
+<li>被告知别人已经当选,自动切换到follower</li>
+<li>一段时间内没有收到majority的票,也没有收到别人当选的消息,则重新发起选举<br>
+作为投票者有以下约束：</li>
+<li>在任一任期,只能投一次票且FCFS</li>
+<li>被投票的节点知道的信息不能比投票者少(即日志更新)</li>
+</ul>
+<h4 id="日志复制">日志复制</h4>
+<p>客户端的一切请求都发送到leader,leader调节这些请求的顺序,把这些请求和执行顺序告知follower,leader和follower以相同的顺序执行,保证状态一致性。</p>
+<h3 id="paxos">Paxos:</h3>
+<h3 id="mapreduce-过程">MapReduce 过程</h3>
+<ul>
+<li>提交任务 JobSubmitter.java</li>
+<li>Jobtracker根据输入文件的大小,根据splitsize(128M)分割为若干个split,调度相应的task,由taskTracker监控和报告给jobtracker</li>
+<li>每个split对应一个map任务,map.run函数会反复读取键值对 并根据key值获得&lt;key,value,partion&gt;写入缓冲区,缓冲区满则会触发spill,将缓冲区内的数据按照partition key sort 然后combiner 之后输出到磁盘
+<ul>
+<li>默认对Key进行哈希运算后，再以ReduceTask数量取模(这样分配可能导致某个partition 数据较多的情况,可以随s个split间隔/随机/采样 n 个key,然后按照key排序,把可以分为n份,获得partition的分区依据<a href="http://bigdatadecode.club/MapReduce%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90--TotalOrderPartitioner.html" target="_blank" rel="noopener">TotalOrderPartitioner</a>)</li>
+<li>环形缓冲区,输出起点-溢出点-下次输出点,一般溢出点占据80%</li>
+<li>对应wordcount 就是每个单词对应一个key,value是1,之后快排(首先比较partition 然后比较key),然后相同key值合并,再输出到磁盘</li>
+<li>当所有文件都输出到磁盘时,会触发merge,按照partition 和 key值排序 归并排序</li>
+</ul>
+</li>
+<li>reduce端 与 AM(ApplicationMaster) 进行心跳通信获得map的数量和位置,通过fetch网络传输数据到缓存(看文件大小)或本地磁盘(缓存满之后出发spill写入磁盘);</li>
+<li>所有数据到达后首先进行归并排序,然后调用combine 将相同key值的value合并,最终获得该partition 中key值的有序排列
+<ul>
+<li>如果内存足够直接在内存中merge然后输出到磁盘</li>
+<li>在写到磁盘之前可能会插入combine的过程,即对缓存内的数据提前进行combine减少后面的计算(在map端很多地方可以插入combine以减少之后输入的文件大小以及网络传输的数据大小);</li>
+</ul>
+</li>
+<li>如果有多个reduce任务,这几个reducer任务还需要进行一次mapReduce
+<ul>
+<li>由于这里的partition是hash然后求余,所以多个任务的reducer结果不一定是全局有序的;</li>
+<li>所以对于分布比较均匀的key值,可以考虑类似哈希一致性算法的方法分配,在这里可以针对wordcount可以根据字符串的单位来分配partition,比如A-C属于partition0,需要把该规则告知全部map端 ;</li>
+<li>对于不均匀分布的key值,这种仍然可能出现数据倾斜的问题,所以可以考虑采样的方法 最大程度获得整体数据的分布情况;</li>
+</ul>
+</li>
+</ul>
+<p>TCC：Try-Confirm-Cancel<br>
+JTA<br>
+RPC<br>
+代理模式<br>
+反射</p>
+<p>微服务整体架构描述</p>
+<p>Zab协议:Zookeeper Atomic Broadcast</p>
+<blockquote></blockquote>
+<p>Paxos 协议<br>
+<a href="https://www.zhihu.com/question/19787937/answer/82340987" target="_blank" rel="noopener">参考1</a></p>
+<blockquote>
+<p>节点通信存在两种模型：共享内存(Shared memory)和消息传递(Messages passing)。Paxos算法就是一种基于消息传递模型的一致性算法<br>
+为什么要超过一半节点?保证两次事务一定有交叠<br>
+为什么第一阶段里提议者接收到已经accept的消息 会更改自己的提议值为该值,为了保持一致性<br>
+每个节点有三种角色,可以同时扮演多个角色</p>
+<ul>
+<li>Proposor:倡议者,可以提出倡议,以供表决</li>
+<li>Acceptor:接受者,可以对按照一定规则对于倡议者提出的提议表决,有过半接受者接受的投票win</li>
+<li>Learner:学习者无投票权,只能从Proposor获知那个提议被选中</li>
+</ul>
+</blockquote>
+<p>目标：</p>
+<ul>
+<li>多个节点可以提出提议</li>
+<li>系统必须针对多个提议中的某个达成一致,且最多只有一个</li>
+<li>只要超过半数的节点存活且可以相互通信,那么整个系统一定能达成一致,即选择一个确定提议</li>
+</ul>
+<p>分为两个阶段<br>
+prepare 阶段</p>
+<ul>
+<li>proposor 向所有节点发送proposal,携带有当前 递增的prepareTimeStamp(PT) ,等待一半的节点回复(加上自己超过一半)
+<ul>
+<li>前提:节点 本身保存三个参数 lastPrepareTimestamp(LPT),lastAcceptedTimeStamp(LAT),lastAcceptValue(LAV)</li>
+<li>情况1:节点没有收到任何提议,即LPT为空,则设置该PT为LPT并response,同时不会再返回任何PT小于等于该LPT的提议</li>
+<li>情况2:节点存在LPT,且LPT &gt;= PT,那么节点不回复(等待超时即可)</li>
+<li>情况3:节点存在LPT且LPT &lt; PT,那么节点更新LPT,返回 之前的LPT 和LAT LAV</li>
+</ul>
+</li>
+<li>proposor没有收到过半的回复,那么结束,收到则进行下一阶段</li>
+</ul>
+<p>accept 阶段</p>
+<ul>
+<li>节点收到了过半的回复,但是其中可能多个回复同时携带 LPT LAT LAV
+<ul>
+<li>情况1:不存在回复携带LPT LAT LAV,那么该节点赢得胜利,可以向所有节点发送下一步(是上一次的节点)的值</li>
+<li>情况2:存在回复带有 LPT LAT LAV ,那么从中找到LPT最大的那么的LAV作为自己的AV,然后广播</li>
+</ul>
+</li>
+<li>如果接收到过半的回复,那么成功提交,告知学习者学习</li>
+</ul>
+<p>理解1：</p>
+<blockquote>
+<p>该协议的场景是多个平等节点间同时对一个值发起更改之后,需要确保值的一致性<br>
+可以确保值的一致性,但不能保证同一区间内的操作满足时间顺序</p>
+</blockquote>
+<p>PAXOS 活锁问题</p>
+<blockquote>
+<p>两个proposor在prepare阶段有交集,而他们反复抢夺交集的归属权,导致尝试-失败-尝试的循环<br>
+解决:在失败过后引入随机等待时间</p>
+</blockquote>
+<p>BASIC PAXOS<br>
+推导过程 详见参考1<br>
+首先起码分为两步走,第一步用于确认有一半以上的节点同意,其次才处于执行阶段</p>
+<ol>
+<li>单proposor 没有任何问题</li>
+<li>2 proposor:可能会出现一个acceptor 接受了两个proposor的情况,所以要么阻止多个proposor发出,要么阻止acceptor接受
+<ul>
+<li>阻止发出:那么必须需要通知到每个节点,要求比较高,难以保证每个节点都可以接收到;而且难以保证及时性</li>
+<li>阻止接受:可以限定必须接收到一半以上的acceptor回复,那么必然两个 proposor 的acceptor 必然有交集,可以进一步限制只能接受一个proposor,同时需要保证第一步不能写入数据,否则会出现数据不一致的现象(类似于二阶段提交协议)
+<ul>
+<li>首先限定proposor的占有规则,对于任何一个节点
+<ul>
+<li>FCFS: 但是如果accept本身也是提议者即3个proposor,那么将永远达不成一致
+<ul>
+<li>任何情况下的单纯一次性确定都会导致 2个以上proposor存在时,很大可能达不成一致 =&gt; 可修改</li>
+<li>决定负责不应该包含局部的特性,不然无法比较,由全局的特性决定,使得节点能够加以区分和比较,保证全局最终结果的一致性 =&gt; 使用全局自增ID(或者 ip+本地时间)来比较</li>
+</ul>
+</li>
+<li>最大者/最近者优先: 可能导致波动,对于ID_A &lt; ID_B 是否接受与到达顺序相关
+<ul>
+<li>首先接收到ID_B 可以拒接ID_A</li>
+<li>但可能出现节点依次接受并返回,导致出现在两个proposor那出现该节点同时同意的情况;即使在接受更大的之后,节点转而通知之前的节点,也不能保证一定到达以及在其进行第二阶段时到达</li>
+</ul>
+</li>
+<li>最小者/最先者优先: 网络原因导致波动
+<ul>
+<li>由于网络原因导致较小的慢到达,同样出现上述情况</li>
+</ul>
+</li>
+<li>对于后两种情况,可能出现节点无法拒绝任何一个proposal的情况,所以可以协调两个proposal表现一致来达到一致性 =&gt; 最大者优先 + FCFS =&gt; <code>对于后来的预提案,只有其id大于已有ID才可以占有之,也不会接受小于该id 的提案,而且会反馈预提案拥有者 之前已接收的提案内容</code></li>
+</ul>
+</li>
+<li>协调意味着两proposal只能选择一个proposal,更改一个proposal的值(如何更改?主动询问所有节点,耗时且增加环节带来的错误情况处理 或者 由该节点通知,即使收不到也被proposal视为不同意 无不良后果), 如何协调 ID_A &lt; ID_B 顺序访问情况下值的一直</li>
+<li>定义占有规则:<code>对于节点,如果其首先接受了预提案,后续的预提案如果id小于现有的id,那么拒绝该提议,也拒绝小于该id的提案,如果大于它,那么接受该提议,同时告诉该提议者自己已经接受了的提案的信息(包括id以及value),而提议者接收到该信息会更新自己的value为反馈的proposal中 id 最大的那个的value; 这样可以保证新的提案与已经被接受的旧提案保持一致,需要证明的是为何选择最大的可以保证一致性</code>
+<ul>
+<li>证明：对于两个存在proposal A B到达执行阶段,那么那个交集的点必然是 小的ID先到,然后ID较大的到,所以较大的ID的提议者会修改自己value,保持最终值的一致性</li>
+<li>如果超过3个proposal,假设对于反馈中的proposalA 和 proposalB 其中 IDA &lt; IDB,而两个提案都存在意味着两者在预提案阶段都接受到超过半数的同意反馈,那么两者必然有交集,对于交集中的节点S,其预提案的到来顺序必然是IDA IDB,如果到达时该节点接受提案,那么该节点会更新自己的id,拒绝后续较小的IDA的提案,如果已经接受,IDB发出的节点必然修改了自己的value为IDA的值,所以最终会保持一致性</li>
+</ul>
+</li>
+<li>如果接受到大部分的acceptor,那么向这些acceptor发送提案,对于每个节点,如果接受的提案&gt;=本身的预提案id,那么可以接受它,同时更新该节点接受的id,并反馈</li>
+<li>如果接受到了超过半数的acceptor回复,那么就说明该次提议完成并会发布消息到learner,告知学习(在论文中没有具体提及其角色,可以猜测起作用:广播禁止下一次对该key的proposal;更新其他节点的值)</li>
+</ul>
+</li>
+<li>活锁(livelock)问题:不断有新的proposal在怕热proposal阶段 抢占节点,导致一直无法达成协议</li>
+<li>多数读/写/<a href="https://blog.csdn.net/tb3039450/article/details/80249664" target="_blank" rel="noopener">Quorum机制</a>:写时节点的数+读时节点的数&gt;总节点的数,可以保证读到最新值;而设置写节点的数目为超过半数可以保证半数的节点宕机也可以保证服务的可用性</li>
+</ul>
+</li>
+</ol>
+<p><a href="http://oceanbase.org.cn/?p=111" target="_blank" rel="noopener">使用Multi-Paxos协议的日志同步与恢复</a><br>
+MUTLI PAXOS</p>
+<ul>
+<li>通过一轮 basic paxos 获得leader ,所以不需要pre阶段的一次rpc 因为 无人竞争
+<ul>
+<li>由leader发布proposal 避免了活锁问题;</li>
+<li>每个leader时期的proposalID是不变的,但是instanceId是变化的,由于每次只要求写入半数的节点可能导致空洞的出现</li>
+</ul>
+</li>
+<li>由于网络等原因可以出现多leader的情况</li>
+</ul>
+<p><a href="http://blog.itpub.net/31509949/viewspace-2218253/" target="_blank" rel="noopener">ZAB</a></p>
+<blockquote></blockquote>
+<p><a href="https://cwiki.apache.org/confluence/display/ZOOKEEPER/Zab+vs.+Paxos" target="_blank" rel="noopener">ZAB VS PAXOS</a><br>
+相同点：</p>
+<ul>
+<li>由leader发布提案 follower接受,然后等待法定人数的认可之后通知learner</li>
+<li>同一个leader的提案共享一个proposalID但是instanceID不同(标识该leader提议的key值次数)</li>
+</ul>
+<p>不同：ZAB目的在于实现高可用的分布式数据库(主从模式),而paxos目的在于构建一个分布式一致的状态机系统</p>
+<ul>
+<li>multi-PAXOS有两个阶段选举和执行事务,而ZAB在两个阶段之间插入恢复阶段,目的在于使follower节点与leader节点的数据保持一致</li>
+</ul>
+<h2 id="tencent-data-wire">Tencent Data Wire</h2>
+<p>TDW是腾讯最大的离线数据处理平台<br>
+TDW 是基于Hadoop和Spark 构建,<br>
+<a href="http://www.ha97.com/5665.html" target="_blank" rel="noopener">参考1</a><br>
+<a href="https://cloud.tencent.com/developer/article/1029640" target="_blank" rel="noopener">参考2</a></p>
+<h3 id="反射">反射</h3>
+<p>反射允许动态的根据类名去获取class对象,并且实例化并调用其方法和对象(甚至更改对象的访问权限)<br>
+其原理是根据class对象的读取,javac编译后 的文件包括 构造函数以及成员函数成员变量<br>
+class.forName 默认由所在类的加载器去加载该class<br>
+getConstructor<br>
+getMethod(变量类型)<br>
+method.invoke(instance,参数)</p>
+<p>为什么反射会比new慢</p>
+<ul>
+<li>method.invoke 的参数是可变参数(编译时会将参数封装进object数组,涉及赋值操作)</li>
+<li>object数组中不能存储基本变量,涉及自动装箱机制</li>
+</ul>
+<h3 id="rpc">RPC</h3>
+<h4 id="rpc-vs-http">RPC VS HTTP</h4>
+<p>优点：</p>
+<ol>
+<li>传输效率高(二进制传输效率)</li>
+<li>调用方向调用本地方法一样调用,无需关心实现<br>
+缺点：</li>
+</ol>
+<ul>
+<li>通用性不如HTTP好(因而rpc一般用于内部服务之间的通信调用,http一般用于跨服务的调用)</li>
+</ul>
+<p>过程：</p>
+<ol>
+<li>客户端(client)以本地调用的方法发起调用</li>
+<li>客户端桩(client stub) 收到调用,负责 将调用的方法参数等必要信息序列化(压缩打包)传输,将之发送给服务端</li>
+<li>服务端桩(server stub) 接收到网络数据,反序列化,获取方法名和参数等必要信息</li>
+<li>服务器桩根据方法名和参数进行本地调用</li>
+<li>服务端执行调用返回结果给服务器桩</li>
+<li>服务器桩接收到结果,序列化,传输给客户端</li>
+<li>客户端桩接收到信息,反序列化,解析返回给客户端</li>
+<li>客户端获得调用结果</li>
+</ol>
+<p>核心：</p>
+<ol>
+<li>消息协议(以下是RPC 二进制协议中的,http中包括XML和Json)
+<ul>
+<li>Protobuf</li>
+<li>Avro</li>
+</ul>
+</li>
+<li>传输机制：基于tcp协议的可靠性,使用tcp传输数据
+<ul>
+<li>服务端 建立socket 监听</li>
+<li>客户端 建立socket 连接服务端,通过3次TCP握手建立连接,然后可以传输数据</li>
+</ul>
+</li>
+</ol>
 
       
     </div>
@@ -488,7 +849,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">108</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -501,7 +862,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -534,7 +895,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx"><span class="nav-number">1.</span> <span class="nav-text">Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kong-网关"><span class="nav-number">2.</span> <span class="nav-text">Kong 网关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限流"><span class="nav-number">2.1.</span> <span class="nav-text">限流</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx"><span class="nav-number">1.</span> <span class="nav-text">Nginx</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kong-网关"><span class="nav-number">2.</span> <span class="nav-text">Kong 网关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#限流"><span class="nav-number">2.1.</span> <span class="nav-text">限流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oauth2认证和jwt机制"><span class="nav-number">3.</span> <span class="nav-text">OAuth2认证和jwt机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2pc"><span class="nav-number">3.1.</span> <span class="nav-text">2PC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3pc"><span class="nav-number">3.2.</span> <span class="nav-text">3PC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#raft"><span class="nav-number">3.3.</span> <span class="nav-text">Raft</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#集群选举"><span class="nav-number">3.3.1.</span> <span class="nav-text">集群选举</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#日志复制"><span class="nav-number">3.3.2.</span> <span class="nav-text">日志复制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#paxos"><span class="nav-number">3.4.</span> <span class="nav-text">Paxos:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mapreduce-过程"><span class="nav-number">3.5.</span> <span class="nav-text">MapReduce 过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tencent-data-wire"><span class="nav-number">4.</span> <span class="nav-text">Tencent Data Wire</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#反射"><span class="nav-number">4.1.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpc"><span class="nav-number">4.2.</span> <span class="nav-text">RPC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rpc-vs-http"><span class="nav-number">4.2.1.</span> <span class="nav-text">RPC VS HTTP</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

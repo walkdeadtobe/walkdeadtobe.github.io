@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="后台面试参考流程-上 编程语言   C++  static 关键字有哪些用法？ 继承层次中,为什么基类析构函数是虚函数？ 重载overload、覆盖重写override、隐藏重定义overwrite 的区别：   overload：同名 不同参数的函数,多态 override: 重写父类的方法 overwrite：实现abstract 方法或者接口   多态和泛型的实现原理？参考   泛型:其本质">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-08-31T11:03:02.575Z">
+<meta property="og:updated_time" content="2020-09-18T05:34:36.057Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="腾讯 求职">
 <meta name="twitter:description" content="后台面试参考流程-上 编程语言   C++  static 关键字有哪些用法？ 继承层次中,为什么基类析构函数是虚函数？ 重载overload、覆盖重写override、隐藏重定义overwrite 的区别：   overload：同名 不同参数的函数,多态 override: 重写父类的方法 overwrite：实现abstract 方法或者接口   多态和泛型的实现原理？参考   泛型:其本质">
@@ -307,8 +307,8 @@
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-31T19:03:02+08:00" content="2020-08-31">
-                2020-08-31
+              <time itemprop="dateUpdated" datetime="2020-09-18T13:34:36+08:00" content="2020-09-18">
+                2020-09-18
               </time>
             </span>
           
@@ -406,7 +406,11 @@ mpstat可以监控到cpu的一些统计信息，在多核cpu的系统里不但�
 </blockquote>
 <ol start="2">
 <li>
-<p>epoll 的ET 和 LT的区别？</p>
+<p>epoll 的ET 和 LT的区别？<br>
+边缘触发(Edge Trigger)和水平触发也叫条件触发(Level Trigger)<br>
+边缘触发 是指每当状态变化时发生一个io事件；<br>
+条件触发 是只要满足条件就发生一个io事件；<br>
+LT模式下，只要这个fd还有数据可读，每次 epoll_wait都会返回它的事件，提醒用户程序去操作，而在ET（边缘触发）模式中，它只会提示一次，直到下次再有数据流入之前都不会再提示了，无 论fd中是否还有数据可读。所以在ET模式下，read一个fd的时候一定要把它的buffer读光，也就是说一直读到read的返回值小于请求值，或者 遇到EAGAIN错误</p>
 </li>
 <li>
 <p>epoll 如何区分 connect/close/read/write 事件?</p>
@@ -444,7 +448,13 @@ HTTPS 在内容传输的加密上使用的是对称加密，非对称加密只�
 <li>加密通讯:通过对称加密 加密数据,保证安全和效率</li>
 </ul>
 <ol start="7">
-<li>网关的作用：请求异步化</li>
+<li>
+<p>网关的作用：请求异步化</p>
+</li>
+<li>
+<p>网格计算<br>
+分布式计算的一种,将计算任务分发到多个有计算资源的机器上,然后将他们计算的结果统一整理</p>
+</li>
 </ol>
 
       
@@ -565,7 +575,7 @@ HTTPS 在内容传输的加密上使用的是对称加密，非对称加密只�
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">108</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -578,7 +588,7 @@ HTTPS 在内容传输的加密上使用的是对称加密，非对称加密只�
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>

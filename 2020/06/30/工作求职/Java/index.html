@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="多线程 线程创建方法  1.继承Thread类，重写run()线程执行程序，创建线程 2.实现Runnable接口，重写run()方法，作为参数构造thread，创建线程 3.使用Callable和Future创建线程 4.使用线程池例如用Executor框架   Executor 的参数   实现Runnable接口比继承Thread类所具有的优势： 1)可以避免java中的单继承的限制；可以继">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-01T08:41:57.524Z">
+<meta property="og:updated_time" content="2020-10-15T07:37:28.794Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java 语言学习">
 <meta name="twitter:description" content="多线程 线程创建方法  1.继承Thread类，重写run()线程执行程序，创建线程 2.实现Runnable接口，重写run()方法，作为参数构造thread，创建线程 3.使用Callable和Future创建线程 4.使用线程池例如用Executor框架   Executor 的参数   实现Runnable接口比继承Thread类所具有的优势： 1)可以避免java中的单继承的限制；可以继">
@@ -307,8 +307,8 @@
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-09-01T16:41:57+08:00" content="2020-09-01">
-                2020-09-01
+              <time itemprop="dateUpdated" datetime="2020-10-15T15:37:28+08:00" content="2020-10-15">
+                2020-10-15
               </time>
             </span>
           
@@ -397,7 +397,7 @@ join()方法：保证当前线程停止执行，直到该线程所加入的线�
 <h3 id="触发gc的条件">触发GC的条件</h3>
 <blockquote>
 <p>1.程序主动调用System.gc<br>
-2.内存不足被动触发</p>
+2.内存不足被动触发(年轻代升级空间不够,或者永久代空间不足)</p>
 </blockquote>
 <h2 id="gc-roots">GC ROOTS</h2>
 <blockquote>
@@ -406,6 +406,16 @@ join()方法：保证当前线程停止执行，直到该线程所加入的线�
 2.阻塞线程以及运行线程涉及的对象；本地方法栈涉及的对象<br>
 3.全局对象，上锁对象<br>
 4.针对younggc来说，gcroot的对象包括所有年老带对象</p>
+</blockquote>
+<h2 id="为对象分配内存的方法">为对象分配内存的方法</h2>
+<ul>
+<li>规整内存/指针碰撞:将内存分为已使用和未使用的两部分,使用指针将两者隔开,然后指针右移需要的空间即可(建立在压缩空闲空间的基础上,耗时)</li>
+<li>空闲列表法:把空间的空间的大小范围列表排序,然后选择(有首次适应,循环适应,最有适应,最坏适应)</li>
+</ul>
+<p>卡表(cardTable)</p>
+<blockquote>
+<p>JVM 把每512字节表示为一个卡页,<br>
+为了提高重新标记的效率，并发标记阶段会把这些发生变化的对象所在的Card标识为Dirty，这样后续阶段就只需要扫描这些Dirty Card的对象，从而避免扫描整个老年代</p>
 </blockquote>
 <h2 id="gc常用算法">GC常用算法</h2>
 <blockquote>
@@ -509,10 +519,206 @@ HashMap：无论key还是value都能为null，线程不安全（在多个线程�
 </blockquote>
 <blockquote>
 <p>但是 HashMap线程不安全，而HashTable安全但是效率低，出现了ConcurrentHashMap使用分段锁<br>
+cocurrent 将hashmap的数据分为若干个子数组,每个子数组包装为segment对其加锁;<br>
 抛开 HashMap，hash 冲突有那些解决办法？开放定址法、链地址法、再哈希法<br>
 <a href="https://www.cnblogs.com/cosmos-wong/p/11845934.html" target="_blank" rel="noopener">java stack不推荐使用</a>,建议使用dequeue代替</p>
 </blockquote>
-<h1 id="异常体系">异常体系</h1>
+<p>HashMap 扩容时机</p>
+<ul>
+<li>hashmap首次插入元素时会resize初始化table</li>
+<li>hashmap中元素总数量达到阈值threshold(阈值初始化时等于)</li>
+<li>如果某个链表的长度&gt;=8-1,则转化为红黑树(小于等于6时转换回来);在转化时,首先判断数组长度是否小于64那么就扩容,否则才转化</li>
+</ul>
+<h2 id="linkedhashmap-treemap">LinkedHashMap TreeMap</h2>
+<blockquote>
+<p>LinkedHashMap保存了记录的插入顺序,在用Iterator遍历LinkedHashMap时,先得到的记录肯定是先插入的,也可以在构造时用带参数,按照应用次数排序.<br>
+在遍历的时候会比HashMap慢,不过有种情况例外，当HashMap容量很大，实际数据较少时，遍历起来可能会比LinkedHashMap慢，因为LinkedHashMap的遍历速度只和实际数据有关，和容量无关，而HashMap的遍历速度和他的容量有关<br>
+TreeMap实现SortMap接口,能够把它保存的记录根据键排序,默认是按键值的升序排序，也可以指定排序的比较器，当用Iterator 遍历TreeMap时，得到的记录是排过序的。插入查询的效率都是O(logN)</p>
+</blockquote>
+<h2 id="arraylist-vs-linkedlist">Arraylist VS LinkedList</h2>
+<blockquote>
+<p>LinkedList与ArrayList一样实现List接口，只是ArrayList是List接口的大小可变数组的实现，LinkedList是List接口链表的实现。基于链表实现的方式使得LinkedList在插入和删除时更优于ArrayList，而随机访问则比ArrayList逊色些。<br>
+LinkedList实现所有可选的列表操作，并允许所有的元素包括null。<br>
+除了实现 List 接口外，LinkedList 类还为在列表的开头及结尾 get、remove 和 insert 元素提供了统一的命名方法。这些操作允许将链接列表用作堆栈、队列或双端队列。<br>
+此类实现 Deque 接口，为 add、poll 提供先进先出队列操作，以及其他堆栈和双端队列操作</p>
+</blockquote>
+<h2 id="volatile和synchronized特点">volatile和synchronized特点：</h2>
+<blockquote>
+<p>执行控制（执行顺序，并发）和内存可见（读写经过内存）<br>
+volatile仅能使用在变量级别；synchronized则可以使用在变量、方法、和类级别(class对象的锁)的<br>
+volatile不会造成线程的阻塞；synchronized可能会造成线程的阻塞<br>
+volatile标记的变量不会被编译器优化；synchronized标记的变量可以被编译器优化</p>
+</blockquote>
+<h2 id="java两种数据类型">Java两种数据类型</h2>
+<blockquote>
+<p>分为基本数据类型（boolean、byte、int、char、long、short、double、float）和引用数据类型（数组、类、接口）<br>
+Java为每 一个基本数据类型都引入了对应的包装类型（Boolean，Character，Byte，Short，Integer，Long，Float，Double），可以使用自动装箱/拆箱进行替换（装箱就是自动将基本数据类型转换为包装器类型；拆箱就是自动将包装器类型转换为基本数据类型）<br>
+例如：int与Integer的基本使用对比</p>
+<ul>
+<li>Integer是int的包装类，Integer变量必须实例化后才能使用；Integer的默认值是null;int是基本数据类型，int变量不需要初始化，int的默认值是0。</li>
+<li>在使用时，Integer实际是对象的引用，指向此new的Integer对象；int是直接存储数据值 ；</li>
+</ul>
+</blockquote>
+<h2 id="设计模式">设计模式</h2>
+<blockquote>
+<p><a href="https://www.runoob.com/design-pattern/design-pattern-tutorial.html" target="_blank" rel="noopener">https://www.runoob.com/design-pattern/design-pattern-tutorial.html</a><br>
+工厂模式:定义一个创建对象的接口，让其子类自己决定实例化哪一个工厂类，工厂模式使其创建过程延迟到子类进行<br>
+优点： 1、一个调用者想创建一个对象，只要知道其名称就可以了。 2、扩展性高，如果想增加一个产品，只要扩展一个工厂类就可以。 3、屏蔽产品的具体实现，调用者只关心产品的接口。</p>
+<p>控制反转（Inversion of Control，缩写为IoC）；依赖注入<br>
+缺点：每次增加一个产品时，都需要增加一个具体类和对象实现工厂，使得系统中类的个数成倍增加，在一定程度上增加了系统的复杂度，同时也增加了系统具体类的依赖。这并不是什么好事<br>
+使用场景： 1、日志记录器：记录可能记录到本地硬盘、系统事件、远程服务器等，用户可以选择记录日志到什么地方。2、设计一个连接服务器的框架，需要三个协议，“POP3”、“IMAP”、“HTTP”。</p>
+<p>单例模式：保证一个类仅有一个实例，并提供一个访问它的全局访问点。<br>
+主要解决：一个全局使用的类频繁地使用，实现共享，锁,static<br>
+优点：1、在内存里只有一个实例，减少了内存的开销，尤其是频繁的创建和销毁实例（比如管理学院首页页面缓存）。2、避免对资源的多重占用（比如写文件操作）。<br>
+缺点：没有接口，不能继承，与单一职责原则冲突，一个类应该只关心内部逻辑，而不关心外面怎么样来实例化。</p>
+<p>装饰器模式:动态地给一个对象添加一些额外的职责。就增加功能来说，装饰器模式相比生成子类更为灵活<br>
+主要解决：一般的，我们为了扩展一个类经常使用继承方式实现，由于继承为类引入静态特征，并且随着扩展功能的增多，子类会很膨胀。<br>
+优点：装饰类和被装饰类可以独立发展，不会相互耦合，装饰模式是继承的一个替代模式，装饰模式可以动态扩展一个实现类的功能.<br>
+缺点：多层装饰比较复杂。</p>
+<p>组合模式：是用于把一组相似的对象当作一个单一的对象</p>
+<p>外观模式：隐藏系统的复杂性，客户端请求的简化方法和对现有系统类方法的委托调用（列类似于自动化脚本的概念）。<br>
+优点： 1、减少系统相互依赖。 2、提高灵活性。 3、提高了安全性。<br>
+缺点：不符合开闭原则，如果要改东西很麻烦，继承重写都不合适。</p>
+<p>代理模式：其他对象提供一种代理以控制对这个对象的访问<br>
+主要解决：远程调用，RPC；直接调用带来的危险，添加控制，火车站<br>
+静态代理：添加日志</p>
+</blockquote>
+<h2 id="堆栈">堆栈</h2>
+<blockquote>
+<p>都是一种数据项按序排列的数据结构，只能在一端(称为栈顶(top))对数据项进行插入和删除。<br>
+堆：一棵树的数组对象（大顶堆，小顶堆），一般程序员申请    ；栈：先入后出，有一半程序员申请 队列：先入先出</p>
+</blockquote>
+<h2 id="bean">bean</h2>
+<blockquote>
+<p><a href="https://www.awaimai.com/2596.html" target="_blank" rel="noopener">https://www.awaimai.com/2596.html</a><br>
+bean是一个由Spring IoC容器实例化、组装和管理的对象。<br>
+类的实例化、依赖的实例化、依赖的传入都交由 Spring Bean 容器控制而不是new</p>
+</blockquote>
+<h2 id="malloc-vs-new">malloc VS new</h2>
+<h2 id="4种io模式">4种IO模式</h2>
+<blockquote>
+<ul>
+<li>同步阻塞IO（Blocking IO）</li>
+<li>同步非阻塞IO（Non-blocking IO）</li>
+<li>IO多路复用（IO Multiplexing）</li>
+<li>异步IO（Asynchronous IO）<br>
+<a href="https://blog.csdn.net/qq_34802511/article/details/81543817" target="_blank" rel="noopener">https://blog.csdn.net/qq_34802511/article/details/81543817</a><br>
+同步io操作导致请求进程阻塞，直到i/o操作完成；异步io操作不导致请求进程阻塞<br>
+以read IO为例子，大致分为2步 1）等待数据准备(数据从磁盘拷贝到内核内存) 2）将数据从内核拷贝到进程中<br>
+同步阻塞在两个阶段都会阻塞；而同步非阻塞IO只会在第二个阶段阻塞，进程在第一步受阻后，会返回，然后反复询问是否内核准备好数据；<br>
+IO多路复用：在同步非阻塞的基础上，可以使用一个进程监视多个输入（select，poll，epoll）<br>
+而异步IO中，两步都不会造成阻塞，知道数据已经复制到进程内存区，会通知进程</li>
+</ul>
+</blockquote>
+<h2 id="nio">NIO</h2>
+<blockquote></blockquote>
+<p><a href="https://juejin.im/post/6844903729435508750" target="_blank" rel="noopener">Java ClassLoader 再不理解就老了</a></p>
+<h2 id="类的加载">类的加载</h2>
+<p>在类的加载之前需要首先基于javac命令将java源文件编译成class文件,然后在运行中加载.<br>
+我们借助类加载器完成类的加载,类的加载共分为三个阶段:加载 链接(验证 准备 解析)  初始化</p>
+<ul>
+<li>加载：根据类的全限定名来找到相应的class文件,并加载到内存</li>
+<li>链接
+<ul>
+<li>验证：验证class字节流文件中的信息符合虚拟机的要求,不会危害自身安全</li>
+<li>准备：给类变量分配内存并初始化为默认值,初始化常量(final)</li>
+<li>解析：将常量池(在编译期即被确定的一些常量)中符号引用转化为直接引用
+<ul>
+<li>举例：对于类而言就是将全限定名转化为该类在内存中的地址</li>
+<li>对于类引用的解析,是在初始化之前加载还是在初始化之后使用前加载,可以由加载器自己决定实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>初始化：给类的静态变量赋给定的初始值,这些操作和静态代码块会统一放置在类构造器<clinit>方法中,该方法只会执行一次.</clinit></li>
+<li>使用：在实例构造器<init>方法中包含了代码分别为 父类的初始化方法-普通常量的初始化赋值-普通代码块-构造函数
+<ul>
+<li>主动使用-触发初始化:new 创建类的实例;访问类的静态变量或类方法;反射;初始化子类导致初始化父类</li>
+<li>被动使用- 不会触发初始化:主动使用的一些例外
+<ul>
+<li>子类来引用父类中定义的静态字段，只会触发父类的初始化而不会触发子类的初始化</li>
+<li>通过数组定义来引用类，不会触发此类的初始化,例如MyObject[] b = new MyObject[10];</li>
+<li>常量字段编译期不确定：UUID.random().toString()</li>
+<li>父类接口：一个接口在初始化时，并不要求其父接口全部都完成了初始化，只有在真正使用到父接口的时候（如引用接口中运行期才确定的常量）才会初始化</li>
+</ul>
+</li>
+</ul>
+</init></li>
+<li>卸载：当MySample类被加载，连接和初始化后，它的生命周期就开始了。当代表MySample类的Class对象不再被引用，即不可触及时，Class对象就会结束生命周期，MySample类在方法区内的数据也会被卸载，从而结束MySample类的生命周期。一个类何时结束生命周期，取决于代表它的Class对象何时结束生命周期</li>
+</ul>
+<blockquote>
+<p>由Java虚拟机自带的加载器所加载的类，在虚拟机的生命周期中，始终不会被卸载。Java虚拟机自带的类加器包括根类加载器，扩展类加载器和系统类加载器。Java虚拟机本身会始终引用这些类加载器，而这些类加载器则会始引用它们所加载的类的Class对象，因此这Class对象终是可及的。由用户自定义的类加载器所加载的类是可以被卸载的。</p>
+</blockquote>
+<p>父子类的执行顺序</p>
+<ul>
+<li>父类<clinit> 子类 <clinit> 虚拟机会保证 子类初始化之前 父类已经初始化defineClass</clinit></clinit></li>
+<li>父类<init> 子类<init></init></init></li>
+<li><init>:父类<init>+普通成员变量赋值+代码块+构造函数</init></init></li>
+</ul>
+<h2 id="类加载的委派机制">类加载的委派机制</h2>
+<p>通常情况下有4种类加载器:</p>
+<ul>
+<li>Bootstrap classLoader 特定目录下,JavaHome/lib</li>
+<li>Extension classLoader 特定目录下,JavaHome/lib/ext</li>
+<li>Application classLoader ClassHome 下 以及 外部依赖</li>
+<li>自定义类加载器</li>
+</ul>
+<p>ClassLoader.defineClass</p>
+<blockquote>
+<p>将字节流转化为class对象</p>
+</blockquote>
+<p>ClassLoader.loadClass</p>
+<ul>
+<li>首先调用findLoadedClass:寻找是否已经加载过该类,如果有则返回</li>
+<li>如果无,那么存在父类加载器,则尝试调用父类加载器的loadClass ,那么调用bootstrap 加载器</li>
+<li>如果还是找不到,会调用findClass(默认抛出classNotfiound异常,被继承后需要重写逻辑;UrlClassLoader中会根据全限定类名找到路径去加载)</li>
+</ul>
+<p>如果想违背父类机制</p>
+<blockquote>
+<p>那么重写loadClass方法,首先调用findLoadedClass  然后直接调用findClass</p>
+</blockquote>
+<h3 id="相同类的加载">相同类的加载</h3>
+<p>利用不同的自定义类加载器实例 实现加载,通过实现不同的findClass方法实现加载,由于JVM 中通过类加载器和全限定类名来确保一个类的唯一性,所以类名字一致但不会重合</p>
+<h3 id="钻石依赖">钻石依赖</h3>
+<p>项目管理上有一个著名的概念叫着「钻石依赖」，是指软件依赖导致同一个软件包的两个版本需要共存而不能冲突。<br>
+MAVEN</p>
+<blockquote>
+<p>maven 是这样解决钻石依赖的，它会从多个冲突的版本中选择一个来使用，如果不同的版本之间兼容性很糟糕，那么程序将无法正常编译运行。Maven 这种形式叫「扁平化」依赖管理。</p>
+</blockquote>
+<p>JVM</p>
+<blockquote>
+<p>使用 ClassLoader 可以解决钻石依赖问题。不同版本的软件包使用不同的 ClassLoader 来加载，位于不同 ClassLoader 中名称一样的类实际上是不同的类。</p>
+</blockquote>
+<h3 id="threadcontextclassloader">Thread.contextClassLoader</h3>
+<p>首先 contextClassLoader 是那种需要显示使用的类加载器，如果你没有显示使用它，也就永远不会在任何地方用到它<br>
+其次线程的 contextClassLoader 默认是从父线程那里继承过来的，所谓父线程就是创建了当前线程的线程。程序启动时的 main 线程的 contextClassLoader 就是 AppClassLoader。这意味着如果没有人工去设置，那么所有的线程的 contextClassLoader 都是 AppClassLoader。</p>
+<p>用处</p>
+<blockquote>
+<p>如果不同的线程使用不同的 contextClassLoader，那么不同的线程使用的类就可以隔离开来。<br>
+如果我们对业务进行划分，不同的业务使用不同的线程池，线程池内部共享同一个 contextClassLoader，线程池之间使用不同的 contextClassLoader，就可以很好的起到隔离保护的作用，避免类版本冲突。</p>
+</blockquote>
+<h3 id="类的运行时寻找机制">类的运行时寻找机制</h3>
+<ul>
+<li>java.lang.File 编译器会自动导入java.lang包</li>
+<li>其他import 的包<br>
+如果出现多个同名的类,编译器会报错</li>
+</ul>
+<h3 id="classloader-的传递性">classLoader 的传递性</h3>
+<p>当程序在运行中遇到一个未知的类时,虚拟机会使用调用者的class对象的classLoader(class有该字段记录加载器)来加载当前类,通常情况下为系统加载器即AppClassLoader</p>
+<h2 id="final-vs-static-vs-finally">final vs static vs finally</h2>
+<blockquote>
+<p>final 标识常量，创建或者初始化后不可更改，可以修饰 属性，方法（不可被重写），类（不可被继承），局部变量<br>
+static 标识唯一性，可以修饰 变量，方法（与类的具体实例），代码段 （仅仅在类被初次加载的时候被调用一次，之后再调用不会再加载；如有父类先进行父类的初始化），不可修饰局部变量<br>
+finally 是异常处理里的内容，try catch finally<br>
+static final=final static：修饰的属性表示一旦给值，就不可修改，并且可以通过类名访问，也可以修饰方法，表示该方法不能重写</p>
+</blockquote>
+<h2 id="throws和throw">throws和throw</h2>
+<blockquote>
+<p>throws出现在方法函数头，可以跟多个异常类名，用逗号隔开，表示出现异常的一种可能性，并不一定会发生这些异常，由调用方去处理，当然也可以不处理，当产生异常，系统会报；<br>
+而throw出现在函数体，是抛出了异常，执行throw则一定抛出了某种异常对象。<br>
+两者都是消极处理异常的方式（这里的消极并不是说这种方式不好），只是抛出或者可能抛出异常，但是不会由函数去处理异常，真正的处理异常由函数的上层调用处理。</p>
+</blockquote>
+<h1 id="异常体系throwable">异常体系(throwable)</h1>
 <blockquote>
 <p><a href="https://blog.csdn.net/junlixxu/article/details/6096266" target="_blank" rel="noopener">java异常体系</a><br>
 Java把异常当作对象来处理，并定义一个基类java.lang.Throwable作为所有异常的超类<br>
@@ -526,21 +732,166 @@ Java把异常当作对象来处理，并定义一个基类java.lang.Throwable作
 <blockquote>
 <p>Exception是程序本身可以处理的异常，这种异常分两大类运行时异常和非运行时异常</p>
 </blockquote>
-<h3 id="运行时异常">运行时异常</h3>
+<h3 id="运行时异常非受检异常">运行时异常(非受检异常)</h3>
 <blockquote>
-<p>个人理解 运行时才可能出现的异常,比如NullPointerException，IndexOutOfBoundsException，IllegalArgumentException等,可以不处理，系统会统一处理，打出日志</p>
+<p>个人理解 运行时才可能出现的异常,比如NullPointerException，IndexOutOfBoundsException，IllegalArgumentException,RuntimeException,InputMismatchException等,可以不处理，系统会统一处理，打出日志</p>
 </blockquote>
-<h3 id="非运行时异常">非运行时异常</h3>
+<h3 id="非运行时异常受检异常checkexception">非运行时异常(受检异常:checkException)</h3>
 <blockquote>
-<p>系统在预编译检查时发现的错误,必须在编译前解决，否则无法编译成功，比如IOException、SQLException等以及用户自定义的Exception,</p>
+<p>系统在预编译检查时发现的错误,必须在编译前解决，否则无法编译成功，比如IOException、SQLException等以及用户自定义的Exception<br>
+通过throws 要求调用者必须处理或者向上排除</p>
 </blockquote>
-<h1 id="todo-异常处理">todo 异常处理</h1>
+<h2 id="异常处理">异常处理</h2>
+<ul>
+<li>try catch finally</li>
+<li>throws 可能的Exception 有调用者处理</li>
+<li>异常链的处理,避免异常覆盖：Throwable 里面有 cause同类型字段,可以保存构造异常时传递的根异常参数,实现异常链条</li>
+</ul>
 <h1 id="出现异常的处理方法">出现异常的处理方法</h1>
 <p>top<br>
 ps -ef<br>
 gc<br>
 iostat  查TCP 连接</p>
 <h1 id="java-多线程-java多线程面试题">Java 多线程 <a href="https://blog.csdn.net/qq_36387471/article/details/105479238" target="_blank" rel="noopener">Java多线程面试题</a></h1>
+<h1 id="java-spi机制是什么">Java SPI机制是什么？</h1>
+<blockquote>
+<p>SPI(service Provider  interface)是一种服务发现机制，提供服务接口，且为该接口寻找服务的实现<br>
+约定：</p>
+</blockquote>
+<ul>
+<li>当服务提供者提供了接口的一种具体实现后，在jar包的META-INF/services目录下创建一个以“接口全限定名”为命名的文件，内容为实现类的全限定名；</li>
+<li>接口实现类所在的jar包放在主程序的classpath中；</li>
+<li>主程序通过java.util.ServiceLoder动态装载实现模块，它通过扫描META-INF/services目录下的配置文件找到实现类的全限定名，把类加载到JVM；</li>
+<li>SPI的实现类必须携带一个不带参数的构造方法；</li>
+</ul>
+<p>加载过程</p>
+<ul>
+<li>ServiceLoader 初始化</li>
+<li>应用程序通过迭代器接口获取对象实例：首先判断是否有缓存实例对象,如果没有就通过反射加载对象并实例化,并把实例化对象缓存到provider,返回对象</li>
+</ul>
+<p>加载-&gt;验证-&gt;解析-&gt;初始化-&gt;使用-&gt;卸载</p>
+<p><a href="https://juejin.im/post/6844903633574690824" target="_blank" rel="noopener">JVM 类加载机制及双亲委派模型</a></p>
+<h1 id="双亲委派模式">双亲委派模式</h1>
+<p>类加载器</p>
+<ul>
+<li>启动（Bootstrap）类加载器：负责将 Java_Home/lib下面的类库加载到内存中（比如rt.jar）。由于引导类加载器涉及到虚拟机本地实现细节，开发者无法直接获取到启动类加载器的引用，所以不允许直接通过引用进行操作</li>
+<li>标准扩展（Extension）类加载器：基于java是由 Sun 的 ExtClassLoader（sun.misc.Launcher$ExtClassLoader）实现的。它负责将Java_Home /lib/ext或者由系统变量 java.ext.dir指定位置中的类库加载到内存中。开发者可以直接使用标准扩展类加载器。</li>
+<li>应用程序（Application）类加载器：基于java是由 Sun 的 AppClassLoader（sun.misc.Launcher$AppClassLoader）实现的。它负责将系统类路径（CLASSPATH）中指定的类库加载到内存中。开发者可以直接使用系统类加载器。由于这个类加载器是ClassLoader中的getSystemClassLoader()方法的返回值，因此一般称为系统（System）加载器。</li>
+<li>自定义加载器<br>
+该模型要求除了顶层的启动类加载器外，其余的类加载器都应该有自己的父类加载器，而这种父子关系一般通过组合（Composition）关系来实现，而不是通过继承（Inheritance）</li>
+</ul>
+<p>需要注意的是 对于任意一个类，都需要由加载它的类加载器和这个类本身共同确立其在Java虚拟机中的唯一性</p>
+<p>双亲委派模型：</p>
+<blockquote>
+<p>某个特定的类加载器在接到加载类的请求时，首先将加载任务委托给父类加载器，依次递归，如果父类加载器可以完成类加载任务，就成功返回；只有父类加载器无法完成此加载任务时，才自己去加载。<br>
+这样可以防止他人写的类替换掉系统的默认类</p>
+</blockquote>
+<p><a href="https://juejin.im/post/6844903806757502984" target="_blank" rel="noopener">java 循环依赖</a></p>
+<p><a href="https://baijiahao.baidu.com/s?id=1667840029586081215" target="_blank" rel="noopener">内存屏障</a><br>
+指令重排序</p>
+<blockquote>
+<p>对于单线程的指令,可能对指令重排序减少对于寄存器的反复读写操作,可以减少执行时间,而多线程下的指令重排序可能导致意外的错误,比如使用未初始化的变量</p>
+</blockquote>
+<p>内存一致性问题</p>
+<blockquote>
+<p>内存模型：对于多核CPU,每个核都使用高速缓存加快数据的读取(而不是每次都到主存存取),但是每个CPU的高速缓存必然是互相隔离的,可能出现共享变量副本不一致的情况<br>
+一般有两种解决方案：</p>
+</blockquote>
+<ul>
+<li>在总线上加锁的方式:在总线上发送busy信号,阻塞其他CPU对 与其他部件的访问 比如 内存,但是效率低下</li>
+<li>缓存一致性协议：比如说inter的MESI 协议保证了每个缓存中使用的变量副本一致</li>
+</ul>
+<p>内存屏障分为两种</p>
+<ul>
+<li>load barrier：读屏障</li>
+<li>Store barrier：写屏障</li>
+</ul>
+<p>内存屏障的作用</p>
+<ul>
+<li>阻止屏障两侧的指令重排序</li>
+<li>写的时候,强制把缓冲区/高速缓存的数据写会内存,并让缓冲区的数据失效,读的时候需要从主存读取</li>
+</ul>
+<p>常见的内存屏障组合有4种</p>
+<ul>
+<li>LoadLoad屏障:保证屏障后的语句读取数据之前完成之前语句的读操作</li>
+<li>StoreStore屏障：保证屏障后的写入操作执行之前,之前的写入操作的对其他处理器可见(获取最新结果)</li>
+<li>LoadStore 屏障：保证屏障之后的写操作被执行完之前,之前读操作的结果必须完成</li>
+<li>StoreLoad 屏障：保证之后的读操作执行之前,屏障之前的写操作的结果对其他处理器可见<br>
+其中StoreLoad是核心 ,因为只有先写后读的操作顺序颠倒才会导致比较严重的后果</li>
+</ul>
+<p>volatile 与 内存屏障</p>
+<ul>
+<li>在每个volatile写操作之前插入StoreStore屏障,在其之后 插入StoreLoad屏障</li>
+<li>在每个volatile读操作之前插入LoadLoad屏障,在其之后插入LoadStore屏障<br>
+从而禁止了指令的重排序和内存的可见性</li>
+</ul>
+<p>提前担保机制</p>
+<p>static synchronize VS synchronize</p>
+<p>ZGC</p>
+<p><a href="https://www.pianshen.com/article/38291243907/" target="_blank" rel="noopener">JVM里的记忆集合</a><br>
+GC两个关键难点</p>
+<ul>
+<li>跨代引用：分带收集将对象分为老年代和年轻代,年轻代朝生夕死,YGC频繁发生,但是可能存在老年代引用新生代导致错误清除新生代对象</li>
+<li>并发标记：stop-word方式的标记对系统影响大,且没有利用多核资源,故而采用并发标记,但是并发标记过程中存在对象的变化没有被感知的风险</li>
+</ul>
+<p>为了解决跨代引用,最简单的方法就是遍历所有的老年代对象,但是实际上只有少部分老年代对象对于年轻代对象有引用,这样效率很低：从而引入了&quot;记忆集&quot;的思想<br>
+记忆集：记录非GC收集区域指向收集区域的抽象数据结构,具体而言就是记录内存空间是否存在记老年代对于新生代的引用状况,根据记录精度分为3种</p>
+<ul>
+<li>字长精度：每个记录精确到一个机器字长,该字中包含跨代指针</li>
+<li>对象精度：每个记录精确到一个对象,该对象包含跨代指针字段</li>
+<li>卡精度：每个记录精确到一块内存区域,该区域中包含跨代指针<br>
+CMS 和 G1 中使用的是cardTable基于卡精度;卡表是个字节数组，每个字节对应堆空间老生代中的512个字节（这512个字节叫做卡页）是否有跨代引用</li>
+</ul>
+<p><a href="https://blog.csdn.net/MACRosshaha/article/details/108433196" target="_blank" rel="noopener">GC</a><br>
+并发标记的可达性分析:<br>
+三色标记：</p>
+<ul>
+<li>白色：尚未被垃圾收集器访问</li>
+<li>黑色：已被访问,且该对象的所有引用已被扫描</li>
+<li>灰色：已被访问,且至少存在一个对象未被扫描</li>
+</ul>
+<p>并发标记可能出现浮动垃圾和对象消失问题</p>
+<blockquote>
+<p>浮动垃圾:黑色对象的引用白色对象不再应用<br>
+对象消失：新增白色对象被黑色对象引用,但没有拉入统计而被回收<br>
+浮动垃圾的问题并不严重,数量不大而且可以下次回收;而对象消失可能干扰 系统的运行导致严重后果</p>
+</blockquote>
+<p>对象消失必然有两个前提：</p>
+<ul>
+<li>增加了黑色对象到该白色对象的引用</li>
+<li>删除后了所有灰色对象对于到该白色对象的直接或者间接引用<br>
+解决方法：</li>
+<li>增量更新：记录新增的黑色对白色的引用,并发结束后,重新扫描</li>
+<li>原始快照：在开始GC之前,对对对象之间的关系快照,涉及删除灰色到白色引用时备份引用,后面再扫描确认(此间产生的对象默认存活)<br>
+两种方法 都通过写屏障 来实现记录的操作(并非内存屏障)<br>
+<a href="https://cloud.tencent.com/developer/article/1599225" target="_blank" rel="noopener">G1回收器：我怎么知道你是什么时候的垃圾 垃圾回收详细过程</a></li>
+</ul>
+<p>高并发下 写屏障可能导致虚共享问题<br>
+<a href="https://www.cnblogs.com/cyfonly/p/5800758.html" target="_blank" rel="noopener">false sharing</a> 并发杀手<br>
+CPU 和 3级cache<br>
+其中速度 L1&gt;L2&gt;L3; 空间L3&gt;L2&gt;L1<br>
+每个cpu核有自己的L1 L2缓存,共享L3级缓存<br>
+缓存中以缓存行(cache Line)作为单位存储,通常是64字节,一次性读取连续的64字节的数据,他有效隐射内存的一块地址<br>
+当多线程所私有的变量处于同一个cache行时,会出现多线程轮番争用拥有权,并发变串行,同时该cache行的更改会将其他核高级cache行设置为失效,强制要求读取内存,即伪共享(可以通过<a href="http://ifeve.com/disruptor-cacheline-padding/" target="_blank" rel="noopener">缓存行填充</a>,使得自己的变量成为占满缓存行)<br>
+而在G1通过配置要求判断是否已经为脏位,是脏位就无须再写,同时java中支持配置注解填充缓存行</p>
+<p>java  泛型和 重写 继承的关系和缺陷<br>
+<a href="https://www.cnblogs.com/wuqinglong/p/9456193.html" target="_blank" rel="noopener">Java泛型类型擦除以及类型擦除带来的问题</a><br>
+<a href="http://blog.sina.com.cn/s/blog_7ffb8dd501012ku9.html" target="_blank" rel="noopener">泛型与类型擦除</a></p>
+<blockquote>
+<p>在代码阶段的重载检查和在JVM 阶段的检查<br>
+如何实现泛型的多态</p>
+</blockquote>
+<p>Java 基础，集合类有哪些，全部说一遍</p>
+<blockquote>
+<p>四大类吧，分别是List、Queue、Set、Map</p>
+</blockquote>
+<ul>
+<li>List：常见的有 ArrayList、LinkedList、Vector、CopyOnWriteArrayList</li>
+<li>Queue：常见的有 ArrayDeque、PriorityQueue、ArrayBlockingQueue、LinkedBlockingQueue、DelayBlockingQueue等等</li>
+<li>Map：HashMap、LinkedHashMap、TreeMap、ConcurrentHashMap等等</li>
+<li>Set：HashSet、LinkedHashSet、TreeSet等</li>
+</ul>
+<p>JAVA的final字段</p>
 
       
     </div>
@@ -660,7 +1011,7 @@ iostat  查TCP 连接</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">108</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -673,7 +1024,7 @@ iostat  查TCP 连接</p>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
@@ -706,7 +1057,7 @@ iostat  查TCP 连接</p>
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程"><span class="nav-number">1.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程创建方法"><span class="nav-number">1.1.</span> <span class="nav-text">线程创建方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">1.2.</span> <span class="nav-text">多线程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gc"><span class="nav-number">2.</span> <span class="nav-text">GC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">2.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gc对象"><span class="nav-number">2.2.</span> <span class="nav-text">GC对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判定方法"><span class="nav-number">2.2.1.</span> <span class="nav-text">判定方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触发gc的条件"><span class="nav-number">2.2.2.</span> <span class="nav-text">触发GC的条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gc-roots"><span class="nav-number">2.3.</span> <span class="nav-text">GC ROOTS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gc常用算法"><span class="nav-number">2.4.</span> <span class="nav-text">GC常用算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cms"><span class="nav-number">2.4.1.</span> <span class="nav-text">CMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zgc"><span class="nav-number">2.4.2.</span> <span class="nav-text">ZGC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cms-vs-g1"><span class="nav-number">2.4.3.</span> <span class="nav-text">CMS VS G1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计模式"><span class="nav-number">3.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">3.1.</span> <span class="nav-text">单例模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他常见问题"><span class="nav-number">5.</span> <span class="nav-text">其他常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hashmap-hashtable-concurrenthashmap"><span class="nav-number">5.1.</span> <span class="nav-text">HashMap HashTable ConcurrentHashMap</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常体系"><span class="nav-number">6.</span> <span class="nav-text">异常体系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#error"><span class="nav-number">6.1.</span> <span class="nav-text">error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exception"><span class="nav-number">6.2.</span> <span class="nav-text">Exception</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时异常"><span class="nav-number">6.2.1.</span> <span class="nav-text">运行时异常</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非运行时异常"><span class="nav-number">6.2.2.</span> <span class="nav-text">非运行时异常</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#todo-异常处理"><span class="nav-number">7.</span> <span class="nav-text">todo 异常处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#出现异常的处理方法"><span class="nav-number">8.</span> <span class="nav-text">出现异常的处理方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-多线程-java多线程面试题"><span class="nav-number">9.</span> <span class="nav-text">Java 多线程 Java多线程面试题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#多线程"><span class="nav-number">1.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#线程创建方法"><span class="nav-number">1.1.</span> <span class="nav-text">线程创建方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">1.2.</span> <span class="nav-text">多线程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#gc"><span class="nav-number">2.</span> <span class="nav-text">GC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">2.1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gc对象"><span class="nav-number">2.2.</span> <span class="nav-text">GC对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#判定方法"><span class="nav-number">2.2.1.</span> <span class="nav-text">判定方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触发gc的条件"><span class="nav-number">2.2.2.</span> <span class="nav-text">触发GC的条件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gc-roots"><span class="nav-number">2.3.</span> <span class="nav-text">GC ROOTS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为对象分配内存的方法"><span class="nav-number">2.4.</span> <span class="nav-text">为对象分配内存的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gc常用算法"><span class="nav-number">2.5.</span> <span class="nav-text">GC常用算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cms"><span class="nav-number">2.5.1.</span> <span class="nav-text">CMS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zgc"><span class="nav-number">2.5.2.</span> <span class="nav-text">ZGC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cms-vs-g1"><span class="nav-number">2.5.3.</span> <span class="nav-text">CMS VS G1</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#设计模式"><span class="nav-number">3.</span> <span class="nav-text">设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">3.1.</span> <span class="nav-text">单例模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text"></span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他常见问题"><span class="nav-number">5.</span> <span class="nav-text">其他常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#hashmap-hashtable-concurrenthashmap"><span class="nav-number">5.1.</span> <span class="nav-text">HashMap HashTable ConcurrentHashMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#linkedhashmap-treemap"><span class="nav-number">5.2.</span> <span class="nav-text">LinkedHashMap TreeMap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#arraylist-vs-linkedlist"><span class="nav-number">5.3.</span> <span class="nav-text">Arraylist VS LinkedList</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#volatile和synchronized特点"><span class="nav-number">5.4.</span> <span class="nav-text">volatile和synchronized特点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#java两种数据类型"><span class="nav-number">5.5.</span> <span class="nav-text">Java两种数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设计模式"><span class="nav-number">5.6.</span> <span class="nav-text">设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆栈"><span class="nav-number">5.7.</span> <span class="nav-text">堆栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#bean"><span class="nav-number">5.8.</span> <span class="nav-text">bean</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#malloc-vs-new"><span class="nav-number">5.9.</span> <span class="nav-text">malloc VS new</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4种io模式"><span class="nav-number">5.10.</span> <span class="nav-text">4种IO模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nio"><span class="nav-number">5.11.</span> <span class="nav-text">NIO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的加载"><span class="nav-number">5.12.</span> <span class="nav-text">类的加载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类加载的委派机制"><span class="nav-number">5.13.</span> <span class="nav-text">类加载的委派机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相同类的加载"><span class="nav-number">5.13.1.</span> <span class="nav-text">相同类的加载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#钻石依赖"><span class="nav-number">5.13.2.</span> <span class="nav-text">钻石依赖</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#threadcontextclassloader"><span class="nav-number">5.13.3.</span> <span class="nav-text">Thread.contextClassLoader</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的运行时寻找机制"><span class="nav-number">5.13.4.</span> <span class="nav-text">类的运行时寻找机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#classloader-的传递性"><span class="nav-number">5.13.5.</span> <span class="nav-text">classLoader 的传递性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#final-vs-static-vs-finally"><span class="nav-number">5.14.</span> <span class="nav-text">final vs static vs finally</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#throws和throw"><span class="nav-number">5.15.</span> <span class="nav-text">throws和throw</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常体系throwable"><span class="nav-number">6.</span> <span class="nav-text">异常体系(throwable)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#error"><span class="nav-number">6.1.</span> <span class="nav-text">error</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exception"><span class="nav-number">6.2.</span> <span class="nav-text">Exception</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#运行时异常非受检异常"><span class="nav-number">6.2.1.</span> <span class="nav-text">运行时异常(非受检异常)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非运行时异常受检异常checkexception"><span class="nav-number">6.2.2.</span> <span class="nav-text">非运行时异常(受检异常:checkException)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理"><span class="nav-number">6.3.</span> <span class="nav-text">异常处理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#出现异常的处理方法"><span class="nav-number">7.</span> <span class="nav-text">出现异常的处理方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-多线程-java多线程面试题"><span class="nav-number">8.</span> <span class="nav-text">Java 多线程 Java多线程面试题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#java-spi机制是什么"><span class="nav-number">9.</span> <span class="nav-text">Java SPI机制是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#双亲委派模式"><span class="nav-number">10.</span> <span class="nav-text">双亲委派模式</span></a></li></ol></div>
             
 
           </div>

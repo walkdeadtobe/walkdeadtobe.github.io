@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Override 的 JVM 实现  背景：在代码中子类Son继承父类Father,并使用Override注解 对于父类方法Test的重写  JVM 加载子类Son.class,递归的向上加载父类的class 文件即Father.class :class文件保存为表示类型信息的结构体中,只包含本类特有的，或者是重写的方法信息，没有父类的方法信息。  JVM会根据class 文件信息生成 方法表(是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="源码解析">
+<meta property="og:url" content="http://yoursite.com/2020/09/03/工作求职/源码解析/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Override 的 JVM 实现  背景：在代码中子类Son继承父类Father,并使用Override注解 对于父类方法Test的重写  JVM 加载子类Son.class,递归的向上加载父类的class 文件即Father.class :class文件保存为表示类型信息的结构体中,只包含本类特有的，或者是重写的方法信息，没有父类的方法信息。  JVM会根据class 文件信息生成 方法表(是">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/Override-test-java.png">
+<meta property="og:image" content="http://yoursite.com/images/Override-testclass.png">
+<meta property="og:image" content="http://yoursite.com/images/Override-method-table.png">
+<meta property="og:updated_time" content="2020-11-03T06:19:31.880Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="源码解析">
+<meta name="twitter:description" content="Override 的 JVM 实现  背景：在代码中子类Son继承父类Father,并使用Override注解 对于父类方法Test的重写  JVM 加载子类Son.class,递归的向上加载父类的class 文件即Father.class :class文件保存为表示类型信息的结构体中,只包含本类特有的，或者是重写的方法信息，没有父类的方法信息。  JVM会根据class 文件信息生成 方法表(是">
+<meta name="twitter:image" content="http://yoursite.com/images/Override-test-java.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/03/工作求职/源码解析/">
+
+
+
+
+
+  <title>源码解析 | Hexo</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hexo</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/03/工作求职/源码解析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">源码解析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2020-09-03T13:06:17+08:00">
+                2020-09-03
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-11-03T14:19:31+08:00" content="2020-11-03">
+                2020-11-03
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="override-的-jvm-实现">Override 的 JVM 实现</h4>
+<blockquote>
+<p>背景：在代码中子类Son继承父类Father,并使用Override注解 对于父类方法Test的重写<br>
+<img src="/images/Override-test-java.png" alt="test1.java test2.java"><br>
+JVM 加载子类Son.class,递归的向上加载父类的class 文件即Father.class :class文件保存为表示类型信息的结构体中,只包含本类特有的，或者是重写的方法信息，没有父类的方法信息。<br>
+<img src="/images/Override-testclass.png" alt="class文件在方法区的结构"><br>
+JVM会根据class 文件信息生成 方法表(是实现多态的关键),方法表中保存该类的所有的包括继承的方法(不包含私有方法),以及指向实例方法的指针<br>
+<img src="/images/Override-method-table.png" alt="方法表"><br>
+其中子类Son的Test方法指针指向Son.class在中的实例方法(这里需要注意的一点是，当Child类的方法表产生指向Parent类中的方法的引用时，会有一个指向eat方法的引用，最后产生指向本类的方法的引用时，也有一个指向eat的引用，这时候，新的数据会覆盖原有的数据，也就是说原来指向Parent.eat的那个引用会被替换成指向Child.eat的引用(占据原来表中的位置)<br>
+堆中存储类的方法表索引以及字段变量<br>
+当执行test方法时,虽然类型是Father,实际执行的是Son的方法表中指向的Son重写的方法</p>
+</blockquote>
+<p>参考：</p>
+<ul>
+<li><a href="https://blog.csdn.net/wonderful_life_mrchi/article/details/78048698" target="_blank" rel="noopener">jvm视角看java继承和多态</a></li>
+<li><a href="https://blog.csdn.net/u011069294/article/details/107415210" target="_blank" rel="noopener">JVM方法区的内部结构</a></li>
+<li><a href="https://www.iteye.com/blog/hxraid-676235" target="_blank" rel="noopener">Java 虚拟机体系结构</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/24317613" target="_blank" rel="noopener">Java动态绑定机制的内幕</a></li>
+<li><a href="https://blog.csdn.net/fan2012huan/article/details/51007517" target="_blank" rel="noopener">java方法调用之动态调用多态（重写override）的实现原理——方法表（三）</a></li>
+</ul>
+<h4 id="synchronize-vs-lock">synchronize VS lock</h4>
+<p><a href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-17.html" target="_blank" rel="noopener">Chapter 17. Threads and Locks</a><br>
+<a href="https://www.cnblogs.com/tiancai/p/9371655.html" target="_blank" rel="noopener">java的锁池和等待池</a><br>
+<a href="https://segmentfault.com/a/1190000017134827" target="_blank" rel="noopener">synchronize - 线程同步机制</a><br>
+synchronize支持同步的机制是monitor(monitorEnter monitorExit),支持两种同步机制 互斥和协作<br>
+每个对象维持两个队列 waitSet 和 EntrySet<br>
+waitSet :</p>
+<ul>
+<li>操作方法:wait(释放锁,进入队列) 和 notify LockSupport.pack/unpack</li>
+<li>需要注意的是notify方法,notify锁唤醒的线程会竞争锁,当该线程竞争成功之后才会将值从wait队列中除去(避免不必要的队列操作,如果要移动到entrySet,那么notifyAll会涉及大量的操作,浪费时间)<br>
+EntrySet：所有想获取锁但未获得的线程</li>
+<li>当线程synchronize获取锁失败后进入entrySet 而 当获得锁的进程放弃锁之后,从该队列中唤醒一个线程</li>
+</ul>
+<h4 id="cyclicbarrier-vs-countdownlatch-vs-semaphore">CyclicBarrier  VS CountDownLatch VS Semaphore</h4>
+<p>CountDownLatch利用state记录次数,用于同步多个runnable任务执行完之后执行主线程其余操作</p>
+<ul>
+<li>await: 重写tryAcquireShared 方法:如果state为0则获取成功可以运行,否则调用doAcquireSharedInterruptibly阻塞该线程;(可用于主线程阻塞自己,等待其他线程完成操作)</li>
+<li>countDown: 重写 releaseShared(1) 降低state值,将为0时执行doReleaseShared唤醒所有休眠线程,否则仅降低state值</li>
+</ul>
+<p>Semaphore 限制state数量的线程可以进入Semaphore.acquire() 和 realease() 修饰的代码</p>
+<ul>
+<li>auquire():重写tryAcquireShared 方法,当state数量小于等于0时,调用doAcquireShared阻塞线程,否则成功返回</li>
+<li>release():重写tryReleaseShared 方法,for循环 中CAS操作增加state 成功则跳出循环</li>
+</ul>
+<p>CyclicBarrier:可循环栅栏(可以用于多次同步动作,比如聚餐的两个同步点,所有到达餐厅开始吃饭,所有人吃完开始离开)<br>
+CyclicBarrier内部维持了ReenterLock对象 在基于此生成condition对象,此外包含内部类Generation,每次循环使用新的generation,Runnable变量barrierCommand即线程的队形,count同步计数变量</p>
+<ul>
+<li>await:利用lock.lock/unlock 维持降低count值,当降低到0 调用nextGenation/BrokenBarrier 方法唤醒休眠线程,重初始化,继续执行,否则阻塞之</li>
+<li>reset:重置barrier为初始状态,那些仍等待barrier的线程会返回一个BrokenBarrierException</li>
+</ul>
+<h4 id="synchronize-和-aqs">synchronize 和 AQS</h4>
+<ul>
+<li>后者需要显示的获得和释放锁</li>
+<li>前者有系统支持,后者是软件层级的锁,前者的锁进入的队列是entry队列,后者是wait队列</li>
+<li>前者是悲观锁,后者基于CAS乐观锁</li>
+<li>前者的锁等待,不能感知中断/不支持显示处理, 后者 可以通过设置允许中断的标志位 来允许其他线程中断自己 并加以处理</li>
+</ul>
+<p>AQS的实现类 sync 可以调用lockInterruptly() 会在获得锁失败后,调用LockSupport.park(),从阻塞中被唤醒(被调用LockSupport.unpark())之后,会判断是否是被中断而唤醒的,如果是那么抛出interruptExcetion ,线程可以针对的处理 避免死锁,<br>
+当其他线程调用Thread.intrerrupt() 时,会设置终终中断的标志位,线程<br>
+object.wait() 方法会检测到 检测中断</p>
+<p>stop()方法停止线程非常的暴力，人家线程运行的好好的，突然就把人家杀死了，线程占用的锁被强制释放，极易导致数据的不一致.</p>
+<h4 id="abstractqueuedsynchronizer">AbstractQueuedSynchronizer</h4>
+<p>private transient volatile Node head;<br>
+private transient volatile Node tail;<br>
+//在独占式里,标识占据lock的线程,从0到1 的变化通过CAS操作完成,大于1时标识多次重入,直接setState完成<br>
+private volatile int state;</p>
+<p>lock.lock() 获得锁的运行(更新state为1),没有获得锁的进入双向队列<br>
+condition.await() 获得锁的线程可以运行该函数,新建Node添加进condition等待单向队列;更新state,并唤醒lock的队列首的后续节点,并调用LockSupport.pack()阻塞自己<br>
+condition.signal()  获取锁的线程,唤醒一个从condition阻塞队列的节点,将之移动到sync同步等待队列,</p>
+<p>lock.unlock() 放弃锁,更新state 唤醒等待队列首,阻塞自己</p>
+<h5 id="class-node">class Node</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Node nextWaiter;</span><br><span class="line">volatile Thread thread;</span><br><span class="line">volatile Node next;</span><br><span class="line">volatile Node prev;</span><br><span class="line">volatile int waitStatus;</span><br><span class="line">static final Node SHARED = new Node();</span><br><span class="line">/** Marker to indicate a node is waiting in exclusive mode */</span><br><span class="line">static final Node EXCLUSIVE = null;</span><br><span class="line"></span><br><span class="line">/** waitStatus value to indicate thread has cancelled */</span><br><span class="line">static final int CANCELLED =  1;</span><br><span class="line">/** waitStatus value to indicate successor&apos;s thread needs unparking */</span><br><span class="line">static final int SIGNAL    = -1;</span><br><span class="line">/** waitStatus value to indicate thread is waiting on condition */</span><br><span class="line">static final int CONDITION = -2;</span><br><span class="line">/**</span><br><span class="line">* waitStatus value to indicate the next acquireShared should</span><br><span class="line">* unconditionally propagate</span><br><span class="line">*/</span><br><span class="line">static final int PROPAGATE = -3;</span><br></pre></td></tr></table></figure>
+<h6 id="节点状态">节点状态</h6>
+<ul>
+<li>CANCELLED:值为1，由于超时或中断，该节点被取消。 节点进入该状态将不再变化。特别是具有取消节点的线程永远不会再次阻塞</li>
+<li>INITIAL:值为0，初始状态,非四种状态</li>
+<li>SIGNAL:值为-1，后继节点的线程处于等待状态，而当前节点的线程如果释放了同步状态或者被取消，那么就会通知后继节点，让后继节点的线程能够运行</li>
+<li>CONDITION:值为-2，Condition的等待队列,不过当其他的线程对Condition调用了signal()方法后，该节点就会从等待队列转移到同步队列(sync)中，然后开始尝试对同步状态的获取</li>
+<li>PROPAGATE:值为-3，只对head节点设置,表示下一次的releaseShared状态获取将会无条件的被传播下去</li>
+</ul>
+<h5 id="conditionsignal">condition.signal</h5>
+<p>首先判断是否是持有锁者在调用释放<br>
+获取锁的线程,唤醒一个从condition阻塞队列的节点,将之移动到sync同步等待队列</p>
+<h5 id="doacquireshared-获取锁">doAcquireShared 获取锁</h5>
+<p><a href="https://juejin.im/post/6844903997438951437" target="_blank" rel="noopener">参考0</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* Acquires in shared uninterruptible mode.</span><br><span class="line">* @param arg the acquire argument</span><br><span class="line">*/</span><br><span class="line">private void doAcquireShared(int arg) &#123;</span><br><span class="line">    //将该线程添加到阻塞队列的队尾,涉及CAS设置tail,并返回tail</span><br><span class="line">    final Node node = addWaiter(Node.SHARED);</span><br><span class="line">    boolean failed = true;</span><br><span class="line">    try &#123;</span><br><span class="line">        boolean interrupted = false;</span><br><span class="line">        for (;;) &#123;</span><br><span class="line">            final Node p = node.predecessor();</span><br><span class="line">            //head 标识 当前阻塞队列中获取锁的线程,那么之后其后继者才有可能获得锁</span><br><span class="line">            if (p == head) &#123;</span><br><span class="line">                int r = tryAcquireShared(arg);</span><br><span class="line">                if (r &gt;= 0) &#123;</span><br><span class="line">                    //设置当前node为head而且沿着阻塞队列向后传播</span><br><span class="line">                    setHeadAndPropagate(node, r);</span><br><span class="line">                    p.next = null; // help GC</span><br><span class="line">                    if (interrupted)</span><br><span class="line">                        selfInterrupt();//??中断后执行finally然后在阻塞队列中删除该节点??</span><br><span class="line">                    failed = false;</span><br><span class="line">                    return;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            //判断线程是否应该阻塞,以及调用LockSupport.park(this) 将线程阻塞并返回是否成功</span><br><span class="line">            if (shouldParkAfterFailedAcquire(p, node) &amp;&amp;</span><br><span class="line">                parkAndCheckInterrupt())</span><br><span class="line">                interrupted = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        if (failed)//取消对于读锁的获取,在阻塞队列里删除该节点</span><br><span class="line">            cancelAcquire(node);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="addwaiter">addWaiter</h5>
+<h4 id="reentrantlockreadwritelock">ReentrantLockReadWriteLock</h4>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//state&gt;&gt;16 获得读锁的线程数;state&amp;(1&lt;&lt;16) 写锁的重入次数</span><br><span class="line">final volatile int state;</span><br><span class="line"></span><br><span class="line">private static final long serialVersionUID = -6992448646407690164L;</span><br><span class="line">//读锁</span><br><span class="line">private final ReentrantReadWriteLock.ReadLock readerLock;</span><br><span class="line">//写锁</span><br><span class="line">private final ReentrantReadWriteLock.WriteLock writerLock;</span><br><span class="line">//同步机制的操作对象</span><br><span class="line">final Sync sync;</span><br><span class="line">//transient 标识序列化时不序列化该元素;firstReader标识获取读锁的第一个线程(最近把读锁计数从0变为1的线程),而firstReaderHoldCount标识该线程持有的锁的数量</span><br><span class="line">private transient Thread firstReader = null;</span><br><span class="line">private transient int firstReaderHoldCount;</span><br><span class="line"></span><br><span class="line">//标识当前线程所持有的读锁的数目(THreadLocal变量)</span><br><span class="line">private transient ThreadLocalHoldCounter readHolds;</span><br><span class="line">//标识最后获得读锁的线程持有的读锁数</span><br><span class="line">private transient HoldCounter cachedHoldCounter;</span><br></pre></td></tr></table></figure>
+<p>获取锁的过程</p>
+<ul>
+<li>lock()</li>
+<li>acquireShared(1) ;tryAcquireShared(1)失败后,说明有写锁, -&gt; fullTryAcquireShared(在没有写锁的前提下,死锁循环获取读锁)</li>
+<li>fullTryAcquireShared 失败后(失败意味着在获取读锁的期间有线程获得读锁或者读锁数量超过限制,否则继续死循环) doAcquireShared(1)</li>
+</ul>
+<p>释放锁的过程</p>
+<ul>
+<li>unlock()</li>
+<li>sync.releaseShared(1)</li>
+<li>tryReleaseShared 成功后 doReleaseShared</li>
+</ul>
+<h5 id="tryacquireshared">tryAcquireShared</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line">//获取共享锁</span><br><span class="line">protected final int tryAcquireShared(int unused) &#123;</span><br><span class="line">    /*</span><br><span class="line">        * Walkthrough:</span><br><span class="line">        * 1. If write lock held by another thread, fail.</span><br><span class="line">        * 2. Otherwise, this thread is eligible for</span><br><span class="line">        *    lock wrt state, so ask if it should block</span><br><span class="line">        *    because of queue policy. If not, try</span><br><span class="line">        *    to grant by CASing state and updating count.</span><br><span class="line">        *    Note that step does not check for reentrant</span><br><span class="line">        *    acquires, which is postponed to full version</span><br><span class="line">        *    to avoid having to check hold count in</span><br><span class="line">        *    the more typical non-reentrant case.</span><br><span class="line">        * 3. If step 2 fails either because thread</span><br><span class="line">        *    apparently not eligible or CAS fails or count</span><br><span class="line">        *    saturated, chain to version with full retry loop.</span><br><span class="line">        */</span><br><span class="line">    Thread current = Thread.currentThread();</span><br><span class="line">    int c = getState();</span><br><span class="line">    //如果已经有进程占有写锁,且不是当前进程,那么不可获得读锁(获得写锁的进程也能获得读锁)</span><br><span class="line">    if (exclusiveCount(c) != 0 &amp;&amp;</span><br><span class="line">        getExclusiveOwnerThread() != current)</span><br><span class="line">        return -1;</span><br><span class="line">    //获得读锁的线程数</span><br><span class="line">    int r = sharedCount(c);</span><br><span class="line">    //如果不应该阻塞(阻塞队列为空或者队首是自己) 且 当前获得锁的线程数量小于最大值  且 CAS 操作成功 ,那么执行</span><br><span class="line">    if (!readerShouldBlock() &amp;&amp;</span><br><span class="line">        r &lt; MAX_COUNT &amp;&amp;</span><br><span class="line">        compareAndSetState(c, c + SHARED_UNIT)) &#123;</span><br><span class="line">        //如果这是第一获得读锁的进程 赋值firstReader 和 firstReaderHoldCount</span><br><span class="line">        if (r == 0) &#123;</span><br><span class="line">            firstReader = current;</span><br><span class="line">            firstReaderHoldCount = 1;</span><br><span class="line">        &#125; else if (firstReader == current) &#123;//或者第一个获得读锁的人是自己,那么增加计数即可</span><br><span class="line">            firstReaderHoldCount++;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            //如果最后一个线程计数器是null或不是自己那么新建 HoldCounter,否则 不是null并且是自己此时如果count为0,则</span><br><span class="line">            HoldCounter rh = cachedHoldCounter;</span><br><span class="line">            if (rh == null || rh.tid != getThreadId(current))</span><br><span class="line">                cachedHoldCounter = rh = readHolds.get();</span><br><span class="line">            else if (rh.count == 0)</span><br><span class="line">                readHolds.set(rh);</span><br><span class="line">            rh.count++;</span><br><span class="line">        &#125;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    return fullTryAcquireShared(current);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="fulltryacquireshared"><a href="https://ifeve.com/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E4%B9%8B-%E8%AF%BB%E9%94%81%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%E8%A7%A3%E9%87%8A%E5%85%B3%E4%BA%8E%E9%94%81%E9%99%8D%E7%BA%A7%E7%9A%84%E4%BA%89/" target="_blank" rel="noopener">fullTryAcquireShared</a></h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">//死循环获取读锁。包含锁降级策略</span><br><span class="line">final int fullTryAcquireShared(Thread current) &#123;</span><br><span class="line">    /*</span><br><span class="line">        * This code is in part redundant with that in</span><br><span class="line">        * tryAcquireShared but is simpler overall by not</span><br><span class="line">        * complicating tryAcquireShared with interactions between</span><br><span class="line">        * retries and lazily reading hold counts.</span><br><span class="line">        */</span><br><span class="line">    HoldCounter rh = null;</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int c = getState();</span><br><span class="line">        //获取读锁之前,确保没有写锁,首先这是读写锁的目标 同时避免获取写锁的线程  之后获取读锁 从而陷入死锁</span><br><span class="line">        if (exclusiveCount(c) != 0) &#123;</span><br><span class="line">            if (getExclusiveOwnerThread() != current)</span><br><span class="line">                return -1;</span><br><span class="line">            // else we hold the exclusive lock; blocking here</span><br><span class="line">            // would cause deadlock.</span><br><span class="line">            //readerShouldBlock 判断 阻塞队列是否有线程,或者阻塞队列首是否是自己,如果是则返回false,不应该阻塞,不要重复获取读锁,写锁的持有线程可以获得读锁</span><br><span class="line">        &#125; else if (readerShouldBlock()) &#123;</span><br><span class="line">            // Make sure we&apos;re not acquiring read lock reentrantly</span><br><span class="line">            if (firstReader == current) &#123;</span><br><span class="line">                // assert firstReaderHoldCount &gt; 0;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (rh == null) &#123;</span><br><span class="line">                    rh = cachedHoldCounter;</span><br><span class="line">                    if (rh == null || rh.tid != getThreadId(current)) &#123;</span><br><span class="line">                        rh = readHolds.get();</span><br><span class="line">                        if (rh.count == 0)</span><br><span class="line">                            readHolds.remove();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                if (rh.count == 0)</span><br><span class="line">                    return -1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        //如果读锁的数量达到限制,报错</span><br><span class="line">        if (sharedCount(c) == MAX_COUNT)</span><br><span class="line">            throw new Error(&quot;Maximum lock count exceeded&quot;);</span><br><span class="line">        if (compareAndSetState(c, c + SHARED_UNIT)) &#123;//尝试获得锁</span><br><span class="line">            //获得成功,如果是第一个获得读锁的线程,更新相关值</span><br><span class="line">            if (sharedCount(c) == 0) &#123;</span><br><span class="line">                firstReader = current;</span><br><span class="line">                firstReaderHoldCount = 1;</span><br><span class="line">            &#125; else if (firstReader == current) &#123;//如果是第一个读者,更新相关值</span><br><span class="line">                firstReaderHoldCount++;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                if (rh == null)</span><br><span class="line">                    rh = cachedHoldCounter;</span><br><span class="line">                //如果rh为空或者rh不为当前线程,那么新建 HoldCounter</span><br><span class="line">                if (rh == null || rh.tid != getThreadId(current))</span><br><span class="line">                    rh = readHolds.get();</span><br><span class="line">                else if (rh.count == 0) //否则即rh为当前线程,且count为0,则更新</span><br><span class="line">                    readHolds.set(rh);</span><br><span class="line">                rh.count++;</span><br><span class="line">                cachedHoldCounter = rh; // cache for release</span><br><span class="line">            &#125;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line">    * Performs tryLock for write, enabling barging in both modes.</span><br><span class="line">    * This is identical in effect to tryAcquire except for lack</span><br><span class="line">    * of calls to writerShouldBlock.</span><br><span class="line">    */</span><br></pre></td></tr></table></figure>
+<h5 id="shouldparkafterfailedacquire">shouldParkAfterFailedAcquire</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">//如果线程获取读锁失败,那么是否阻塞之,并且修改其在队列中的状态</span><br><span class="line">private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) &#123;</span><br><span class="line">    int ws = pred.waitStatus;</span><br><span class="line">    //如果前继节点的状态是SIGNAL那么可以阻塞该线程</span><br><span class="line">    if (ws == Node.SIGNAL)</span><br><span class="line">        /*</span><br><span class="line">            * This node has already set status asking a release</span><br><span class="line">            * to signal it, so it can safely park.</span><br><span class="line">            */</span><br><span class="line">        return true;</span><br><span class="line">    if (ws &gt; 0) &#123;</span><br><span class="line">        //前继节点处于CANCEL的状态,所以锁的最新情况不能通过前继节点传递给他,所以需要删除这样的节点.</span><br><span class="line">        /*</span><br><span class="line">            * Predecessor was cancelled. Skip over predecessors and</span><br><span class="line">            * indicate retry.</span><br><span class="line">            */</span><br><span class="line">        do &#123;</span><br><span class="line">            node.prev = pred = pred.prev;</span><br><span class="line">        &#125; while (pred.waitStatus &gt; 0);</span><br><span class="line">        pred.next = node;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        //前继节点处于CONDITION 或者 PROPAGATE 状态,那么 修改状态为 SINGAL</span><br><span class="line">        /*</span><br><span class="line">            * waitStatus must be 0 or PROPAGATE.  Indicate that we</span><br><span class="line">            * need a signal, but don&apos;t park yet.  Caller will need to</span><br><span class="line">            * retry to make sure it cannot acquire before parking.</span><br><span class="line">            */</span><br><span class="line">        compareAndSetWaitStatus(pred, ws, Node.SIGNAL);</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="shouldparkafterfailedacquire">shouldParkAfterFailedAcquire</h5>
+<p>判断已获取读锁失败的线程是否应该阻塞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">private static boolean shouldParkAfterFailedAcquire(Node pred, Node node) &#123;</span><br><span class="line">    int ws = pred.waitStatus;</span><br><span class="line">    if (ws == Node.SIGNAL)</span><br><span class="line">        /*</span><br><span class="line">            * This node has already set status asking a release</span><br><span class="line">            * to signal it, so it can safely park.</span><br><span class="line">            */</span><br><span class="line">        return true;</span><br><span class="line">    if (ws &gt; 0) &#123;</span><br><span class="line">        /*</span><br><span class="line">            * Predecessor was cancelled. Skip over predecessors and</span><br><span class="line">            * indicate retry.</span><br><span class="line">            */</span><br><span class="line">        do &#123;</span><br><span class="line">            node.prev = pred = pred.prev;</span><br><span class="line">        &#125; while (pred.waitStatus &gt; 0);</span><br><span class="line">        pred.next = node;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        /*</span><br><span class="line">            * waitStatus must be 0 or PROPAGATE.  Indicate that we</span><br><span class="line">            * need a signal, but don&apos;t park yet.  Caller will need to</span><br><span class="line">            * retry to make sure it cannot acquire before parking.</span><br><span class="line">            */</span><br><span class="line">        compareAndSetWaitStatus(pred, ws, Node.SIGNAL);</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="tryreleaseshared">tryReleaseShared</h5>
+<p>释放该线程的读锁,count-1</p>
+<ol>
+<li>是否是firstReader
+<ul>
+<li>是否 count = 1</li>
+</ul>
+</li>
+<li>是否是最后一个Reader</li>
+<li>死循环CAS更新所有读锁的count,成功后退出</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">protected final boolean tryReleaseShared(int unused) &#123;</span><br><span class="line">    Thread current = Thread.currentThread();</span><br><span class="line">    if (firstReader == current) &#123;</span><br><span class="line">        // assert firstReaderHoldCount &gt; 0;</span><br><span class="line">        if (firstReaderHoldCount == 1)</span><br><span class="line">            firstReader = null;</span><br><span class="line">        else</span><br><span class="line">            firstReaderHoldCount--;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        HoldCounter rh = cachedHoldCounter;</span><br><span class="line">        if (rh == null || rh.tid != getThreadId(current))</span><br><span class="line">            rh = readHolds.get();</span><br><span class="line">        int count = rh.count;</span><br><span class="line">        if (count &lt;= 1) &#123;</span><br><span class="line">            readHolds.remove();</span><br><span class="line">            if (count &lt;= 0)</span><br><span class="line">                throw unmatchedUnlockException();</span><br><span class="line">        &#125;</span><br><span class="line">        --rh.count;</span><br><span class="line">    &#125;</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        int c = getState();</span><br><span class="line">        int nextc = c - SHARED_UNIT;</span><br><span class="line">        if (compareAndSetState(c, nextc))</span><br><span class="line">            // Releasing the read lock has no effect on readers,</span><br><span class="line">            // but it may allow waiting writers to proceed if</span><br><span class="line">            // both read and write locks are now free.</span><br><span class="line">            return nextc == 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="doreleaseshared">doReleaseShared</h5>
+<p>该节点释放锁之后,</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">private void doReleaseShared() &#123;</span><br><span class="line">    /*</span><br><span class="line">        * Ensure that a release propagates, even if there are other</span><br><span class="line">        * in-progress acquires/releases.  This proceeds in the usual</span><br><span class="line">        * way of trying to unparkSuccessor of head if it needs</span><br><span class="line">        * signal. But if it does not, status is set to PROPAGATE to</span><br><span class="line">        * ensure that upon release, propagation continues.</span><br><span class="line">        * Additionally, we must loop in case a new node is added</span><br><span class="line">        * while we are doing this. Also, unlike other uses of</span><br><span class="line">        * unparkSuccessor, we need to know if CAS to reset status</span><br><span class="line">        * fails, if so rechecking.</span><br><span class="line">        */</span><br><span class="line">    for (;;) &#123;</span><br><span class="line">        Node h = head;</span><br><span class="line">        if (h != null &amp;&amp; h != tail) &#123;</span><br><span class="line">            int ws = h.waitStatus;</span><br><span class="line">            if (ws == Node.SIGNAL) &#123;</span><br><span class="line">                if (!compareAndSetWaitStatus(h, Node.SIGNAL, 0))</span><br><span class="line">                    continue;            // loop to recheck cases</span><br><span class="line">                //如果更新成功,解锁后继节点</span><br><span class="line">                unparkSuccessor(h);</span><br><span class="line">            &#125;</span><br><span class="line">            else if (ws == 0 &amp;&amp;</span><br><span class="line">                        !compareAndSetWaitStatus(h, 0, Node.PROPAGATE))</span><br><span class="line">                continue;                // loop on failed CAS</span><br><span class="line">        &#125;</span><br><span class="line">        if (h == head)                   // loop if head changed</span><br><span class="line">            break;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="threadlocal">ThreadLocal</h4>
+<p>通过继承ThreadLocal 重写 initialValue,获得默认值<br>
+Thread 类中包含ThreadLocalMap  和 InheritThreadLocalMap<br>
+ThreadLocalMap 是一个 Entry数组,一个 Entry 定义时包含对于ThreadLocal的弱引用,利用Object(value)存储保存的值</p>
+<h5 id="get">get</h5>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//多线程共享进程的变量threadLocal,以该变量为key值去获取线程私有变量中的相关值,不涉及对于全局变量的修改,不会线程不安全,利用这种方法可以实现多变量的线程间共享,而且不必要放入参数中传进去</span><br><span class="line">public T get() &#123;</span><br><span class="line">        Thread t = Thread.currentThread();</span><br><span class="line">        ThreadLocalMap map = getMap(t);</span><br><span class="line">        if (map != null) &#123;</span><br><span class="line">            ThreadLocalMap.Entry e = map.getEntry(this);</span><br><span class="line">            if (e != null) &#123;</span><br><span class="line">                @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">                T result = (T)e.value;</span><br><span class="line">                return result;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return setInitialValue();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="sleep">sleep</h4>
+<p><a href="https://www.jianshu.com/p/0964124ae822" target="_blank" rel="noopener">Java线程源码解析之yield和sleep</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/09/02/工作求职/多线程/" rel="next" title="多线程">
+                <i class="fa fa-chevron-left"></i> 多线程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/04/工作求职/MyBatis/" rel="prev" title="MyBatis">
+                MyBatis <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">chengr</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#override-的-jvm-实现"><span class="nav-number">1.</span> <span class="nav-text">Override 的 JVM 实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronize-vs-lock"><span class="nav-number">2.</span> <span class="nav-text">synchronize VS lock</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cyclicbarrier-vs-countdownlatch-vs-semaphore"><span class="nav-number">3.</span> <span class="nav-text">CyclicBarrier  VS CountDownLatch VS Semaphore</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#synchronize-和-aqs"><span class="nav-number">4.</span> <span class="nav-text">synchronize 和 AQS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#abstractqueuedsynchronizer"><span class="nav-number">5.</span> <span class="nav-text">AbstractQueuedSynchronizer</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#class-node"><span class="nav-number">5.1.</span> <span class="nav-text">class Node</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#节点状态"><span class="nav-number">5.1.1.</span> <span class="nav-text">节点状态</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#conditionsignal"><span class="nav-number">5.2.</span> <span class="nav-text">condition.signal</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#doacquireshared-获取锁"><span class="nav-number">5.3.</span> <span class="nav-text">doAcquireShared 获取锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#addwaiter"><span class="nav-number">5.4.</span> <span class="nav-text">addWaiter</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#reentrantlockreadwritelock"><span class="nav-number">6.</span> <span class="nav-text">ReentrantLockReadWriteLock</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#tryacquireshared"><span class="nav-number">6.1.</span> <span class="nav-text">tryAcquireShared</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fulltryacquireshared"><span class="nav-number">6.2.</span> <span class="nav-text">fullTryAcquireShared</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#shouldparkafterfailedacquire"><span class="nav-number">6.3.</span> <span class="nav-text">shouldParkAfterFailedAcquire</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#shouldparkafterfailedacquire"><span class="nav-number">6.4.</span> <span class="nav-text">shouldParkAfterFailedAcquire</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#tryreleaseshared"><span class="nav-number">6.5.</span> <span class="nav-text">tryReleaseShared</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#doreleaseshared"><span class="nav-number">6.6.</span> <span class="nav-text">doReleaseShared</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#threadlocal"><span class="nav-number">7.</span> <span class="nav-text">ThreadLocal</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#get"><span class="nav-number">7.1.</span> <span class="nav-text">get</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sleep"><span class="nav-number">8.</span> <span class="nav-text">sleep</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chengr</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
