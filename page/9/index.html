@@ -261,7 +261,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/基础知识/authen-server/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/13/基础知识/service-discovery-and-register/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chengr">
@@ -280,7 +280,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/05/14/基础知识/authen-server/" itemprop="url">authen_server</a></h1>
+                <a class="post-title-link" href="/2019/03/13/基础知识/service-discovery-and-register/" itemprop="url">service discovery and register</a></h1>
         
 
         <div class="post-meta">
@@ -292,173 +292,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-14T17:11:39+08:00">
-                2019-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:21:09+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>2019-5-14 尝试将spring oauth server安装到 实验室服务器上（虽然是初版），做一下记录<br>
-如何用idea 打包 maven项目<br>
-‘’’<br>
-用idea中maven 打开项目，点击idea 右侧的 Maven Projects，<br>
-点击 LIfecycle -&gt; install -&gt; run maven build 即可<br>
-‘’’<br>
-之后 将该项目scp至服务器<br>
-使用 java -jar *.jar 运行<br>
-在运行时出现一些错误，如下</p>
-<p>‘’’<br>
-2019-05-14 17:06:35.986 ERROR 1180706 — [ost-startStop-1] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.</p>
-<p>com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure</p>
-<p>The last packet successfully received from the server was 199 milliseconds ago.  The last packet sent successfully to the server was 192 milliseconds ago.<br>
-at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method) ~[na:1.8.0_181]<br>
-at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62) ~[na:1.8.0_181]<br>
-…<br>
-…<br>
-… 154 common frames omitted<br>
-Caused by: java.security.cert.CertPathValidatorException: Path does not chain with any of the trust anchors<br>
-at sun.security.provider.certpath.PKIXCertPathValidator.validate(PKIXCertPathValidator.java:154) ~[na:1.8.0_181]<br>
-at sun.security.provider.certpath.PKIXCertPathValidator.engineValidate(PKIXCertPathValidator.java:80) ~[na:1.8.0_181]<br>
-at java.security.cert.CertPathValidator.validate(CertPathValidator.java:292) ~[na:1.8.0_181]<br>
-at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(ExportControlled.java:295) ~[mysql-connector-java-5.1.46.jar!/:5.1.46]<br>
-… 156 common frames omitted</p>
-<p>‘’’<br>
-经查询(<a href="https://www.jianshu.com/p/b3151ca89def" target="_blank" rel="noopener">https://www.jianshu.com/p/b3151ca89def</a> ）发现是因为SSL配置的原因（暂时没有细究），在源代码 application.yml 文件中将useSSL=true 改为 false即可，重新打包，scp，运行</p>
-<p>在查询过程中发现之后可能会出现的另一个问题，即在长时间未连接mysql时会报类似的 Communications link failure 错误，不过这里是因为mysql默认配置 无连接最长等待时间是8小时，可以通过修改配置文件 mysql.ini 去解决这个错误</p>
-<p>在此之前需要在服务器安装mysql<br>
-按照官网教程(下面的是Ubuntu下的，如果安装在redhat上，会有一些区别 ，具体参照官方教程 <a href="https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/" target="_blank" rel="noopener">https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/</a>)</p>
-<ul>
-<li>wget <a href="https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb" target="_blank" rel="noopener">https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</a></li>
-<li>也可以选择检查 文件传输中是否出错 md5sum mysql-apt-config_0.8.13-1_all.deb</li>
-<li>之后运行 dpkg -i mysql-apt-config_0.8.13-1_all.deb，选择你所需要安装的mysql版本，程序会将之添加到apt源中</li>
-<li>运行 sudo apt-get update （–fix-missing）</li>
-<li>自动下载之后需要配置用户名与密码，需要与你在spring程序中配置的一致</li>
-</ul>
-<p>进入数据库 mysql -u root -p ,之后输入密码</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/01/基础知识/Machine_learning_course/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/01/基础知识/Machine_learning_course/" itemprop="url">Machine_learning_course</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-05-01T10:43:46+08:00">
-                2019-05-01
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-13T15:51:50+08:00">
+                2019-03-13
               </time>
             
 
@@ -506,17 +341,12 @@ at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(Ex
       
         
           
-            <p>2019-5-10<br>
-机器学习布置作业，6-15前交，内容未知<br>
-基于主成分分析方法的人脸识别方法</p>
-<ul>
-<li>之前是寻找空间特征，某一局部点</li>
-<li>人脸识别的核心问题是提取特征(人脸的相关性打，冗余信息多？如何去除：主成分分析，如何将一个矩阵变成一个向量)</li>
-<li>PCA方法的优缺点：从压缩能量的角度，PCA是最有效率的，可以用于维度压缩</li>
-<li>PCA  FisherDiscriminant analysis or LDA</li>
-<li>kErnel PCA</li>
-<li>KFDA</li>
-</ul>
+            <p><a href="https://mp.weixin.qq.com/s/uzGF5b4sn1DeSc1F1FOGRA" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/uzGF5b4sn1DeSc1F1FOGRA</a></p>
+<p>微信 上关于微服务发现的推文<br>
+服务发现背后的基本思想是对于服务的每一个新实例（或应用程序），能够识别当前环境和存储相关信息。存储的注册表信息本身通常采用键/值对的格式，由于服务发现经常用于分布式系统，所以要求这些信息可伸缩、支持容错和分布式集群中的所有节点</p>
+<p>做到服务发现之前首先需要做到的是提供服务注册表，供服务消毒费查询<br>
+同时注册表应当保持高可用，大多以键值对的形式存在</p>
+<p>Zookeeper</p>
 
           
         
@@ -565,7 +395,7 @@ at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(Ex
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/28/基础知识/NLP/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/08/基础知识/openresty-source-compile/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chengr">
@@ -584,7 +414,7 @@ at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(Ex
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/28/基础知识/NLP/" itemprop="url">NLP</a></h1>
+                <a class="post-title-link" href="/2019/03/08/基础知识/openresty-source-compile/" itemprop="url">openresty_source_compile</a></h1>
         
 
         <div class="post-meta">
@@ -596,8 +426,179 @@ at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(Ex
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-28T16:42:56+08:00">
-                2019-04-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-08T20:30:42+08:00">
+                2019-03-08
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:23:59+08:00" content="2020-08-30">
+                2020-08-30
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>最近调研APIGateway，目前主要在研究 kong 的东西，打算在服务器上布置环境，测试其性能<br>
+系统环境：<br>
+操作系统版本：Linux version 4.4.0-134-generic (buildd@lgw01-amd64-033) (gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.10) )</p>
+<p>用户目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">×××@bd45:~$ tree -L 1  </span><br><span class="line">.  </span><br><span class="line">|-- apr  </span><br><span class="line">|-- apr-1.4.5  </span><br><span class="line">|-- apr-1.4.5.tar.gz  </span><br><span class="line">|-- apr-util  </span><br><span class="line">|-- apr-util-1.3.12  </span><br><span class="line">|-- apr-util-1.3.12.tar.gz  </span><br><span class="line">|-- download_file?file_path=dists%2Fkong-community-edition-1.0.3.xenial.all.deb </span><br><span class="line">|-- httpd  </span><br><span class="line">|-- httpd-2.4.38  </span><br><span class="line">|-- httpd-2.4.38.tar.gz  </span><br><span class="line">|-- kong  </span><br><span class="line">|-- kong_source  </span><br><span class="line">|-- lua-5.3.4  </span><br><span class="line">|-- lua-5.3.4.tar.gz  </span><br><span class="line">|-- luarocks  </span><br><span class="line">|-- nginx  </span><br><span class="line">|-- nginx-1.15.9  </span><br><span class="line">|-- nginx-1.15.9.tar.gz  </span><br><span class="line">|-- openresty  </span><br><span class="line">|-- openresty-1.13.6.2  </span><br><span class="line">|-- openresty-1.13.6.2.tar.gz</span><br><span class="line">|-- openssl</span><br><span class="line">|-- openssl-1.0.2r</span><br><span class="line">|-- openssl-1.0.2r.tar.gz</span><br><span class="line">|-- pcre</span><br><span class="line">|-- pcre-8.43</span><br><span class="line">|-- pcre-8.43.tar.gz</span><br><span class="line">|-- postgresql</span><br><span class="line">|-- postgresql-11.2</span><br><span class="line">|-- postgresql-11.2.tar.gz</span><br><span class="line">|-- siege</span><br><span class="line">|-- siege-4.0.4</span><br><span class="line">`-- siege-4.0.4.tar.gz</span><br></pre></td></tr></table></figure>
+<p>安装pcre</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O  https://ftp.pcre.org/pub/pcre/pcre-8.43.tar.gz</span><br><span class="line">./configure --prefix=/home/LAB/chengr/pcre </span><br><span class="line">./configure --prefix=/home/LAB/chengr/nginx --with-pcre=/home/LAB/chengr/pcre-8.43</span><br></pre></td></tr></table></figure>
+<p>安装zlib</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget http://prdownloads.sourceforge.net/libpng/zlib-1.2.11.tar.gz</span><br><span class="line"> ./configure  --prefix=/home/LAB/chengr/zlib</span><br><span class="line"> make &amp;&amp; make check &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>安装 nginx，官网配置说明 ：<a href="https://nginx.org/en/docs/configure.html" target="_blank" rel="noopener">https://nginx.org/en/docs/configure.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O http://nginx.org/download/nginx-1.15.8.tar.gz</span><br><span class="line">tar -zvxf nginx-1.15.8.tar.gz</span><br><span class="line">cd nginx-1.15.8</span><br><span class="line">(./configure: error: the HTTP rewrite module requires the PCRE library.)</span><br><span class="line">(./configure: error: the HTTP magzip module requires the zlib library.)</span><br><span class="line">与nginx模块一起编译，要求指定源码目录</span><br><span class="line">./configure --prefix=/home/LAB/chengr/nginx  --with-pcre=/home/LAB/chengr/pcre-8.39  --with-zlib=/home/LAB/chengr/zlib-1.2.11</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>下载openssl(配置openresty)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O https://www.openssl.org/source/openssl-1.0.2r.tar.gz(https://www.openssl.org/source/)</span><br><span class="line">tar -zvxf openssl-1.0.2r.tar.gz</span><br><span class="line">./config --prefix=/home/LAB/chengr/openssl  -fPIC no-gost no-shared no-zlib</span><br><span class="line">make depend</span><br></pre></td></tr></table></figure>
+<p>安装luarock:<br>
+按照教程来 <a href="https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Unix" target="_blank" rel="noopener">https://github.com/luarocks/luarocks/wiki/Installation-instructions-for-Unix</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">（其中configure 改为./configure    --prefix=/home/LAB/chengr/luarocks   --lua-suffix=jit    --with-lua=/home/LAB/chengr/openresty/luajit    --with-lua-include=/home/LAB/chengr/openresty/luajit/include/luajit-2.1）</span><br><span class="line">make</span><br><span class="line">  make install</span><br><span class="line">  make bootstrap</span><br></pre></td></tr></table></figure>
+<p>安装 openresty 官网教程：<a href="https://openresty.org/cn/installation.html" target="_blank" rel="noopener">https://openresty.org/cn/installation.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O https://openresty.org/download/openresty-1.13.6.2.tar.gz  </span><br><span class="line">tar -xzvf openresty-1.13.6.2.tar.gz  </span><br><span class="line">cd cd openresty-1.13.6.2  </span><br><span class="line">mkdir openresty  </span><br><span class="line">./configure --prefix=/home/LAB/chengr/openresty  --with-luajit --with-stream   --with-http_iconv_module --with-http_realip_module   --with-ld-opt=&quot;-Wl,-rpath,/usr/local/lib&quot;  --with-http_stub_status_module   --with-http_ssl_module --with-http_sub_module  </span><br><span class="line">//按照kong官网要求加上如下配置  </span><br><span class="line">   --with-pcre-jit </span><br><span class="line">   --with-http_ssl_module </span><br><span class="line">   --with-http_realip_module </span><br><span class="line">   --with-http_stub_status_module </span><br><span class="line">   --with-http_v2_module   </span><br><span class="line">   --with-openssl=/home/LAB/chengr/openssl-1.0.2r</span><br><span class="line"></span><br><span class="line">make   </span><br><span class="line">sudo make install</span><br><span class="line">【】</span><br></pre></td></tr></table></figure>
+<p>安装postgresql （官网教程：<a href="https://www.postgresql.org/docs/current/install-procedure.html%EF%BC%89" target="_blank" rel="noopener">https://www.postgresql.org/docs/current/install-procedure.html）</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O https://ftp.postgresql.org/pub/source/v11.2/postgresql-11.2.tar.gz</span><br></pre></td></tr></table></figure>
+<p>按安装性能测试工具：siege ab</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -# -O http://download.joedog.org/siege/siege-4.0.4.tar.gz</span><br><span class="line">tar -zvxf siege-4.0.4.tar.gz   </span><br><span class="line">cd siege-4.0.4</span><br><span class="line">./configure --prefix=/home/LAB/chengr/siege  </span><br><span class="line">make     </span><br><span class="line">sudo make install   </span><br><span class="line"> siege/bin/siege –help</span><br></pre></td></tr></table></figure>
+<hr>
+<p>ab（需要提前安装 apr 、apr-util、pcre、openssl）<br>
+apr</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://archive.apache.org/dist/apr/apr-1.4.5.tar.gz</span><br><span class="line">tar -zxf apr-1.4.5.tar.gz  </span><br><span class="line">cd  apr-1.4.5  </span><br><span class="line">./configure --prefix=/home/LAB/chengr/apr  </span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>apr-util</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://archive.apache.org/dist/apr/apr-util-1.3.12.tar.gz</span><br><span class="line">tar -zxf apr-util-1.3.12.tar.gz</span><br><span class="line">cd apr-util-1.3.12</span><br><span class="line">./configure --prefix=/home/LAB/chengr/apr-util --with-apr=/home/LAB/chengr/apr/</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>pcre</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget http://jaist.dl.sourceforge.net/project/pcre/pcre/8.39/pcre-8.39.tar.gz</span><br><span class="line">tar -zxf pcre-8.39.tar.gz</span><br><span class="line">cd pcre-8.10</span><br><span class="line">./configure --prefix=/home/LAB/chengr/pcre</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>最终安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd httpd-2.4.38</span><br><span class="line">./configure --prefix=/home/LAB/chengr/httpd --with-apr=/home/LAB/chengr/apr --with-apr-util=/home/LAB/chengr/apr-util --with-pcre=/home/LAB/chengr/pcre --enable-ssl --with-ssl=/home/LAB/chengr/openssl</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
+<p>curl -# -O <a href="https://www-us.apache.org/dist//httpd/httpd-2.4.38.tar.gz" target="_blank" rel="noopener">https://www-us.apache.org/dist//httpd/httpd-2.4.38.tar.gz</a></p>
+<p>按照教程安装 <a href="https://www.cnblogs.com/chevin/p/10222681.html" target="_blank" rel="noopener">https://www.cnblogs.com/chevin/p/10222681.html</a></p>
+<p>（下载 httpd wget <a href="https://www.apache.org/dist/httpd/httpd-2.4.38.tar.gz" target="_blank" rel="noopener">https://www.apache.org/dist/httpd/httpd-2.4.38.tar.gz</a> ）</p>
+<p>./config --prefix=/home/LAB/chengr/openssl  -fPIC no-gost no-shared no-zlib<br>
+make depend<br>
+解决：<a href="http://www.bubuko.com/infodetail-621556.html" target="_blank" rel="noopener">http://www.bubuko.com/infodetail-621556.html</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">chengr@bd46:~$ tree -L 2 -d</span><br><span class="line">.</span><br><span class="line">|-- apr</span><br><span class="line">|   |-- bin</span><br><span class="line">|   `-- lib</span><br><span class="line"></span><br><span class="line">|-- apr-util</span><br><span class="line">|   |-- bin</span><br><span class="line">|   `-- lib</span><br><span class="line">|-- httpd</span><br><span class="line">|   |-- bin</span><br><span class="line">|   |-- build</span><br><span class="line">|   |-- cgi-bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">|-- openssl</span><br><span class="line">|   |-- bin</span><br><span class="line">|   |-- lib</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">|   `-- VMS</span><br><span class="line">|-- pcre</span><br><span class="line">|   |-- bin</span><br><span class="line">|   |-- lib</span><br><span class="line"></span><br><span class="line">|-- siege</span><br><span class="line">|   |-- bin</span><br></pre></td></tr></table></figure>
+<p>添加到环境变量中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">#add for apr 2019-3-10</span><br><span class="line">export APR_HOME=/home/LAB/chengr/apr</span><br><span class="line">export PATH=$PATH:$APR_HOME/bin</span><br><span class="line">#export LIB_PATH+=$APR_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for apr-util 2019-3-10</span><br><span class="line">export APRUTIL_HOME=/home/LAB/chengr/apr-util</span><br><span class="line">export PATH=$PATH:$APRUTIL_HOME/bin</span><br><span class="line">#export LIB_PATH+=$APRUTIL_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for httpd 2019-3-10</span><br><span class="line">export HTTPD_HOME=/home/LAB/chengr/httpd</span><br><span class="line">export PATH=$PATH:$HTTPD_HOME/bin</span><br><span class="line">#export LIB_PATH+=$HTTPD_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for openssl 2019-3-10</span><br><span class="line">export OPENSSL_HOME=/home/LAB/chengr/openssl</span><br><span class="line">export PATH=$PATH:$OPENSSL_HOME/bin</span><br><span class="line">#export LIB_PATH+=$OPENSSL_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for pcre 2019-3-10</span><br><span class="line">export PCRE_HOME=/home/LAB/chengr/pcre</span><br><span class="line">export PATH=$PATH:$PCRE_HOME/bin</span><br><span class="line">#export LIB_PATH+=$HTTPD_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for siege 2019-3-10</span><br><span class="line">export SIEGE_HOME=/home/LAB/chengr/siege</span><br><span class="line">export PATH=$PATH:$SIEGE_HOME/bin</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for luarocks 2019-3-10</span><br><span class="line">export LUAROCKS_HOME=/home/LAB/chengr/luarocks</span><br><span class="line">export PATH=$PATH:$LUAROCKS_HOME/bin</span><br><span class="line">#export LIB_PATH+=$LUAROCKS_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for nginx 2019-3-10</span><br><span class="line">export NGINX_HOME=/home/LAB/chengr/nginx</span><br><span class="line">export PATH=$PATH:$NGINX_HOME/sbin</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for openresty 2019-3-10</span><br><span class="line">export OPENRESTY_HOME=/home/LAB/chengr/openresty</span><br><span class="line">export PATH=$PATH:$OPENRESTY_HOME/bin</span><br><span class="line">#export LIB_PATH+=$OPENRESTY_HOME/lib</span><br><span class="line">#end</span><br><span class="line"></span><br><span class="line">#add for postgresql 2019-3-10</span><br><span class="line">export POSTGRESQL_HOME=/home/LAB/chengr/postgresql</span><br><span class="line">export PATH=$PATH:$POSTGRESQL_HOME/bin</span><br><span class="line">#export LIB_PATH+=$POSTGRESQL_HOME/lib</span><br><span class="line">#end</span><br></pre></td></tr></table></figure>
+<p>jhipster<br>
+<a href="https://blog.csdn.net/zhao50632/article/details/54582177" target="_blank" rel="noopener">https://blog.csdn.net/zhao50632/article/details/54582177</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/06/基础知识/nginx-mongodb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/06/基础知识/nginx-mongodb/" itemprop="url">nginx+mongodb</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-06T22:47:29+08:00">
+                2019-03-06
               </time>
             
 
@@ -645,8 +646,15 @@ at com.mysql.jdbc.ExportControlled$X509TrustManagerWrapper.checkServerTrusted(Ex
       
         
           
-            <p>2019-4-28 周日下午<br>
-NLP aligment</p>
+            <br>
+  install luarock:https://blog.csdn.net/kgzhang/article/details/72885199
+  <br>
+  install lua_nginx_moudle https://www.cnblogs.com/uglyliu/p/8534473.html
+<br>
+install nginx-gridfx https://blog.csdn.net/jameshadoop/article/details/52665342  + https://blog.csdn.net/caiwenfeng_for_23/article/details/44230513 +
+https://github.com/mdirolf/nginx-gridfs
+<p>./configure --user=nginx --group=nginx --prefix=/usr/local/nginx  --with-http_realip_module --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module --with-cc-opt=-Wno-error --with-stream --add-module=/opt/nginx_module/ngx_devel_kit --add-module=/opt/nginx_module/lua-nginx-module --add-module=/opt/nginx_module/nginx-gridfs</p>
+<p>./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-cc-opt=-Wno-error --add-module=/opt/nginx_module/ngx_devel_kit --add-module=/opt/nginx_module/lua-nginx-module --add-module=/opt/nginx_module/nginx-gridfs</p>
 
           
         
@@ -695,7 +703,7 @@ NLP aligment</p>
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/基础知识/人脸识别/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/06/基础知识/API-Key/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chengr">
@@ -714,7 +722,7 @@ NLP aligment</p>
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/04/27/基础知识/人脸识别/" itemprop="url">人脸识别</a></h1>
+                <a class="post-title-link" href="/2019/03/06/基础知识/API-Key/" itemprop="url">API_Key</a></h1>
         
 
         <div class="post-meta">
@@ -726,8 +734,8 @@ NLP aligment</p>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-27T22:00:32+08:00">
-                2019-04-27
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-06T09:20:15+08:00">
+                2019-03-06
               </time>
             
 
@@ -739,7 +747,7 @@ NLP aligment</p>
           
             <span class="post-updated">
               &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:24+08:00" content="2020-08-30">
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:38+08:00" content="2020-08-30">
                 2020-08-30
               </time>
             </span>
@@ -775,932 +783,14 @@ NLP aligment</p>
       
         
           
-            <p>PCA方法学习：解释得比较清楚<br>
-<a href="https://blog.csdn.net/qq_32865355/article/details/80809835" target="_blank" rel="noopener">https://blog.csdn.net/qq_32865355/article/details/80809835</a></p>
-<p>github 开源方案<br>
-<a href="https://github.com/ahhda/Face-Recogntion" target="_blank" rel="noopener">https://github.com/ahhda/Face-Recogntion</a><br>
-<a href="https://github.com/ageitgey/face_recognition" target="_blank" rel="noopener">https://github.com/ageitgey/face_recognition</a></p>
-<p>相关论文<br>
-<a href="https://blog.csdn.net/tMb8Z9Vdm66wH68VX1/article/details/83155487" target="_blank" rel="noopener">https://blog.csdn.net/tMb8Z9Vdm66wH68VX1/article/details/83155487</a></p>
-<p>CNN 实现 人脸识别<br>
-<a href="https://blog.csdn.net/u012162613/article/details/43277187" target="_blank" rel="noopener">https://blog.csdn.net/u012162613/article/details/43277187</a><br>
-<a href="https://blog.csdn.net/zouxy09/article/details/8781543" target="_blank" rel="noopener">https://blog.csdn.net/zouxy09/article/details/8781543</a></p>
-<p>相关github 代码<br>
-<a href="https://github.com/wepe/MachineLearning" target="_blank" rel="noopener">https://github.com/wepe/MachineLearning</a></p>
-<p>faceCascade.detectMultiScale 从图像中找出人脸<br>
-theano.shared可以看作是将变量设置为全局变量，其值可以在多个函数中共用<br>
-theano.tensor.dot(X, Y) 简单的看做XY 矩阵相乘 或者说 内积<br>
-maxpooling 、average_pooling ？？</p>
-<p>tensor库函数解释<br>
-<a href="http://deeplearning.net/software/theano/library/tensor/basic.html" target="_blank" rel="noopener">http://deeplearning.net/software/theano/library/tensor/basic.html</a></p>
-<p>损失函数的分类（交叉熵） <a href="https://www.jianshu.com/p/47172eb86b39" target="_blank" rel="noopener">https://www.jianshu.com/p/47172eb86b39</a></p>
-<p>神经网络 数学公式 表达 <a href="https://blog.csdn.net/sinat_35821976/article/details/80615612" target="_blank" rel="noopener">https://blog.csdn.net/sinat_35821976/article/details/80615612</a></p>
-<p>分类器用的是softmax  <a href="https://www.cnblogs.com/python-frog/p/9380290.html" target="_blank" rel="noopener">https://www.cnblogs.com/python-frog/p/9380290.html</a><br>
-，LeNet5用的是rbf？？</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/基础知识/决策树/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/27/基础知识/决策树/" itemprop="url">决策树</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-27T11:26:38+08:00">
-                2019-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:24+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天上课提及了决策树，随机森林，Dropout，Deepforest(周志华)<br>
-目前而言，决策树指对于一个集合，依此以某种确定特征作为分类标准，从而将该集合分为若干类(每个节点都代表一个分类或者一种决策标准)<br>
-随机森林，指在每个节点，随机选择某个特征从而构建一个线性分类器，将样本分为几部分</p>
-<p>Boosted Cascades VS 随机森林<br>
-前者是一个不平衡的树，适合不均匀的分类问题</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/基础知识/数据结构/slide_window/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/23/基础知识/数据结构/slide_window/" itemprop="url">slice_window</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-23T19:31:56+08:00">
-                2019-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:24:28+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>返回滑动窗口的最大值(考虑极端情况起码考虑 空 )<br>
-给定一个输入序列（数组)，返回窗口范围内的最大值，每次移动一次窗口，并返回一个最大值</p>
-<ul>
-<li>方法1：大顶堆（MaxHeap）  删除离开的元素，加入新的元素，排序  时间复杂度<br>
-$$ N log^{k} $$</li>
-<li>deque(双端 Queue)</li>
-<li>–入队列</li>
-<li>–维护队列：对于长度为K 的窗口，将窗口范围内最大值之前的数全部删除（忽略），因为在最大值之前的数必然不会成为最大值</li>
-</ul>
-<ul>
-  <li>JavaScript
-    <ol>
-      <li>
-        第一章
-        <ul>
-          <li>const</li>
-          <li>let</li>
-        </ul>
-      </li>
-      <li>
-        第二章sdisjfosdklsjfkdddddldddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-        <ul>
-          <li>function</li>
-          <li>object</li>
-        </ul>
-      </li>
-    </ol>
-  </li>
-  <li>Java
-    <ol>
-      <li>
-        第一章
-        <ul>
-          <li>class</li>
-          <li>package</li>
-        </ul>
-      </li>
-      <li>
-        第二章
-        <ul>
-          <li>private</li>
-          <li>public</li>
-        </ul>
-      </li>
-    </ol>
-  </li>
-</ul>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/基础知识/数据结构/map_and_set/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/23/基础知识/数据结构/map_and_set/" itemprop="url">map_and_set</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-23T19:31:56+08:00">
-                2019-04-23
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:24:29+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>
-List VS Map VS Set</p>
-<ul>
-<li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li>
-<li>Map ：键值对Key-value</li>
-<li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li>
-</ul>
-<p>HashMap VS TreeMap<br>
-HashSet VS TreeSet<br>
-在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>
-但是 哈希表的实现是无序的，而树的实现是有序的</p>
-<p>题目：242（Leetcode） Valid Anagrant<br>
-题意：对给定的两个字符串，判断是否是同一单词的错位变换</p>
-<ul>
-<li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>
-$$ O(Nlog^N) $$</li>
-<li>方法2：构造Map，比较Map是否相同算法复杂度<br>
-$$ O(N) $$</li>
-</ul>
-<p>题目：Two Sum(Three Sum)<br>
-题意：给定一个数组，以及value，输出数组中和为value的元素下标</p>
-<ul>
-<li>方法1：暴力方法时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-<li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>
-$$<br>
-O(N)<br>
-$$</li>
-</ul>
-<p>那么对于ThreeSum</p>
-<ul>
-<li>方法1：暴力 时间复杂度<br>
-$$<br>
-O(N^3)<br>
-$$</li>
-<li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-<li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-<li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/工具/小技巧总结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/22/工具/小技巧总结/" itemprop="url">小技巧总结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T21:16:59+08:00">
-                2019-04-22
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:26:46+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.git commit 由于没有添加 -m 而进入 vim界面，无法退出，在一个博文找到方法（<a href="https://blog.csdn.net/weixin_42197191/article/details/87015837%EF%BC%89" target="_blank" rel="noopener">https://blog.csdn.net/weixin_42197191/article/details/87015837）</a><br>
-Ctrl + v + 命令键 实现命令</p>
-<p>2.由于两个电脑同时修改自己的blog markdown文件，导致文件有差异，如何解决，暂时没有找到思路，将某一个电脑的master回退，会导致他的修改丢失（或者提前保存其修改，或许这就是多分支存在的理由）<br>
-git log 查看最近commit的记录<br>
-git reset --hard (HEAD～n)/(commit_id)   会退到当前(之前的n个提交记录)/(在git log 中的某个提交记录)<br>
-git push --force 将当前分支提交<br>
-it branch --set-upstream-to=<remote origin>/<remote branch> <local branch>  绑定当前本地分支与某个远程分支</local></remote></remote></p>
-<ol start="3">
-<li>获得 包含某个字符串的进程ID 并且将之作为参数，删除相应进程<br>
-kill -9 $(ps -ef|grep id | grep -v grep|awk ‘{print $2}’ )。</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/基础知识/数据结构/manacher/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/22/基础知识/数据结构/manacher/" itemprop="url">manacher</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T21:08:04+08:00">
-                2019-04-22
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:24:29+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>马拉车算法，解决最大回文串问题，有点意思，感觉有点像KMP算法</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/基础知识/代理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/04/22/基础知识/代理/" itemprop="url">代理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-22T19:12:45+08:00">
-                2019-04-22
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:24+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>代理给通信带来更多的功能</p>
-<ul>
-<li>拦截：代理可以选择性拦截传输的网络流量，比如一些公司限制员工在上班的时候不能访问某些游戏或者电商网站，再比如把我们和世界隔离开来的 GFW，还有在数据中心中拒绝恶意访问的网关。</li>
-<li>统计：既然所有的流量都经过代理，那么代理也可以用来统计网络中的数据信息，比如了解哪些人在访问哪些网站，通信的应答延迟等。</li>
-<li>缓存：如果通信双方比较”远“，访问比较慢，那么代理可以把最近访问的数据缓存在本地，后面的访问不用访问后端来做到加速。CDN 就是这个功能的典型场景。</li>
-<li>分发(负载均衡)：如果某个通信方有多个服务器后端，代理可以根据某些规则来选择如何把流量发送给多个服务器，也就是我们常说的负载均衡功能，比如著名的 Nginx 软件。</li>
-<li>跳板：如果 A、B 双方因为某些原因不能直接访问，而代理可以和双方通信，那么通过代理，双方可以绕过原来的限制进行通信。VPN，内网穿透。</li>
-<li>注入：既然代理可以看到流量，那么它也可以修改网络流量，可以自动在收到的流量中添加一些数据，比如有些宽带提供商的弹窗广告。</li>
-</ul>
-<p>ssr速度不行安装v2ray<br>
-参考<a href="https://www.stackcc.com/2019/04/02/v2raysetup/" target="_blank" rel="noopener">网站1</a><a href="https://tlanyan.me/v2ray-tutorial/" target="_blank" rel="noopener">网站2</a><br>
-<a href="https://www.hijk.pw/v2rayn-config-tutorial/" target="_blank" rel="noopener">网站3</a></p>
-<p><a href="https://www.v2rayssr.com/v2raynginx.html" target="_blank" rel="noopener">V2RAY+Nginx+Ws+Tls+Host+Path</a></p>
-<ol>
-<li>域名购买：<a href="https://dcc.godaddy.com/" target="_blank" rel="noopener">狗爹</a><br>
-[godaddy 域名解析]whetstone.xyz</li>
-</ol>
-<p>export CF_Token=“0gE0NDS31pewoA8ykVN2CqQXC_kKxcp5C2yp_ZNn”</p>
-<p><a href="http://acme.sh" target="_blank" rel="noopener">acme.sh</a> --issue --dns dns_cf -d whetstone.xyz -d www.whetstone.xyz -k ec-256<br>
-cat ~/.acme.sh/whetstone.xyz_ecc/fullchain.cer &gt; /etc/nginx/ssl/whetstone.xyz.crt<br>
-cat ~/.acme.sh/whetstone.xyz_ecc/whetstone.xyz.key &gt; /etc/nginx/ssl/whetstone.xyz.key<br>
-systemctl start nginx<br>
-<a href="http://acme.sh" target="_blank" rel="noopener">acme.sh</a> --installcert -d whetstone.xyz -d www.whetstone.xyz --fullchainpath /etc/nginx/ssl/whetstone.xyz.crt --keypath /etc/nginx/ssl/whetstone.xyz.key --ecc --reloadcmd “systemctl reload nginx”</p>
+            <h2 id="how-kong-generate-api-key-in-plugin-key-auth">How Kong  generate api key in plugin key-auth</h2>
+<p>在 github <a href="https://github.com/Kong/kong" target="_blank" rel="noopener">https://github.com/Kong/kong</a> ，我们可以看到关于Kong的代码<br>
+在https://github.com/eyolas/kong-plugin-key-auth-referer/blob/master/kong/plugins/key-auth-referer/daos.lua 上，我们可以看到其中包含代码<br>
+<code>local utils = require &quot;kong.tools.utils&quot;</code><br>
+<code> key = {type = &quot;string&quot;, required = false, unique = true, default = utils.random_string}</code><br>
+按照目录搜索<code>https://github.com/Kong/kong/blob/master/kong/tools/utils.lua</code>，从中可以查询到函数<code>random_string</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">local function random_string()</span><br><span class="line">    -- get 24 bytes, which will return a 32 char string after encoding</span><br><span class="line">    -- this is done in attempt to maintain backwards compatibility as</span><br><span class="line">    -- much as possible while improving the strength of this function</span><br><span class="line">    return encode_base64(get_rand_bytes(24, true))</span><br><span class="line">           :gsub(&quot;/&quot;, char(rand(48, 57)))  -- 0 - 10</span><br><span class="line">           :gsub(&quot;+&quot;, char(rand(65, 90)))  -- A - Z</span><br><span class="line">           :gsub(&quot;=&quot;, char(rand(97, 122))) -- a - z</span><br><span class="line">  end</span><br></pre></td></tr></table></figure>
+<p>由此可知，当使用key-auth插件，但不指明key值时，就会默认自动生成 24位字符，对于产生的特殊字符进行替换</p>
 
           
         
@@ -1740,7 +830,7 @@ systemctl start nginx<br>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
   </nav>
 
 
@@ -1786,7 +876,7 @@ systemctl start nginx<br>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">109</span>
+                  <span class="site-state-item-count">84</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1799,7 +889,7 @@ systemctl start nginx<br>
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
