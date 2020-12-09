@@ -261,6 +261,228 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/20/工作求职/注解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="chengr">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/20/工作求职/注解/" itemprop="url">注解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-20T19:17:38+08:00">
+                2019-04-20
+              </time>
+            
+
+            
+
+            
+          </span>
+          
+          
+            <span class="post-updated">
+              &nbsp; | &nbsp; 更新于
+              <time itemprop="dateUpdated" datetime="2020-08-30T13:25:50+08:00" content="2020-08-30">
+                2020-08-30
+              </time>
+            </span>
+          
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="元注解">元注解</h2>
+<blockquote>
+<p>可以用于修饰注解的注解,称之为元注解</p>
+</blockquote>
+<p>@Retention(RetentionPolicy.VALUE)</p>
+<blockquote>
+<p>确定所修饰注解的生命周期范围</p>
+</blockquote>
+<ul>
+<li>@Retention(RetentionPolicy.CLASS)修饰的注解，表示注解的信息被保留在class文件(字节码文件)中当程序编译时，但不会被虚拟机读取在运行的时候；</li>
+<li>@Retention(RetentionPolicy.SOURCE )修饰的注解,表示注解的信息会被编译器抛弃，不会留在class文件中，注解的信息只会留在源文件中；</li>
+<li>@Retention(RetentionPolicy.RUNTIME )修饰的注解，表示注解的信息被保留在class文件(字节码文件)中当程序编译时，会被虚拟机保留在运行时，所以他们可以用反射的方式读取。RetentionPolicy.RUNTIME 可以让你从JVM中读取Annotation注解的信息，以便在分析程序的时候使用.</li>
+</ul>
+<p>@Traget({ElementType.VALUE,… })</p>
+<blockquote>
+<p>确定所修饰的注解 修饰的对象范围</p>
+</blockquote>
+<ul>
+<li>ElementType.CONSTRUCTOR:用于描述构造器</li>
+<li>ElementType.FIELD:用于描述域</li>
+<li>ElementType.LOCAL_VARIABLE:用于描述局部变量</li>
+<li>ElementType.METHOD:用于描述方法</li>
+<li>ElementType.PACKAGE:用于描述包</li>
+<li>ElementType.PARAMETER:用于描述参数</li>
+<li>ElementType.TYPE:用于描述类、接口(包括注解类型) 或enum声明</li>
+</ul>
+<p>@Bean<br>
+(@Set @Get)</p>
+<p>@AutoWire<br>
+public class cla/public void set(class cla)</p>
+<ul>
+<li>自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量</li>
+</ul>
+<p>@Component(“name”)</p>
+<ul>
+<li>目前的了解是，加上该注解，就无需告知spring为该类创建Bean;如果有括号，并将该Bean ID标识（命名）为里面的字符串</li>
+</ul>
+<p>@Name</p>
+<ul>
+<li>spring 支持其代替 @Component ，唔，但不了解</li>
+</ul>
+<p>@ComponentScan<br>
+@ComponentScan(“name”)<br>
+@ComponentScan(basePackages=“name”/{“name”,“name1”})</p>
+<ol>
+<li>注解:在spring里开启组件扫描，默认扫描与配置类相同的包，扫描所在包以及子包中所有带有@Component注解的类</li>
+<li>注解:指明基础包，可以指明多个基础包</li>
+</ol>
+<p>@ContextConfiguration(classes=*.class)</p>
+<ul>
+<li>从指明的class里加载配置</li>
+</ul>
+<p>@interface</p>
+<blockquote>
+<p>@interface Annotation{ } 定义一个注解 @Annotation，一个注解是一个类</p>
+</blockquote>
+<p>@Pointcut(表达式)</p>
+<blockquote>
+<p>Pointcut表示式(expression)和Pointcut签名(signature),signature 可用于 需要的注解找到该pointcut<br>
+//Pointcut表示式<br>
+@Pointcut(“execution(* com.savage.aop.MessageSender.*(…))”)<br>
+//Point签名<br>
+private void log(){}</p>
+</blockquote>
+<p>Pointcut 表达式</p>
+<ul>
+<li>execution：用于匹配方法执行的连接点；</li>
+<li>within：用于匹配指定类型内的方法执行；</li>
+<li>this：用于匹配当前AOP代理对象类型的执行方法；注意是AOP代理对象的类型匹配，这样就可能包括引入接口也类型匹配；</li>
+<li>target：用于匹配当前目标对象类型的执行方法；注意是目标对象的类型匹配，这样就不包括引入接口也类型匹配；</li>
+<li>args：用于匹配当前执行的方法传入的参数为指定类型的执行方法；</li>
+<li>@within：用于匹配所以持有指定注解类型内的方法；</li>
+<li>@target：用于匹配当前目标对象类型的执行方法，其中目标对象持有指定的注解；</li>
+<li>@args：用于匹配当前执行的方法传入的参数持有指定注解的执行；</li>
+<li>@annotation：用于匹配当前执行方法持有指定注解的方法；</li>
+</ul>
+<blockquote>
+<p>execution 表达式<br>
+@Pointcut(execution(modifiers-pattern? ret-type-pattern declaring-type-pattern? name-pattern(param-pattern)throws-pattern?) )</p>
+</blockquote>
+<ul>
+<li>修饰符匹配（modifier-pattern?）:public/private</li>
+<li>返回值匹配（ret-type-pattern）可以为*表示任何返回值,全路径的类名等</li>
+<li>类路径匹配（declaring-type-pattern?）</li>
+<li>方法名匹配（name-pattern）可以指定方法名 或者 <em>代表所有, set</em> 代表以set开头的所有方法</li>
+<li>参数匹配（(param-pattern)）可以指定具体的参数类型，多个参数间用“,”隔开，各个参数也可以用“<em>”来表示匹配任意类型的参数，如(String)表示匹配一个String参数的方法；(</em>,String) 表示匹配有两个参数的方法，第一个参数可以是任意类型，而第二个参数是String类型；可以用(…)表示零个或多个任意参数</li>
+<li>异常类型匹配（throws-pattern?）</li>
+<li>其中后面跟着“?”的是可选项</li>
+</ul>
+<p>2019-6-27 更新<br>
+今天在给spring 添加新restful接口时，发现无法访问；最后发现，接口如果不设置访问方法。默认访问方式是GET，奇怪的是，如果设置为POST方式，那么将无法访问，重定位回登录页面？？</p>
+<p>在学习微服务构建时，需要看java代码，看到注解 时十分迷惑，暂时没有自己的见解<br>
+但是 这边博客说的不错<br>
+<a href="https://blog.csdn.net/briblue/article/details/73824058" target="_blank" rel="noopener">https://blog.csdn.net/briblue/article/details/73824058</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/基础知识/stack-queue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1583,140 +1805,6 @@ LSTM<br>
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/基础知识/ABAC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chengr">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/03/20/基础知识/ABAC/" itemprop="url">ABAC</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-20T21:04:17+08:00">
-                2019-03-20
-              </time>
-            
-
-            
-
-            
-          </span>
-          
-          
-            <span class="post-updated">
-              &nbsp; | &nbsp; 更新于
-              <time itemprop="dateUpdated" datetime="2020-08-30T13:21:09+08:00" content="2020-08-30">
-                2020-08-30
-              </time>
-            </span>
-          
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>ABAC:Attribute Based Access Control<br>
-abaC 介绍视频： <a href="https://www.youtube.com/watch?v=cgTa7YnGfHA" target="_blank" rel="noopener">https://www.youtube.com/watch?v=cgTa7YnGfHA</a><br>
-+<br>
-<a href="https://www.youtube.com/watch?v=gskKUIa0_6A" target="_blank" rel="noopener">https://www.youtube.com/watch?v=gskKUIa0_6A</a><br>
-An Attribute Based Access Control Model for RESTful Service：一篇相关论文，其视频：<a href="https://www.youtube.com/watch?v=hDlr66-4paI" target="_blank" rel="noopener">https://www.youtube.com/watch?v=hDlr66-4paI</a></p>
-<p>相关概念延伸：XACML</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1767,7 +1855,7 @@ An Attribute Based Access Control Model for RESTful Service：一篇相关论文
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-count">109</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1780,7 +1868,7 @@ An Attribute Based Access Control Model for RESTful Service：一篇相关论文
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">tags</span>
                 
               </div>
