@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="JVM 内存   方法区：存放类运行时必须的结构信息,比如类的静态变量,常量,类的全局名称,方法信息,父类引用等如 堆：实际存储对象的地方,占据大量内存,主要GC对象,具体可以分为老年堆和年轻堆 虚拟机栈：每个线程都有一个自己独立的Java栈，每次线程执行到一个新的方法时就在栈里面压入一个栈帧。帧里包含了方法里的局部变量，操作数栈(数据运算)以及帧数据区。这三种区域中局部变量很好理解，就是在方法">
@@ -25,7 +26,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM">
 <meta property="og:url" content="http://yoursite.com/2020/08/15/工作求职/JVM/index.html">
-<meta property="og:site_name" content="面向对象编程">
+<meta property="og:site_name" content="知行合一">
 <meta property="og:description" content="JVM 内存   方法区：存放类运行时必须的结构信息,比如类的静态变量,常量,类的全局名称,方法信息,父类引用等如 堆：实际存储对象的地方,占据大量内存,主要GC对象,具体可以分为老年堆和年轻堆 虚拟机栈：每个线程都有一个自己独立的Java栈，每次线程执行到一个新的方法时就在栈里面压入一个栈帧。帧里包含了方法里的局部变量，操作数栈(数据运算)以及帧数据区。这三种区域中局部变量很好理解，就是在方法">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/JMM.png">
@@ -48,7 +49,7 @@
   };
 </script>
 
-  <title>JVM | 面向对象编程</title>
+  <title>JVM | 知行合一</title>
   
 
 
@@ -99,7 +100,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">面向对象编程</h1>
+      <h1 class="site-title">知行合一</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -119,6 +120,21 @@
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -163,10 +179,6 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
     <main class="main">
@@ -184,13 +196,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/15/工作求职/JVM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chengr">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="面向对象编程">
+      <meta itemprop="name" content="知行合一">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -401,8 +413,8 @@ condition.await():CAS 更新state,放弃锁,并调用LockSupport.park 放弃CPU�
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/07/21/工作求职/DataStructure/" rel="prev" title="DataStructure">
-      <i class="fa fa-chevron-left"></i> DataStructure
+    <a href="/2020/07/21/基础知识/Algorithm/" rel="prev" title="Algorithm">
+      <i class="fa fa-chevron-left"></i> Algorithm
     </a></div>
       <div class="post-nav-item">
     <a href="/2020/08/28/工作求职/面经收集/" rel="next" title="面经收集">
@@ -472,7 +484,9 @@ condition.await():CAS 更新state,放弃锁,并调用LockSupport.park 放弃CPU�
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">chengr</p>
+    <img class="site-author-image" itemprop="image" alt="夸父"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">夸父</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -480,7 +494,7 @@ condition.await():CAS 更新state,放弃锁,并调用LockSupport.park 放弃CPU�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">98</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -490,10 +504,19 @@ condition.await():CAS 更新state,放弃锁,并调用LockSupport.park 放弃CPU�
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/walkdeadtobe" title="GitHub → https://github.com/walkdeadtobe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -520,7 +543,7 @@ condition.await():CAS 更新state,放弃锁,并调用LockSupport.park 放弃CPU�
   </span>
   <span class="author" itemprop="copyrightHolder">chengr</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>
 
         
@@ -538,6 +561,8 @@ condition.await():CAS 更新state,放弃锁,并调用LockSupport.park 放弃CPU�
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>

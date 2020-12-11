@@ -14,10 +14,11 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="域名 域名购买 国内域名 域名解析 godaddy 国内解析 cloudflare 审核 阿里云 初审 主要是网站名称的问题，发现不能使用成语。 管局审核 在hexo相应处增加该信息 公安局审核 公安联网备案申请,并在hexo相应处增加该信息 部署 服务器部署hexo 安装必要软件 git nginx 12sudo apt-get-install nodejs npmnpm install -g">
@@ -25,10 +26,10 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="个人网站搭建">
 <meta property="og:url" content="http://yoursite.com/2020/07/05/Blog/个人网站/index.html">
-<meta property="og:site_name" content="面向对象编程">
+<meta property="og:site_name" content="知行合一">
 <meta property="og:description" content="域名 域名购买 国内域名 域名解析 godaddy 国内解析 cloudflare 审核 阿里云 初审 主要是网站名称的问题，发现不能使用成语。 管局审核 在hexo相应处增加该信息 公安局审核 公安联网备案申请,并在hexo相应处增加该信息 部署 服务器部署hexo 安装必要软件 git nginx 12sudo apt-get-install nodejs npmnpm install -g">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-10T02:16:39.558Z">
+<meta property="og:updated_time" content="2020-12-10T02:20:17.444Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="个人网站搭建">
 <meta name="twitter:description" content="域名 域名购买 国内域名 域名解析 godaddy 国内解析 cloudflare 审核 阿里云 初审 主要是网站名称的问题，发现不能使用成语。 管局审核 在hexo相应处增加该信息 公安局审核 公安联网备案申请,并在hexo相应处增加该信息 部署 服务器部署hexo 安装必要软件 git nginx 12sudo apt-get-install nodejs npmnpm install -g">
@@ -46,7 +47,7 @@
   };
 </script>
 
-  <title>个人网站搭建 | 面向对象编程</title>
+  <title>个人网站搭建 | 知行合一</title>
   
 
 
@@ -97,7 +98,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">面向对象编程</h1>
+      <h1 class="site-title">知行合一</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -117,6 +118,21 @@
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -161,10 +177,6 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
     <main class="main">
@@ -182,13 +194,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Blog/个人网站/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chengr">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="面向对象编程">
+      <meta itemprop="name" content="知行合一">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -209,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-10 10:16:39" itemprop="dateModified" datetime="2020-12-10T10:16:39+08:00">2020-12-10</time>
+                <time title="Modified: 2020-12-10 10:20:17" itemprop="dateModified" datetime="2020-12-10T10:20:17+08:00">2020-12-10</time>
               </span>
 
           
@@ -254,6 +266,8 @@ cloudflare</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir /tmp/hexo  #中转目录</span><br><span class="line">mkdir /var/www/hexo #nginx 根目录</span><br></pre></td></tr></table></figure>
 <p>编辑 hooks/post-receive 文件,指定 ~/hexo.git/目录下的仓库更新后的操作</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">GIT_REPO=~/hexo.git                      # 触发 hook</span><br><span class="line">TMP_GIT_CLONE=/tmp/hexo                  # 存在 /tmp 下</span><br><span class="line">PUBLIC_WWW=/var/www/hexo                 # 展示网站的目录</span><br><span class="line">rm -rf $&#123;TMP_GIT_CLONE&#125;                  # 删除之前内容</span><br><span class="line">git clone $GIT_REPO $TMP_GIT_CLONE       # 将 Git 仓库上传的内容复制到/tmp</span><br><span class="line">rm -rf $&#123;PUBLIC_WWW&#125;/*                   # 删除展示网站的目录的全部内容</span><br><span class="line">cp -rf $&#123;TMP_GIT_CLONE&#125;/* $&#123;PUBLIC_WWW&#125;  # 将/tmp所有内容复制到网站目录</span><br></pre></td></tr></table></figure>
+<p>使得post-receive 可执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod +x hexo/hexo.git/hooks/post-receiv</span><br></pre></td></tr></table></figure>
 <ol start="4">
 <li>配置https<br>
 从阿里云申请免费证书，下载证书，放置在相关位置，并修改nginx配置文件</li>
@@ -355,7 +369,9 @@ cloudflare</p>
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">chengr</p>
+    <img class="site-author-image" itemprop="image" alt="夸父"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">夸父</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -363,7 +379,7 @@ cloudflare</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">98</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -373,10 +389,19 @@ cloudflare</p>
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/walkdeadtobe" title="GitHub → https://github.com/walkdeadtobe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -403,7 +428,7 @@ cloudflare</p>
   </span>
   <span class="author" itemprop="copyrightHolder">chengr</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>
 
         
@@ -421,6 +446,8 @@ cloudflare</p>
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>

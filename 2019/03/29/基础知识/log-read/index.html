@@ -14,17 +14,18 @@
 
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="今天搭建对于kong log读取的系统，来源与师兄的经验，一些坑就可以避免了 这套系统由4部分组成 Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Luce">
 <meta property="og:type" content="article">
 <meta property="og:title" content="log_read">
 <meta property="og:url" content="http://yoursite.com/2019/03/29/基础知识/log-read/index.html">
-<meta property="og:site_name" content="面向对象编程">
+<meta property="og:site_name" content="知行合一">
 <meta property="og:description" content="今天搭建对于kong log读取的系统，来源与师兄的经验，一些坑就可以避免了 这套系统由4部分组成 Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Luce">
 <meta property="og:locale" content="en">
 <meta property="og:updated_time" content="2020-08-30T05:19:27.585Z">
@@ -45,7 +46,7 @@
   };
 </script>
 
-  <title>log_read | 面向对象编程</title>
+  <title>log_read | 知行合一</title>
   
 
 
@@ -96,7 +97,7 @@
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">面向对象编程</h1>
+      <h1 class="site-title">知行合一</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -116,6 +117,21 @@
         <li class="menu-item menu-item-home">
 
     <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
 
   </li>
         <li class="menu-item menu-item-archives">
@@ -160,10 +176,6 @@
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
     <main class="main">
@@ -181,13 +193,13 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/29/基础知识/log-read/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="chengr">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="面向对象编程">
+      <meta itemprop="name" content="知行合一">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -365,7 +377,9 @@ filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">chengr</p>
+    <img class="site-author-image" itemprop="image" alt="夸父"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">夸父</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -373,7 +387,7 @@ filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">98</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -383,10 +397,19 @@ filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash
       </div>
   </nav>
 </div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/walkdeadtobe" title="GitHub → https://github.com/walkdeadtobe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
 
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -413,7 +436,7 @@ filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash
   </span>
   <span class="author" itemprop="copyrightHolder">chengr</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>
 
         
@@ -431,6 +454,8 @@ filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash
 
   
   <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 <script src="/js/utils.js"></script><script src="/js/motion.js"></script>
