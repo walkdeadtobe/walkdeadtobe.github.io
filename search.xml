@@ -4,6 +4,63 @@
   
     
     <entry>
+      <title>Kubeedge的前世今生</title>
+      <link href="/2020/12/19/%E5%88%86%E5%B8%83%E5%BC%8F/Kubeedge/Kubeedge/"/>
+      <url>/2020/12/19/%E5%88%86%E5%B8%83%E5%BC%8F/Kubeedge/Kubeedge/</url>
+      
+        <content type="html"><![CDATA[<p>Kubeedge 基于Kubernetes，并扩展提供在边缘端的原生容器化应用编排和设备管理；包含云端和边缘端两部分构成，支持在云和边之间网络、应用部署和元信息协同。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> kubeedge 分布式 资源管理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>K8S中的名词</title>
+      <link href="/2020/12/17/%E5%88%86%E5%B8%83%E5%BC%8F/Kubernetes/%E7%AE%80%E4%BB%8B/"/>
+      <url>/2020/12/17/%E5%88%86%E5%B8%83%E5%BC%8F/Kubernetes/%E7%AE%80%E4%BB%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="简介">简介</h1><p><a href="https://kubernetes.io/zh/docs/home/" target="_blank" rel="noopener">Kubernetes</a> 是一个可移植、可扩展的开源平台，用于管理容器化的工作负载和服务，可用于声明式配置和自动化.</p><p>Kubernetes 提供服务发现和负载均衡、存储编排、自动部署和回滚、自我修复、自动装箱机制、秘钥和配置管理.</p><h1 id="组件">组件</h1><p>kubernetes 集群由一组被称为节点的机器构成，这些节点上运行着kubernetes所管理的容器化应用.<br>工作节点管理着作为应用负载的组件的Pod，控制平面管理着集群中的控制节点和Pod.在生产环境中，为了保证故障转移和高可用性，控制平面一般跨主机运行，集群通常跨节点.</p><h2 id="控制平面control-plane"><a href="https://kubernetes.io/docs/concepts/overview/components/" target="_blank" rel="noopener">控制平面(Control Plane)</a></h2><p>在集群中，控制平面组件做出全局的决策，比如调度、检测和回复集群变动(例如为满足副本数而新建pod).<br>Control Plane 包含若干部分，Kube-apiserver，etcd，kube-scheduler，kube-controller-manager，cloud-control-manager</p><p><a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/" target="_blank" rel="noopener">kube-apiserver</a></p><blockquote><p>apiserver 负责管理和配置API(Application Programing Interface)的对象，例如Pods，servers等.<br>apiserver 并不是唯一的，可以有多个实例.</p></blockquote><p><a href="https://etcd.io/docs/" target="_blank" rel="noopener">etcd</a></p><blockquote><p>etcd是一个高可用的分布式键值存储系统，内部使用raft协议作为一致性算法，基于Go语言实现.<br>在kubernetes中作为集群数据的备用存储库.</p></blockquote><p><a href>kube-schedule</a></p><blockquote><p>schedule负责决定新创建的Pods部署在哪个Node，考虑因素包括单个和总体的资源要求、硬件/软件/策略约束、偏好性和排斥性因素、数据本地存储因素、服务间负载因素以及deadline等等.</p></blockquote><p><a href="https://kubernetes.io/docs/concepts/architecture/controller/" target="_blank" rel="noopener">kube-controller-manager</a></p><blockquote><p>控制平面组件运行着控制进程，逻辑上，不同的控制进程是相互独立的，但是为了降低复杂度，将所有控制进程编译进一个单独的二进制文件，作为一个进程运行.<br>控制进程包括:</p></blockquote><ul><li>节点控制器:负责在节点宕机时提醒并作出回应.</li><li>副本控制器:负责保持Pods的副本数量保持正常.</li><li>终端控制器:填充终端对象(即加入Service与Pod)</li><li>服务账户和令牌控制器:为新的命名空间创建默认账户和API访问令牌</li></ul><p>cloud-controller-manager</p><blockquote><p>云控制管理器指嵌入特定云的控制逻辑的控制平面插件。下面的控制器包含对于云平台的依赖</p></blockquote><ul><li>节点控制器:在节点停止响应后，检查云供应商是否已经删除节点</li><li>路由控制器:在底层云基础架构中设置路由</li><li>服务控制器: 用于创建、更新和删除云平台供应商的负载均衡器</li></ul><h2 id="node-组件">Node 组件</h2><p>节点组件运行在每个node节点上，运行pods并提供k8s的运行时环境。</p><h3 id="kubelet">kubelet</h3><p>kubelet是集群中运行在节点上的代理，确保容器运行在pod中。<br>kubelet接收一系列包含各种机制的Pod描述文件，并确保容器健康运行。此外，kubelet不管理不由k8s创建的容器。</p><h3 id="kube-proxy"><a href="https://kubernetes.io/docs/reference/command-line-tools-reference/kube-proxy/" target="_blank" rel="noopener">kube-proxy</a></h3><p>kube-proxy 是运行在每个节点的网络代理，实现Service/服务 概念的部分功能。<br>kube-proxy 维持着节点上的网络规则，这些规则允许集群内外的网络会话与Pods通信。<br>如果操作系统的数据包过滤层可用，那么kube-proxy基于此实现网络规则，否则kube-proxy仅转发流量本身。</p><h3 id="container-runtime容器运行时环境">Container Runtime(容器运行时环境)</h3><p>K8s支持多种运行时环境：Docker、containerd、CRI-O和任何实现对于Kubernetes CRI的继承的软件。</p><h2 id="插件addons">插件(Addons)</h2><p>插件使用K8s资源(DaemonSet、Deploymnet)实现集群功能，由于提供集群级别的功能，所以插件中命名空间域的资源属于<code>kube-system</code>命名空间。</p><h3 id="dns">DNS</h3><p>集群DNS是一个DNS服务器，与环境中的其他DNS服务器一起工作，为k8s集群服务提供DNS服务。<br>k8s集群所启动的容器会将该DNS服务器包含在其DNS搜索列表。</p><h3 id="web界面仪表盘">web界面(仪表盘)</h3><p>Dashboard是k8s集群通用的、基于web的用户界面。借助其，用户可以直接管理应用和排除应用故障。</p><h3 id="容器资源监控">容器资源监控</h3><p>Container Resource Monitoring 将容器的通用时序衡量指标记录于中心数据库，并提供web界面浏览数据。</p><h3 id="集群级别的日记">集群级别的日记</h3><p>一个集群级别的记录机制可以保存容器日志到集中日志存储，并提供搜索和浏览接口。</p><h1 id="相关概念">相关概念</h1><h2 id="cluster-architecture">Cluster Architecture</h2><p>主从架构</p><h3 id="node"><a href="https://kubernetes.io/docs/concepts/architecture/nodes/" target="_blank" rel="noopener">Node</a></h3><p>Kubernetes 通过在Node上运行由容器构成的Pods 来运行Workloads；Node可以是虚拟的，也可以是物理机器；每个Node都包含运行Pods所必需的服务，由 control plane 管理；组件包括kubelet，container runtime和kube-proxy</p><h4 id="管理">管理</h4><p>有两种方式可以添加Node，一种是由node上的kublet自注册到control plane，另一种是使用kubectl人工增加节点，添加之后control plane会检测新node是有有效。</p><h4 id="node状态">Node状态</h4><p>Node状态由Addresses、Conditions、Capacity and Allocatable、Info 四部分构成<br>Addresses包括HostName、ExternalIp(用于集群外使用)、InternalIp(集群内使用)<br>Conditions描述Node的状态，其值有Ready、DiskPressure(当Disk容量低时为True)、MemoryPressure、PIDPressure、NetworkUnavailable</p><h3 id="control-plane-node-communication"><a href="https://kubernetes.io/docs/concepts/architecture/control-plane-node-communication/" target="_blank" rel="noopener">Control Plane Node Communication</a></h3><h3 id="controller"><a href="https://kubernetes.io/docs/concepts/architecture/controller/" target="_blank" rel="noopener">Controller</a></h3><h3 id="cloud-controller-manager"><a href="https://kubernetes.io/docs/concepts/architecture/cloud-controller/" target="_blank" rel="noopener">Cloud Controller Manager</a></h3><h2 id="containers">Containers</h2><p>共享宿主机操作系统</p><h2 id="workloads">Workloads</h2><p>即运行在K8S上的一个应用，可能又多个Pod构成</p><h2 id="servicesloadbalancingand-networking">Services,Loadbalancing,and Networking</h2><h2 id="storage">Storage</h2><h2 id="configuration">Configuration</h2><h2 id="security">Security</h2><h2 id="pliocies">Pliocies</h2><h2 id="scheduling-and-eviction">Scheduling and Eviction</h2>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> kubernetes 分布式 资源管理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>K8S中的PODS</title>
+      <link href="/2020/12/16/%E5%88%86%E5%B8%83%E5%BC%8F/Kubernetes/pod/"/>
+      <url>/2020/12/16/%E5%88%86%E5%B8%83%E5%BC%8F/Kubernetes/pod/</url>
+      
+        <content type="html"><![CDATA[<p>Kubernetes 中的Pods是一系列container的集合,一系列container运行的环境，集合内的container共享存储/网络资源,可以统一管理pods中的多个container;</p><h4 id="pods更新操作">Pods更新操作</h4><p>kuberlet 会创建一个新的pod，然后替代这个旧的pod</p><h4 id="资源分享和交流resource-sharing-and-communication">资源分享和交流(Resource sharing and communication)</h4><p>pod 允许其中的container分享数据和交流<br>pod内的container共享一个ip和相应的port空间</p><h4 id="dns">DNS</h4>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> kubernetes 分布式 资源管理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>算法导论</title>
       <link href="/2020/12/10/%E5%88%86%E5%B8%83%E5%BC%8F/%E4%B9%A6%E7%B1%8D%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/"/>
       <url>/2020/12/10/%E5%88%86%E5%B8%83%E5%BC%8F/%E4%B9%A6%E7%B1%8D%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/%E7%AE%97%E6%B3%95%E5%AF%BC%E8%AE%BA/</url>
@@ -452,25 +509,6 @@
     
     
     <entry>
-      <title>blog 产生记</title>
-      <link href="/2020/07/05/Blog/blog/"/>
-      <url>/2020/07/05/Blog/blog/</url>
-      
-        <content type="html"><![CDATA[]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> hexo next </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>个人网站搭建</title>
       <link href="/2020/07/05/Blog/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/"/>
       <url>/2020/07/05/Blog/%E4%B8%AA%E4%BA%BA%E7%BD%91%E7%AB%99/</url>
@@ -482,6 +520,25 @@
         <tags>
             
             <tag> VPS hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>blog 产生记</title>
+      <link href="/2020/07/05/Blog/blog/"/>
+      <url>/2020/07/05/Blog/blog/</url>
+      
+        <content type="html"><![CDATA[]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> hexo next </tag>
             
         </tags>
       
@@ -942,25 +999,6 @@
     
     
     <entry>
-      <title>lua</title>
-      <link href="/2019/07/10/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/lua/"/>
-      <url>/2019/07/10/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/lua/</url>
-      
-        <content type="html"><![CDATA[<p><br>因为决定学习开发网关kong的插件，所以需要学习lua语言，正在从<a href="https://www.runoob.com/lua/" target="_blank" rel="noopener">Lua 菜鸟教程</a>学习<br><br>关于kong插件开发的博客 <a href="https://www.jianshu.com/p/68457b42b84f" target="_blank" rel="noopener">链接1</a><br><br>发现一个很有意思的lua 模块  :openresty 的lua-resty-template 模块，提供模板渲染的功能<br><br>准备在网关处进行对于token的检验工作，由于没有使用已有的oauth server 插件，所以需要自己写个额外插件<br>在这个插件中主要需要完成的工作是从cookie 中 提取出 token ,并以此为凭借到oauth  server 进行相关检验，如果检验成功，应当返回id 以及这个token的ttl ,网关处获得id 应当 将之体现在日志里(插件逻辑处新建header,在nginx日志处自定义日志格式,指明该id或者在网关处建立与oauth server相同的用户体系，起码账户名一致，这样根据id 可以从数据库中提取出相应的consumer credential ,这样的话可以用于后续的基于用户的限流等操作)<br>主要点在于1.Lua中进行http 操作  ,<a href="https://github.com/ledgetech/lua-resty-http#request" target="_blank" rel="noopener">Github 源码文档</a><br>2.考虑对token进行缓存,[‘token’,‘id’,ttl],这样无需多次存取(可能带来的问题有，注销登录后如何通知网关注销token：这又分为两种注销后不再登录和重新登陆，对于后者可以下次请求经过网关时,注销相同id的键值对)<br><a href="https://github.com/openresty/lua-resty-redis/" target="_blank" rel="noopener">Github lua-resty-redis</a><br><a href="https://github.com/Kong/kong/blob/master/kong/plugins/rate-limiting/policies/init.lua" target="_blank" rel="noopener">Kong rate-limiting 插件</a>中涉及对于redis的操作,可以观摩下</p><p><br>目前在网关处验证用户身份成功后，在后端为避免再次检验身份的需要，因此需要网关提供给后端身份凭据，认可这次身份凭据，同时应当提供某种验证手段，让后端验证请求是否身份凭据是否是真的/是否是伪造<br>方案1 ：利用某种对称加密算法,网关对用户身份进行加密,后端以相同的密钥进行解密,得到身份<br>确定使用AES算法<a href="https://github.com/openresty/lua-resty-string/" target="_blank" rel="noopener">Github 示例</a>,在网关处使用CBC加密，相同的偏移向量,结果转化为hex格式，传输到python后端，对结果转发，解密，但是解密始终得不到正确的结果，怀疑是<a href="https://blog.csdn.net/diodosu/article/details/51923670" target="_blank" rel="noopener">博客</a>中提到的问题，但是我在测试中设置的加密字段,加密密钥，偏移向量都是16位的，看起来应该不会有填充的问题才对，但是解密仍然失败<br>方案2 ：采取非对称加密算法，在网关处向后端传递两个header：userid,encrypted 在网关处按照某种方法加密得到 encrypt header,后端使用同样的方法加密，如果结果相同，则认为 userid 经过了网关的认证，同时加密内容应当是网关与后端之间相互约定的动态的内容</p><p><br>2020-1-10 代码更新，把硬编码信息改为插件的配置输入<br>curl -i -X POST <a href="http://localhost:8001/plugins" target="_blank" rel="noopener">http://localhost:8001/plugins</a> <br>–data “name=kong-plugin-myplugin” <br>–data “config.sso_domain=SS0_DOMAIN” <br>–data “config.check_path=CHECK_PATH” <br>–data “config.front_domain=FRONT_DOMAIN” <br>–data “config.client=CLIENT_JSON”</p><p>其中需要注意的是，kong网关对于插件配置的输入中对于字符 ‘&amp;’ 的支持不好，而使用’\&amp;‘的话，网关处接收后会转化为’\\&amp;’,看起来很不舒服，然后我 使用 ‘\a’ 字符代表 ‘&amp;’,在插件处理逻辑处再替换回来(需要注意的是如果单个的’'存在，会影响 string 转化为 json)</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> lua </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>动态规划学习</title>
       <link href="/2019/07/10/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/dp/"/>
       <url>/2019/07/10/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/dp/</url>
@@ -972,6 +1010,25 @@
         <tags>
             
             <tag> dp  algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>lua</title>
+      <link href="/2019/07/10/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/lua/"/>
+      <url>/2019/07/10/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/lua/</url>
+      
+        <content type="html"><![CDATA[<p><br>因为决定学习开发网关kong的插件，所以需要学习lua语言，正在从<a href="https://www.runoob.com/lua/" target="_blank" rel="noopener">Lua 菜鸟教程</a>学习<br><br>关于kong插件开发的博客 <a href="https://www.jianshu.com/p/68457b42b84f" target="_blank" rel="noopener">链接1</a><br><br>发现一个很有意思的lua 模块  :openresty 的lua-resty-template 模块，提供模板渲染的功能<br><br>准备在网关处进行对于token的检验工作，由于没有使用已有的oauth server 插件，所以需要自己写个额外插件<br>在这个插件中主要需要完成的工作是从cookie 中 提取出 token ,并以此为凭借到oauth  server 进行相关检验，如果检验成功，应当返回id 以及这个token的ttl ,网关处获得id 应当 将之体现在日志里(插件逻辑处新建header,在nginx日志处自定义日志格式,指明该id或者在网关处建立与oauth server相同的用户体系，起码账户名一致，这样根据id 可以从数据库中提取出相应的consumer credential ,这样的话可以用于后续的基于用户的限流等操作)<br>主要点在于1.Lua中进行http 操作  ,<a href="https://github.com/ledgetech/lua-resty-http#request" target="_blank" rel="noopener">Github 源码文档</a><br>2.考虑对token进行缓存,[‘token’,‘id’,ttl],这样无需多次存取(可能带来的问题有，注销登录后如何通知网关注销token：这又分为两种注销后不再登录和重新登陆，对于后者可以下次请求经过网关时,注销相同id的键值对)<br><a href="https://github.com/openresty/lua-resty-redis/" target="_blank" rel="noopener">Github lua-resty-redis</a><br><a href="https://github.com/Kong/kong/blob/master/kong/plugins/rate-limiting/policies/init.lua" target="_blank" rel="noopener">Kong rate-limiting 插件</a>中涉及对于redis的操作,可以观摩下</p><p><br>目前在网关处验证用户身份成功后，在后端为避免再次检验身份的需要，因此需要网关提供给后端身份凭据，认可这次身份凭据，同时应当提供某种验证手段，让后端验证请求是否身份凭据是否是真的/是否是伪造<br>方案1 ：利用某种对称加密算法,网关对用户身份进行加密,后端以相同的密钥进行解密,得到身份<br>确定使用AES算法<a href="https://github.com/openresty/lua-resty-string/" target="_blank" rel="noopener">Github 示例</a>,在网关处使用CBC加密，相同的偏移向量,结果转化为hex格式，传输到python后端，对结果转发，解密，但是解密始终得不到正确的结果，怀疑是<a href="https://blog.csdn.net/diodosu/article/details/51923670" target="_blank" rel="noopener">博客</a>中提到的问题，但是我在测试中设置的加密字段,加密密钥，偏移向量都是16位的，看起来应该不会有填充的问题才对，但是解密仍然失败<br>方案2 ：采取非对称加密算法，在网关处向后端传递两个header：userid,encrypted 在网关处按照某种方法加密得到 encrypt header,后端使用同样的方法加密，如果结果相同，则认为 userid 经过了网关的认证，同时加密内容应当是网关与后端之间相互约定的动态的内容</p><p><br>2020-1-10 代码更新，把硬编码信息改为插件的配置输入<br>curl -i -X POST <a href="http://localhost:8001/plugins" target="_blank" rel="noopener">http://localhost:8001/plugins</a> <br>–data “name=kong-plugin-myplugin” <br>–data “config.sso_domain=SS0_DOMAIN” <br>–data “config.check_path=CHECK_PATH” <br>–data “config.front_domain=FRONT_DOMAIN” <br>–data “config.client=CLIENT_JSON”</p><p>其中需要注意的是，kong网关对于插件配置的输入中对于字符 ‘&amp;’ 的支持不好，而使用’\&amp;‘的话，网关处接收后会转化为’\\&amp;’,看起来很不舒服，然后我 使用 ‘\a’ 字符代表 ‘&amp;’,在插件处理逻辑处再替换回来(需要注意的是如果单个的’'存在，会影响 string 转化为 json)</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> lua </tag>
             
         </tags>
       
@@ -1278,11 +1335,11 @@
     
     
     <entry>
-      <title>slice_window</title>
-      <link href="/2019/04/23/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/slide_window/"/>
-      <url>/2019/04/23/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/slide_window/</url>
+      <title>map_and_set</title>
+      <link href="/2019/04/23/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/map_and_set/"/>
+      <url>/2019/04/23/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/map_and_set/</url>
       
-        <content type="html"><![CDATA[<p>返回滑动窗口的最大值(考虑极端情况起码考虑 空 )<br>给定一个输入序列（数组)，返回窗口范围内的最大值，每次移动一次窗口，并返回一个最大值</p><ul><li>方法1：大顶堆（MaxHeap）  删除离开的元素，加入新的元素，排序  时间复杂度<br>$$ N log^{k} $$</li><li>deque(双端 Queue)</li><li>–入队列</li><li>–维护队列：对于长度为K 的窗口，将窗口范围内最大值之前的数全部删除（忽略），因为在最大值之前的数必然不会成为最大值</li></ul><ul>  <li>JavaScript    <ol>      <li>        第一章        <ul>          <li>const</li>          <li>let</li>        </ul>      </li>      <li>        第二章sdisjfosdklsjfkdddddldddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd        <ul>          <li>function</li>          <li>object</li>        </ul>      </li>    </ol>  </li>  <li>Java    <ol>      <li>        第一章        <ul>          <li>class</li>          <li>package</li>        </ul>      </li>      <li>        第二章        <ul>          <li>private</li>          <li>public</li>        </ul>      </li>    </ol>  </li></ul>]]></content>
+        <content type="html"><![CDATA[<p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>List VS Map VS Set</p><ul><li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li><li>Map ：键值对Key-value</li><li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li></ul><p>HashMap VS TreeMap<br>HashSet VS TreeSet<br>在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>但是 哈希表的实现是无序的，而树的实现是有序的</p><p>题目：242（Leetcode） Valid Anagrant<br>题意：对给定的两个字符串，判断是否是同一单词的错位变换</p><ul><li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>$$ O(Nlog^N) $$</li><li>方法2：构造Map，比较Map是否相同算法复杂度<br>$$ O(N) $$</li></ul><p>题目：Two Sum(Three Sum)<br>题意：给定一个数组，以及value，输出数组中和为value的元素下标</p><ul><li>方法1：暴力方法时间复杂度<br>$$<br>O(N^2)<br>$$</li><li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>$$<br>O(N)<br>$$</li></ul><p>那么对于ThreeSum</p><ul><li>方法1：暴力 时间复杂度<br>$$<br>O(N^3)<br>$$</li><li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>$$<br>O(N^2)<br>$$</li><li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>$$<br>O(N^2)<br>$$</li><li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>$$<br>O(N^2)<br>$$</li></ul>]]></content>
       
       
       
@@ -1297,11 +1354,11 @@
     
     
     <entry>
-      <title>map_and_set</title>
-      <link href="/2019/04/23/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/map_and_set/"/>
-      <url>/2019/04/23/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/map_and_set/</url>
+      <title>slice_window</title>
+      <link href="/2019/04/23/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/slide_window/"/>
+      <url>/2019/04/23/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/slide_window/</url>
       
-        <content type="html"><![CDATA[<p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>List VS Map VS Set</p><ul><li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li><li>Map ：键值对Key-value</li><li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li></ul><p>HashMap VS TreeMap<br>HashSet VS TreeSet<br>在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>但是 哈希表的实现是无序的，而树的实现是有序的</p><p>题目：242（Leetcode） Valid Anagrant<br>题意：对给定的两个字符串，判断是否是同一单词的错位变换</p><ul><li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>$$ O(Nlog^N) $$</li><li>方法2：构造Map，比较Map是否相同算法复杂度<br>$$ O(N) $$</li></ul><p>题目：Two Sum(Three Sum)<br>题意：给定一个数组，以及value，输出数组中和为value的元素下标</p><ul><li>方法1：暴力方法时间复杂度<br>$$<br>O(N^2)<br>$$</li><li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>$$<br>O(N)<br>$$</li></ul><p>那么对于ThreeSum</p><ul><li>方法1：暴力 时间复杂度<br>$$<br>O(N^3)<br>$$</li><li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>$$<br>O(N^2)<br>$$</li><li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>$$<br>O(N^2)<br>$$</li><li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>$$<br>O(N^2)<br>$$</li></ul>]]></content>
+        <content type="html"><![CDATA[<p>返回滑动窗口的最大值(考虑极端情况起码考虑 空 )<br>给定一个输入序列（数组)，返回窗口范围内的最大值，每次移动一次窗口，并返回一个最大值</p><ul><li>方法1：大顶堆（MaxHeap）  删除离开的元素，加入新的元素，排序  时间复杂度<br>$$ N log^{k} $$</li><li>deque(双端 Queue)</li><li>–入队列</li><li>–维护队列：对于长度为K 的窗口，将窗口范围内最大值之前的数全部删除（忽略），因为在最大值之前的数必然不会成为最大值</li></ul><ul>  <li>JavaScript    <ol>      <li>        第一章        <ul>          <li>const</li>          <li>let</li>        </ul>      </li>      <li>        第二章sdisjfosdklsjfkdddddldddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd        <ul>          <li>function</li>          <li>object</li>        </ul>      </li>    </ol>  </li>  <li>Java    <ol>      <li>        第一章        <ul>          <li>class</li>          <li>package</li>        </ul>      </li>      <li>        第二章        <ul>          <li>private</li>          <li>public</li>        </ul>      </li>    </ol>  </li></ul>]]></content>
       
       
       
