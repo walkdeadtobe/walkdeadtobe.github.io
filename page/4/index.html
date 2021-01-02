@@ -185,6 +185,255 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/06/工作求职/计算机网络/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/06/工作求职/计算机网络/" class="post-title-link" itemprop="url">计算机网络</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-06 09:29:04" itemprop="dateCreated datePublished" datetime="2020-07-06T09:29:04+08:00">2020-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-09-15 15:22:11" itemprop="dateModified" datetime="2020-09-15T15:22:11+08:00">2020-09-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基础问题">基础问题</h2>
+<h3 id="http-报文键值对">http 报文键值对</h3>
+<blockquote>
+<p>host<br>
+Content-*<br>
+ACCEPT<br>
+COOKIE</p>
+</blockquote>
+<h3 id="osi-7层">OSI 7层</h3>
+<ul>
+<li>物理层：电路交换 报文交换 分组交换</li>
+<li>数据链路层：组帧,差错控制,流量控制,介质访问(频分时分波分码分复用)</li>
+<li>网络层：异构网络互联;路由与转发;拥塞控制
+<ul>
+<li>ARP：查询IP与MAC地址的映射;DHCP：动态分配IP;ICMP:允许主机以及路由器报告差错情况;TRACEROTE</li>
+<li>NAT CIDR(路由聚合)</li>
+<li>OSPF RIP</li>
+</ul>
+</li>
+<li>传输层：传输层寻址与端口;无连接服务和有连接服务
+<ul>
+<li>UDP:无连接不可靠,数据校验(源端口目的端口;udp报文长度;校 验和; 数据)</li>
+<li>TCP：连接管理：可靠传输;流量控制和拥塞控制(源目的端口：序号确认号数据偏移;标志位：SYN ACK PUS FIN RST ；校验和 窗口字段)</li>
+</ul>
+</li>
+<li>会话层</li>
+<li>表示层(加密)</li>
+<li>应用层：CS 模式 P2P模式
+<ul>
+<li>PING;HTTP:TCP 80</li>
+<li>DNS udp 53</li>
+<li>FTP TCP 2021</li>
+<li>EMAIL:TCP SMTP:25 POP3 110</li>
+</ul>
+</li>
+</ul>
+<h3 id="close_wait-和-time_wait">close_wait 和 time_wait</h3>
+<blockquote>
+<p>close_wait 在 被关闭防 接收到fin报文时,发出ack 报文 进入close_wait状态 ,发送完报文,调用close(),close_wait 状态结束<br>
+socket 其实就是一个五元组，包括：源IP, 源端口, 目的IP, 目的端口, 类型(TCP or UDP)<br>
+TIME_WAIT</p>
+<ul>
+<li>防止前一个连接上延迟的数据包或者丢失重传的数据包，被后面复用的连接错误的接收</li>
+<li>确保连接方能在时间范围内，关闭自己的连接(考虑到丢包的情况)</li>
+</ul>
+</blockquote>
+<p>在高并发短连接的TCP服务器上，当服务器处理完请求后立刻主动正常关闭连接,避免有时出现客户端连接不上</p>
+<ul>
+<li>高并发导致服务器过多使用端口资源(0-65535)</li>
+<li>短连接表示“业务处理+传输数据的时间 远远小于 TIMEWAIT超时的时间”的连接。<br>
+解决：</li>
+<li>开启SYN cookie</li>
+<li>开启 tcp_tw_reuse 允许TIME_WAIT的socket重用于TCP连接</li>
+<li>开启 tcp_tw_recycle,开启TCP连接中TIME-WAIT sockets的快速回收,会丢弃时间戳较小的syn报文(在最新的linux内核中放弃这个参数,可能导致tcp网络极不稳定)</li>
+</ul>
+<h4 id="time_wait-和-close_wait大量出现">time_wait 和 close_wait大量出现</h4>
+<blockquote>
+<p>当time_wait(2MSL 60S) 比较多时,客户建立的连接没有有效利用 ,可以考虑tcp长连接复用;</p>
+</blockquote>
+<blockquote>
+<p>大量close_wait的现象，主要原因是某种情况下对方关闭了socket链接，但是我方忙与读或者写，没有关闭连接</p>
+</blockquote>
+<p>tcp为什么可靠，和udp的区别，序号的作用除了可靠性还有什么？</p>
+<ul>
+<li>校验</li>
+<li>序列号和确认机制</li>
+<li>序列号</li>
+<li>重传机制</li>
+</ul>
+<h3 id="tcp三次握手四次挥手为什么要三次握手">TCP三次握手四次挥手，为什么要三次握手</h3>
+<blockquote>
+<p>三次握手是为了避免两次握手带来的漏洞（如果两次建立连接，那么假设A-&gt;B，B-&gt;A的请求未到达，B认为链接建立，放数据，A认为链接未建立，不接受数据，B数据超时会再重发，引发锁）<br>
+四次挥手：最后一次挥手可能应为网络原因而丢失，故等待2MSL再没收到FIN 则认为对方收到了最后一次挥手<br>
+数据传输，所以四次挥手而非3次</p>
+</blockquote>
+<p>TCP拥塞协议，tcpudp区别</p>
+<ul>
+<li>是否连接</li>
+<li>是否可靠传输,保证有序</li>
+<li>一对读通信,udp广播多播</li>
+<li>面向报文,面向字节流</li>
+<li>首部开销</li>
+<li>使用场景：适用于实时场景(视频频电话直播),可靠的传输(文件数据传输)</li>
+</ul>
+<h3 id="http和https区别">HTTP和HTTPs区别</h3>
+<blockquote>
+<p>http：超文本传输协议，明文传播<br>
+https： TCP 层与 HTTP 层之间加入了 SSL/TLS;http+ssl加密数据；<br>
+对称加密，非对称加密（公钥加密，私钥解密，GitHub，ssh，身份签名）</p>
+</blockquote>
+<h3 id="http">HTTP</h3>
+<blockquote>
+<p>Method<br>
+GET: 获取资源###<br>
+HEAD: 获取报文头部###<br>
+POST: 传输实体主体###<br>
+PUT: 传输文件###<br>
+DELETE: 删除文件###<br>
+OPTIONS: 询问支持方法####<br>
+Status Code：<br>
+200 （成功） 服务器已成功处理了请求<br>
+301 （永久移动） 永久重定向<br>
+302 （临时移动）<br>
+304 （未修改） 自从上次请求后，请求的网页未修改过。<br>
+307 （临时重定向） 服务器目前从不同位置的网页响应请求<br>
+401 （未授权） 请求要求身份验证<br>
+403 （禁止） 服务器拒绝请求<br>
+404 （未找到） 服务器找不到请求的网页<br>
+500 （服务器内部错误） 服务器遇到错误，无法完成请求<br>
+502 （错误网关） 服务器作为网关或代理，从上游服务器收到无效响应</p>
+<p>HTTP vs HTTPS<br>
+https=http+对于数据进行SSL（Secure Sockets Layer）加密<br>
+1.https协议需要到ca申请证书，一般免费证书较少<br>
+2.http是超文本传输协议，信息是明文传输，https则是具有安全性的ssl加密传输协议<br>
+3.http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443<br>
+4.http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全</p>
+</blockquote>
+<h3 id="http报文格式">http报文格式</h3>
+<p>请求报文</p>
+<ul>
+<li>请求行：方法,url 协议版本 (GET /index.html HTTP/1.1)</li>
+<li>请求头部 header 键值对(User-Agent,Accept,Host)</li>
+<li>请求数据:GET 中不使用,POST中使用<br>
+响应报文</li>
+<li>状态行：HTTP-Version Status-Code Reason-Phrase(状态代码的文本描述)</li>
+<li>消息报头</li>
+<li>响应正文</li>
+</ul>
+<p>GET VS POST</p>
+<ul>
+<li>数据位置:GET提交,请求的数据会附在URL之后,POST提交：把提交的数据放置在是HTTP包的body中</li>
+<li>数据长度:GET:特定浏览器和服务器对URL长度有限制，例如IE对URL长度的限制是2083字节(2K+35) 而 POST对提交数据的大小有限制</li>
+<li>安全性</li>
+</ul>
+<h4 id="ipv4-报文格式">IPV4 报文格式</h4>
+<ul>
+<li>版本 首部长度 总长度</li>
+<li>标识 标志 片偏移(数据报分组之后在元报文的偏移量;数据链路层有最大报文传输单元限制MTU)</li>
+<li>生存时间 具体协议(TCP UDP) 首部校验和</li>
+<li>源目的地址</li>
+<li>可选字段 填充</li>
+<li>数据</li>
+</ul>
+<p>路由算法</p>
+<ul>
+<li>OSPF</li>
+<li>RIP</li>
+</ul>
+<h4 id="dns">DNS</h4>
+<p>13台根服务器 顶级域名服务器  权限域名服务器 本地域名服务器<br>
+定义域名 一级域名  二级域名<br>
+域名解析服务器分类：</p>
+<ul>
+<li>主域名服务器：负责维护一个区域所有域名信息，为特定域名的所有信息的权威来源，可以修改信息。</li>
+<li>辅助域名服务器：当主域名服务器出现故障，关机或负载过重等情况，辅助域名服务器作为备份服务器来提供域名解析服务，辅助域名服务器是从另一台远程域名服务器下载的所有域名信息，域名信息不具有修改权限</li>
+<li>缓存域名服务器：当从远程域名服务器获得域名解析信息后，将其缓存到高速缓存中，当下次需要请求相同的域名解析时，直接从本地缓存中读取，缓存域名信息不具有权威性</li>
+<li>转发域名服务器：转发域名服务器用来请求不在本地域名服务器上的信息，当收到域名请求服务时，现在本地缓存中查取，如果查询不到。即依次向指定的域名服务器发出请求，直到查到所需信息返回结果。否则，返回无法映射的信息。<br>
+dig :命令主要用来从 DNS 域名服务器查询主机地址信息</li>
+</ul>
+<h4 id="浏览器访问wwwbaiducom的过程"><a href="https://blog.nowcoder.net/n/a8337baa9c554acdab25b898f7b0970b" target="_blank" rel="noopener">浏览器访问www.baidu.com的过程</a></h4>
+<blockquote>
+<p>DNS域名解析:从浏览器缓存中获取,从本机/操作系统中尝试查找域名(host文件)</p>
+<ul>
+<li>如果在局域网,可能在路由器或者在ISP存在缓存</li>
+<li>询问本地域名服务器,本地域名没有的话,询问根域名服务器,如果是迭代的话,可能从根域名服务器获得下一步需要去查询的顶级域名服务器,可能获得下一步的授权域名服务器,获得真实的IP,缓存并返回给主机。<br>
+获得ip 然后发送TCP连接</li>
+</ul>
+</blockquote>
+<p>tcpdump</p>
+<blockquote>
+<p>使用tcpdump抓包在卡顿的时候会抓到大量的syn请求</p>
+</blockquote>
+<p>SYN FLOOD</p>
+<blockquote>
+<p>前提:服务端在第二次握手时,就分配相关资源给该tcp连接<br>
+synflood利用这一缺陷,大量发送syn request包,耗尽服务端的资源从而使之无法提供正常服务<br>
+解决：<br>
+限制ip的访问次数<br>
+开启syncookie:在第二次握手时,不分配资源而是根据syn包的一些信息以及自己的秘钥经过算法计算出cookie值,下次返回ack 再计算一次,相同才开始分配资源;延迟资源分配到简历真正连接的时候</p>
+</blockquote>
+<p>http1 VS http1.1</p>
+<ul>
+<li>http1:增加HTTP头、扩展PUT、POST等方法</li>
+<li>HTTP1.1 :长连接、流水线支持，最广泛使用的HTTP传输协议</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/06/工作求职/OS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -591,70 +840,6 @@ poll 函数的参数</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Blog/blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/05/Blog/blog/" class="post-title-link" itemprop="url">blog 产生记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-07-05 22:52:19" itemprop="dateCreated datePublished" datetime="2020-07-05T22:52:19+08:00">2020-07-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-09 16:00:31" itemprop="dateModified" datetime="2020-12-09T16:00:31+08:00">2020-12-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Blog/个人网站/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -746,6 +931,70 @@ cloudflare</p>
 <h2 id="本地hexo配置deploy">本地hexo配置deploy</h2>
 <p>配置多个deploy对象，参考 <a href="https://hexo.io/zh-cn/docs/one-command-deployment" target="_blank" rel="noopener">hexo deploy配置</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">- type: git</span><br><span class="line">  repository: git@github.com: ***/***.github.io.git </span><br><span class="line">  branch: master </span><br><span class="line">- type: git</span><br><span class="line">  repository: root@ip:/path/to/push</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Blog/blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/05/Blog/blog/" class="post-title-link" itemprop="url">blog 产生记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-05 22:52:19" itemprop="dateCreated datePublished" datetime="2020-07-05T22:52:19+08:00">2020-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-09 16:00:31" itemprop="dateModified" datetime="2020-12-09T16:00:31+08:00">2020-12-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
       
     </div>
 
@@ -1818,99 +2067,6 @@ CPU 和 3级cache<br>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/13/基础知识/linux/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/01/13/基础知识/linux/" class="post-title-link" itemprop="url">linux</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-01-13 10:57:57" itemprop="dateCreated datePublished" datetime="2020-01-13T10:57:57+08:00">2020-01-13</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:19:27" itemprop="dateModified" datetime="2020-08-30T13:19:27+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>本问用于记录linux常用的命令</p>
-<p>ssh</p>
-<p>scp</p>
-<blockquote>
-<p>在两个服务器之间传输文件<br>
-rz<br>
-传输本地文件到服务器<br>
-sz [filename]<br>
-传输服务器文件到本地</p>
-</blockquote>
-<p>find [PATH] [option]</p>
-<blockquote>
-<p>在指定目录下查找相关文件<br>
-example : find . -name “name”</p>
-</blockquote>
-<p>tail [file] [option]</p>
-<blockquote>
-<p>从后开始查询文件，默认查询最后十行<br>
-tail -n 100 nohup.log</p>
-</blockquote>
-<p>cat/touch<br>
-netstat<br>
-telnet<br>
-chown/chmod/chgrp<br>
-useradd</p>
-<p>配置 <a href="https://wiki.archlinux.org/index.php/Readline" target="_blank" rel="noopener">命令自动补全</a></p>
-<blockquote>
-<p>配置 ~/.inputrc 文件</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1982,7 +2138,7 @@ useradd</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -2026,7 +2182,7 @@ useradd</p>
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

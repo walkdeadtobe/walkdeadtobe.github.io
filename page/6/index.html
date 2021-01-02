@@ -185,6 +185,96 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/09/基础知识/迁移/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/09/基础知识/迁移/" class="post-title-link" itemprop="url">系统迁移</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-09 19:22:46" itemprop="dateCreated datePublished" datetime="2019-11-09T19:22:46+08:00">2019-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:25:38" itemprop="dateModified" datetime="2020-08-30T13:25:38+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>这套系统由4部分组成</p>
+<p>Logstash是一个开元数据收集引擎，具备实时管道功能；Logstash可以动态的将俩字不同来源的数据统一起来，并将数据标准化至你所选择的目的地。这里我们选择的Elasricearch</p>
+<p>Elastricearch 是一个分布式可扩展的实时搜索的分析引擎，一个建立在全文搜索引擎Apache Lucene 基础上的搜索引擎，Elastricsearch 不仅包括全文搜索功能，还可以进行</p>
+<ul>
+<li>分布式实时文件存储，将每一个字段都编入索引，使之可以被搜索</li>
+<li>实时分析的分布式搜索引擎</li>
+<li>可以扩展到上百台服务器上，处理PB级别的结果或者非结构化数据</li>
+</ul>
+<p>FIleBeat  是一个日志文件托运工具，在服务器安装客户端后，FIlebeat可以监控日志目录或者指定的日志文件，追踪读取这些文件（追踪文件的变化，不停的读），并且转发这些信息到elasticsearch或者logstarsh中存放。</p>
+<p>Metricbeat可以定期收集操作系统和服务器的运行指标（CPU，内存，硬盘，IO,读写速度，进程等等），Metricbeat可以将收集到的指标和数据发送到你指定的输出，比如：elasticsearch，最终达成监视服务器的目标。</p>
+<p>Kibana是一个开源的分析和可视化平台，设计用于和Elasticsearch一起工作。你用Kibana来搜索，查看，并和存储在Elasticsearch索引中的数据进行交互。你可以轻松地执行高级数据分析，并且以各种图标、表格和地图的形式可视化数据。Kibana使得理解大量数据变得很容易。它简单的、基于浏览器的界面使你能够快速创建和共享动态仪表板，实时显示Elasticsearch查询的变化。</p>
+<p><font size="6">kong</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">log_format json_log escape=json &apos;&#123; &quot;@timestamp&quot;: &quot;$time_iso8601&quot;, &apos;  &apos;&quot;remote_addr&quot;: &quot;$remote_addr&quot;, &apos;  &apos;&quot;referer&quot;: &quot;$http_referer&quot;, &apos;  &apos;&quot;request&quot;: &quot;$request&quot;, &apos;  &apos;&quot;status&quot;: $status, &apos;  &apos;&quot;bytes&quot;:$body_bytes_sent, &apos;  &apos;&quot;agent&quot;: &quot;$http_user_agent&quot;, &apos;  &apos;&quot;user&quot;: &quot;$http_username&quot;, &apos; &apos;&quot;x_forwarded&quot;: &quot;$http_x_forwarded_for&quot;, &apos;  &apos;&quot;upstr_addr&quot;: &quot;$upstream_addr&quot;,&apos;  &apos;&quot;upstr_host&quot;: &quot;$upstream_http_host&quot;,&apos;  &apos;&quot;ups_resp_time&quot;: &quot;$upstream_response_time&quot; &#125;&apos;;</span><br><span class="line">access_log logs/access.log json_log;</span><br></pre></td></tr></table></figure>
+<p><font size="6">logstash</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#filebeat_kong.conf</span><br><span class="line">input&#123;</span><br><span class="line">   beats &#123;</span><br><span class="line">        type =&gt; &quot;nginx-log&quot; #&quot;logs&quot;</span><br><span class="line">        port =&gt; 9044</span><br><span class="line">          &#125;</span><br><span class="line">     &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">filter&#123;</span><br><span class="line">    json&#123; #获取nginx log日志</span><br><span class="line">        source =&gt; &quot;message&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    mutate&#123;# 删去logstash转化后保留的messegae字段</span><br><span class="line">            remove_field =&gt; [&quot;message&quot;]</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">output&#123;</span><br><span class="line">    stdout &#123; codec =&gt; rubydebug &#125;</span><br><span class="line">    elasticsearch &#123;</span><br><span class="line">        hosts =&gt; [&quot;10.1.1.46:9200&quot;]</span><br><span class="line">        index =&gt; &quot;system-syslog-%&#123;+YYYY.MM&#125;&quot;</span><br><span class="line">        document_type =&gt; &quot;logs&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><font size="6">filebeat</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#filebeat.yml</span><br><span class="line">filebeat.prospectors:</span><br><span class="line"></span><br><span class="line">- input_type: log</span><br><span class="line"> # encoding: UTF-8</span><br><span class="line">  paths:</span><br><span class="line">    - /home/LAB/chengr/kong_log/file.log</span><br><span class="line">  json.keys_under_root: true #在一次部署中发现这一行不能识别，最终注释之解决</span><br><span class="line">  #json.add_error_key: true</span><br><span class="line">  #json.message_key: log</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">output.logstash:</span><br><span class="line">  #The Logstash hosts</span><br><span class="line">  hosts: [&quot;10.1.1.46:9044&quot;]</span><br></pre></td></tr></table></figure>
+<p><font size="6">elastcisearch</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#config/elasticsearch.yml</span><br><span class="line">cluster.name: my-es-cluster</span><br><span class="line">node.name: es-node-1</span><br><span class="line">path.data: /home/LAB/chengr/ELK/data/data-es</span><br><span class="line">path.logs: /home/LAB/chengr/ELK/log/log-es</span><br><span class="line">network.host: 10.1.1.46</span><br><span class="line">http.port: 9200</span><br></pre></td></tr></table></figure>
+<p><font size="6">kibana</font></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#config/kibana.yml</span><br><span class="line">server.port: 5601</span><br><span class="line">elasticsearch.url: &quot;http://10.1.1.46:9200&quot;</span><br></pre></td></tr></table></figure>
+<p>ps:部署在实际机器上时将配置中ip改为对应的IP</p>
+<p><font size="5">kibana 添加邮件预警 </font><br>
+<a href="http://www.cnblogs.com/small-k/p/8551960.html" target="_blank" rel="noopener">http://www.cnblogs.com/small-k/p/8551960.html</a><br>
+<a href="https://blog.51cto.com/10546390/2051676" target="_blank" rel="noopener">https://blog.51cto.com/10546390/2051676</a></p>
+<p>ps:<a href="https://docs.konghq.com/0.13.x/configuration/?_ga=2.242544130.102618566.1558236281-1173907870.1558236281#proxy_access_log" target="_blank" rel="noopener">kong 相关配置地址</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/03/基础知识/Aminer/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1087,91 +1177,6 @@ tag: 根据我查看的文件结构与commit相同,但引用博客中说没有�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/基础知识/lua/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/10/基础知识/lua/" class="post-title-link" itemprop="url">lua</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-07-10 20:20:19" itemprop="dateCreated datePublished" datetime="2019-07-10T20:20:19+08:00">2019-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:19:27" itemprop="dateModified" datetime="2020-08-30T13:19:27+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><br>因为决定学习开发网关kong的插件，所以需要学习lua语言，正在从<a href="https://www.runoob.com/lua/" target="_blank" rel="noopener">Lua 菜鸟教程</a>学习<br>
-<br>关于kong插件开发的博客 <a href="https://www.jianshu.com/p/68457b42b84f" target="_blank" rel="noopener">链接1</a><br>
-<br>发现一个很有意思的lua 模块  :openresty 的lua-resty-template 模块，提供模板渲染的功能<br>
-<br>准备在网关处进行对于token的检验工作，由于没有使用已有的oauth server 插件，所以需要自己写个额外插件<br>
-在这个插件中主要需要完成的工作是从cookie 中 提取出 token ,并以此为凭借到oauth  server 进行相关检验，如果检验成功，应当返回id 以及这个token的ttl ,网关处获得id 应当 将之体现在日志里(插件逻辑处新建header,在nginx日志处自定义日志格式,指明该id或者在网关处建立与oauth server相同的用户体系，起码账户名一致，这样根据id 可以从数据库中提取出相应的consumer credential ,这样的话可以用于后续的基于用户的限流等操作)<br>
-主要点在于1.Lua中进行http 操作  ,<a href="https://github.com/ledgetech/lua-resty-http#request" target="_blank" rel="noopener">Github 源码文档</a><br>
-2.考虑对token进行缓存,[‘token’,‘id’,ttl],这样无需多次存取(可能带来的问题有，注销登录后如何通知网关注销token：这又分为两种注销后不再登录和重新登陆，对于后者可以下次请求经过网关时,注销相同id的键值对)<br>
-<a href="https://github.com/openresty/lua-resty-redis/" target="_blank" rel="noopener">Github lua-resty-redis</a><br>
-<a href="https://github.com/Kong/kong/blob/master/kong/plugins/rate-limiting/policies/init.lua" target="_blank" rel="noopener">Kong rate-limiting 插件</a>中涉及对于redis的操作,可以观摩下</p>
-<p><br>目前在网关处验证用户身份成功后，在后端为避免再次检验身份的需要，因此需要网关提供给后端身份凭据，认可这次身份凭据，同时应当提供某种验证手段，让后端验证请求是否身份凭据是否是真的/是否是伪造<br>
-方案1 ：利用某种对称加密算法,网关对用户身份进行加密,后端以相同的密钥进行解密,得到身份<br>
-确定使用AES算法<a href="https://github.com/openresty/lua-resty-string/" target="_blank" rel="noopener">Github 示例</a>,在网关处使用CBC加密，相同的偏移向量,结果转化为hex格式，传输到python后端，对结果转发，解密，但是解密始终得不到正确的结果，怀疑是<a href="https://blog.csdn.net/diodosu/article/details/51923670" target="_blank" rel="noopener">博客</a>中提到的问题，但是我在测试中设置的加密字段,加密密钥，偏移向量都是16位的，看起来应该不会有填充的问题才对，但是解密仍然失败<br>
-方案2 ：采取非对称加密算法，在网关处向后端传递两个header：userid,encrypted 在网关处按照某种方法加密得到 encrypt header,后端使用同样的方法加密，如果结果相同，则认为 userid 经过了网关的认证，同时加密内容应当是网关与后端之间相互约定的动态的内容</p>
-<p><br>2020-1-10 代码更新，把硬编码信息改为插件的配置输入<br>
-curl -i -X POST <a href="http://localhost:8001/plugins" target="_blank" rel="noopener">http://localhost:8001/plugins</a> <br>
-–data “name=kong-plugin-myplugin” <br>
-–data “config.sso_domain=SS0_DOMAIN” <br>
-–data “config.check_path=CHECK_PATH” <br>
-–data “config.front_domain=FRONT_DOMAIN” <br>
-–data “config.client=CLIENT_JSON”</p>
-<p>其中需要注意的是，kong网关对于插件配置的输入中对于字符 ‘&amp;’ 的支持不好，而使用’\&amp;‘的话，网关处接收后会转化为’\\&amp;’,看起来很不舒服，然后我 使用 ‘\a’ 字符代表 ‘&amp;’,在插件处理逻辑处再替换回来(需要注意的是如果单个的’'存在，会影响 string 转化为 json)</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1243,7 +1248,7 @@ curl -i -X POST <a href="http://localhost:8001/plugins" target="_blank" rel="noo
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -1287,7 +1292,7 @@ curl -i -X POST <a href="http://localhost:8001/plugins" target="_blank" rel="noo
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

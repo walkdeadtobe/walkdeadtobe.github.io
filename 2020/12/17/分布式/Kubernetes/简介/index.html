@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="知行合一">
 <meta property="og:description" content="k8s中概念介绍">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-22T08:23:19.855Z">
+<meta property="og:updated_time" content="2020-12-23T14:36:07.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="K8S中的名词">
 <meta name="twitter:description" content="k8s中概念介绍">
@@ -221,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-22 16:23:19" itemprop="dateModified" datetime="2020-12-22T16:23:19+08:00">2020-12-22</time>
+                <time title="Modified: 2020-12-23 22:36:07" itemprop="dateModified" datetime="2020-12-23T22:36:07+08:00">2020-12-23</time>
               </span>
 
           
@@ -311,9 +311,56 @@ k8s集群所启动的容器会将该DNS服务器包含在其DNS搜索列表。</
 <h4 id="node状态">Node状态</h4>
 <p>Node状态由Addresses、Conditions、Capacity and Allocatable、Info 四部分构成<br>
 Addresses包括HostName、ExternalIp(用于集群外使用)、InternalIp(集群内使用)<br>
-Conditions描述Node的状态，其值有Ready、DiskPressure(当Disk容量低时为True)、MemoryPressure、PIDPressure、NetworkUnavailable</p>
-<h3 id="control-plane-node-communication"><a href="https://kubernetes.io/docs/concepts/architecture/control-plane-node-communication/" target="_blank" rel="noopener">Control Plane Node Communication</a></h3>
+Conditions描述Node的状态，其值有Ready、DiskPressure(当Disk容量低时为True)、MemoryPressure、PIDPressure、NetworkUnavailable<br>
+Capacity-and-Allocatable 描述的资源包括CPU、内存、节点上可被调度的最大pod数量。Capacity和Allocatable分别指总共资源和可分配的资源。<br>
+Info 描述了Node的通用信息，比如内核版本，k8s版本，docker版本，os版本等等。</p>
+<h4 id="node-controller">Node Controller</h4>
+<p>Node Controller是K8s控制平面的组件，负责管理在各个层面管理node。<br>
+Node Controller有三个主要功能，</p>
+<ul>
+<li>分配CIDR地址块</li>
+<li>检测节点的健康状态，更新节点的状态并当节点不可达时下线其pods</li>
+<li>保证node controller的node列表与云服务提供商的列表一致，当某个节点状态为unhealthy时，查询云提供商后决定是否删除节点。</li>
+</ul>
+<h4 id="心跳">心跳</h4>
+<p>更新节点的状态以及租约。</p>
+<h4 id="可靠性">可靠性</h4>
+<p>通过移除pod以及限制移除pod的频率实现。</p>
+<h3 id="control-plane-node-communication"><a href="https://kubernetes.io/docs/concepts/architecture/control-plane-node-communication/" target="_blank" rel="noopener">Control Plane-Node Communication</a></h3>
+<p>主要有两方面的交流，一方面是 Node 到 Control Plane的通信，另一方面是Control Plane 到 Node 的通信。</p>
+<h4 id="node-to-control-plane">Node to Control Plane</h4>
+<p>所有的node的API请求最终到达apiserver，而不是直接到达Control Plane(其组件与apiserver通过安全端口连接)；apiserver在https 443 端口监听远程连接，node需要提供客户端凭据来验证自己的身份，而pod需要使用service 账号才能连接apiserver；<br>
+所以node/pod到control plane的通信可以运行在非信任网络或者公开网络中。</p>
+<h4 id="control-plane-to-node">Control Plane to Node</h4>
+<p>一般有两种情况，control plane(apiserver)与节点上的kublet进程通信，另一种是使用apiserver的转发功能向node、pod、service通信。<br>
+apiserver to kublet</p>
+<ul>
+<li>拉取pods的日志</li>
+<li>通过kubectl创建pods</li>
+<li>提供kubelet的端口转发功能</li>
+</ul>
+<blockquote>
+<p>通常情况下，这些连接不验证kubelet的服务证书，因而可能遭到中间人攻击，对此可以使用<code>--kubelet-certificate-authority</code>标志来对连接进行认证。</p>
+</blockquote>
+<p>apiserver to pods/nodes/services</p>
+<blockquote>
+<p>通常情况下，连接默认为纯HTTP连接，没有认证也没有加密；可以通过在 nodes/pods/services 前加前缀 <code>https:</code> 来提供加密服务，但是不能实现证书认证，因而不能安全地在非受信网络和公共网络上运行。</p>
+</blockquote>
 <h3 id="controller"><a href="https://kubernetes.io/docs/concepts/architecture/controller/" target="_blank" rel="noopener">Controller</a></h3>
+<p>controller 类似于恒温器，努力将当前集群的状态调整到设定的状态。</p>
+<h4 id="controller-模式">Controller 模式</h4>
+<p>一个controller至少追踪一个k8s资源的状态。<br>
+controller可以直接改变状态或者通过外部方式(api server)改变状态。<br>
+direct control</p>
+<blockquote>
+<p>一些控制器需要从集群外起作用。例如增加cluster的node，controller增加node后会通知API server状态变更，然后可以创建新的pod或者container。</p>
+</blockquote>
+<p>control via API server</p>
+<blockquote>
+<p>一些控制器通过API server，调整状态。例如Job Controller(k8s 内置controller)，通过API server创建或移除pod/container。</p>
+</blockquote>
+<h4 id="设计">设计</h4>
+<p>k8s里有一系列controller负责控制不同方面的集群状态</p>
 <h3 id="cloud-controller-manager"><a href="https://kubernetes.io/docs/concepts/architecture/cloud-controller/" target="_blank" rel="noopener">Cloud Controller Manager</a></h3>
 <h2 id="containers">Containers</h2>
 <p>共享宿主机操作系统</p>
@@ -408,7 +455,7 @@ Conditions描述Node的状态，其值有Ready、DiskPressure(当Disk容量低�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件"><span class="nav-number">2.</span> <span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#控制平面control-plane"><span class="nav-number">2.1.</span> <span class="nav-text">控制平面(Control Plane)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-组件"><span class="nav-number">2.2.</span> <span class="nav-text">Node 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kubelet"><span class="nav-number">2.2.1.</span> <span class="nav-text">kubelet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kube-proxy"><span class="nav-number">2.2.2.</span> <span class="nav-text">kube-proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#container-runtime容器运行时环境"><span class="nav-number">2.2.3.</span> <span class="nav-text">Container Runtime(容器运行时环境)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件addons"><span class="nav-number">2.3.</span> <span class="nav-text">插件(Addons)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dns"><span class="nav-number">2.3.1.</span> <span class="nav-text">DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web界面仪表盘"><span class="nav-number">2.3.2.</span> <span class="nav-text">web界面(仪表盘)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器资源监控"><span class="nav-number">2.3.3.</span> <span class="nav-text">容器资源监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群级别的日记"><span class="nav-number">2.3.4.</span> <span class="nav-text">集群级别的日记</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关概念"><span class="nav-number">3.</span> <span class="nav-text">相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cluster-architecture"><span class="nav-number">3.1.</span> <span class="nav-text">Cluster Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#node"><span class="nav-number">3.1.1.</span> <span class="nav-text">Node</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#管理"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node状态"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Node状态</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#control-plane-node-communication"><span class="nav-number">3.1.2.</span> <span class="nav-text">Control Plane Node Communication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#controller"><span class="nav-number">3.1.3.</span> <span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cloud-controller-manager"><span class="nav-number">3.1.4.</span> <span class="nav-text">Cloud Controller Manager</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#containers"><span class="nav-number">3.2.</span> <span class="nav-text">Containers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#workloads"><span class="nav-number">3.3.</span> <span class="nav-text">Workloads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#servicesloadbalancingand-networking"><span class="nav-number">3.4.</span> <span class="nav-text">Services,Loadbalancing,and Networking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#storage"><span class="nav-number">3.5.</span> <span class="nav-text">Storage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#configuration"><span class="nav-number">3.6.</span> <span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#security"><span class="nav-number">3.7.</span> <span class="nav-text">Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pliocies"><span class="nav-number">3.8.</span> <span class="nav-text">Pliocies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scheduling-and-eviction"><span class="nav-number">3.9.</span> <span class="nav-text">Scheduling and Eviction</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件"><span class="nav-number">2.</span> <span class="nav-text">组件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#控制平面control-plane"><span class="nav-number">2.1.</span> <span class="nav-text">控制平面(Control Plane)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#node-组件"><span class="nav-number">2.2.</span> <span class="nav-text">Node 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kubelet"><span class="nav-number">2.2.1.</span> <span class="nav-text">kubelet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kube-proxy"><span class="nav-number">2.2.2.</span> <span class="nav-text">kube-proxy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#container-runtime容器运行时环境"><span class="nav-number">2.2.3.</span> <span class="nav-text">Container Runtime(容器运行时环境)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件addons"><span class="nav-number">2.3.</span> <span class="nav-text">插件(Addons)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dns"><span class="nav-number">2.3.1.</span> <span class="nav-text">DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web界面仪表盘"><span class="nav-number">2.3.2.</span> <span class="nav-text">web界面(仪表盘)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器资源监控"><span class="nav-number">2.3.3.</span> <span class="nav-text">容器资源监控</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群级别的日记"><span class="nav-number">2.3.4.</span> <span class="nav-text">集群级别的日记</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关概念"><span class="nav-number">3.</span> <span class="nav-text">相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cluster-architecture"><span class="nav-number">3.1.</span> <span class="nav-text">Cluster Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#node"><span class="nav-number">3.1.1.</span> <span class="nav-text">Node</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#管理"><span class="nav-number">3.1.1.1.</span> <span class="nav-text">管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node状态"><span class="nav-number">3.1.1.2.</span> <span class="nav-text">Node状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#node-controller"><span class="nav-number">3.1.1.3.</span> <span class="nav-text">Node Controller</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#心跳"><span class="nav-number">3.1.1.4.</span> <span class="nav-text">心跳</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可靠性"><span class="nav-number">3.1.1.5.</span> <span class="nav-text">可靠性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#control-plane-node-communication"><span class="nav-number">3.1.2.</span> <span class="nav-text">Control Plane-Node Communication</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#node-to-control-plane"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">Node to Control Plane</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#control-plane-to-node"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">Control Plane to Node</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#controller"><span class="nav-number">3.1.3.</span> <span class="nav-text">Controller</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#controller-模式"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">Controller 模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">设计</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cloud-controller-manager"><span class="nav-number">3.1.4.</span> <span class="nav-text">Cloud Controller Manager</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#containers"><span class="nav-number">3.2.</span> <span class="nav-text">Containers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#workloads"><span class="nav-number">3.3.</span> <span class="nav-text">Workloads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#servicesloadbalancingand-networking"><span class="nav-number">3.4.</span> <span class="nav-text">Services,Loadbalancing,and Networking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#storage"><span class="nav-number">3.5.</span> <span class="nav-text">Storage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#configuration"><span class="nav-number">3.6.</span> <span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#security"><span class="nav-number">3.7.</span> <span class="nav-text">Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pliocies"><span class="nav-number">3.8.</span> <span class="nav-text">Pliocies</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#scheduling-and-eviction"><span class="nav-number">3.9.</span> <span class="nav-text">Scheduling and Eviction</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -424,7 +471,7 @@ Conditions描述Node的状态，其值有Ready、DiskPressure(当Disk容量低�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -468,7 +515,7 @@ Conditions描述Node的状态，其值有Ready、DiskPressure(当Disk容量低�
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

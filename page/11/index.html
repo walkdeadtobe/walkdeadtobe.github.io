@@ -185,6 +185,79 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/06/基础知识/nginx-mongodb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/03/06/基础知识/nginx-mongodb/" class="post-title-link" itemprop="url">nginx+mongodb</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-03-06 22:47:29" itemprop="dateCreated datePublished" datetime="2019-03-06T22:47:29+08:00">2019-03-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:23:04" itemprop="dateModified" datetime="2020-08-30T13:23:04+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <br>
+  install luarock:https://blog.csdn.net/kgzhang/article/details/72885199
+  <br>
+  install lua_nginx_moudle https://www.cnblogs.com/uglyliu/p/8534473.html
+<br>
+install nginx-gridfx https://blog.csdn.net/jameshadoop/article/details/52665342  + https://blog.csdn.net/caiwenfeng_for_23/article/details/44230513 +
+https://github.com/mdirolf/nginx-gridfs
+<p>./configure --user=nginx --group=nginx --prefix=/usr/local/nginx  --with-http_realip_module --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module --with-cc-opt=-Wno-error --with-stream --add-module=/opt/nginx_module/ngx_devel_kit --add-module=/opt/nginx_module/lua-nginx-module --add-module=/opt/nginx_module/nginx-gridfs</p>
+<p>./configure --user=nginx --group=nginx --prefix=/usr/local/nginx --with-cc-opt=-Wno-error --add-module=/opt/nginx_module/ngx_devel_kit --add-module=/opt/nginx_module/lua-nginx-module --add-module=/opt/nginx_module/nginx-gridfs</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/06/基础知识/API-Key/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -324,7 +397,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">101</span>
+          <span class="site-state-item-count">102</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -368,7 +441,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
