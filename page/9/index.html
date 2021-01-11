@@ -185,6 +185,230 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/基础知识/数据结构/map_and_set/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/23/基础知识/数据结构/map_and_set/" class="post-title-link" itemprop="url">map_and_set</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-23 19:31:56" itemprop="dateCreated datePublished" datetime="2019-04-23T19:31:56+08:00">2019-04-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:24:29" itemprop="dateModified" datetime="2020-08-30T13:24:29+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>
+List VS Map VS Set</p>
+<ul>
+<li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li>
+<li>Map ：键值对Key-value</li>
+<li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li>
+</ul>
+<p>HashMap VS TreeMap<br>
+HashSet VS TreeSet<br>
+在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>
+但是 哈希表的实现是无序的，而树的实现是有序的</p>
+<p>题目：242（Leetcode） Valid Anagrant<br>
+题意：对给定的两个字符串，判断是否是同一单词的错位变换</p>
+<ul>
+<li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>
+$$ O(Nlog^N) $$</li>
+<li>方法2：构造Map，比较Map是否相同算法复杂度<br>
+$$ O(N) $$</li>
+</ul>
+<p>题目：Two Sum(Three Sum)<br>
+题意：给定一个数组，以及value，输出数组中和为value的元素下标</p>
+<ul>
+<li>方法1：暴力方法时间复杂度<br>
+$$<br>
+O(N^2)<br>
+$$</li>
+<li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>
+$$<br>
+O(N)<br>
+$$</li>
+</ul>
+<p>那么对于ThreeSum</p>
+<ul>
+<li>方法1：暴力 时间复杂度<br>
+$$<br>
+O(N^3)<br>
+$$</li>
+<li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>
+$$<br>
+O(N^2)<br>
+$$</li>
+<li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>
+$$<br>
+O(N^2)<br>
+$$</li>
+<li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>
+$$<br>
+O(N^2)<br>
+$$</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/基础知识/数据结构/slide_window/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/23/基础知识/数据结构/slide_window/" class="post-title-link" itemprop="url">slice_window</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-23 19:31:56" itemprop="dateCreated datePublished" datetime="2019-04-23T19:31:56+08:00">2019-04-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:24:28" itemprop="dateModified" datetime="2020-08-30T13:24:28+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>返回滑动窗口的最大值(考虑极端情况起码考虑 空 )<br>
+给定一个输入序列（数组)，返回窗口范围内的最大值，每次移动一次窗口，并返回一个最大值</p>
+<ul>
+<li>方法1：大顶堆（MaxHeap）  删除离开的元素，加入新的元素，排序  时间复杂度<br>
+$$ N log^{k} $$</li>
+<li>deque(双端 Queue)</li>
+<li>–入队列</li>
+<li>–维护队列：对于长度为K 的窗口，将窗口范围内最大值之前的数全部删除（忽略），因为在最大值之前的数必然不会成为最大值</li>
+</ul>
+<ul>
+  <li>JavaScript
+    <ol>
+      <li>
+        第一章
+        <ul>
+          <li>const</li>
+          <li>let</li>
+        </ul>
+      </li>
+      <li>
+        第二章sdisjfosdklsjfkdddddldddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+        <ul>
+          <li>function</li>
+          <li>object</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+  <li>Java
+    <ol>
+      <li>
+        第一章
+        <ul>
+          <li>class</li>
+          <li>package</li>
+        </ul>
+      </li>
+      <li>
+        第二章
+        <ul>
+          <li>private</li>
+          <li>public</li>
+        </ul>
+      </li>
+    </ol>
+  </li>
+</ul>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/工具/小技巧总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -855,146 +1079,6 @@ private void log(){}</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/06/基础知识/nlp-2019-4-5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/06/基础知识/nlp-2019-4-5/" class="post-title-link" itemprop="url">nlp-2019-4-5</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-06 19:31:56" itemprop="dateCreated datePublished" datetime="2019-04-06T19:31:56+08:00">2019-04-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:23:04" itemprop="dateModified" datetime="2020-08-30T13:23:04+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>隐藏马尔科夫模型<br>
-EM算法 （迭代计算）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/31/基础知识/machine-learning-website/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/31/基础知识/machine-learning-website/" class="post-title-link" itemprop="url">machine_learning_website</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-03-31 22:53:21" itemprop="dateCreated datePublished" datetime="2019-03-31T22:53:21+08:00">2019-03-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:23:59" itemprop="dateModified" datetime="2020-08-30T13:23:59+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>上机器学习课程时候，检索的网站，备注一下，以后需要学习<br>
-<a href="https://blog.csdn.net/qq_33273962/article/details/83547342" target="_blank" rel="noopener">https://blog.csdn.net/qq_33273962/article/details/83547342</a></p>
-<p><a href="https://www.cnblogs.com/baiting/p/6101981.html" target="_blank" rel="noopener">https://www.cnblogs.com/baiting/p/6101981.html</a></p>
-<p><a href="https://m.leiphone.com/news/201902/biIqSBpehsaXFwpN.html?uniqueCode=OTEsp9649VqJfUcO" target="_blank" rel="noopener">https://m.leiphone.com/news/201902/biIqSBpehsaXFwpN.html?uniqueCode=OTEsp9649VqJfUcO</a></p>
-<p><a href="https://blog.csdn.net/u014665013/article/details/78970184" target="_blank" rel="noopener">https://blog.csdn.net/u014665013/article/details/78970184</a></p>
-<p><a href="https://m.baidu.com/from=1019471a/s?word=k+s+%E6%A3%80%E9%AA%8C++%E6%8B%9F%E5%90%88&amp;sa=bb&amp;ts=8918111&amp;t_kt=0&amp;ie=utf-8&amp;rsv_t=9789dDDxyBbDgg8gANiHbFLNiH9iyPv%252FBZ08a7iihLsR2SpKsNsS0G5sZ3o5A14&amp;rsv_pq=8183285748722183729&amp;ss=110&amp;tj=1&amp;rqlang=zh&amp;rsv_sug4=7460&amp;inputT=334&amp;oq=k%2Bs%2B%E6%A3%80%E9%AA%8C" target="_blank" rel="noopener">https://m.baidu.com/from=1019471a/s?word=k+s+检验++拟合&amp;sa=bb&amp;ts=8918111&amp;t_kt=0&amp;ie=utf-8&amp;rsv_t=9789dDDxyBbDgg8gANiHbFLNiH9iyPv%2FBZ08a7iihLsR2SpKsNsS0G5sZ3o5A14&amp;rsv_pq=8183285748722183729&amp;ss=110&amp;tj=1&amp;rqlang=zh&amp;rsv_sug4=7460&amp;inputT=334&amp;oq=k%2Bs%2B检验</a></p>
-<p><a href="https://www.cnblogs.com/yunfeifei/p/4019504.html" target="_blank" rel="noopener">https://www.cnblogs.com/yunfeifei/p/4019504.html</a></p>
-<p><a href="https://blog.csdn.net/qq_42686550/article/details/81514233" target="_blank" rel="noopener">https://blog.csdn.net/qq_42686550/article/details/81514233</a></p>
-<p><a href="https://www.cnblogs.com/zackstang/p/8232921.html" target="_blank" rel="noopener">https://www.cnblogs.com/zackstang/p/8232921.html</a></p>
-<p><a href="https://www.cnblogs.com/lianyingteng/p/7755545.html" target="_blank" rel="noopener">https://www.cnblogs.com/lianyingteng/p/7755545.html</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1066,7 +1150,7 @@ EM算法 （迭代计算）</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

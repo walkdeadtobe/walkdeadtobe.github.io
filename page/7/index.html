@@ -185,6 +185,316 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/12/基础知识/Paxos/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/08/12/基础知识/Paxos/" class="post-title-link" itemprop="url">Paxos</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-08-12 13:40:30" itemprop="dateCreated datePublished" datetime="2019-08-12T13:40:30+08:00">2019-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:20:52" itemprop="dateModified" datetime="2020-08-30T13:20:52+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>博客列表：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/hugb/p/8955505.html" target="_blank" rel="noopener">图解分布式一致性协议Paxos</a></li>
+</ul>
+<p>相关概念</p>
+<ul>
+<li>拜占庭模型:
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%8B%9C%E5%8D%A0%E5%BA%AD%E5%B0%86%E5%86%9B%E9%97%AE%E9%A2%98" target="_blank" rel="noopener">wiki 拜占庭问题</a></li>
+<li>分布式对等网路容错问题：在分布式对等网络中需要按照共同一致策略协作的成员计算机即为问题中的将军，而各成员计算机赖以进行通讯的网络链路即为信使。拜占庭将军问题描述的就是某些成员计算机或网络链路出现错误、甚至被蓄意破坏者控制的情况。</li>
+</ul>
+</li>
+<li>非拜占庭模型：
+<ul>
+<li>指可能出现故障，但是不会伪造信息的情况(即，要么收不到信息，要么收到真实的信息)</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/22/工具/Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/07/22/工具/Git/" class="post-title-link" itemprop="url">git 学习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-07-22 15:42:16" itemprop="dateCreated datePublished" datetime="2019-07-22T15:42:16+08:00">2019-07-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:26:55" itemprop="dateModified" datetime="2020-08-30T13:26:55+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="简介">简介</h3>
+<p>GIT 可以分为本地的内容寻址系统(content-addressable filesystem) 和 远程的分布式的版本控制系统(version control system)</p>
+<blockquote>
+<p>在本地其核心可以看做一个简单的键值对数据存储系统,value 是实际存储的文件(.git/objects 目录下),key是文件的SHA-1值,因而我们用key 找回(retrieve) 历史内容<br>
+远程内容待补充</p>
+</blockquote>
+<h3 id="目录解析">目录解析</h3>
+<p>.git<br>
+├── COMMIT_EDITMSG<br>
+├── FETCH_HEAD<br>
+├── HEAD<br>
+├── config<br>
+├── description<br>
+├── index<br>
+├── hooks//以下是文件夹<br>
+├── info<br>
+├── logs<br>
+├── objects<br>
+└── refs</p>
+<p>1.git/COMMIT_EDITMSG</p>
+<blockquote>
+<p>记录commit附带的说明，经测试只记录最新的commit 说明</p>
+</blockquote>
+<p>2.git/FETCH_HEAD</p>
+<blockquote>
+<p>记录从远程仓库fetch的各分支的Head</p>
+</blockquote>
+<p>3.git/HEAD</p>
+<blockquote>
+<p>表示当前分支的Head</p>
+</blockquote>
+<p>4.git/config</p>
+<blockquote>
+<p>当前 git仓库的配置文件。保存这 git仓库的远程地址,远程仓库分支等</p>
+</blockquote>
+<p>5.git/index</p>
+<blockquote>
+<p>暂存区:存储时间戳,文件名,文件的SHA值等元数据<br>
+每当我们执行 git add操作的时候， git会给添加的每个文件的内容创建一个对象，然后把这个文件的路径和生成的对象进行映射，存放到 .git/index文件中。等到后期新的命令（比如：git add、 git rm或者 git mv）执行的时候，又会重新更新索引。</p>
+</blockquote>
+<p>6.git/hook</p>
+<blockquote>
+<p>伴随着git的命令所触发的处理脚本,通常在 git init 时拷贝到新目录<br>
+具体脚本可分为客户端和服务端两种,待补充</p>
+</blockquote>
+<p>7.git/info</p>
+<blockquote>
+<p>关于仓库的的其他信息<br>
+例如.git/info/exclude 可以排除本地本人不想提交的文件,只与自己相关,该文件也不会上传,可用于排除私人的某些配置等,注意与全局的 .gitignore 文件区别</p>
+</blockquote>
+<p>8.git/logs</p>
+<blockquote>
+<p>记录仓库各分支上提交的commit操作/修改,可以通过 git log 查看</p>
+</blockquote>
+<p>9.git/objects</p>
+<blockquote>
+<p>真正保存代码的地方。其中分成两种类型的文件，一种是 pack，另外的是 blob文件。其中 pack是根据定位内容非常相似的全部文件，然后为他们之一存储整个内容。之后计算相似文件之间的差异并且只存储差异。而 blob文件就是记录差异。blob是“二进制大对象”（ binary largeobject）的简写，是计算机领域常用术语，用来指代某些可以包含任意数据的变量或文件<br>
+.git/objects:三种类型</p>
+<blockquote>
+<p>blob :实际存储的文件,<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-Objects" target="_blank" rel="noopener">具体详情</a><br>
+tree : 当前project的一个快照,存储多个实体/数据结构(由blob object的git mode,类型,SHA-1值,文件名构成),记录了当前tree下所有文件所指向的blob object<br>
+commit: 记录所产生的tree object,作者,时间,commit msg,上一个commit object<br>
+tag: 根据我查看的文件结构与commit相同,但引用博客中说没有记录tree object,而记录创建tag 所在的commit object,是因为更新了？</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>.git/objects/info 关于object的其他信息<br>
+.git/objects/pack 在git gc  或者 git push 时,git 会将松散的object文件打包压缩,降低存储空间 <a href="https://www.git-scm.com/book/en/v2/Git-Internals-Packfiles" target="_blank" rel="noopener">详情</a></p>
+</blockquote>
+<p>10.git/refs</p>
+<blockquote>
+<p>引用文件<br>
+.git/refs/heads 记录本地各分支最新状态(文件中存储git object 的SHA-1值),即指向最后一次commit提交只有产生的git object<br>
+.git/refs/tags<br>
+.git/refs/remotes 记录远程各分支最新状态(文件中存储git object 的SHA-1值),同样指向本地的git object(每次fetch或者pull会拉去远程的更新)</p>
+</blockquote>
+<h3 id="常见命令及其解析">常见命令及其解析：</h3>
+<ul>
+<li>git &lt;命令&gt; --help</li>
+</ul>
+<blockquote>
+<p>git 查看该命令以及相关参数说明</p>
+</blockquote>
+<ul>
+<li>git add/commit/push/fetch/merge/pull/config</li>
+</ul>
+<blockquote>
+<p>git add <filename><br>
+<code>git fetch origin [branchName]</code><br>
+拉取远程分支的最新commit记录到本地，并把FETCH_HEAD 设置为 最新的commit，等待merge<br>
+<code>git merge </code> <a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging" target="_blank" rel="noopener">解析</a></filename></p>
+</blockquote>
+<ul>
+<li>
+<p>本地分支 和 合并分支 是前后继 的关系：Git 指针移动即可</p>
+</li>
+<li>
+<p>本地分支 和 合并分支 不是前后继的关系：例如master与branch1,此处有两个快照(snapshots) 分别为master和branch1的最新节点以及两者的共同最近祖先,祖先依照时间(一次观察是如此,未找到其他依据)接受 master 和 branch1 相对与祖先的修改,如果master与branch1的修改没有冲突,就形成了一个新快照,Git 会自动创建一次commit 指向它,同时其的祖先节点有两个分别为 master和branch1的最新节点;如果 有冲突,GIT暂时不提供智能化合并,需要手工操作</p>
+</li>
+<li></li>
+<li>
+<p>git checkout</p>
+</li>
+</ul>
+<blockquote>
+<p><code>git checkout &lt;branch-name&gt;</code> 更改分支<br>
+<code>git check -- &lt;path&gt;</code> 将路径下所有文件重置回index状态/最近的commit状态</p>
+</blockquote>
+<ul>
+<li>git clean</li>
+</ul>
+<blockquote>
+<p>从工作目录中删除所有没有track过的文件,常与git reset --hard 一起用</p>
+</blockquote>
+<ul>
+<li>git reset</li>
+</ul>
+<blockquote>
+<p>reset 只影响 被track的文件<br>
+<code>git reset --hard/mixed/soft</code>???</p>
+</blockquote>
+<ul>
+<li>git log</li>
+</ul>
+<blockquote>
+<p>查看 git commit 的历史记录及其 HASH ID</p>
+</blockquote>
+<ul>
+<li>git cat-files</li>
+</ul>
+<blockquote></blockquote>
+<ul>
+<li>回退分支 git checkout VS git reset</li>
+</ul>
+<blockquote></blockquote>
+<h3 id="常见git场景">常见git场景</h3>
+<h4 id="撤销修改">撤销修改</h4>
+<blockquote>
+<p>已修改,未 <code>git add</code> : <code>git checkout  -- &lt;filepathname&gt;</code> 撤销 某文件未 git add提交的缓存,例如 <code>git checkout --</code> .撤销当前目录所有文件的未add 缓存</p>
+</blockquote>
+<blockquote>
+<p>已 <code>git add</code>,未 <code>git commit</code>: <code>git reset HEAD filepathname</code> 可以撤销 <code>git add</code>命令，回退到 已修改,未 <code>git add</code> 状态</p>
+</blockquote>
+<blockquote>
+<p>已 <code>git commit</code>,未 <code>git push</code>: <code>git reset --soft HEAD^</code> 可回退到上次commit的的状态,保持git add 的状态,也可以使用 <code>git reset --soft  &lt;commitid&gt;</code> 回退到任意版本,但是如果使用<code>git reset --hard &lt;commitid&gt;</code> 会丢失之前的修改信息,文件内容直接回退到commitid版本所对应的状态</p>
+</blockquote>
+<h4 id="分支相关">分支相关</h4>
+<blockquote>
+<p>增加分支<br>
+删除分支<br>
+更新远程分支git remote update origin -p<br>
+更新远程分支状态<br>
+<code>git fetch --all</code> 追踪所有远程分支<br>
+<code>git fetch -p/--prune</code> 对远程分支中已删除的,本地同样删除</p>
+</blockquote>
+<p>跟随态 VS 游离态</p>
+<ul>
+<li>跟随态：test</li>
+<li>游离态:test</li>
+</ul>
+<p>参考：<br>
+1.<a href="https://www.siteground.com/tutorials/git/directory-structure/" target="_blank" rel="noopener">Git Directory</a><br>
+2.<a href="https://www.git-scm.com/book/en/v2/Git-Internals-Git-References" target="_blank" rel="noopener">Git Ref</a><br>
+3.<a href="https://www.git-scm.com/docs/githooks" target="_blank" rel="noopener">Git hooks</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/基础知识/lua/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -705,23 +1015,93 @@ list.List 返回的是一个结构体值类型,list.New()返回的是一个初�
 <p>Stringer 接口包含 String() 方法，定义如下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">type Stringer interface &#123;</span><br><span class="line">    String() string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>任何类型只要实现了 String() 方法,在进行Print 输出时，可以使用 其实现 String() 中的定义。</p>
-<h4 id="sync">sync</h4>
-<p>WaitGroup</p>
-<h4 id="reflect">reflect</h4>
-<h2 id="分布式系统学习第一弹">分布式系统学习第一弹</h2>
-<p><a href="https://pdos.csail.mit.edu/6.824/labs/lab-1.html" target="_blank" rel="noopener">MIT 6.824</a><br>
-按照课程要求,下载源码<br>
-修改一：添加日志,在 go  init 函数更改日志格式,使得输出时带位置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//init log format</span><br><span class="line">func init()&#123;</span><br><span class="line">    log.SetFlags(log.Ldate| log.Lshortfile |log.Ltime |log.LUTC)</span><br><span class="line">&#125;</span><br><span class="line">//样例输出</span><br><span class="line">2019/07/22 07:34:41 master_splitmerge.go:23: Merge: open mrtmp.test-res-0: no such file or directory</span><br></pre></td></tr></table></figure>
-<h2 id="cache2go-学习">cache2go 学习</h2>
-<p><a href="https://blog.csdn.net/notbaron/article/details/52008155" target="_blank" rel="noopener">项目结构 简介</a><br>
-<a href="https://blog.csdn.net/zhizhengguan/article/details/84257338" target="_blank" rel="noopener">Go缓存库cache2go介绍</a></p>
-<h2 id="go-语言">go 语言</h2>
-<p>实现长度为变量的二维数组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var status [][]int</span><br><span class="line">for i := 0; i &lt; len(variable1); i++ &#123;</span><br><span class="line">	var statu = make([]int, len(variable2))</span><br><span class="line">	status = append(status, statu)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>range</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">for _, num := range nums &#123;</span><br><span class="line">    sum += num</span><br><span class="line">&#125;</span><br><span class="line">fmt.Println(&quot;sum:&quot;, sum)</span><br><span class="line">//在数组上使用range将传入index和值两个变量.上面那个例子我们不需要使用该元素的序号,所以我们使用空白符&quot;_&quot;省略了.有时侯我们确实需要知道它的索引.</span><br><span class="line">for i, num := range nums &#123;</span><br><span class="line">    if num == 3 &#123;</span><br><span class="line">        fmt.Println(&quot;index:&quot;, i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>make vs new</p>
+<h4 id="sync"><a href="https://docs.studygolang.com/pkg/sync/" target="_blank" rel="noopener">sync</a></h4>
+<p>sync 包提供基础的同步功能，例如互斥锁。除了Once、WaitGroup类型，大多数应用于底层链接库。一般借助 channel 和 通信 实现 高层次同步。<br>
+不建议复制 sync 中类型的值。<br>
+常用的类型包括：</p>
+<ul>
+<li>Locker</li>
+<li>Map</li>
+<li>Mutex</li>
+<li>Once</li>
+<li>WaitGroup</li>
+<li>Cond</li>
+<li>Pool</li>
+<li>RWMutex</li>
+</ul>
+<p>Once 是一个只会执行一个动作的对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">type Once struct &#123;</span><br><span class="line">    // contains filtered or unexported fields</span><br><span class="line">&#125; </span><br><span class="line">```  </span><br><span class="line"></span><br><span class="line">Example</span><br></pre></td></tr></table></figure>
+<p>func main() {<br>
+var once sync.Once<br>
+onceBody := func() {<br>
+fmt.Println(“Only once”)<br>
+}<br>
+done := make(chan bool)<br>
+for i := 0; i &lt; 10; i++ {<br>
+go func() {<br>
+<a href="http://once.Do" target="_blank" rel="noopener">once.Do</a>(onceBody)<br>
+done &lt;- true<br>
+}()<br>
+}</p>
+<pre><code>for i := 0; i &lt; 10; i++ {
+	&lt;-done
+}
+</code></pre>
+<p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">一个 WaitGroup 是一个待完成的 go 协程集合。主协程通过 Add 方法 设置等待的协程的数量。每个协程结束之后调用 Done 方法。同时，Wait 方法可以用于阻塞当前协程直至所有协程都完成。</span><br></pre></td></tr></table></figure>
+<p>type httpPkg struct{}</p>
+<p>func (httpPkg) Get(url string) {}</p>
+<p>var http httpPkg</p>
+<p>func main() {<br>
+var wg sync.WaitGroup<br>
+var urls = []string{<br>
+“<a href="http://www.google.org/" target="_blank" rel="noopener">http://www.google.org/</a>”,<br>
+“<a href="http://www.google.com/" target="_blank" rel="noopener">http://www.google.com/</a>”,<br>
+“<a href="http://www.somestupidname.com/" target="_blank" rel="noopener">http://www.somestupidname.com/</a>”,<br>
+}<br>
+for _, url := range urls {<br>
+// Increment the WaitGroup counter.<br>
+wg.Add(1)<br>
+// Launch a goroutine to fetch the URL.<br>
+go func(url string) {<br>
+// Decrement the counter when the goroutine completes.<br>
+defer wg.Done()<br>
+// Fetch the URL.<br>
+fmt.Println(url)<br>
+http.Get(url)<br>
+}(url)<br>
+}<br>
+// Wait for all HTTP fetches to complete.<br>
+wg.Wait()<br>
+}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">#### [reflect](https://docs.studygolang.com/pkg/reflect/)</span><br><span class="line">refelct 包继承运行时反射接口，允许程序操作任何类型的对象。</span><br><span class="line">常用的方法是 利用一个有静态类型 interface&#123;&#125; 的值 并 通过调用TypeOf方法(返回Type)抽取出它的动态信息。</span><br><span class="line"></span><br><span class="line">ValueOf 方法返回 实时数据的值。Zero 方法返回一个当前类型的 零值的 Type类型。</span><br><span class="line"></span><br><span class="line">#### [runtime](https://docs.studygolang.com/pkg/runtime/)</span><br><span class="line">runtime包 包含与Go运行时系统交互的相关操作，例如函数控制协程。也包含reflect包使用的底层信息。</span><br><span class="line"></span><br><span class="line">## 分布式系统学习第一弹</span><br><span class="line">[MIT 6.824](https://pdos.csail.mit.edu/6.824/labs/lab-1.html)</span><br><span class="line">按照课程要求,下载源码</span><br><span class="line">修改一：添加日志,在 go  init 函数更改日志格式,使得输出时带位置</span><br></pre></td></tr></table></figure>
+<p>//init log format<br>
+func init(){<br>
+log.SetFlags(log.Ldate| log.Lshortfile |log.Ltime |log.LUTC)<br>
+}<br>
+//样例输出<br>
+2019/07/22 07:34:41 master_splitmerge.go:23: Merge: open mrtmp.test-res-0: no such file or directory</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## cache2go 学习</span><br><span class="line">[项目结构 简介](https://blog.csdn.net/notbaron/article/details/52008155)</span><br><span class="line">[Go缓存库cache2go介绍](https://blog.csdn.net/zhizhengguan/article/details/84257338)</span><br><span class="line"></span><br><span class="line">## go 语言</span><br><span class="line">实现长度为变量的二维数组</span><br></pre></td></tr></table></figure>
+<p>var status [][]int<br>
+for i := 0; i &lt; len(variable1); i++ {<br>
+var statu = make([]int, len(variable2))<br>
+status = append(status, statu)<br>
+}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">range</span><br></pre></td></tr></table></figure>
+<p>for <em>, num := range nums {<br>
+sum += num<br>
+}<br>
+fmt.Println(“sum:”, sum)<br>
+<a href="//xn--rangeindex-ui2p8juc93qtubz0fd4gy8mvkdkvs21ywk1cotxe1g4b0r3f.xn--fhqg0gu0bbvdcx4ogsht7stuhdmkwx3dkyd162abo6b38hn3u7f0a8tb">//在数组上使用range将传入index和值两个变量.上面那个例子我们不需要使用该元素的序号</a>,所以我们使用空白符&quot;</em>&quot;省略了.有时侯我们确实需要知道它的索引.<br>
+for i, num := range nums {<br>
+if num == 3 {<br>
+fmt.Println(“index:”, i)<br>
+}<br>
+}</p>
+<pre><code>
+make vs new
+
+</code></pre>
 
       
     </div>
@@ -882,206 +1262,6 @@ list.List 返回的是一个结构体值类型,list.New()返回的是一个初�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/27/基础知识/跨域问题小结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/27/基础知识/跨域问题小结/" class="post-title-link" itemprop="url">跨域问题小结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-05-27 11:56:40" itemprop="dateCreated datePublished" datetime="2019-05-27T11:56:40+08:00">2019-05-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:25:24" itemprop="dateModified" datetime="2020-08-30T13:25:24+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近在做项目时经常遇到跨域问题，经历过这种折腾，最终有两种比较可行的方法，但总体而言都是代理转发</p>
-<ul>
-<li>在nginx上部署相关请求的代理转发，在将请求指向同域名的nginx服务器</li>
-<li>将请求转发给网关，由网关做代理</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/22/基础知识/微服务授权/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/05/22/基础知识/微服务授权/" class="post-title-link" itemprop="url">微服务授权</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-05-22 21:08:04" itemprop="dateCreated datePublished" datetime="2019-05-22T21:08:04+08:00">2019-05-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:18:55" itemprop="dateModified" datetime="2020-08-30T13:18:55+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>目前准备使用外部授权认证服务与kong结合，kong可能制作简单的限流任务；<br>
-经过查询，发现kong在这里提供两个插件<br>
-<a href="https://docs.konghq.com/hub/kong-inc/oauth2/" target="_blank" rel="noopener">OAuth 2.0 Authentication</a><br>
-和 <a href="https://docs.konghq.com/hub/kong-inc/oauth2-introspection/" target="_blank" rel="noopener">OAuth 2.0 Introspection</a><br>
-前者主要可以提供Oauth 认证服务，而后者支持第三方的授权认证服务器，不过仅支持企业版<br>
-最后找到一个github同仁自己基于 lua开发的相关插件，<a href="https://github.com/mogui/kong-external-oauth" target="_blank" rel="noopener">链接</a></p>
-<p>安装 这个额外插件，重新启动kong 时，luarock 需要luacrypto 去完成加密相关操作，故直接即可  sudo luarocks install luacrypto（从源码配置有点麻烦）</p>
-<p>Spring Security 源码分析系列博客<br>
-<a href="https://niocoder.com/categories/#Security" target="_blank" rel="noopener">链接1</a><br>
-<a href="http://www.liuhaihua.cn/%E5%8F%B2%E4%B8%8A%E6%9C%80%E7%AE%80%E5%8D%95%E7%9A%84-springcloud-%E6%95%99%E7%A8%8B" target="_blank" rel="noopener">链接2</a></p>
-<p>spring 讲解<br>
-<a href="https://www.cnblogs.com/RunForLove/p/4641672.html" target="_blank" rel="noopener">链接1</a></p>
-<p>spring 默认配置<br>
-<a href="https://www.jianshu.com/p/b02691ff4093" target="_blank" rel="noopener">链接1</a></p>
-<p>springboot+springsecurity+oauth2整合(并用mysql数据库实现持久化客户端数据 <a href="https://blog.csdn.net/Victor_An/article/details/81510874" target="_blank" rel="noopener">链接1</a></p>
-<p>spring登录认证 与 token<br>
-<a href="https://www.huangyunkun.com/2016/03/02/spring-security-form-to-token/" target="_blank" rel="noopener">链接1</a><br>
-<a href="https://www.jianshu.com/p/19059060036b" target="_blank" rel="noopener">链接2</a><br>
-<a href="https://www.jianshu.com/p/68779236aa23" target="_blank" rel="noopener">链接3</a><br>
-<a href="https://www.cnblogs.com/xifengxiaoma/p/10043173.html" target="_blank" rel="noopener">链接4 个人觉得最详细</a><br>
-access_token 获取过程 <a href="https://www.cnblogs.com/lexiaofei/p/7152326.html?utm_source=itdadao&amp;utm_medium=referral" target="_blank" rel="noopener">链接1</a></p>
-<p>access_token 更改返回 <a href="https://www.jianshu.com/p/d9a35facff6f" target="_blank" rel="noopener">链接1</a></p>
-<p>oauth2数据库 表的说明 <a href="https://www.cnblogs.com/donglu/articles/10218348.html" target="_blank" rel="noopener">链接1</a><br>
-<a href="https://www.bbsmax.com/A/qVdeeNmndP/" target="_blank" rel="noopener">链接2</a><br>
-<a href="http://www.andaily.com/spring-oauth-server/db_table_description.html" target="_blank" rel="noopener">链接3</a></p>
-<p>oauth2 授权过程说明 来自知乎<a href="https://www.zhihu.com/question/19781476" target="_blank" rel="noopener">链接1</a><br>
-<a href="http://andaily.com/spring-oauth-server/db_table_description.html" target="_blank" rel="noopener">链接2</a></p>
-<p>接口测试链接(备用)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">POST http://localhost:8082/oauth/token?grant_type=client_credentials&amp;client_id=curl_client&amp;client_secret=user</span><br><span class="line"></span><br><span class="line">GET http://localhost:8082/oauth/check_token?grant_type=client_credentials&amp;token=445d302d-4fa1-49c4-8800-617bd72dd1e9</span><br></pre></td></tr></table></figure>
-<p>在直接使用JdbcClientDetailsService 直接查询数据时，出现变量为null<br>
-即在非controller 层使用 @AUtowired时，无法取得变量<br>
-使用 如下方法 解决  <a href="https://blog.csdn.net/u013294097/article/details/84192367" target="_blank" rel="noopener">链接</a></p>
-<p>error</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data too long for oauth_code column &apos;authentication&apos;</span><br><span class="line">这是在oauth服务器中获取oauth_code时往数据库插入值时，发生的意外，在网上找到许多奇奇怪怪的方法，行不通，最后发现自己在数据库oauth建表是oauth_code 表 authentication 表项为 VARBINARY 而实际应该是 LONG VARBINARY</span><br></pre></td></tr></table></figure>
-<p>2019-5-21</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">目前，打算借助oauth2 实现SSO ,利用client_credential 来识别不同系统或者应用，只不过比较困惑的是如何定义用户的权限(目前做demou先不考虑)</span><br></pre></td></tr></table></figure>
-<p>2019-5-23<br>
-认证流程<br>
-1.系统A检测是否有token，没有跳转</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:8082/oauth/authorize?client_id=test&amp;redirect_uri=http://127.0.0.1&amp;response_type=code&amp;scope=read</span><br></pre></td></tr></table></figure>
-<p>2.填写用户名与密码（图片不对，待更换）<br>
-<img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="登录_png"><br>
-3.返回相应code 到系统A，系统A根据code到授权服务器申请token（部分图片错误，待更改）</p>
-<blockquote>
-<p>获取code<br>
-<img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="获取code_png"></p>
-</blockquote>
-<blockquote>
-<p>根据code获取token<br>
-<img src="https://github.com/walkdeadtobe/picture/raw/master/code_token.png" alt="获取token_png"></p>
-</blockquote>
-<p>4.系统检测到token后，需要到授权系统检测该token对应的用户权限</p>
-<blockquote>
-<p>获取token所对应用户权限<br>
-<img src="https://github.com/walkdeadtobe/picture/raw/master/code_check_token.png" alt="检测token_png"></p>
-</blockquote>
-<p>2019-7-24<br>
-最近涉及到单点登陆系统记住用户所登陆的系统，下次访问默认登陆,经过思考可以在cookie里面添加tag字段,在接受登陆请求之后标志所登陆的系统,下次登陆时可以以此作为标志,此外应当保证登陆另外一个系统时，字段值更改(js),这就需要后端向前端传值,由于sprig boot里传递的是modelandview 所以不采用在url链接链接里附上参数的方法，转而 controller层通过Model对象传值到对应的返回页面，返回页面获得相应的参数来做处理;<br>
-前端页面我 使用 thymeleaf模板引擎 渲染,其也有相应的方法取值<br>
-后端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RequestMapping(&quot;/login&quot;)</span><br><span class="line">    public ModelAndView loginPage(HttpServletRequest request, HttpServletResponse response) &#123;</span><br><span class="line">        RequestCache requestCache= new HttpSessionRequestCache();</span><br><span class="line">        SavedRequest savedrequest = requestCache.getRequest(request,response);</span><br><span class="line">        ModelAndView model = new ModelAndView(&quot;login&quot;);</span><br><span class="line">        model.addObject(&quot;from&quot;, &quot;all&quot;);</span><br><span class="line">       return model;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<p>前端：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">var s_from = [[$&#123;from&#125;]];</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;p  th:text=&quot;#&#123;from&#125;&quot;&gt;&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>此外，由于需要获得服务启动时服务本身的端口号，需要配置读取 Application.yml 的配置信息</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># @ConfigurationProperties 注解依赖</span><br><span class="line">&lt;dependency&gt;  </span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;  </span><br><span class="line">    &lt;artifactId&gt;spring-boot-configuration-processor&lt;/artifactId&gt;  </span><br><span class="line">    &lt;optional&gt;true&lt;/optional&gt;  </span><br><span class="line">&lt;/dependency&gt;  </span><br><span class="line"></span><br><span class="line">#Application.yml 部分内容</span><br><span class="line">server:</span><br><span class="line">  port: 80</span><br><span class="line">  address: 0.0.0.0</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># 配置类</span><br><span class="line">package com.aak.configuration;</span><br><span class="line"></span><br><span class="line">import org.springframework.boot.context.properties.ConfigurationProperties;</span><br><span class="line">import org.springframework.context.annotation.Bean;</span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">@Component</span><br><span class="line">@ConfigurationProperties(prefix=&quot;server&quot;) //接收application.yml中的server下面的属性</span><br><span class="line">public class MyApplication &#123;</span><br><span class="line">    public String address;</span><br><span class="line">    public String port;</span><br><span class="line">    public String getUrl() &#123;</span><br><span class="line">        return address;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUrl(String Url) &#123;</span><br><span class="line">        this.address = Url;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getPort() &#123;</span><br><span class="line">        return port;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setPort(String port) &#123;</span><br><span class="line">        this.port = port;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#使用</span><br><span class="line">@Autowired</span><br><span class="line">private MyApplication myApplication ;</span><br><span class="line">String port=myApplication.getPort();</span><br><span class="line">log.info(&quot;port:&quot;+port);</span><br></pre></td></tr></table></figure>
-<p>2019-8-5<br>
-spring security oauth2 authorization code模式</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">[Spring Security Oauth 相关配置默认实现](https://docs.spring.io/spring-security/oauth/apidocs/org/springframework/security/oauth2/provider/endpoint/package-summary.html),其中包含(后期重新排版)</span><br><span class="line">AuthorizationEndpoint:Implementation of the Authorization Endpoint from the OAuth2 specification.</span><br><span class="line">CheckTokenEndpoint:Controller which decodes access tokens for clients who are not able to do so (or where opaque token values are used).</span><br><span class="line">DefaultRedirectResolver:Default implementation for a redirect resolver.</span><br><span class="line">ExactMatchRedirectResolver:Strict implementation for a redirect resolver which requires an exact match between the registered and requested redirect_uri.</span><br><span class="line">FrameworkEndpointHandlerMapping:A handler mapping for framework endpoints (those annotated with @FrameworkEndpoint).</span><br><span class="line">TokenEndpoint:Endpoint for token requests as described in the OAuth2 spec.</span><br><span class="line">TokenEndpointAuthenticationFilter:An optional authentication filter for the TokenEndpoint.</span><br><span class="line">TokenKeyEndpoint:OAuth2 token services that produces JWT encoded token values.</span><br><span class="line">WhitelabelApprovalEndpoint:Controller for displaying the approval page for the authorization server.</span><br><span class="line">WhitelabelErrorEndpoint:Controller for displaying the error page for the authorization server.</span><br><span class="line"></span><br><span class="line">最近需要在单点登录系统中实现在登录完成之后.跳转回系统跳转登录的页面</span><br><span class="line">code 模式下, </span><br><span class="line">1.跳转 http://localhost:8080/oauth/authorize?client_id=test2&amp;redirect_uri=http://127.0.0.1/oauth/code&amp;response_type=code&amp;scope=read</span><br><span class="line">2.登录成功之后返回code即重定向至http://127.0.0.1/oauth/code?code=CODE</span><br><span class="line">3.http://127.0.0.1/oauth/code?code=CODE获取code,传至后端,后端由此可以根据code获取token以Set-Cookie的方式返回response到页面</span><br><span class="line"></span><br><span class="line">AuthorizationEndpoint 实现 /oauth/authorize 接口,[实现流程](https://www.cnblogs.com/xifengxiaoma/p/10043173.html)中首先检验相关信息正确,之后在code模式下会生成code,并跳转回 redirect_uri?code=CODE</span><br><span class="line">最初以为需要重写 [AuthorizationEndpoint 实现](http://www.javased.com/?source_dir=spring-security-oauth/spring-security-oauth2/src/main/java/org/springframework/security/oauth2/provider/endpoint/AuthorizationEndpoint.java) 下面 /oauth/authorize 接口,使得最终重定向到redirect_uri后在链接中添加上跳转发生时来源的网址.经过调查没有找到重写 AuthorizationEndpoint 类的方法(spring security 没有提供接口,使得重写类覆盖默认类, 发生作用)</span><br><span class="line">后来发现 跳转时 是 由 window.location.href 实现的,但是无法像request请求一样 拥有 referer header ,即使能够重写 AuthorizationEndpoint 类,也不能从保存的请求中获取 相关header,只能在跳转链接中附上相关信息(暂时没有调研,是否可以在跳转的同时携带相关信息);</span><br><span class="line">问题在于 跳转回redirect_uri是在AuthorizationEndpoint 实现的,具体的地址已经配置好,而且没有找到相关的filter可以在这处理发生后拦截,进行相关逻辑处理,之后想到可以把 redirect_u redirect_uri 中,即redirect_uri=/oauth/code?back_to=原本处理code的地址</span><br><span class="line">以及可以在 跳转链接上 附上 window.location 信息(refer=window.location),然后在 login 中保存相关信息到 当前session,然后在接口中/oauth/code 接口实现中,提取出back_to和 code值,以及附上从session 获得的refer,返回,告知back_to获得token 后应当跳转的地址</span><br><span class="line">完整链接如下:</span><br><span class="line">window.location.href=&apos;http://localhost:8080/oauth/authorize?client_id=test2&amp;redirect_uri=/oauth/code?back_to=http://127.0.0.1/oauth/code&amp;response_type=code&amp;scope=read&amp;refer=&apos;+window.location</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1153,7 +1333,7 @@ spring security oauth2 authorization code模式</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

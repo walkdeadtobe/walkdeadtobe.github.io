@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="知行合一">
 <meta property="og:description" content="基础问题 http 报文键值对  host Content-* ACCEPT COOKIE  OSI 7层  物理层：电路交换 报文交换 分组交换 数据链路层：组帧,差错控制,流量控制,介质访问(频分时分波分码分复用) 网络层：异构网络互联;路由与转发;拥塞控制  ARP：查询IP与MAC地址的映射;DHCP：动态分配IP;ICMP:允许主机以及路由器报告差错情况;TRACEROTE NAT CI">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-09-15T07:22:11.589Z">
+<meta property="og:updated_time" content="2021-01-11T04:26:16.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="计算机网络">
 <meta name="twitter:description" content="基础问题 http 报文键值对  host Content-* ACCEPT COOKIE  OSI 7层  物理层：电路交换 报文交换 分组交换 数据链路层：组帧,差错控制,流量控制,介质访问(频分时分波分码分复用) 网络层：异构网络互联;路由与转发;拥塞控制  ARP：查询IP与MAC地址的映射;DHCP：动态分配IP;ICMP:允许主机以及路由器报告差错情况;TRACEROTE NAT CI">
@@ -221,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-15 15:22:11" itemprop="dateModified" datetime="2020-09-15T15:22:11+08:00">2020-09-15</time>
+                <time title="Modified: 2021-01-11 12:26:16" itemprop="dateModified" datetime="2021-01-11T12:26:16+08:00">2021-01-11</time>
               </span>
 
           
@@ -420,6 +420,15 @@ synflood利用这一缺陷,大量发送syn request包,耗尽服务端的资源�
 <li>http1:增加HTTP头、扩展PUT、POST等方法</li>
 <li>HTTP1.1 :长连接、流水线支持，最广泛使用的HTTP传输协议</li>
 </ul>
+<p>粘包问题</p>
+<blockquote>
+<p>传输层有两种协议，TCP和UDP。TCP是面向流的，UDP是面向报文的；<br>
+应用层需要提取传输层的数据，在使用UDP协议时，可以提取完整的报文，但是使用TCP报文时，无法保证提取完整的报文，需要将收到的报文按照字节序排序完成后提取<br>
+由于TCP是可靠的，面向连接的，每次报文传输的代价相对于UDP更大，通常会避免频繁发小报文，按照nagle算法 会积累一定的小报文，集中发送，但是而接收方接到报文后，需要按照预设的分隔标记从中提取多个小报文。<br>
+解决方法:<br>
+1.在发送数据前，将自己要发送的字节流大小告知接收方。(可能增加传输和等待回应所带来的时间损耗)<br>
+2.在TCP报文头的基础上，为字节流增加固定窗长度报文头，增加字节流的实际长度。</p>
+</blockquote>
 
     </div>
 
@@ -519,7 +528,7 @@ synflood利用这一缺陷,大量发送syn request包,耗尽服务端的资源�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
