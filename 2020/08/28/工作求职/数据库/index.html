@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="知行合一">
 <meta property="og:description" content="数据库 Reids 参考1 参考2 基础数据类型：  string，hash，list，set及有序集合（每个元素都关联一个分数，通过分数排序）   string(len,free,char[]):用于计数 list：双向链表,随机定位性能较弱，首尾插入删除性能较优 hash:数组+单链表 hash扩容时使用渐进式的rehash(一个hash结构有两个hash表ht[0]ht[1] ht[1]用于">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-01-15T02:57:53.103Z">
+<meta property="og:updated_time" content="2021-01-15T09:08:32.713Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库">
 <meta name="twitter:description" content="数据库 Reids 参考1 参考2 基础数据类型：  string，hash，list，set及有序集合（每个元素都关联一个分数，通过分数排序）   string(len,free,char[]):用于计数 list：双向链表,随机定位性能较弱，首尾插入删除性能较优 hash:数组+单链表 hash扩容时使用渐进式的rehash(一个hash结构有两个hash表ht[0]ht[1] ht[1]用于">
@@ -221,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-15 10:57:53" itemprop="dateModified" datetime="2021-01-15T10:57:53+08:00">2021-01-15</time>
+                <time title="Modified: 2021-01-15 17:08:32" itemprop="dateModified" datetime="2021-01-15T17:08:32+08:00">2021-01-15</time>
               </span>
 
           
@@ -281,7 +281,7 @@
 <ol>
 <li>内存不敏感,可以通过降低P来降低内存需求</li>
 <li>可以用于范围查询</li>
-<li>容易实现</li>
+<li>容易实现(相比较于b+树等,无需负责的平衡操作就可以实现LOGN的复杂度)</li>
 </ol>
 </li>
 </ul>
@@ -428,9 +428,11 @@ redis master 选举：由 sential leader 选择redis集群中的某个节点作�
 <blockquote>
 <p>脏读：事务A读取了事务B更新的数据，然后B回滚操作，那么A读取到的数据是脏数据<br><br>
 不可重复读：事务 A 多次读取同一数据，事务 B 在事务A多次读取的过程中，对数据作了更新并提交，导致事务A多次读取同一数据时，结果 不一致。<br><br>
-丢失修改：两个事务AB修改顺序颠倒,A后发先修改,A的修改被B的修改覆盖,导致修改丢失<br>
+丢失修改：两个事务AB修改顺序颠倒,A后发先修改,A的修改被B的修改覆盖,导致修改丢失<br><br>
 幻读：系统管理员A将数据库中所有学生的成绩从具体分数改为ABCDE等级，但是系统管理员B就在这个时候插入了一条具体分数的记录，当系统管理员A改结束后发现还有一条记录没有改过来，就好像发生了幻觉一样，这就叫幻读.<br><br>
-小结：不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表<br></p>
+小结：不可重复读和脏读是由于读取了未提交事务的修改的数据,一读一写;丢失修改和幻读则是修改了事务间的共同数据,双写;<br><br>
+不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。<br><br>
+解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表<br></p>
 </blockquote>
 <h3 id="事物隔离级别">事物隔离级别</h3>
 <p>| 事务隔离级别  | 脏读  | 不可重复  | 幻读 |方法<br>
@@ -474,7 +476,7 @@ InnoDB 存储引擎在绝大多数情况下使用 B+ 树建立索引，这是关
 主键可以作为外键存在,而唯一索引不行<br>
 对于一张表来说,主键索引只有一个,唯一索引可以有多个</p>
 </blockquote>
-<p>主键索引的插入和删除可能会造成页的分裂和合并,所以一般建议使用自增ID作为主键</p>
+<p>主键索引的插入和删除可能会造成页的分裂和合并,进而导致索引的更改,所以一般建议使用自增ID作为主键</p>
 <p>唯一索引的用处:</p>
 <blockquote>
 <p>确保属性值唯一,比如对于网站而言,利用手机号,邮箱注册账号,必然希望其唯一<br>
@@ -586,9 +588,9 @@ undo log:Innodb引擎的undo日志是记录在表空间中单独的回滚段中�
 </ul>
 <p>binlog VS redolog</p>
 <ul>
-<li>binglog是服务层的记录sql语句,redolog是存储引擎这一层的记录的是物理操作(页的变更操作)</li>
+<li>binglog是服务层的记录sql语句，不或缺,redolog是存储引擎innodb这一层的记录的是物理操作(页的变更操作),并不是所有引擎都有</li>
 <li>binlog可用于同步,redolog和binlog配合用于奔溃恢复</li>
-<li>binlog是累加的提交事务时写入磁盘,redolog是复写的</li>
+<li>binlog是累加的提交事务时写入磁盘,redolog是固定大小的，复写的</li>
 </ul>
 <p>binlog的刷盘时机 sync_binlog</p>
 <ul>
