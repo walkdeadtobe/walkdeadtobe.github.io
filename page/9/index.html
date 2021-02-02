@@ -185,7 +185,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/基础知识/数据结构/map_and_set/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/基础知识/人脸识别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -199,7 +199,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2019/04/23/基础知识/数据结构/map_and_set/" class="post-title-link" itemprop="url">map_and_set</a>
+            <a href="/2019/04/27/基础知识/人脸识别/" class="post-title-link" itemprop="url">人脸识别</a>
         </h2>
 
         <div class="post-meta">
@@ -209,14 +209,14 @@
               </span>
               <span class="post-meta-item-text">Posted on</span>
 
-              <time title="Created: 2019-04-23 19:31:56" itemprop="dateCreated datePublished" datetime="2019-04-23T19:31:56+08:00">2019-04-23</time>
+              <time title="Created: 2019-04-27 22:00:32" itemprop="dateCreated datePublished" datetime="2019-04-27T22:00:32+08:00">2019-04-27</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:24:29" itemprop="dateModified" datetime="2020-08-30T13:24:29+08:00">2020-08-30</time>
+                <time title="Modified: 2020-08-30 13:25:24" itemprop="dateModified" datetime="2020-08-30T13:25:24+08:00">2020-08-30</time>
               </span>
 
           
@@ -230,56 +230,97 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>
-List VS Map VS Set</p>
-<ul>
-<li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li>
-<li>Map ：键值对Key-value</li>
-<li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li>
-</ul>
-<p>HashMap VS TreeMap<br>
-HashSet VS TreeSet<br>
-在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>
-但是 哈希表的实现是无序的，而树的实现是有序的</p>
-<p>题目：242（Leetcode） Valid Anagrant<br>
-题意：对给定的两个字符串，判断是否是同一单词的错位变换</p>
-<ul>
-<li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>
-$$ O(Nlog^N) $$</li>
-<li>方法2：构造Map，比较Map是否相同算法复杂度<br>
-$$ O(N) $$</li>
-</ul>
-<p>题目：Two Sum(Three Sum)<br>
-题意：给定一个数组，以及value，输出数组中和为value的元素下标</p>
-<ul>
-<li>方法1：暴力方法时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-<li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>
-$$<br>
-O(N)<br>
-$$</li>
-</ul>
-<p>那么对于ThreeSum</p>
-<ul>
-<li>方法1：暴力 时间复杂度<br>
-$$<br>
-O(N^3)<br>
-$$</li>
-<li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-<li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-<li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>
-$$<br>
-O(N^2)<br>
-$$</li>
-</ul>
+          <p>PCA方法学习：解释得比较清楚<br>
+<a href="https://blog.csdn.net/qq_32865355/article/details/80809835" target="_blank" rel="noopener">https://blog.csdn.net/qq_32865355/article/details/80809835</a></p>
+<p>github 开源方案<br>
+<a href="https://github.com/ahhda/Face-Recogntion" target="_blank" rel="noopener">https://github.com/ahhda/Face-Recogntion</a><br>
+<a href="https://github.com/ageitgey/face_recognition" target="_blank" rel="noopener">https://github.com/ageitgey/face_recognition</a></p>
+<p>相关论文<br>
+<a href="https://blog.csdn.net/tMb8Z9Vdm66wH68VX1/article/details/83155487" target="_blank" rel="noopener">https://blog.csdn.net/tMb8Z9Vdm66wH68VX1/article/details/83155487</a></p>
+<p>CNN 实现 人脸识别<br>
+<a href="https://blog.csdn.net/u012162613/article/details/43277187" target="_blank" rel="noopener">https://blog.csdn.net/u012162613/article/details/43277187</a><br>
+<a href="https://blog.csdn.net/zouxy09/article/details/8781543" target="_blank" rel="noopener">https://blog.csdn.net/zouxy09/article/details/8781543</a></p>
+<p>相关github 代码<br>
+<a href="https://github.com/wepe/MachineLearning" target="_blank" rel="noopener">https://github.com/wepe/MachineLearning</a></p>
+<p>faceCascade.detectMultiScale 从图像中找出人脸<br>
+theano.shared可以看作是将变量设置为全局变量，其值可以在多个函数中共用<br>
+theano.tensor.dot(X, Y) 简单的看做XY 矩阵相乘 或者说 内积<br>
+maxpooling 、average_pooling ？？</p>
+<p>tensor库函数解释<br>
+<a href="http://deeplearning.net/software/theano/library/tensor/basic.html" target="_blank" rel="noopener">http://deeplearning.net/software/theano/library/tensor/basic.html</a></p>
+<p>损失函数的分类（交叉熵） <a href="https://www.jianshu.com/p/47172eb86b39" target="_blank" rel="noopener">https://www.jianshu.com/p/47172eb86b39</a></p>
+<p>神经网络 数学公式 表达 <a href="https://blog.csdn.net/sinat_35821976/article/details/80615612" target="_blank" rel="noopener">https://blog.csdn.net/sinat_35821976/article/details/80615612</a></p>
+<p>分类器用的是softmax  <a href="https://www.cnblogs.com/python-frog/p/9380290.html" target="_blank" rel="noopener">https://www.cnblogs.com/python-frog/p/9380290.html</a><br>
+，LeNet5用的是rbf？？</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/27/基础知识/决策树/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/27/基础知识/决策树/" class="post-title-link" itemprop="url">决策树</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-27 11:26:38" itemprop="dateCreated datePublished" datetime="2019-04-27T11:26:38+08:00">2019-04-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:25:24" itemprop="dateModified" datetime="2020-08-30T13:25:24+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>今天上课提及了决策树，随机森林，Dropout，Deepforest(周志华)<br>
+目前而言，决策树指对于一个集合，依此以某种确定特征作为分类标准，从而将该集合分为若干类(每个节点都代表一个分类或者一种决策标准)<br>
+随机森林，指在每个节点，随机选择某个特征从而构建一个线性分类器，将样本分为几部分</p>
+<p>Boosted Cascades VS 随机森林<br>
+前者是一个不平衡的树，适合不均匀的分类问题</p>
 
       
     </div>
@@ -391,6 +432,120 @@ $$ N log^{k} $$</li>
     </ol>
   </li>
 </ul>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/23/基础知识/数据结构/map_and_set/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/23/基础知识/数据结构/map_and_set/" class="post-title-link" itemprop="url">map_and_set</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-23 19:31:56" itemprop="dateCreated datePublished" datetime="2019-04-23T19:31:56+08:00">2019-04-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:24:29" itemprop="dateModified" datetime="2020-08-30T13:24:29+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>哈希函数，哈希表，哈希碰撞(单个节点变成链表来解决：拉链法)<br>
+List VS Map VS Set</p>
+<ul>
+<li>List：由数组或者链表实现，插入O(1)，查找O(N)，可重复</li>
+<li>Map ：键值对Key-value</li>
+<li>Set :用哈希表或者二叉树实现；相对于List不允许重复</li>
+</ul>
+<p>HashMap VS TreeMap<br>
+HashSet VS TreeSet<br>
+在查询时，哈希表实现 O(1) ，Tree实现 O(log_{n})<br>
+但是 哈希表的实现是无序的，而树的实现是有序的</p>
+<p>题目：242（Leetcode） Valid Anagrant<br>
+题意：对给定的两个字符串，判断是否是同一单词的错位变换</p>
+<ul>
+<li>方法1：给两个字符串排序，判断是否相同 算法复杂度 ：<br>
+$$ O(Nlog^N) $$</li>
+<li>方法2：构造Map，比较Map是否相同算法复杂度<br>
+$$ O(N) $$</li>
+</ul>
+<p>题目：Two Sum(Three Sum)<br>
+题意：给定一个数组，以及value，输出数组中和为value的元素下标</p>
+<ul>
+<li>方法1：暴力方法时间复杂度<br>
+$$<br>
+O(N^2)<br>
+$$</li>
+<li>方法2：Set;对于数组的任意元素x，如果元素 value-x 存在，则输出 时间复杂度<br>
+$$<br>
+O(N)<br>
+$$</li>
+</ul>
+<p>那么对于ThreeSum</p>
+<ul>
+<li>方法1：暴力 时间复杂度<br>
+$$<br>
+O(N^3)<br>
+$$</li>
+<li>方法2：枚举a+b,在Set里查询c 时间复杂度<br>
+$$<br>
+O(N^2)<br>
+$$</li>
+<li>方法3：首先排序，枚举a,在剩下的子数组中，b和c各位于最左和最右，根据a+b+c&gt;0/&lt;0 ,来判断移动b或者c 虽然空间复杂度是常数级别的，但修改了原数组 ，时间复杂度<br>
+$$<br>
+O(N^2)<br>
+$$</li>
+<li>方法4：应用ThreeSum的方法,递归(4=1+3;3=1+2) 时间复杂度<br>
+$$<br>
+O(N^2)<br>
+$$</li>
+</ul>
+
       
     </div>
 
@@ -580,7 +735,7 @@ kill -9 $(ps -ef|grep id | grep -v grep|awk ‘{print $2}’ )。</li>
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-22 17:54:07" itemprop="dateModified" datetime="2021-01-22T17:54:07+08:00">2021-01-22</time>
+                <time title="Modified: 2021-01-26 20:13:42" itemprop="dateModified" datetime="2021-01-26T20:13:42+08:00">2021-01-26</time>
               </span>
 
           
@@ -612,6 +767,20 @@ kill -9 $(ps -ef|grep id | grep -v grep|awk ‘{print $2}’ )。</li>
 [godaddy 域名解析]whetstone.xyz</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum install -y socat</span><br><span class="line">curl  https://get.acme.sh | sh</span><br><span class="line">source ~/.bashrc</span><br><span class="line">export CF_Token=&quot;Wl6tf8wsQ1wFCOowI4tdCetZLE68eaZ3aJaGR0cm&quot;</span><br><span class="line"></span><br><span class="line">acme.sh --issue --dns dns_cf -d whetstone.xyz -d www.whetstone.xyz -k ec-256</span><br><span class="line">cat ~/.acme.sh/whetstone.xyz_ecc/fullchain.cer &gt; /etc/nginx/ssl/whetstone.xyz.crt</span><br><span class="line">cat ~/.acme.sh/whetstone.xyz_ecc/whetstone.xyz.key &gt; /etc/nginx/ssl/whetstone.xyz.key</span><br><span class="line">systemctl start nginx</span><br><span class="line">acme.sh --installcert -d whetstone.xyz -d www.whetstone.xyz --fullchainpath /etc/nginx/ssl/whetstone.xyz.crt --keypath /etc/nginx/ssl/whetstone.xyz.key --ecc --reloadcmd &quot;systemctl reload nginx&quot;</span><br></pre></td></tr></table></figure>
+<p>更换vltur服务器,重新安装遇到的问题</p>
+<ol>
+<li>域名解析失败,523</li>
+</ol>
+<blockquote>
+<p>新服务器防火墙屏蔽了一些端口</p>
+</blockquote>
+<ol start="2">
+<li>直接使用ip/TCP成功,使用websocket/域名伪装失败</li>
+</ol>
+<blockquote>
+<p>初步定为在nginx问题,尝试过很多方法,未能精确定位错误原因,可能是ws伪装仍然发出http请求,而nginx未配置http强转https导致无法命中</p>
+</blockquote>
+
       
     </div>
 
@@ -933,146 +1102,6 @@ private void log(){}</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/基础知识/数据结构/island-count/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/11/基础知识/数据结构/island-count/" class="post-title-link" itemprop="url">island_count</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-11 22:32:42" itemprop="dateCreated datePublished" datetime="2019-04-11T22:32:42+08:00">2019-04-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:24:29" itemprop="dateModified" datetime="2020-08-30T13:24:29+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>算法体：被河流围的若干岛屿分别用0和1表示，求岛屿个数以及可能的岛屿面积<br>
-第一种方法：染色（我更愿意理解为聚类删除）<br>
-即找到每一个1身边所有的1并将之删除（这符合岛屿的规定，即由1连在一起的集合），可以使用DFS或者BFS来进行删除<br>
-第二种方法：并查集<br>
-遍历数组，对于第一个遇到的1 ，将之作为队长，由此BFS/DFS建立 建立并查集，将同一个岛屿的1属于同一个集合；</p>
-<p>应用：朋友圈</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/11/基础知识/bullon-filter/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/04/11/基础知识/bullon-filter/" class="post-title-link" itemprop="url">bullon_filter</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-04-11 22:25:43" itemprop="dateCreated datePublished" datetime="2019-04-11T22:25:43+08:00">2019-04-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:21:10" itemprop="dateModified" datetime="2020-08-30T13:21:10+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>极客时间<br>
-哈希函数：将key隐射到一维数组的特殊位置（很少有错）<br>
-即使有错也可以 采取二维数组，减小错误率<br>
-类似于 计算机组成原理 内存与cache映射 中 组相联（还有直接隐射，全相联）</p>
-<p>布隆过滤器：将key分解为若干元素组成，比如说连续的二进制<br>
-每输入一个key，将相应二进制位赋值为1，由此可以简单的判断不在，但是不能确定是否在，需要进一步判断（比如到后面数据库再核实）</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1144,14 +1173,14 @@ private void log(){}</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">106</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">58</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
