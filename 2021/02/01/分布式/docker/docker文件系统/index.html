@@ -29,12 +29,12 @@
 <meta property="og:site_name" content="知行合一">
 <meta property="og:description" content="docker文件系统的本质,docker VS 虚拟机">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://yoursite.com/images/ocerlay_constructs.jpg">
-<meta property="og:updated_time" content="2021-02-03T13:36:48.666Z">
+<meta property="og:image" content="http://yoursite.com/images/overlay_constructs.jpg">
+<meta property="og:updated_time" content="2021-02-03T14:27:11.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker文件系统">
 <meta name="twitter:description" content="docker文件系统的本质,docker VS 虚拟机">
-<meta name="twitter:image" content="http://yoursite.com/images/ocerlay_constructs.jpg">
+<meta name="twitter:image" content="http://yoursite.com/images/overlay_constructs.jpg">
 
 <link rel="canonical" href="http://yoursite.com/2021/02/01/分布式/docker/docker文件系统/">
 
@@ -223,7 +223,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-03 21:36:48" itemprop="dateModified" datetime="2021-02-03T21:36:48+08:00">2021-02-03</time>
+                <time title="Modified: 2021-02-03 22:27:11" itemprop="dateModified" datetime="2021-02-03T22:27:11+08:00">2021-02-03</time>
               </span>
 
           
@@ -288,7 +288,7 @@ Image可以独立存在,而Container需要基于Image构建运行时环境以支
 <p>OverlayFS 是类似于AUFS的联合文件系统，但是通过简单的继承实现更快的速度。它有两个版本，overlay和更新更稳定的overlay2</p>
 <h4 id="overlay的运行">overlay的运行</h4>
 <p>overlay文件系统中有两种目录，处于相对底层的目录称为lowerdir 和 处于相对高层的目录称为upperdir，此外暴露出的联合视角的目录称之为 merge;将目录称为layer，而联合的过程称为联合挂载。如下图所示：<br>
-<img src="/images/ocerlay_constructs.jpg" alt="overlay 文件结构"><br>
+<img src="/images/overlay_constructs.jpg" alt="overlay 文件结构"><br>
 当文件同时存在于container层和image层时，container层的文件被读写，掩盖了image层相应文件的存在。</p>
 <p>参考:<br>
 1.<a href="https://blog.csdn.net/qq_37133717/article/details/86359947" target="_blank" rel="noopener">Docker核心原理之namespace</a><br>
@@ -314,13 +314,10 @@ Image可以独立存在,而Container需要基于Image构建运行时环境以支
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/01/03/分布式/书籍阅读笔记/程序员修炼之道/" rel="prev" title="程序员修炼之道">
-      <i class="fa fa-chevron-left"></i> 程序员修炼之道
+    <a href="/2021/02/01/分布式/docker/NameSpace/" rel="prev" title="NameSpace">
+      <i class="fa fa-chevron-left"></i> NameSpace
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/02/01/分布式/docker/NameSpace/" rel="next" title="NameSpace">
-      NameSpace <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
