@@ -30,7 +30,7 @@
 <meta property="og:description" content="docker文件系统的本质,docker VS 虚拟机">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://yoursite.com/images/overlay_constructs.jpg">
-<meta property="og:updated_time" content="2021-02-03T14:27:11.320Z">
+<meta property="og:updated_time" content="2021-02-03T16:04:03.637Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="docker文件系统">
 <meta name="twitter:description" content="docker文件系统的本质,docker VS 虚拟机">
@@ -223,7 +223,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-02-03 22:27:11" itemprop="dateModified" datetime="2021-02-03T22:27:11+08:00">2021-02-03</time>
+                <time title="Modified: 2021-02-04 00:04:03" itemprop="dateModified" datetime="2021-02-04T00:04:03+08:00">2021-02-04</time>
               </span>
 
           
@@ -286,10 +286,26 @@ Image可以独立存在,而Container需要基于Image构建运行时环境以支
 <h3 id="devicemapper">DeviceMapper</h3>
 <h3 id="overlayfs"><a href="https://docs.docker.com/storage/storagedriver/overlayfs-driver/" target="_blank" rel="noopener">OverlayFS</a></h3>
 <p>OverlayFS 是类似于AUFS的联合文件系统，但是通过简单的继承实现更快的速度。它有两个版本，overlay和更新更稳定的overlay2</p>
-<h4 id="overlay的运行">overlay的运行</h4>
+<h4 id="overlay的运行"><a href="https://docs.docker.com/storage/storagedriver/overlayfs-driver/#how-the-overlay-driver-works" target="_blank" rel="noopener">overlay的运行</a></h4>
 <p>overlay文件系统中有两种目录，处于相对底层的目录称为lowerdir 和 处于相对高层的目录称为upperdir，此外暴露出的联合视角的目录称之为 merge;将目录称为layer，而联合的过程称为联合挂载。如下图所示：<br>
 <img src="/images/overlay_constructs.jpg" alt="overlay 文件结构"><br>
-当文件同时存在于container层和image层时，container层的文件被读写，掩盖了image层相应文件的存在。</p>
+当文件同时存在于container层和image层时，container层的文件被读写，掩盖了image层相应文件的存在。<br>
+overlay 驱动器只有两层,即多层的image不能通过多层的overlay实现。多层image的每层在<code>/var/lib/docker/overlay</code>都有自己的子目录，基于硬链接实现对于 lowerdir image中文件的共享(单个inodes存在的超量硬链接可能成为overlay驱动器的突出限制)。<br>
+当创建容器时，overlay 会新建一个container的可写的目录/upperdir，与lowerdir/只读image目录合并。</p>
+<h4 id="overlay2的运行"><a href="https://docs.docker.com/storage/storagedriver/overlayfs-driver/" target="_blank" rel="noopener">overlay2的运行</a></h4>
+<h4 id="在overlay和overlay2中容器如何读写">在overlay和overlay2中容器如何读写</h4>
+<p>读文件(与AUFS一致)</p>
+<ul>
+<li>文件不存在于容器层:当container读一个并不存在于容器层的文件时，会向其下一层寻找文件(递归),从找到的那一层读取.</li>
+<li>文件只存在于容器层:从容器层读取。</li>
+<li>文件在容器层和镜像层中都存在:如果container读取同时存在于此容器层和多个image层的文件时，从容器层读取.容器层的文件覆盖(obscure)了image层的同路径文件.</li>
+</ul>
+<p>修改文件或目录</p>
+<ul>
+<li>第一次修改文件:与AUFS大致相同(文件层次的拷贝),但是由于overlay只有两层(不管是不是多层image),所以相对于AUFS降低了查找的时间(最多递归两次)。</li>
+<li>删除文件和目录:当container删除一个文件/目录时，并不会在只读的image操作实际操作，aufs会在container层生成特殊文件,阻碍从container层对于该文件/目录的访问。</li>
+<li>重命名目录: 当且仅当原路径和目的路径在最高层(不存在多层同名路径)。</li>
+</ul>
 <p>参考:<br>
 1.<a href="https://blog.csdn.net/qq_37133717/article/details/86359947" target="_blank" rel="noopener">Docker核心原理之namespace</a><br>
 2.<a href="https://blog.csdn.net/ningyuxuan123/article/details/81981835" target="_blank" rel="noopener">docker的cgroup</a><br>
@@ -314,10 +330,13 @@ Image可以独立存在,而Container需要基于Image构建运行时环境以支
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/02/01/分布式/docker/NameSpace/" rel="prev" title="NameSpace">
-      <i class="fa fa-chevron-left"></i> NameSpace
+    <a href="/2021/01/03/分布式/书籍阅读笔记/程序员修炼之道/" rel="prev" title="程序员修炼之道">
+      <i class="fa fa-chevron-left"></i> 程序员修炼之道
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/01/分布式/docker/NameSpace/" rel="next" title="NameSpace">
+      NameSpace <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -376,7 +395,7 @@ Image可以独立存在,而Container需要基于Image构建运行时环境以支
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#container-vs-vm"><span class="nav-number">1.</span> <span class="nav-text">container VS Vm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-文件系统"><span class="nav-number">2.</span> <span class="nav-text">docker 文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相关概念-镜像与容器"><span class="nav-number">2.1.</span> <span class="nav-text">相关概念 : 镜像与容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据卷-volume"><span class="nav-number">2.2.</span> <span class="nav-text">数据卷 volume</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aufs"><span class="nav-number">2.3.</span> <span class="nav-text">AUFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目录修改"><span class="nav-number">2.3.1.</span> <span class="nav-text">目录修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#aufs中container读写的方式"><span class="nav-number">2.3.2.</span> <span class="nav-text">aufs中container读写的方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#devicemapper"><span class="nav-number">2.4.</span> <span class="nav-text">DeviceMapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#overlayfs"><span class="nav-number">2.5.</span> <span class="nav-text">OverlayFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#overlay的运行"><span class="nav-number">2.5.1.</span> <span class="nav-text">overlay的运行</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#container-vs-vm"><span class="nav-number">1.</span> <span class="nav-text">container VS Vm</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#docker-文件系统"><span class="nav-number">2.</span> <span class="nav-text">docker 文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相关概念-镜像与容器"><span class="nav-number">2.1.</span> <span class="nav-text">相关概念 : 镜像与容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据卷-volume"><span class="nav-number">2.2.</span> <span class="nav-text">数据卷 volume</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#aufs"><span class="nav-number">2.3.</span> <span class="nav-text">AUFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#目录修改"><span class="nav-number">2.3.1.</span> <span class="nav-text">目录修改</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#aufs中container读写的方式"><span class="nav-number">2.3.2.</span> <span class="nav-text">aufs中container读写的方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#devicemapper"><span class="nav-number">2.4.</span> <span class="nav-text">DeviceMapper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#overlayfs"><span class="nav-number">2.5.</span> <span class="nav-text">OverlayFS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#overlay的运行"><span class="nav-number">2.5.1.</span> <span class="nav-text">overlay的运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#overlay2的运行"><span class="nav-number">2.5.2.</span> <span class="nav-text">overlay2的运行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在overlay和overlay2中容器如何读写"><span class="nav-number">2.5.3.</span> <span class="nav-text">在overlay和overlay2中容器如何读写</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -392,14 +411,14 @@ Image可以独立存在,而Container需要基于Image构建运行时环境以支
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">106</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">58</span>
+        <span class="site-state-item-count">59</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

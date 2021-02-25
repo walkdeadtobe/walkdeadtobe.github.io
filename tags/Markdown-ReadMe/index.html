@@ -21,20 +21,15 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="用途  Merkle树大多用来进行完整性验证。 Merkle树还可以用来对数据进行快速对比，快速定位到不一致的数据。 分布式存储系统中，数据常常会保存副本，需要对副本进行比较以判断副本是否过期，这时在节点间传输数据比较的效率太低，可以选择对于文件的Hash值进行比较来判断是否一致。  原理  Merkle树节点中存储的值是hash值，其中叶子节点存储数据文件的hash值，而非叶子节点存储叶子节点的">
-<meta name="keywords" content="Data Structure">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Merkle树">
-<meta property="og:url" content="http://yoursite.com/2020/11/27/基础知识/数据结构/Merkle树/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="知行合一">
+<meta property="og:url" content="http://yoursite.com/tags/Markdown-ReadMe/index.html">
 <meta property="og:site_name" content="知行合一">
-<meta property="og:description" content="用途  Merkle树大多用来进行完整性验证。 Merkle树还可以用来对数据进行快速对比，快速定位到不一致的数据。 分布式存储系统中，数据常常会保存副本，需要对副本进行比较以判断副本是否过期，这时在节点间传输数据比较的效率太低，可以选择对于文件的Hash值进行比较来判断是否一致。  原理  Merkle树节点中存储的值是hash值，其中叶子节点存储数据文件的hash值，而非叶子节点存储叶子节点的">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-11-28T13:22:10.571Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Merkle树">
-<meta name="twitter:description" content="用途  Merkle树大多用来进行完整性验证。 Merkle树还可以用来对数据进行快速对比，快速定位到不一致的数据。 分布式存储系统中，数据常常会保存副本，需要对副本进行比较以判断副本是否过期，这时在节点间传输数据比较的效率太低，可以选择对于文件的Hash值进行比较来判断是否一致。  原理  Merkle树节点中存储的值是hash值，其中叶子节点存储数据文件的hash值，而非叶子节点存储叶子节点的">
+<meta name="twitter:title" content="知行合一">
 
-<link rel="canonical" href="http://yoursite.com/2020/11/27/基础知识/数据结构/Merkle树/">
+<link rel="canonical" href="http://yoursite.com/tags/Markdown-ReadMe/">
 
 
 <script id="page-configurations">
@@ -42,12 +37,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true,
+    isPost : false,
     lang   : 'en'
   };
 </script>
 
-  <title>Merkle树 | 知行合一</title>
+  <title>Tag: Markdown ReadMe | 知行合一</title>
   
 
 
@@ -184,107 +179,51 @@
         <div class="content-wrap">
           
 
-          <div class="content post posts-expand">
+          <div class="content tag">
             
 
-    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/27/基础知识/数据结构/Merkle树/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          Merkle树
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-27 14:08:04" itemprop="dateCreated datePublished" datetime="2020-11-27T14:08:04+08:00">2020-11-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-28 21:22:10" itemprop="dateModified" datetime="2020-11-28T21:22:10+08:00">2020-11-28</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
+  
+  <div class="post-block">
+    <div class="posts-collapse">
+      <div class="collection-title">
+        <h2 class="collection-header">Markdown ReadMe
+          <small>Tag</small>
+        </h2>
+      </div>
 
       
-        <p>用途</p>
-<blockquote>
-<p>Merkle树大多用来进行完整性验证。<br>
-Merkle树还可以用来对数据进行快速对比，快速定位到不一致的数据。<br>
-分布式存储系统中，数据常常会保存副本，需要对副本进行比较以判断副本是否过期，这时在节点间传输数据比较的效率太低，可以选择对于文件的Hash值进行比较来判断是否一致。</p>
-</blockquote>
-<p>原理</p>
-<blockquote>
-<p>Merkle树节点中存储的值是hash值，其中叶子节点存储数据文件的hash值，而非叶子节点存储叶子节点的叶子节点的hash和。<br>
-对于有N个节点的Merkle树，如果数据不一致，从根节点出，O(logN) 次可以查找到不同的数据块。<br>
-还有一种数据结构 Hash List,将N个子结点所代表的文件数据的hash值之和作为节点值，同样可以对比文件是否一致，但是需要O(N)次才能找到不一致的点</p>
-</blockquote>
-<p>Merkle 在Dynamo中的应用</p>
-<blockquote>
-<p>Dynamo集群的所有机器分布在一致性Hash环中，每一个机器负责存储Hash环某个区间的所有数据，同时为了保持数据的可靠性，一台机器上存储的数据会在其他机器上有备份；处于某些原因(比如某机器下线，需要复制该机器上的所有数据，保持副本数)，副本需要保持一致进行后续的同步；一般同步需要传输数据，然后对比，如果要传输机器上的所有数据，不仅耗时间长而且可能造成网络拥挤；<br>
-为了解决这个问题，可以针对每台机器的每个区间的数据构造一颗Merkle树；当两台机器间对比数据时，从所属的Merkle树的根节点开始对比，不需要任何的传输，如果不一样，可以以log(N)的时间复杂度定位不一致的数据的位置。</p>
-</blockquote>
-<p>在Git中的应用</p>
-<blockquote></blockquote>
-
+    <div class="collection-year">
+      <span class="collection-header">2019</span>
     </div>
 
-    
-    
-    
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
 
-      <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Data-Structure/" rel="tag"># Data Structure</a>
-          </div>
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2019-11-15T23:37:22+08:00"
+              content="2019-11-15">
+          11-15
+        </time>
+      </div>
 
-        
+      <div class="post-title">
+          <a class="post-title-link" href="/2019/11/15/README/" itemprop="url">
+            <span itemprop="name">Learn Markdown</span>
+          </a>
+      </div>
 
-
-        
-    <div class="post-nav">
-      <div class="post-nav-item">
-    <a href="/2020/11/19/分布式/书籍阅读笔记/大规模分布式存储系统-原理解析与架构实战/" rel="prev" title="大规模分布式存储系统">
-      <i class="fa fa-chevron-left"></i> 大规模分布式存储系统
-    </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/11/27/基础知识/数据结构/Gossip协议/" rel="next" title="Gossip协议">
-      Gossip协议 <i class="fa fa-chevron-right"></i>
-    </a></div>
-    </div>
-      </footer>
-    
+    </header>
   </article>
+
+    </div>
+  </div>
   
   
+  
+
   
 
 
