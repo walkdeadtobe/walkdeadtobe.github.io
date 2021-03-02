@@ -185,6 +185,115 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/基础知识/论文阅读/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/14/基础知识/论文阅读/" class="post-title-link" itemprop="url">论文阅读</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-14 19:12:45" itemprop="dateCreated datePublished" datetime="2020-06-14T19:12:45+08:00">2020-06-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:25:24" itemprop="dateModified" datetime="2020-08-30T13:25:24+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="大多是data-center-资源集中">大多是Data Center ,资源集中</h4>
+<h4 id="cooperative-game-based-virtual-machine-resource-allocation-algorithms-in-cloud-data-centershindawi">Cooperative Game-Based Virtual Machine Resource Allocation Algorithms in Cloud Data Centers(hindawi)</h4>
+<ol>
+<li>Cloud Data Center(CDC)资源利用率低</li>
+<li>思路：对不同资源使用不同的基于 value 的博弈论解决方法;
+<ul>
+<li>CPU: Shaply value(SV), payoff by number contribution</li>
+<li>memory: weighted Shaply value(WSV),payoff by coliation ;and  members’s payoff about positive effort of coliation</li>
+<li>storage: proportional Shaply value(PSV)</li>
+<li>bandwith: weigthed-egalitarian Shaply value(WESV) payoff by member contribution and  heterogeneity between members</li>
+</ul>
+</li>
+<li>不足：
+<ul>
+<li>task 生成分为四类,每类的资源要求固定(task 不具有 变动性)</li>
+<li>数据未公开</li>
+<li>未解释 四类资源某些不足时的处理???</li>
+</ul>
+</li>
+</ol>
+<h4 id="game-theoretic-resource-allocation-in-cloud-computing">Game theoretic resource allocation in cloud computing</h4>
+<ol>
+<li>介绍：同名书中的相干章节，基于Min-Max Game
+<ul>
+<li>输入：request的信息，resource的信息</li>
+<li>输出：分配矩阵</li>
+</ul>
+</li>
+<li>思路：实现最大化资源的 utility(效用) 的目标；</li>
+<li>utility 的公式构成(又分为单类资源utility和全局资源utility) ?? 不同资源,CPU
+<ul>
+<li>budget</li>
+<li>cost per sencod</li>
+<li>request 量</li>
+<li>request time 消耗时间</li>
+<li>budget和time的factor因子</li>
+</ul>
+</li>
+<li>算法：
+<ul>
+<li>挑选出可以进行博弈的request</li>
+<li>依次对每一种资源选择全局最大化utility时的分配，iteration</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/11/工具/毕设/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -994,74 +1103,6 @@ carts-fc985d95-h78dn            0/1     Running       22         12h<br>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/12/30/基础知识/重构/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/12/30/基础知识/重构/" class="post-title-link" itemprop="url">Coding</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-12-30 21:45:45" itemprop="dateCreated datePublished" datetime="2019-12-30T21:45:45+08:00">2019-12-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:25:24" itemprop="dateModified" datetime="2020-08-30T13:25:24+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近在重构之前用java写的SSO的代码，有点感触<br>
-1.对自己写的屎一样的代码，尽量重构，起码让自己以后重新看时，还敢承认这是自己的代码<br>
-2.写代码时，要注意自己的最初目的，不要让函数超出了它本身应该做的事情<br>
-3.尽量不要涉及硬编码的部分，如果大量重复的硬编码，那么该思考是不是必要的，也许它应该是数据库的信息？</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1133,7 +1174,7 @@ carts-fc985d95-h78dn            0/1     Running       22         12h<br>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-count">107</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

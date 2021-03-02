@@ -185,6 +185,338 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/04/工作求职/Nginx/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/04/工作求职/Nginx/" class="post-title-link" itemprop="url">Nginx</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-04 17:04:30" itemprop="dateCreated datePublished" datetime="2020-09-04T17:04:30+08:00">2020-09-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-15 10:57:23" itemprop="dateModified" datetime="2021-01-15T10:57:23+08:00">2021-01-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Nginx是一个web服务器和反向代理服务器，用于HTTP、HTTPS、SMTP、POP3和IMAP协议</p>
+<h2 id="nginx-描述">Nginx 描述</h2>
+<p>nginx 是一个高性能的web服务器和方向代理服务器;</p>
+<ol>
+<li>Nginx 特性</li>
+</ol>
+<blockquote>
+<p>反向代理/L7负载均衡器<br>
+动态二进制升级<br>
+嵌入式Perl解释器<br>
+可用于重新编写URL，具有非常好的PCRE支持</p>
+</blockquote>
+<ol start="2">
+<li>Nginx VS Apache</li>
+</ol>
+<blockquote>
+<p>轻量级，同样起web 服务，比apache 占用更少的内存及资源<br>
+抗并发，nginx 处理请求是异步非阻塞的，而apache 则是阻塞型的，在高并发下nginx 能保持低资源低消耗高性能<br>
+高度模块化的设计，编写模块相对简单<br>
+最核心的区别在于apache是同步多进程模型，一个连接对应一个进程；nginx是异步的，多个连接（万级别）可以对应一个进程</p>
+</blockquote>
+<ol start="3">
+<li>nginx是如何实现高并发的</li>
+</ol>
+<blockquote>
+<p>一个主进程，多个工作进程，每个工作进程可以处理多个请求，每进来一个request，会有一个worker进程去处理。<br>
+Worker处理到可能发生阻塞的地方，比如向上游（后端）服务器转发request，并等待请求返回。那么，这个处理的worker继续处理其他请求，而一旦上游服务器返回了，就会触发这个事件，worker才会来接手，这个request才会接着往下走。<br>
+由于web server的工作性质决定了每个request的大部份生命都是在网络传输中，实际上花费在server机器上的时间片不多<br>
+从而实现高并发</p>
+</blockquote>
+<ol start="4">
+<li>解释Nginx如何处理HTTP请求</li>
+</ol>
+<blockquote>
+<p>Nginx使用反应器模式。主事件循环等待操作系统发出准备事件的信号，这样数据就可以从套接字读取，在该实例中读取到缓冲区并进行处理。单个线程可以提供数万个并发连接。</p>
+</blockquote>
+<ol start="5">
+<li>反应器模式</li>
+</ol>
+<blockquote>
+<p>当一个主体发生改变时，所有依属体都得到通知。不过，观察者模式与单个事件源关联，而反应器模式则与多个事件源关联</p>
+</blockquote>
+<p>同步和异步区别：有无通知（是否轮询）<br>
+堵塞和非堵塞区别：操作结果是否等待（是否马上有返回值），只是设计方式的不同</p>
+<ol start="6">
+<li>在Nginx中，如何使用未定义的服务器名称来阻止处理请求?</li>
+</ol>
+<blockquote>
+<p>server_name设置为一个空字符串，它将在没有“主机”头字段的情况下匹配请求，而一个特殊的Nginx的非标准代码444被返回，从而终止连接</p>
+</blockquote>
+<ol start="7">
+<li>使用&quot;反向代理服务器&quot;的优点是什么</li>
+</ol>
+<blockquote>
+<p>安全：反向代理服务器可以隐藏源服务器的存在和特征。它充当互联网云和web服务器之间的中间层。这对于安全方面来说是很好的，特别是当您使用web托管服务时</p>
+</blockquote>
+<ol start="8">
+<li>请列举Nginx服务器的最佳用途</li>
+</ol>
+<blockquote>
+<p>正向:做缓存,加快速度;j静态网站展示;转发请求<br>
+反向代理:安全;负载均衡</p>
+</blockquote>
+<ol start="9">
+<li>请解释Nginx服务器上的Master和Worker进程分别是什么</li>
+</ol>
+<blockquote>
+<p>Master进程：读取及评估配置和维持<br>
+Worker进程：处理请求</p>
+</blockquote>
+<ol start="10">
+<li>请解释是否有可能将Nginx的错误替换为502错误、503?</li>
+</ol>
+<blockquote>
+<p>502 =错误网关 503 =服务器超载 有可能，但是您可以确保fastcgi_intercept_errors被设置为ON，并使用错误页面指令。</p>
+</blockquote>
+<ol start="11">
+<li>在Nginx中，解释如何在URL中保留双斜线?</li>
+</ol>
+<blockquote>
+<p>要在URL中保留双斜线，就必须使用merge_slashes_off;默认on</p>
+</blockquote>
+<ol start="12">
+<li>ngx_http_upstream_module的作用是什么</li>
+</ol>
+<blockquote>
+<p>ngx_http_upstream_module用于定义可通过fastcgi传递、proxy传递、uwsgi传递、memcached传递和scgi传递指令来引用的服务器组。</p>
+</blockquote>
+<ol start="13">
+<li>请解释什么是C10K问题?</li>
+</ol>
+<blockquote>
+<p>C10K问题是指无法同时处理大量客户端(10,000)的网络套接字</p>
+</blockquote>
+<ol start="14">
+<li>在Nginx中，请说明Rewrite模块里break和last的区别。</li>
+</ol>
+<blockquote>
+<p>last：停止执行当前这一轮的ngx_http_rewrite_module指令集，包括后续的rewrite 和 return,然后查找匹配改变后URI的新location<br>
+break：停止执行当前这一轮的ngx_http_rewrite_module指令集；包括 后续的rewrite和return,继续执行剩余的命令比如echo<br>
+temporary 302  return 302 更新url<br>
+permant  301 return 301    更新url</p>
+</blockquote>
+<ol start="15">
+<li>为什么不使用多线程？</li>
+</ol>
+<blockquote>
+<p>Apache: 创建多个进程或线程，而每个进程或线程都会为其分配cpu和内存（线程要比进程小的多，所以worker支持比perfork高的并发），并发过大会榨干服务器资源。<br>
+Nginx: 采用单线程来异步非阻塞处理请求（管理员可以配置Nginx主进程的工作进程的数量）(epoll)，不会为每个请求分配cpu和内存资源，节省了大量资源，同时也减少了大量的CPU的上下文切换。所以才使得Nginx支持更高的并发。一般进程数设置为cpu核数</p>
+</blockquote>
+<ol start="16">
+<li>Nginx是如何处理一个请求的呢？</li>
+</ol>
+<blockquote>
+<p>首先，nginx在启动时，会解析配置文件，得到需要监听的端口与ip地址，然后在nginx的master进程里面<br>
+先初始化好这个监控的socket，再进行listen<br>
+然后再fork出多个子进程出来, 子进程会竞争accept新的连接。<br>
+此时，客户端就可以向nginx发起连接了。当客户端与nginx进行三次握手，与nginx建立好一个连接后<br>
+此时，某一个子进程会accept成功，然后创建nginx对连接的封装，即ngx_connection_t结构体<br>
+接着，根据事件调用相应的事件处理模块，如http模块与客户端进行数据的交换。<br>
+最后，nginx或客户端来主动关掉连接，到此，一个连接就寿终正寝了</p>
+</blockquote>
+<ol start="17">
+<li>为什么要做动静分离？</li>
+</ol>
+<blockquote>
+<p>在日常开发中，前端请求静态文件比如图片资源是不需要经过后端服务器的，但是调用API这些类型的就需要后端进行处理请求，所以为了提高对资源文件的响应速度，我们应该使用动静分离的策略去做架构。我们可以将静态文件放到Nginx中，将动态资源的请求转发到后端服务器去进行进一步的处理</p>
+</blockquote>
+<ol start="18">
+<li>Session不同步如何处理？</li>
+</ol>
+<blockquote>
+<p>载均衡方式使用ip_hash方式，如果用户已经访问过某个后端器，则再次访问时会将这个请求的ip地址进行哈希算法转换，自动定位到该服务器。当然也可以通过redis缓存用户session，一样可以处理session不同步的问题。</p>
+</blockquote>
+<ol start="19">
+<li>负载均衡算法</li>
+</ol>
+<blockquote>
+<p>轮询,ip hash ,url hash ,fair(返回时间),weight(加权轮询,即按比例平滑排列 abcadca)</p>
+</blockquote>
+<ol>
+<li>LVS（4层与7层）原理</li>
+</ol>
+<blockquote>
+<p>LVS:Linux Virtual Server<br>
+使用LVS架设的服务器集群系统有三个部分组成：最前端的负载均衡层（Loader Balancer），中间的服务器群组层，用Server Array表示，最底层的数据共享存储层，用Shared Storage表示</p>
+</blockquote>
+<ol start="2">
+<li>Nginx 双机备份</li>
+</ol>
+<ul>
+<li>主从模式</li>
+</ul>
+<blockquote>
+<p>nginx进程基于Master+Slave(worker)多进程模型，自身具有非常稳定的子进程管理功能。在Master进程分配模式下，Master进程永远不进行业务处理，只是进行任务分发，从而达到Master进程的存活高可靠性，Slave(worker)进程所有的业务信号都 由主进程发出，Slave(worker)进程所有的超时任务都会被Master中止，属于非阻塞式任务模型。<br>
+Keepalived是Linux下面实现VRRP备份路由的高可靠性运行件。基于Keepalived设计的服务模式能够真正做到主服务器和备份服务器故障时IP瞬间无缝交接。二者结合，可以构架出比较稳定的软件LB方案<br>
+VRRP:Virtual Router Redundancy Protocol虚拟路由冗余协议;将N台提供相同功能的路由器组成一个路由器组(Router Group)，这个组里面有一个master和多个backup，但在外界看来就像一台一样，构成虚拟路由器，拥有一个虚拟IP（vip，也就是路由器所在局域网内其他机器的默认路由），占有这个IP的master实际负责ARP相应和转发IP数据包，组中的其它路由器作为备份的角色处于待命状态。master会发组播消息，当backup在超时时间内收不到vrrp包时就认为master宕掉了，这时就需要根据VRRP的优先级来选举一个backup当master，保证路由器的高可用。</p>
+</blockquote>
+<ul>
+<li>主主模式</li>
+</ul>
+<blockquote>
+<p>即前端使用两台负载均衡服务器，互为主备，且都处于活动状态，同时各自绑定一个公网虚拟IP，提供负载均衡服务；当其中一台发生故障时，另一台接管发生故障服务器的公网虚拟IP（这时由非故障机器一台负担所有的请求）。这种方案，经济实惠，非常适合于当前架构环境。</p>
+</blockquote>
+<ol start="3">
+<li>虚拟主机</li>
+</ol>
+<blockquote>
+<p>虚拟主机是一种特殊的软硬件技术，它可以将网络上的每一台计算机分成多个虚拟主机，每个虚拟主机可以独立对外提供 www 服务，这样就可以实现一台主机对外提供多个 web 服务，每个虚拟主机之间是独立的，互不影响的<br>
+虚拟主机可以对应配置文件中的server<br>
+虚拟主机具体可以分为基于IP,port,域名(host文件)的配置</p>
+</blockquote>
+<ol start="4">
+<li>命令</li>
+</ol>
+<ul>
+<li>server :</li>
+<li>listen</li>
+<li>location : 匹配 url</li>
+<li>root 虚拟主机目录</li>
+<li>index 首页</li>
+<li>server_name</li>
+<li>upstream ：负载均衡</li>
+<li>keepalive_timeout</li>
+<li>work_process</li>
+<li>work_connection</li>
+<li>sendfile on</li>
+<li>proxy 命令</li>
+</ul>
+<ol start="5">
+<li>Nginx 优化</li>
+</ol>
+<blockquote>
+<p>利用 location expire 缓存静态文件<br>
+keepalive_imeout<br>
+调整worker_processes指定Nginx需要创建的worker进程数量，刚才有提到worker进程数一般设置为和CPU核心数一致。<br>
+调整worker_connections设置Nginx最多可以同时服务的客户端数。结合worker_processes配置可以获得每秒可以服务的最大客户端数。<br>
+启动gzip压缩，可以对文件大小进行压缩，减少了客户端http的传输带宽，可以大幅度提高页面的加载速度。<br>
+启用缓存，如果请求静态资源，启用缓存是可以大幅度提升性能的。</p>
+</blockquote>
+<ol start="6">
+<li></li>
+<li>Linux 命令</li>
+</ol>
+<blockquote>
+<p>crontab</p>
+</blockquote>
+<p>LVS VS NGINX<br>
+<a href="https://www.cnblogs.com/zhoading/p/11037708.html" target="_blank" rel="noopener">浅谈 Nginx和LVS的各种优缺点</a></p>
+<p>Nginx 实现热部署</p>
+<blockquote>
+<p>当通知 ngnix 重读配置文件的时候，master 进程会进行语法错误的判断。如果存在语法错误的话，返回错误，不进行装载；如果配置文件没有语法错误，那么 ngnix 也不会将新的配置调整到所有 worker 中。而是，先不改变已经建立连接的 worker，等待 worker 将所有请求结束之后，将原先在旧的配置下启动的 worker 杀死，然后使用新的配置创建新的 worker<br>
+修改配置文件nginx.conf后，重新生成新的worker进程，当然会以新的配置进行处理请求，而且新的请求必须都交给新的worker进程，至于老的worker进程，等把那些以前的请求处理完毕后，kill掉即可</p>
+</blockquote>
+<p>301 VS 302</p>
+<blockquote>
+<p>重定向指将网络请求重新确定方向到新的位置<br>
+场景</p>
+</blockquote>
+<ul>
+<li>网站调整(页面调整)或者页面变化,避免旧用户返回404;临时则用302,永久则用301(在开发里发现浏览器会记住301重定向)</li>
+</ul>
+<blockquote>
+<p>301 永久重定向 302 临时重定向(可以返回原来的地址)</p>
+</blockquote>
+<h3 id="pid-file">pid file</h3>
+<p>每个后台程序都会在/var/run目录下产生一个<name>.pid file 里面存储了程序pid的file<br>
+nginx.pid 中存储了master进程的file</name></p>
+<h3 id="文件锁">文件锁</h3>
+<p>nginx进程之间的通信机制包括 信号 信号量 文件锁<br>
+信号：SIGHUP<br>
+信号量：用来保证两个或多个代码段不被并发访问，是一种保证共享资源有序访问的工具<br>
+文件锁：<br>
+互斥锁</p>
+<h2 id="源码解析">源码解析</h2>
+<h3 id="配置文件解析">配置文件解析</h3>
+<p>配置块(’}‘结尾)和配置项(’;'结尾)</p>
+<p>分词之后,使用key-value对的方式解析存储配置项,而非语法分析的方式构建语法树<br>
+http配置文件为有3个组成部分;不同级别对应的配置项范围向下延伸</p>
+<ul>
+<li>void **main_conf:可包含多个server字段</li>
+<li>void **server_conf:包含多个loc字段</li>
+<li>void **loc_conf:loc字段可嵌套,最终合并为一层</li>
+</ul>
+<p>在解析到http模块时,会调用create_main_conf create_srv_conf  create_loc_conf 方法创建3组结构体,已在各模块存储其感兴趣的main级别配置项;同样解析server模块会调用create_srv_conf  create_loc_conf 相应结构体,存储server级别配置项</p>
+<h4 id="其他">其他</h4>
+<p>include 指令</p>
+<blockquote>
+<p>可以降低多个server字段的耦合程度,涉及递归调用parse函数</p>
+</blockquote>
+<p>location 嵌套</p>
+<blockquote>
+<p>server模块下可能有多个location块,而location块下可以嵌套存储location<br>
+loc结构体下有队列成员变量存储其他嵌套队列</p>
+</blockquote>
+<p>上下文继承</p>
+<h3 id="event模块">event模块</h3>
+<h3 id="mail-模块">mail 模块</h3>
+<h3 id="http-模块">http 模块</h3>
+<h4 id="数据存储结构">数据存储结构</h4>
+<p>在nginx运行过程中，有一个全局配置结构体ngx_cycle_t，其有一个属性conf_ctx，这个属性是存储nginx所有模块配置的一个数组，这个数组的长度与nginx模块的个数相同。不过需要注意的是，conf_ctx数组的第一维只会存储核心模块的配置，而其他模块对应的位置处的数组元素其实是为NULL。在conf_ctx中，各个核心模块配置结构体的存储位置与该模块在所有模块（包括非核心模块）中的相对位置是一致的，如下图所示为nginx存储核心模块的一个结构示意图<br>
+全局配置结构体ngx_cycle_t 下有 conf_ctx记录配置文件的信息<br>
+ngx_cycle_t-&gt;conf_ctx</p>
+<ul>
+<li>void **main_conf;   // http</li>
+<li>void **srv_conf;   // server</li>
+<li>void **loc_conf;   //location</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/04/工作求职/MyBatis/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -523,95 +855,6 @@ ThreadLocalMap 是一个 Entry数组,一个 Entry 定义时包含对于ThreadLoc
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//多线程共享进程的变量threadLocal,以该变量为key值去获取线程私有变量中的相关值,不涉及对于全局变量的修改,不会线程不安全,利用这种方法可以实现多变量的线程间共享,而且不必要放入参数中传进去</span><br><span class="line">public T get() &#123;</span><br><span class="line">        Thread t = Thread.currentThread();</span><br><span class="line">        ThreadLocalMap map = getMap(t);</span><br><span class="line">        if (map != null) &#123;</span><br><span class="line">            ThreadLocalMap.Entry e = map.getEntry(this);</span><br><span class="line">            if (e != null) &#123;</span><br><span class="line">                @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">                T result = (T)e.value;</span><br><span class="line">                return result;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return setInitialValue();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 <h4 id="sleep">sleep</h4>
 <p><a href="https://www.jianshu.com/p/0964124ae822" target="_blank" rel="noopener">Java线程源码解析之yield和sleep</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/工作求职/资源收集/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/02/工作求职/资源收集/" class="post-title-link" itemprop="url">资源收集</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-02 00:09:39" itemprop="dateCreated datePublished" datetime="2020-09-02T00:09:39+08:00">2020-09-02</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-15 10:57:42" itemprop="dateModified" datetime="2021-01-15T10:57:42+08:00">2021-01-15</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p><a href="https://github.com/Snailclimb/" target="_blank" rel="noopener">https://github.com/Snailclimb/JavaGuide</a></p>
-<p>JavaGuide<br>
-多线程文章推荐</p>
-<ul>
-<li><a href="https://github.com/RedSpider1/concurrent" target="_blank" rel="noopener">深入浅出Java多线程</a> , <a href="https://redspider.gitbook.io/concurrent" target="_blank" rel="noopener">网页浏览</a></li>
-</ul>
-<p>Spring Boot</p>
-<ul>
-<li><a href="https://juejin.im/post/6844904024286691335#heading-80" target="_blank" rel="noopener">SpringBoot 就这一篇全搞定</a></li>
-<li><a href="https://github.com/dyc87112/SpringBoot-Learning/tree/master/2.1.x" target="_blank" rel="noopener">Spring Boot基础教程（2.x版本）</a></li>
-<li><a href="https://github.com/zhshuixian/learn-spring-boot-2" target="_blank" rel="noopener">Spring Boot 2.X 实战</a> <a href="https://github.com/zhshuixian/learn-spring-boot-2" target="_blank" rel="noopener">在线阅读</a></li>
-</ul>
-<p>Nginx</p>
-<ul>
-<li><a href="https://juejin.im/post/6844904021552005127" target="_blank" rel="noopener">Nginx通关攻略</a></li>
-</ul>
-<p>Mysql</p>
-<ul>
-<li><a href="https://juejin.im/post/6850037271233331208" target="_blank" rel="noopener">Mysql</a></li>
-</ul>
-<p>文件资料</p>
-<ul>
-<li><a href="D:%5CDownload%5CBaiduNetdisk%5Cbat%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB" target="_blank" rel="noopener">Local</a></li>
-</ul>
-<p><a href="https://github.com/yttsam/interview_internal_reference" target="_blank" rel="noopener">面试问题收集</a></p>
 
       
     </div>
@@ -1493,6 +1736,95 @@ PROPAGATE	值为-3，表示下一次的共享式同步状态获取将会无条�
 CANCELLED	值为1，由于超时或中断，该节点被取消。 节点进入该状态将不再变化。特别是具有取消节点的线程永远不会再次阻塞<br>
 INITIAL	值为0，初始状态</p>
 <p>condition  配合 lock 因为condition 的await 和 singal不是线程 安全的</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/02/工作求职/资源收集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/02/工作求职/资源收集/" class="post-title-link" itemprop="url">资源收集</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-02 00:09:39" itemprop="dateCreated datePublished" datetime="2020-09-02T00:09:39+08:00">2020-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-15 10:57:42" itemprop="dateModified" datetime="2021-01-15T10:57:42+08:00">2021-01-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><a href="https://github.com/Snailclimb/" target="_blank" rel="noopener">https://github.com/Snailclimb/JavaGuide</a></p>
+<p>JavaGuide<br>
+多线程文章推荐</p>
+<ul>
+<li><a href="https://github.com/RedSpider1/concurrent" target="_blank" rel="noopener">深入浅出Java多线程</a> , <a href="https://redspider.gitbook.io/concurrent" target="_blank" rel="noopener">网页浏览</a></li>
+</ul>
+<p>Spring Boot</p>
+<ul>
+<li><a href="https://juejin.im/post/6844904024286691335#heading-80" target="_blank" rel="noopener">SpringBoot 就这一篇全搞定</a></li>
+<li><a href="https://github.com/dyc87112/SpringBoot-Learning/tree/master/2.1.x" target="_blank" rel="noopener">Spring Boot基础教程（2.x版本）</a></li>
+<li><a href="https://github.com/zhshuixian/learn-spring-boot-2" target="_blank" rel="noopener">Spring Boot 2.X 实战</a> <a href="https://github.com/zhshuixian/learn-spring-boot-2" target="_blank" rel="noopener">在线阅读</a></li>
+</ul>
+<p>Nginx</p>
+<ul>
+<li><a href="https://juejin.im/post/6844904021552005127" target="_blank" rel="noopener">Nginx通关攻略</a></li>
+</ul>
+<p>Mysql</p>
+<ul>
+<li><a href="https://juejin.im/post/6850037271233331208" target="_blank" rel="noopener">Mysql</a></li>
+</ul>
+<p>文件资料</p>
+<ul>
+<li><a href="D:%5CDownload%5CBaiduNetdisk%5Cbat%E9%9D%A2%E8%AF%95%E9%A2%98%E6%B1%87%E6%80%BB" target="_blank" rel="noopener">Local</a></li>
+</ul>
+<p><a href="https://github.com/yttsam/interview_internal_reference" target="_blank" rel="noopener">面试问题收集</a></p>
 
       
     </div>
@@ -3190,494 +3522,6 @@ mysql的插入和更新涉及页的分裂</p>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/28/工作求职/面经收集/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/28/工作求职/面经收集/" class="post-title-link" itemprop="url">面经收集</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-28 15:30:33" itemprop="dateCreated datePublished" datetime="2020-08-28T15:30:33+08:00">2020-08-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-15 10:57:59" itemprop="dateModified" datetime="2021-01-15T10:57:59+08:00">2021-01-15</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Java 后台开发<br>
-<a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">Github 知识总结</a></p>
-<ul>
-<li><a href="https://www.nowcoder.com/discuss/491234?channel=1013&amp;source_id=home_feed" target="_blank" rel="noopener">美团一面</a></li>
-</ul>
-<p>面试问题收集：</p>
-<ol>
-<li>
-<p>volatile不是线程安全<br>
-线程安全必须保证原子性，可见性，有序性。而volatile只能保证可见性和有序性,volatile 只能保证 可见性,有序性 不能保证操作的原子性,建议使用CAS操作 利用cocurrent.atomic包下面的封装</p>
-</li>
-<li>
-<p>配置线程池需要考虑哪些因素</p>
-</li>
-</ol>
-<blockquote>
-<p>从任务的优先级，任务的执行时间长短，任务的性质（CPU密集/ IO密集），任务的依赖关系这四个角度来分析。并且近可能地使用有界的工作队列。<br>
-性质不同的任务可用使用不同规模的线程池分开处理：</p>
-</blockquote>
-<ul>
-<li>CPU密集型：尽可能少的线程，Ncpu+1</li>
-<li>IO密集型：尽可能多的线程, Ncpu*2，比如数据库连接池</li>
-<li>混合型：CPU密集型的任务与IO密集型任务的执行时间差别较小，拆分为两个线程池；否则没有必要拆分。</li>
-</ul>
-<ol start="3">
-<li>集群基本概念—脑裂的产生和解决方案<br>
-<a href="https://www.cnblogs.com/kevingrace/p/12433503.html" target="_blank" rel="noopener">脑裂</a></li>
-</ol>
-<ul>
-<li>限定发送人数,确定集群有效无效</li>
-<li>冗余通信(物理)</li>
-<li>仲裁方式</li>
-<li>磁盘锁定</li>
-</ul>
-<ol start="4">
-<li>Map 接口及其实现类</li>
-</ol>
-<blockquote>
-<p>HashMap<br>
-LinkedHashMap<br>
-TreeMap<br>
-HashTable<br>
-WeakHashMap:以弱键 实现的基于哈希表的 Map。在 WeakHashMap 中，当某个键不再正常使用时，将自动移除其条目。更精确地说，对于一个给定的键，其映射的存在并不阻止垃圾回收器对该键的丢弃，这就使该键成为可终止的，被终止，然后被回收<br>
-EnumMap</p>
-</blockquote>
-<ol start="5">
-<li>StringBuilder StringBuffer</li>
-</ol>
-<blockquote>
-<p>StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。<br>
-由于 StringBuilder 相较于 StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。</p>
-</blockquote>
-<ol start="6">
-<li>
-<p>juc</p>
-</li>
-<li>
-<p>几个垃圾回收器（3对+1），Serial与Serial Old ,ps和po  ，pn和cms，g1</p>
-</li>
-<li>
-<p>对象创建的生命周期(栈，线程本地，堆)，对象的分配(一般对象，大对象，一直存在的对象)，如何判断一个对象是否是垃圾对象(介绍了两个方法，各自特点)，强软弱需引用，有哪些垃圾回收算法（4个方法），各自的特点，还说了几个垃圾回收器（3对+1），Serial与Serial Old ,ps和po  ，pn和cms，g1，还介绍了各自的优点缺点，jdk怎么用的，stw的情况，还说了如何调优，jdk1.8默认ps po的调优（介绍了几个指令），最后还说了，我用的一直都是idea默认版本pspo。</p>
-</li>
-<li>
-<p>AOP原理了解吗？</p>
-</li>
-</ol>
-<blockquote>
-<p>恒切面;切点；通知</p>
-</blockquote>
-<ol start="10">
-<li>
-<p>shard</p>
-</li>
-<li>
-<p>分布式session</p>
-</li>
-</ol>
-<ul>
-<li>粘性session：粘性Session是指将用户锁定到某一个服务器上;在nginx出配置;但容错性低</li>
-<li>服务器session复制：修改 传播所有机器</li>
-<li>session共享机制：reids共享</li>
-</ul>
-<ol start="12">
-<li>MySQL Explain详解</li>
-</ol>
-<blockquote>
-<p>explain这个命令来查看一个这些SQL语句的执行计划，查看该SQL语句有没有使用上了索引，有没有做全表扫描，这都可以通过explain命令来查看</p>
-</blockquote>
-<ol start="13">
-<li>concurrenthashmap 是否线程安全?</li>
-</ol>
-<blockquote>
-<p>concurrenthashmap的线程安全是指他的put和get操作是原子操作，是线程安全的;outIfabsent</p>
-</blockquote>
-<ol start="14">
-<li>在一个千万级的数据库查寻中，如何提高查询效率？</li>
-</ol>
-<ul>
-<li>分表：femmale 枚举字段 分表</li>
-<li>优化查询,避免全表查询,建立并使用索引</li>
-<li>应尽可能的避免更新索引数据列(insert)，因为索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新索引数据列，那么需要考虑是否应将该索引建为索引</li>
-<li>避免临时操作</li>
-<li>尽量使用数字型字段，若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。</li>
-<li>避免全表查询
-<ul>
-<li>where 子句中使用!=或&lt;&gt;</li>
-<li>where 子句中使用 or 来连接条件</li>
-<li>in 和 not in  like</li>
-</ul>
-</li>
-</ul>
-<ol start="15">
-<li>微信红包算法</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public static double getRandomMoney(RedPackage _redPackage) &#123;</span><br><span class="line">        // remainSize 剩余的红包数量</span><br><span class="line">        // remainMoney 剩余的钱</span><br><span class="line">        if (_redPackage.remainSize == 1) &#123;</span><br><span class="line">            _redPackage.remainSize--;</span><br><span class="line">            return (double) Math.round(_redPackage.remainMoney * 100) / 100;</span><br><span class="line">        &#125;</span><br><span class="line">        Random r = new Random();</span><br><span class="line">        double min = 0.01; //</span><br><span class="line">        double max = _redPackage.remainMoney / _redPackage.remainSize * 2;</span><br><span class="line">        double money = r.nextDouble() * max;</span><br><span class="line">        money = money &lt;= min ? 0.01 : money;</span><br><span class="line">        money = Math.floor(money * 100) / 100;</span><br><span class="line">        _redPackage.remainSize--;</span><br><span class="line">        _redPackage.remainMoney -= money;</span><br><span class="line">        return money;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ol start="16">
-<li>为什么用B+树？</li>
-</ol>
-<blockquote>
-<p>磁盘IO开销小 栈空间较小<br>
-查找比较稳定。效率比较高</p>
-</blockquote>
-<ol start="17">
-<li>解决哈希冲突有如下的方法：</li>
-</ol>
-<blockquote>
-<p>开放定址法(线性探测，二次探测，伪随机探测)<br>
-链地址法<br>
-再散列法（双重散列，多重散列）<br>
-建立一个公共溢出区</p>
-</blockquote>
-<ol start="18">
-<li>外排序</li>
-</ol>
-<blockquote>
-<p>利用外存也就是磁盘进行排序的一种简称。<br>
-典型的应用是hadoop　的 mapreduce 的merge 阶段(map shuffle reduce)</p>
-</blockquote>
-<ol start="19">
-<li>秒杀怎么解决超卖</li>
-</ol>
-<blockquote>
-<p>redis 缓存数据库压力;消息队列;分步骤 下单 和 真正获取订单;限制用户访问频率和次数</p>
-</blockquote>
-<ol start="20">
-<li>消息队列</li>
-</ol>
-<blockquote>
-<p>异步通信:降低服务耦合;提高并发度;流量削峰</p>
-</blockquote>
-<ol start="21">
-<li>HashMap 30分钟<br>
-<a href="https://blog.csdn.net/zhengwangzw/article/details/104889549" target="_blank" rel="noopener"> HashMap 30分钟</a></li>
-</ol>
-<ul>
-<li>因为1.7头插法扩容时，头插法会使链表发生反转，多线程环境下会产生环；</li>
-</ul>
-<ol start="22">
-<li>
-<p>2-3树到红黑树</p>
-</li>
-<li>
-<p>存储过程</p>
-</li>
-</ol>
-<blockquote>
-<p>存储过程可以说是一个记录集吧，它是由一些T-SQL语句组成的代码块，这些T-SQL语句代码像一个方法一样实现一些功能（对单表或多表的增删改查），然后再给这个代码块取一个名字，在用到这个功能的时候调用他就<br>
-由于数据库执行动作时，是先编译后执行的。然而存储过程是一个编译过的代码块，所以执行效率要比T-SQL语句高<br>
-一个存储过程在程序在网络中交互时可以替代大堆的T-SQL语句，所以也能降低网络的通信量，提高通信</p>
-</blockquote>
-<ol start="24">
-<li>linux 管道</li>
-</ol>
-<blockquote>
-<p>管道是Linux中很重要的一种通信方式,是把一个程序的输出直接连接到另一个程序的输入,常说的管道多是指无名管道,无名管道只能用于具有亲缘关系的进程之间，这是它与有名管道的最大区别。</p>
-</blockquote>
-<ul>
-<li>管道是一个固定大小的缓冲区。在Linux中，该缓冲区的大小为1页，即4K字节，使得它的大小不象文件那样不加检验地增长。使用单个固定缓冲区也会带来问题，比如在写管道时可能变满，当这种情况发生时，随后对管道的write()调用将默认地被阻塞</li>
-<li>读取进程也可能工作得比写进程快。当所有当前进程数据已被读取时，管道变空。当这种情况发生时，一个随后的read()调用将默认地被阻塞，等待某些数据被写入，这解决了read()调用返回文件结束的问题。</li>
-<li>半双工</li>
-</ul>
-<ol start="25">
-<li>request和response</li>
-</ol>
-<blockquote>
-<p>Web服务器收到客户端的http请求，会针对每一次请求，分别创建一个用于代表请求的request对象、和代表响应的response对象</p>
-</blockquote>
-<ol start="26">
-<li>NIO</li>
-</ol>
-<blockquote>
-<p>NIO主要有三大核心部分：Channel(通道)，Buffer(缓冲区), Selector。传统IO基于字节流和字符流进行操作，而NIO基于Channel和Buffer(缓冲区)进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector(选择区)用于监听多个通道</p>
-</blockquote>
-<ol start="27">
-<li>HashMap HashTable CocurrentHashmap LinkedHashMap TreeHashMap</li>
-</ol>
-<blockquote>
-<p>JDK1.7版本锁的粒度是基于Segment的，包含多个HashEntry(ReentrantLock+Segment+HashEntry): volatile HashEntry&lt;K,V&gt; 确保可见性<br>
-DK1.8锁的粒度就是HashEntry（首节点）(synchronized+CAS+HashEntry+红黑树)</p>
-</blockquote>
-<ol start="28">
-<li>MVC 处理流程</li>
-</ol>
-<blockquote>
-<p>用户发送请求至前端控制器DispatcherServlet<br>
-DispatcherServlet收到请求调用HandlerMapping处理器映射器<br>
-处理器映射器找到具体的处理器(可以根据xml配置、注解进行查找)，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet<br>
-DispatcherServlet调用HandlerAdapter处理器适配器<br>
-HandlerAdapter经过适配调用具体的处理器(Controller，也叫后端控制器)<br>
-Controller执行完成返回ModelAndView。<br>
-HandlerAdapter将controller执行结果ModelAndView返回给DispatcherServlet。<br>
-DispatcherServlet将ModelAndView传给ViewReslover视图解析器<br>
-响应客户</p>
-</blockquote>
-<ol start="29">
-<li>静态方法和实例方法</li>
-</ol>
-<blockquote>
-<p>从逻辑关系来看：若方法与类的实例不存在逻辑上的联系，那么用静态方法。反之则最好使用实例化方法。<br>
-从性能角度:若方法经常被调用，则用静态方法更佳，因为这样可以避免频繁地实例化对象导致的资源占用，提高性能。然而，由于静态的东西，在构造的时候是在堆中声称的，在结束之前不会被释放与改变，会一直占用内存空间，所以不宜有过多的静态成员。<br>
-从线程并发的角度考虑:如果并发的可能性很大，则不适宜使用静态方法。如果并发的可能性很小，或者通过简单的同步操作可以保证线程安全，那就可以考虑使用静态方法</p>
-</blockquote>
-<ol start="33">
-<li>raft<br>
-leader candidate follower</li>
-</ol>
-<blockquote>
-<p>leader负责对整个集群进行控制管理，同时接受客户端的请求。在整个集群中，不能同时出现多个leader，任何时刻只会有一个或者没有。<br>
-candidate就是处于选主阶段的状态，要么选举成功成为leader，要么退回到follower。<br>
-一般情况下大部分服务器都处于follower状态。跟随者可以理解为master-slave结构中的slave，就像是将军领导下的小兵。follower不会主动向集群发起消息</p>
-</blockquote>
-<ol start="34">
-<li>
-<p>内连接左连接，完整型约束</p>
-</li>
-<li>
-<p>top<br>
-P：CPU排序；M：排序</p>
-</li>
-<li>
-<p>如何保障缓存一致性(缓存与数据库的双写一致性)<br>
-共识</p>
-</li>
-</ol>
-<ul>
-<li>缓存必须要有过期时间</li>
-<li>保证数据库跟缓存的最终一致性即可，不必追求强一致性<br>
-<a href="https://juejin.im/post/6844903941646319623" target="_blank" rel="noopener">数据库与缓存数据一致性问题</a><br>
-更新缓存的的Design Pattern有四种</li>
-<li>Cache Aside Pattern
-<ul>
-<li>失效：应用程序先从cache取数据，没有得到，则从数据库中取数据，成功后，放到缓存中</li>
-<li>命中：应用程序从cache中取数据，取到后返回。</li>
-<li>更新：先把数据存到数据库中，成功后，再让缓存失效；更新的操作还有：
-<ul>
-<li>先更新数据库,再写缓存 可能出现 AB 先后更新数据库,但更新缓存的顺序为BA 导致脏数据;其次如果并不确定该数据是否被频繁访问,如果每次更新数据库都更新缓存,可能造成缓存空间的浪费;所以更新不可取,删除更好(需求方主动触发缓存更新)</li>
-<li>先更新缓存,然后更新数据库：更新操作可能失败,导致数据可能丢失,不能保证最终一致性(应当以数据库为主);同时也存在操作乱序的问题</li>
-<li>先删除缓存,然后更新数据库：可能在 A在删除缓存 和更新数据库之间 出现B 缓存不命中,读取脏值到redis中的情况(在读写分离的情况下更为严重)</li>
-<li>先更新数据库,然后删除缓存：可能出现缓存失效的情况下,A-&gt;读取旧值-&gt;B更新数据库-&gt;B删除缓存-&gt;A写旧值到到缓存(是否可以通过写redis时要求比较值的时间戳);但可能性低 同时主从读写分离的情况下,可能出现从库数据未脏数据的情况</li>
-</ul>
-</li>
-<li>定时删除缓存(消息队列,过期时间);比较高频数据的写时间戳</li>
-<li>删除缓存可能导致的缓存击穿 可以利用锁操作( set 在发现缓存为空时,竞争读写数据库的机会)</li>
-</ul>
-</li>
-</ul>
-<p>更强的一致性实现：分布式读写锁(共享读锁,在写锁存在的情况下不可以申请读锁)</p>
-<ol start="37">
-<li>redis 锁<br>
-单节点 锁INCR、SETNX、SET</li>
-</ol>
-<ul>
-<li>SETNX：排他性;该命令只会在键不存在的情况下才会为键设置值,这样当别的进程再去使用这个命令设置这个键的时候就会失败进而无法获得锁</li>
-<li>避免死锁：在获得setnx 同时设置锁的过期时间;</li>
-<li>释放锁时检查:A在获得锁之后,超时自动释放而不自知,但后续主动释放已经被B获得的锁,破坏了B涉及的互斥过程。</li>
-</ul>
-<p>分布式锁<br>
-共识算法<br>
-raft paxos gossip</p>
-<p>CopyOnWriteArrayList 线程安全</p>
-<blockquote>
-<p>CopyOnWriteArrayList 不强调线程之间的同步,强调数据的共享(对于可能的写不干扰其他读)<br>
-对于所有涉及修改的操作,加锁,其实现都是复制一个与原本数据已知的数组对象,然后把指针指向这个对象;相当于线程的私有变量,随着线程的消亡而消亡(可能会面临内存泄漏的问题)<br>
-适合于读多写少的场景,但是对于数据量比较大的场景,复制会比较消耗时间,在完成之前访问,仍然获得旧数据</p>
-</blockquote>
-<p>如何存储一个弹幕系统的弹幕，使用redis的什么类型，怎么保证热点数据，每秒会产生大量的数据，redis扛不住怎么办<br>
-<a href="https://www.cnblogs.com/java920043111/p/9286123.html" target="_blank" rel="noopener">bilibili 高并发实时弹幕系统的实现</a><br>
-消息队列  udp广播</p>
-<p>spring AOP，JDK和CGlib的区别，除了针对接口和类以外的不同</p>
-<blockquote>
-<p>java动态代理是利用反射机制生成一个实现代理接口的代理类，在调用具体方法前调用InvokeHandler来处理。</p>
-<ul>
-<li>JDK代理是不需要以来第三方的库，只要要JDK环境就可以进行代理<br>
-而cglib动态代理是利用asm开源包，对代理对象类的class文件加载进来，通过修改其字节码生成子类来处理。</li>
-<li>CGLib 必须依赖于CGLib的类库</li>
-</ul>
-</blockquote>
-<p>实现 ReadWriteLock</p>
-<p><a href="https://www.cnblogs.com/yihujiu/p/6379279.html" target="_blank" rel="noopener">大量日志查找</a><br>
-HAdoop mapreduce</p>
-<p>Docker容器本质上是宿主机上的进程，卷相当于容器的磁盘。</p>
-<blockquote>
-<p>Docker通过nampespace实现了资源隔离，通过cgroups实现了资源限制，通过写时复制机制（copy-on-write）实现了高效的文件操作。</p>
-</blockquote>
-<p>轻量级锁</p>
-<blockquote>
-<p>他的出现并不是代替重量级锁，而是在没有多线程竞争的前提下，减少系统互斥量操作产生的性能消耗<br>
-锁战友的而时间步长</p>
-</blockquote>
-<p><a href="https://blog.csdn.net/scdn_cp/article/details/86491792" target="_blank" rel="noopener">无锁 -&gt; 偏向锁 -&gt; 轻量级 -&gt; 重量级</a></p>
-<ul>
-<li>初期锁对象刚创建时，还没有任何线程来竞争，对象的Mark Word是下图的第一种情形，这偏向锁标识位是0，锁状态01，说明该对象处于无锁状态</li>
-<li>当有一个线程来竞争锁时，先用偏向锁，表示锁对象偏爱这个线程，这个线程要执行这个锁关联的任何代码，不需要再做任何检查和切换，这种竞争不激烈的情况下，效率非常高。这时Mark Word会记录自己偏爱的线程的ID，把该线程当做自己的熟人。如下图第二种情形</li>
-<li>当有两个线程开始竞争这个锁对象，情况发生变化了，不再是偏向（独占）锁了，锁会升级为轻量级锁(monitorenter)，两个线程公平竞争，哪个线程先占有锁对象并执行代码，锁对象的Mark Word就执行哪个线程的栈帧中的锁记录。如下图第三种情形</li>
-<li>如果竞争的这个锁对象的线程更多，导致了更多的切换和等待，JVM会把该锁对象的锁升级为重量级锁，这个就叫做同步锁，这个锁对象Mark Word再次发生变化，会指向一个监视器对象，这个监视器对象用集合的形式，来登记和管理排队的线程</li>
-</ul>
-<p><a href="https://www.xttblog.com/?p=4881" target="_blank" rel="noopener">Java为什么要引入偏向锁？</a><br>
-Java 对象头 记录 锁的状态以及当前线程ID 或时间戳<br>
-堆栈中记录着当前持有的锁的对象</p>
-<p><a href="https://juejin.im/post/6844904023540105229" target="_blank" rel="noopener">Class.forName &amp; ClassLoader.loadClass 比较</a><br>
-<a href="https://juejin.im/post/6873691965892853767" target="_blank" rel="noopener">new Object()到底占用几个字节，看完这篇就彻底明白了</a></p>
-<p>mysql里什么是检查点、保存点和中间点？：w</p>
-<p>Object 有哪些方法？</p>
-<ul>
-<li>hashCode</li>
-<li>equals 之间判断地址是否相等,可重写</li>
-<li>clone  默认仅仅是复制引用,浅拷贝; 重写该接口必须 实现Cloneable接口</li>
-<li>toString 对象名@hashcode</li>
-<li>notify notifyAll wat</li>
-<li>protected finalize 垃圾回收器准备释放内存的时候，会先调用finalize(),并且只会调用一次(可能会出现方法)</li>
-</ul>
-<h2 id="算法">算法</h2>
-<h3 id="排序算法">排序算法</h3>
-<table>
-<thead>
-<tr>
-<th>算法名</th>
-<th>稳定</th>
-<th>时间复杂度</th>
-<th>空间复杂度</th>
-<th>核心思想</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>插入排序</td>
-<td>稳定</td>
-<td>O(n^2)</td>
-<td>O(1)</td>
-<td>在数组中实现,第一个节点构成的集合是有序的,然后依次增加集合相邻的元素进入,采取后移和插入的方式实现集合内的有序,直至集合包含所有元素</td>
-</tr>
-<tr>
-<td>冒泡排序</td>
-<td>稳定</td>
-<td>O(n^2)</td>
-<td>O(1)</td>
-<td>循环的比较相邻的值,如果前者大于后者则调换位置,一次遍历可以把最大的放置在最后,然后可以放置次大</td>
-</tr>
-<tr>
-<td>归并排序</td>
-<td>稳定</td>
-<td>O(nlogn)</td>
-<td>O(n)</td>
-<td>将数组分割为N个集合,集合内归并排序,然后合并集合</td>
-</tr>
-<tr>
-<td>计数排序</td>
-<td>稳定</td>
-<td>O(n+k)</td>
-<td>O(n+k)</td>
-<td>在数组最大值和最小值的空间内,统计数组中每个元素出现的次数,然后输出即可</td>
-</tr>
-<tr>
-<td>桶排序</td>
-<td>稳定</td>
-<td>O(n+k)</td>
-<td>O(n+k)</td>
-<td>可以把某个范围定义为桶,把元素分割到各个桶内,桶内使用任何排序使得有序,然后整体有序</td>
-</tr>
-<tr>
-<td>基数排序</td>
-<td>稳定</td>
-<td>O(n*k)</td>
-<td>O(n+k)</td>
-<td>根据数组元素,将元素分为N个关键字,每次针对一个关键字排序,N个关键字排序之后保持有序</td>
-</tr>
-<tr>
-<td>希尔排序</td>
-<td>不稳定</td>
-<td>O(n^1.3)</td>
-<td>O(1)</td>
-<td>设定步长为N,共可得到N个每个元素相邻下标为N的元素集合,集合内部插入排序,然后 不断缩减步长到1;由于 减少了集合间元素的比较,在当步长越小,集合也变得大体有序</td>
-</tr>
-<tr>
-<td>选择排序</td>
-<td>不稳定</td>
-<td>O(n^2)</td>
-<td>O(1)</td>
-<td>选择最小/最大值到开头或者末尾,在剩下的元素中选择最小/最大,添加进之前的有序末尾</td>
-</tr>
-<tr>
-<td>堆排序</td>
-<td>不稳定</td>
-<td>O(nlogn)</td>
-<td>O(1）</td>
-<td>基于完全二叉树,所以可以使用数组实现; 首先根据N个输入元素构建完全而二叉树;然后从节点N/2——1开始自下而上调整树,调整最大堆;随后将最大值和节点N互换,自上而下调整树,再次得到最大堆,持续可得到有序输出</td>
-</tr>
-<tr>
-<td>快速排序</td>
-<td>不稳定</td>
-<td>O(nlogn)</td>
-<td>O(nlogn)</td>
-<td>通过选定一个基准,将所有小于该基准的放在左边,大于该基准的放在右边,随后对基准左右分别快排,获得全局有序</td>
-</tr>
-</tbody>
-</table>
-<p>mysql 事务的实现</p>
-<blockquote>
-<p>锁+MVCC<br>
-锁：读写锁/共享独占锁(二阶段锁提交)+间隙锁/临界锁(在二段加锁的情况下,可能导致死锁)<br>
-MVCC：undolog 实现未提交事务的原子性(redolog 保证已提交事务的持久性)<br>
-MVCC 是快照读,不能读创建readview之后提交的事务的更新,可以添加for update 强制当前读<br>
-innodb的RR隔离级别下,读自动开启行锁和间隙锁构成next-key锁,配合MVCC 解决幻读或者直接串行化</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -3749,7 +3593,7 @@ innodb的RR隔离级别下,读自动开启行锁和间隙锁构成next-key锁,�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-count">107</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

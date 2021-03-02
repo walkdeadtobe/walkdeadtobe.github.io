@@ -185,6 +185,494 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/28/工作求职/面经收集/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/28/工作求职/面经收集/" class="post-title-link" itemprop="url">面经收集</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-28 15:30:33" itemprop="dateCreated datePublished" datetime="2020-08-28T15:30:33+08:00">2020-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-15 10:57:59" itemprop="dateModified" datetime="2021-01-15T10:57:59+08:00">2021-01-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Java 后台开发<br>
+<a href="https://github.com/Snailclimb/JavaGuide" target="_blank" rel="noopener">Github 知识总结</a></p>
+<ul>
+<li><a href="https://www.nowcoder.com/discuss/491234?channel=1013&amp;source_id=home_feed" target="_blank" rel="noopener">美团一面</a></li>
+</ul>
+<p>面试问题收集：</p>
+<ol>
+<li>
+<p>volatile不是线程安全<br>
+线程安全必须保证原子性，可见性，有序性。而volatile只能保证可见性和有序性,volatile 只能保证 可见性,有序性 不能保证操作的原子性,建议使用CAS操作 利用cocurrent.atomic包下面的封装</p>
+</li>
+<li>
+<p>配置线程池需要考虑哪些因素</p>
+</li>
+</ol>
+<blockquote>
+<p>从任务的优先级，任务的执行时间长短，任务的性质（CPU密集/ IO密集），任务的依赖关系这四个角度来分析。并且近可能地使用有界的工作队列。<br>
+性质不同的任务可用使用不同规模的线程池分开处理：</p>
+</blockquote>
+<ul>
+<li>CPU密集型：尽可能少的线程，Ncpu+1</li>
+<li>IO密集型：尽可能多的线程, Ncpu*2，比如数据库连接池</li>
+<li>混合型：CPU密集型的任务与IO密集型任务的执行时间差别较小，拆分为两个线程池；否则没有必要拆分。</li>
+</ul>
+<ol start="3">
+<li>集群基本概念—脑裂的产生和解决方案<br>
+<a href="https://www.cnblogs.com/kevingrace/p/12433503.html" target="_blank" rel="noopener">脑裂</a></li>
+</ol>
+<ul>
+<li>限定发送人数,确定集群有效无效</li>
+<li>冗余通信(物理)</li>
+<li>仲裁方式</li>
+<li>磁盘锁定</li>
+</ul>
+<ol start="4">
+<li>Map 接口及其实现类</li>
+</ol>
+<blockquote>
+<p>HashMap<br>
+LinkedHashMap<br>
+TreeMap<br>
+HashTable<br>
+WeakHashMap:以弱键 实现的基于哈希表的 Map。在 WeakHashMap 中，当某个键不再正常使用时，将自动移除其条目。更精确地说，对于一个给定的键，其映射的存在并不阻止垃圾回收器对该键的丢弃，这就使该键成为可终止的，被终止，然后被回收<br>
+EnumMap</p>
+</blockquote>
+<ol start="5">
+<li>StringBuilder StringBuffer</li>
+</ol>
+<blockquote>
+<p>StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。<br>
+由于 StringBuilder 相较于 StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。</p>
+</blockquote>
+<ol start="6">
+<li>
+<p>juc</p>
+</li>
+<li>
+<p>几个垃圾回收器（3对+1），Serial与Serial Old ,ps和po  ，pn和cms，g1</p>
+</li>
+<li>
+<p>对象创建的生命周期(栈，线程本地，堆)，对象的分配(一般对象，大对象，一直存在的对象)，如何判断一个对象是否是垃圾对象(介绍了两个方法，各自特点)，强软弱需引用，有哪些垃圾回收算法（4个方法），各自的特点，还说了几个垃圾回收器（3对+1），Serial与Serial Old ,ps和po  ，pn和cms，g1，还介绍了各自的优点缺点，jdk怎么用的，stw的情况，还说了如何调优，jdk1.8默认ps po的调优（介绍了几个指令），最后还说了，我用的一直都是idea默认版本pspo。</p>
+</li>
+<li>
+<p>AOP原理了解吗？</p>
+</li>
+</ol>
+<blockquote>
+<p>恒切面;切点；通知</p>
+</blockquote>
+<ol start="10">
+<li>
+<p>shard</p>
+</li>
+<li>
+<p>分布式session</p>
+</li>
+</ol>
+<ul>
+<li>粘性session：粘性Session是指将用户锁定到某一个服务器上;在nginx出配置;但容错性低</li>
+<li>服务器session复制：修改 传播所有机器</li>
+<li>session共享机制：reids共享</li>
+</ul>
+<ol start="12">
+<li>MySQL Explain详解</li>
+</ol>
+<blockquote>
+<p>explain这个命令来查看一个这些SQL语句的执行计划，查看该SQL语句有没有使用上了索引，有没有做全表扫描，这都可以通过explain命令来查看</p>
+</blockquote>
+<ol start="13">
+<li>concurrenthashmap 是否线程安全?</li>
+</ol>
+<blockquote>
+<p>concurrenthashmap的线程安全是指他的put和get操作是原子操作，是线程安全的;outIfabsent</p>
+</blockquote>
+<ol start="14">
+<li>在一个千万级的数据库查寻中，如何提高查询效率？</li>
+</ol>
+<ul>
+<li>分表：femmale 枚举字段 分表</li>
+<li>优化查询,避免全表查询,建立并使用索引</li>
+<li>应尽可能的避免更新索引数据列(insert)，因为索引数据列的顺序就是表记录的物理存储顺序，一旦该列值改变将导致整个表记录的顺序的调整，会耗费相当大的资源。若应用系统需要频繁更新索引数据列，那么需要考虑是否应将该索引建为索引</li>
+<li>避免临时操作</li>
+<li>尽量使用数字型字段，若只含数值信息的字段尽量不要设计为字符型，这会降低查询和连接的性能，并会增加存储开销。这是因为引擎在处理查询和连接时会逐个比较字符串中每一个字符，而对于数字型而言只需要比较一次就够了。</li>
+<li>避免全表查询
+<ul>
+<li>where 子句中使用!=或&lt;&gt;</li>
+<li>where 子句中使用 or 来连接条件</li>
+<li>in 和 not in  like</li>
+</ul>
+</li>
+</ul>
+<ol start="15">
+<li>微信红包算法</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public static double getRandomMoney(RedPackage _redPackage) &#123;</span><br><span class="line">        // remainSize 剩余的红包数量</span><br><span class="line">        // remainMoney 剩余的钱</span><br><span class="line">        if (_redPackage.remainSize == 1) &#123;</span><br><span class="line">            _redPackage.remainSize--;</span><br><span class="line">            return (double) Math.round(_redPackage.remainMoney * 100) / 100;</span><br><span class="line">        &#125;</span><br><span class="line">        Random r = new Random();</span><br><span class="line">        double min = 0.01; //</span><br><span class="line">        double max = _redPackage.remainMoney / _redPackage.remainSize * 2;</span><br><span class="line">        double money = r.nextDouble() * max;</span><br><span class="line">        money = money &lt;= min ? 0.01 : money;</span><br><span class="line">        money = Math.floor(money * 100) / 100;</span><br><span class="line">        _redPackage.remainSize--;</span><br><span class="line">        _redPackage.remainMoney -= money;</span><br><span class="line">        return money;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="16">
+<li>为什么用B+树？</li>
+</ol>
+<blockquote>
+<p>磁盘IO开销小 栈空间较小<br>
+查找比较稳定。效率比较高</p>
+</blockquote>
+<ol start="17">
+<li>解决哈希冲突有如下的方法：</li>
+</ol>
+<blockquote>
+<p>开放定址法(线性探测，二次探测，伪随机探测)<br>
+链地址法<br>
+再散列法（双重散列，多重散列）<br>
+建立一个公共溢出区</p>
+</blockquote>
+<ol start="18">
+<li>外排序</li>
+</ol>
+<blockquote>
+<p>利用外存也就是磁盘进行排序的一种简称。<br>
+典型的应用是hadoop　的 mapreduce 的merge 阶段(map shuffle reduce)</p>
+</blockquote>
+<ol start="19">
+<li>秒杀怎么解决超卖</li>
+</ol>
+<blockquote>
+<p>redis 缓存数据库压力;消息队列;分步骤 下单 和 真正获取订单;限制用户访问频率和次数</p>
+</blockquote>
+<ol start="20">
+<li>消息队列</li>
+</ol>
+<blockquote>
+<p>异步通信:降低服务耦合;提高并发度;流量削峰</p>
+</blockquote>
+<ol start="21">
+<li>HashMap 30分钟<br>
+<a href="https://blog.csdn.net/zhengwangzw/article/details/104889549" target="_blank" rel="noopener"> HashMap 30分钟</a></li>
+</ol>
+<ul>
+<li>因为1.7头插法扩容时，头插法会使链表发生反转，多线程环境下会产生环；</li>
+</ul>
+<ol start="22">
+<li>
+<p>2-3树到红黑树</p>
+</li>
+<li>
+<p>存储过程</p>
+</li>
+</ol>
+<blockquote>
+<p>存储过程可以说是一个记录集吧，它是由一些T-SQL语句组成的代码块，这些T-SQL语句代码像一个方法一样实现一些功能（对单表或多表的增删改查），然后再给这个代码块取一个名字，在用到这个功能的时候调用他就<br>
+由于数据库执行动作时，是先编译后执行的。然而存储过程是一个编译过的代码块，所以执行效率要比T-SQL语句高<br>
+一个存储过程在程序在网络中交互时可以替代大堆的T-SQL语句，所以也能降低网络的通信量，提高通信</p>
+</blockquote>
+<ol start="24">
+<li>linux 管道</li>
+</ol>
+<blockquote>
+<p>管道是Linux中很重要的一种通信方式,是把一个程序的输出直接连接到另一个程序的输入,常说的管道多是指无名管道,无名管道只能用于具有亲缘关系的进程之间，这是它与有名管道的最大区别。</p>
+</blockquote>
+<ul>
+<li>管道是一个固定大小的缓冲区。在Linux中，该缓冲区的大小为1页，即4K字节，使得它的大小不象文件那样不加检验地增长。使用单个固定缓冲区也会带来问题，比如在写管道时可能变满，当这种情况发生时，随后对管道的write()调用将默认地被阻塞</li>
+<li>读取进程也可能工作得比写进程快。当所有当前进程数据已被读取时，管道变空。当这种情况发生时，一个随后的read()调用将默认地被阻塞，等待某些数据被写入，这解决了read()调用返回文件结束的问题。</li>
+<li>半双工</li>
+</ul>
+<ol start="25">
+<li>request和response</li>
+</ol>
+<blockquote>
+<p>Web服务器收到客户端的http请求，会针对每一次请求，分别创建一个用于代表请求的request对象、和代表响应的response对象</p>
+</blockquote>
+<ol start="26">
+<li>NIO</li>
+</ol>
+<blockquote>
+<p>NIO主要有三大核心部分：Channel(通道)，Buffer(缓冲区), Selector。传统IO基于字节流和字符流进行操作，而NIO基于Channel和Buffer(缓冲区)进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。Selector(选择区)用于监听多个通道</p>
+</blockquote>
+<ol start="27">
+<li>HashMap HashTable CocurrentHashmap LinkedHashMap TreeHashMap</li>
+</ol>
+<blockquote>
+<p>JDK1.7版本锁的粒度是基于Segment的，包含多个HashEntry(ReentrantLock+Segment+HashEntry): volatile HashEntry&lt;K,V&gt; 确保可见性<br>
+DK1.8锁的粒度就是HashEntry（首节点）(synchronized+CAS+HashEntry+红黑树)</p>
+</blockquote>
+<ol start="28">
+<li>MVC 处理流程</li>
+</ol>
+<blockquote>
+<p>用户发送请求至前端控制器DispatcherServlet<br>
+DispatcherServlet收到请求调用HandlerMapping处理器映射器<br>
+处理器映射器找到具体的处理器(可以根据xml配置、注解进行查找)，生成处理器对象及处理器拦截器(如果有则生成)一并返回给DispatcherServlet<br>
+DispatcherServlet调用HandlerAdapter处理器适配器<br>
+HandlerAdapter经过适配调用具体的处理器(Controller，也叫后端控制器)<br>
+Controller执行完成返回ModelAndView。<br>
+HandlerAdapter将controller执行结果ModelAndView返回给DispatcherServlet。<br>
+DispatcherServlet将ModelAndView传给ViewReslover视图解析器<br>
+响应客户</p>
+</blockquote>
+<ol start="29">
+<li>静态方法和实例方法</li>
+</ol>
+<blockquote>
+<p>从逻辑关系来看：若方法与类的实例不存在逻辑上的联系，那么用静态方法。反之则最好使用实例化方法。<br>
+从性能角度:若方法经常被调用，则用静态方法更佳，因为这样可以避免频繁地实例化对象导致的资源占用，提高性能。然而，由于静态的东西，在构造的时候是在堆中声称的，在结束之前不会被释放与改变，会一直占用内存空间，所以不宜有过多的静态成员。<br>
+从线程并发的角度考虑:如果并发的可能性很大，则不适宜使用静态方法。如果并发的可能性很小，或者通过简单的同步操作可以保证线程安全，那就可以考虑使用静态方法</p>
+</blockquote>
+<ol start="33">
+<li>raft<br>
+leader candidate follower</li>
+</ol>
+<blockquote>
+<p>leader负责对整个集群进行控制管理，同时接受客户端的请求。在整个集群中，不能同时出现多个leader，任何时刻只会有一个或者没有。<br>
+candidate就是处于选主阶段的状态，要么选举成功成为leader，要么退回到follower。<br>
+一般情况下大部分服务器都处于follower状态。跟随者可以理解为master-slave结构中的slave，就像是将军领导下的小兵。follower不会主动向集群发起消息</p>
+</blockquote>
+<ol start="34">
+<li>
+<p>内连接左连接，完整型约束</p>
+</li>
+<li>
+<p>top<br>
+P：CPU排序；M：排序</p>
+</li>
+<li>
+<p>如何保障缓存一致性(缓存与数据库的双写一致性)<br>
+共识</p>
+</li>
+</ol>
+<ul>
+<li>缓存必须要有过期时间</li>
+<li>保证数据库跟缓存的最终一致性即可，不必追求强一致性<br>
+<a href="https://juejin.im/post/6844903941646319623" target="_blank" rel="noopener">数据库与缓存数据一致性问题</a><br>
+更新缓存的的Design Pattern有四种</li>
+<li>Cache Aside Pattern
+<ul>
+<li>失效：应用程序先从cache取数据，没有得到，则从数据库中取数据，成功后，放到缓存中</li>
+<li>命中：应用程序从cache中取数据，取到后返回。</li>
+<li>更新：先把数据存到数据库中，成功后，再让缓存失效；更新的操作还有：
+<ul>
+<li>先更新数据库,再写缓存 可能出现 AB 先后更新数据库,但更新缓存的顺序为BA 导致脏数据;其次如果并不确定该数据是否被频繁访问,如果每次更新数据库都更新缓存,可能造成缓存空间的浪费;所以更新不可取,删除更好(需求方主动触发缓存更新)</li>
+<li>先更新缓存,然后更新数据库：更新操作可能失败,导致数据可能丢失,不能保证最终一致性(应当以数据库为主);同时也存在操作乱序的问题</li>
+<li>先删除缓存,然后更新数据库：可能在 A在删除缓存 和更新数据库之间 出现B 缓存不命中,读取脏值到redis中的情况(在读写分离的情况下更为严重)</li>
+<li>先更新数据库,然后删除缓存：可能出现缓存失效的情况下,A-&gt;读取旧值-&gt;B更新数据库-&gt;B删除缓存-&gt;A写旧值到到缓存(是否可以通过写redis时要求比较值的时间戳);但可能性低 同时主从读写分离的情况下,可能出现从库数据未脏数据的情况</li>
+</ul>
+</li>
+<li>定时删除缓存(消息队列,过期时间);比较高频数据的写时间戳</li>
+<li>删除缓存可能导致的缓存击穿 可以利用锁操作( set 在发现缓存为空时,竞争读写数据库的机会)</li>
+</ul>
+</li>
+</ul>
+<p>更强的一致性实现：分布式读写锁(共享读锁,在写锁存在的情况下不可以申请读锁)</p>
+<ol start="37">
+<li>redis 锁<br>
+单节点 锁INCR、SETNX、SET</li>
+</ol>
+<ul>
+<li>SETNX：排他性;该命令只会在键不存在的情况下才会为键设置值,这样当别的进程再去使用这个命令设置这个键的时候就会失败进而无法获得锁</li>
+<li>避免死锁：在获得setnx 同时设置锁的过期时间;</li>
+<li>释放锁时检查:A在获得锁之后,超时自动释放而不自知,但后续主动释放已经被B获得的锁,破坏了B涉及的互斥过程。</li>
+</ul>
+<p>分布式锁<br>
+共识算法<br>
+raft paxos gossip</p>
+<p>CopyOnWriteArrayList 线程安全</p>
+<blockquote>
+<p>CopyOnWriteArrayList 不强调线程之间的同步,强调数据的共享(对于可能的写不干扰其他读)<br>
+对于所有涉及修改的操作,加锁,其实现都是复制一个与原本数据已知的数组对象,然后把指针指向这个对象;相当于线程的私有变量,随着线程的消亡而消亡(可能会面临内存泄漏的问题)<br>
+适合于读多写少的场景,但是对于数据量比较大的场景,复制会比较消耗时间,在完成之前访问,仍然获得旧数据</p>
+</blockquote>
+<p>如何存储一个弹幕系统的弹幕，使用redis的什么类型，怎么保证热点数据，每秒会产生大量的数据，redis扛不住怎么办<br>
+<a href="https://www.cnblogs.com/java920043111/p/9286123.html" target="_blank" rel="noopener">bilibili 高并发实时弹幕系统的实现</a><br>
+消息队列  udp广播</p>
+<p>spring AOP，JDK和CGlib的区别，除了针对接口和类以外的不同</p>
+<blockquote>
+<p>java动态代理是利用反射机制生成一个实现代理接口的代理类，在调用具体方法前调用InvokeHandler来处理。</p>
+<ul>
+<li>JDK代理是不需要以来第三方的库，只要要JDK环境就可以进行代理<br>
+而cglib动态代理是利用asm开源包，对代理对象类的class文件加载进来，通过修改其字节码生成子类来处理。</li>
+<li>CGLib 必须依赖于CGLib的类库</li>
+</ul>
+</blockquote>
+<p>实现 ReadWriteLock</p>
+<p><a href="https://www.cnblogs.com/yihujiu/p/6379279.html" target="_blank" rel="noopener">大量日志查找</a><br>
+HAdoop mapreduce</p>
+<p>Docker容器本质上是宿主机上的进程，卷相当于容器的磁盘。</p>
+<blockquote>
+<p>Docker通过nampespace实现了资源隔离，通过cgroups实现了资源限制，通过写时复制机制（copy-on-write）实现了高效的文件操作。</p>
+</blockquote>
+<p>轻量级锁</p>
+<blockquote>
+<p>他的出现并不是代替重量级锁，而是在没有多线程竞争的前提下，减少系统互斥量操作产生的性能消耗<br>
+锁战友的而时间步长</p>
+</blockquote>
+<p><a href="https://blog.csdn.net/scdn_cp/article/details/86491792" target="_blank" rel="noopener">无锁 -&gt; 偏向锁 -&gt; 轻量级 -&gt; 重量级</a></p>
+<ul>
+<li>初期锁对象刚创建时，还没有任何线程来竞争，对象的Mark Word是下图的第一种情形，这偏向锁标识位是0，锁状态01，说明该对象处于无锁状态</li>
+<li>当有一个线程来竞争锁时，先用偏向锁，表示锁对象偏爱这个线程，这个线程要执行这个锁关联的任何代码，不需要再做任何检查和切换，这种竞争不激烈的情况下，效率非常高。这时Mark Word会记录自己偏爱的线程的ID，把该线程当做自己的熟人。如下图第二种情形</li>
+<li>当有两个线程开始竞争这个锁对象，情况发生变化了，不再是偏向（独占）锁了，锁会升级为轻量级锁(monitorenter)，两个线程公平竞争，哪个线程先占有锁对象并执行代码，锁对象的Mark Word就执行哪个线程的栈帧中的锁记录。如下图第三种情形</li>
+<li>如果竞争的这个锁对象的线程更多，导致了更多的切换和等待，JVM会把该锁对象的锁升级为重量级锁，这个就叫做同步锁，这个锁对象Mark Word再次发生变化，会指向一个监视器对象，这个监视器对象用集合的形式，来登记和管理排队的线程</li>
+</ul>
+<p><a href="https://www.xttblog.com/?p=4881" target="_blank" rel="noopener">Java为什么要引入偏向锁？</a><br>
+Java 对象头 记录 锁的状态以及当前线程ID 或时间戳<br>
+堆栈中记录着当前持有的锁的对象</p>
+<p><a href="https://juejin.im/post/6844904023540105229" target="_blank" rel="noopener">Class.forName &amp; ClassLoader.loadClass 比较</a><br>
+<a href="https://juejin.im/post/6873691965892853767" target="_blank" rel="noopener">new Object()到底占用几个字节，看完这篇就彻底明白了</a></p>
+<p>mysql里什么是检查点、保存点和中间点？：w</p>
+<p>Object 有哪些方法？</p>
+<ul>
+<li>hashCode</li>
+<li>equals 之间判断地址是否相等,可重写</li>
+<li>clone  默认仅仅是复制引用,浅拷贝; 重写该接口必须 实现Cloneable接口</li>
+<li>toString 对象名@hashcode</li>
+<li>notify notifyAll wat</li>
+<li>protected finalize 垃圾回收器准备释放内存的时候，会先调用finalize(),并且只会调用一次(可能会出现方法)</li>
+</ul>
+<h2 id="算法">算法</h2>
+<h3 id="排序算法">排序算法</h3>
+<table>
+<thead>
+<tr>
+<th>算法名</th>
+<th>稳定</th>
+<th>时间复杂度</th>
+<th>空间复杂度</th>
+<th>核心思想</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>插入排序</td>
+<td>稳定</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+<td>在数组中实现,第一个节点构成的集合是有序的,然后依次增加集合相邻的元素进入,采取后移和插入的方式实现集合内的有序,直至集合包含所有元素</td>
+</tr>
+<tr>
+<td>冒泡排序</td>
+<td>稳定</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+<td>循环的比较相邻的值,如果前者大于后者则调换位置,一次遍历可以把最大的放置在最后,然后可以放置次大</td>
+</tr>
+<tr>
+<td>归并排序</td>
+<td>稳定</td>
+<td>O(nlogn)</td>
+<td>O(n)</td>
+<td>将数组分割为N个集合,集合内归并排序,然后合并集合</td>
+</tr>
+<tr>
+<td>计数排序</td>
+<td>稳定</td>
+<td>O(n+k)</td>
+<td>O(n+k)</td>
+<td>在数组最大值和最小值的空间内,统计数组中每个元素出现的次数,然后输出即可</td>
+</tr>
+<tr>
+<td>桶排序</td>
+<td>稳定</td>
+<td>O(n+k)</td>
+<td>O(n+k)</td>
+<td>可以把某个范围定义为桶,把元素分割到各个桶内,桶内使用任何排序使得有序,然后整体有序</td>
+</tr>
+<tr>
+<td>基数排序</td>
+<td>稳定</td>
+<td>O(n*k)</td>
+<td>O(n+k)</td>
+<td>根据数组元素,将元素分为N个关键字,每次针对一个关键字排序,N个关键字排序之后保持有序</td>
+</tr>
+<tr>
+<td>希尔排序</td>
+<td>不稳定</td>
+<td>O(n^1.3)</td>
+<td>O(1)</td>
+<td>设定步长为N,共可得到N个每个元素相邻下标为N的元素集合,集合内部插入排序,然后 不断缩减步长到1;由于 减少了集合间元素的比较,在当步长越小,集合也变得大体有序</td>
+</tr>
+<tr>
+<td>选择排序</td>
+<td>不稳定</td>
+<td>O(n^2)</td>
+<td>O(1)</td>
+<td>选择最小/最大值到开头或者末尾,在剩下的元素中选择最小/最大,添加进之前的有序末尾</td>
+</tr>
+<tr>
+<td>堆排序</td>
+<td>不稳定</td>
+<td>O(nlogn)</td>
+<td>O(1）</td>
+<td>基于完全二叉树,所以可以使用数组实现; 首先根据N个输入元素构建完全而二叉树;然后从节点N/2——1开始自下而上调整树,调整最大堆;随后将最大值和节点N互换,自上而下调整树,再次得到最大堆,持续可得到有序输出</td>
+</tr>
+<tr>
+<td>快速排序</td>
+<td>不稳定</td>
+<td>O(nlogn)</td>
+<td>O(nlogn)</td>
+<td>通过选定一个基准,将所有小于该基准的放在左边,大于该基准的放在右边,随后对基准左右分别快排,获得全局有序</td>
+</tr>
+</tbody>
+</table>
+<p>mysql 事务的实现</p>
+<blockquote>
+<p>锁+MVCC<br>
+锁：读写锁/共享独占锁(二阶段锁提交)+间隙锁/临界锁(在二段加锁的情况下,可能导致死锁)<br>
+MVCC：undolog 实现未提交事务的原子性(redolog 保证已提交事务的持久性)<br>
+MVCC 是快照读,不能读创建readview之后提交的事务的更新,可以添加for update 强制当前读<br>
+innodb的RR隔离级别下,读自动开启行锁和间隙锁构成next-key锁,配合MVCC 解决幻读或者直接串行化</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/15/工作求职/JVM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -407,77 +895,6 @@ condition.await():CAS 更新state,放弃锁,并调用LockSupport.park 放弃CPU�
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/21/基础知识/Algorithm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/21/基础知识/Algorithm/" class="post-title-link" itemprop="url">Algorithm</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-07-21 16:07:22" itemprop="dateCreated datePublished" datetime="2020-07-21T16:07:22+08:00">2020-07-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:21:09" itemprop="dateModified" datetime="2020-08-30T13:21:09+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>算法概述</p>
-<h2 id></h2>
-<p>递归<br>
-动态规划</p>
-<p>###并查集<br>
-<a href="https://blog.csdn.net/qq_19782019/article/details/78916595" target="_blank" rel="noopener">size数组和rank数组</a><br>
-题目:<a href="https://leetcode-cn.com/problems/number-of-islands" target="_blank" rel="noopener">leetcode 200</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/21/工作求职/DataStructure/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -534,6 +951,77 @@ condition.await():CAS 更新state,放弃锁,并调用LockSupport.park 放弃CPU�
 <p>这个东西感觉挺有意思</p>
 </blockquote>
 <p>红黑树</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/21/基础知识/Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/21/基础知识/Algorithm/" class="post-title-link" itemprop="url">Algorithm</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-21 16:07:22" itemprop="dateCreated datePublished" datetime="2020-07-21T16:07:22+08:00">2020-07-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:21:09" itemprop="dateModified" datetime="2020-08-30T13:21:09+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>算法概述</p>
+<h2 id></h2>
+<p>递归<br>
+动态规划</p>
+<p>###并查集<br>
+<a href="https://blog.csdn.net/qq_19782019/article/details/78916595" target="_blank" rel="noopener">size数组和rank数组</a><br>
+题目:<a href="https://leetcode-cn.com/problems/number-of-islands" target="_blank" rel="noopener">leetcode 200</a></p>
 
       
     </div>
@@ -1229,6 +1717,70 @@ poll 函数的参数</p>
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Blog/blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/07/05/Blog/blog/" class="post-title-link" itemprop="url">blog 产生记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-07-05 22:52:19" itemprop="dateCreated datePublished" datetime="2020-07-05T22:52:19+08:00">2020-07-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-12-09 16:00:31" itemprop="dateModified" datetime="2020-12-09T16:00:31+08:00">2020-12-09</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Blog/个人网站/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1320,70 +1872,6 @@ cloudflare</p>
 <h2 id="本地hexo配置deploy">本地hexo配置deploy</h2>
 <p>配置多个deploy对象，参考 <a href="https://hexo.io/zh-cn/docs/one-command-deployment" target="_blank" rel="noopener">hexo deploy配置</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">- type: git</span><br><span class="line">  repository: git@github.com: ***/***.github.io.git </span><br><span class="line">  branch: master </span><br><span class="line">- type: git</span><br><span class="line">  repository: root@ip:/path/to/push</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/07/05/Blog/blog/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/07/05/Blog/blog/" class="post-title-link" itemprop="url">blog 产生记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-07-05 22:52:19" itemprop="dateCreated datePublished" datetime="2020-07-05T22:52:19+08:00">2020-07-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-09 16:00:31" itemprop="dateModified" datetime="2020-12-09T16:00:31+08:00">2020-12-09</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          
       
     </div>
 
@@ -2080,115 +2568,6 @@ CPU 和 3级cache<br>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/14/基础知识/论文阅读/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/14/基础知识/论文阅读/" class="post-title-link" itemprop="url">论文阅读</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-14 19:12:45" itemprop="dateCreated datePublished" datetime="2020-06-14T19:12:45+08:00">2020-06-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:25:24" itemprop="dateModified" datetime="2020-08-30T13:25:24+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="大多是data-center-资源集中">大多是Data Center ,资源集中</h4>
-<h4 id="cooperative-game-based-virtual-machine-resource-allocation-algorithms-in-cloud-data-centershindawi">Cooperative Game-Based Virtual Machine Resource Allocation Algorithms in Cloud Data Centers(hindawi)</h4>
-<ol>
-<li>Cloud Data Center(CDC)资源利用率低</li>
-<li>思路：对不同资源使用不同的基于 value 的博弈论解决方法;
-<ul>
-<li>CPU: Shaply value(SV), payoff by number contribution</li>
-<li>memory: weighted Shaply value(WSV),payoff by coliation ;and  members’s payoff about positive effort of coliation</li>
-<li>storage: proportional Shaply value(PSV)</li>
-<li>bandwith: weigthed-egalitarian Shaply value(WESV) payoff by member contribution and  heterogeneity between members</li>
-</ul>
-</li>
-<li>不足：
-<ul>
-<li>task 生成分为四类,每类的资源要求固定(task 不具有 变动性)</li>
-<li>数据未公开</li>
-<li>未解释 四类资源某些不足时的处理???</li>
-</ul>
-</li>
-</ol>
-<h4 id="game-theoretic-resource-allocation-in-cloud-computing">Game theoretic resource allocation in cloud computing</h4>
-<ol>
-<li>介绍：同名书中的相干章节，基于Min-Max Game
-<ul>
-<li>输入：request的信息，resource的信息</li>
-<li>输出：分配矩阵</li>
-</ul>
-</li>
-<li>思路：实现最大化资源的 utility(效用) 的目标；</li>
-<li>utility 的公式构成(又分为单类资源utility和全局资源utility) ?? 不同资源,CPU
-<ul>
-<li>budget</li>
-<li>cost per sencod</li>
-<li>request 量</li>
-<li>request time 消耗时间</li>
-<li>budget和time的factor因子</li>
-</ul>
-</li>
-<li>算法：
-<ul>
-<li>挑选出可以进行博弈的request</li>
-<li>依次对每一种资源选择全局最大化utility时的分配，iteration</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -2260,7 +2639,7 @@ CPU 和 3级cache<br>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-count">107</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
