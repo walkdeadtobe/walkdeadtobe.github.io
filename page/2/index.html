@@ -185,6 +185,82 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/27/基础知识/数据结构/Gossip协议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/27/基础知识/数据结构/Gossip协议/" class="post-title-link" itemprop="url">Gossip协议</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-11-27 20:08:04 / Modified: 20:41:26" itemprop="dateCreated datePublished" datetime="2020-11-27T20:08:04+08:00">2020-11-27</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Gossip协议是一个通信协议，一种传播和扩散消息的方式，常用于数据库复制，信息扩散，集群成员身份确认、故障探测等；类似于瘟疫和社交网络的传播方式；Gossip协议的应用包括Redis Cluster、Consul、Apache Cassandra。</p>
+<p>六度分隔理论</p>
+<blockquote>
+<p>世界上，任意两个陌生人之间的间隔不会超过六个人。</p>
+</blockquote>
+<p>问题</p>
+<blockquote>
+<p>集群中的任意一个节点信息更新并扩散给网络中其他节点</p>
+</blockquote>
+<p>基本思想</p>
+<blockquote>
+<p>信息增加的节点会周期性/触发性的随机选择一些节点，并将信息传递给这些节点，而这些节点也会如此操作，最终所有节点</p>
+</blockquote>
+<p>停止条件</p>
+<ul>
+<li>轮次数或者时间限制</li>
+<li>是否普遍存在回路</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/27/基础知识/数据结构/Merkle树/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -268,71 +344,6 @@ Merkle树还可以用来对数据进行快速对比，快速定位到不一致�
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/19/分布式/chubby/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/11/19/分布式/chubby/" class="post-title-link" itemprop="url">chubby分布式锁服务</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-11-19 18:57:50" itemprop="dateCreated datePublished" datetime="2020-11-19T18:57:50+08:00">2020-11-19</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-11-29 10:01:42" itemprop="dateModified" datetime="2020-11-29T10:01:42+08:00">2020-11-29</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Google File System  和  Google BigTable 中都使用Chubby 分布式锁服务，比较好奇，待完整分析</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/19/分布式/书籍阅读笔记/大规模分布式存储系统-原理解析与架构实战/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -387,6 +398,71 @@ Merkle树还可以用来对数据进行快速对比，快速定位到不一致�
             </div>
           <!--/noindex-->
         
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/19/分布式/chubby/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/19/分布式/chubby/" class="post-title-link" itemprop="url">chubby分布式锁服务</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-11-19 18:57:50" itemprop="dateCreated datePublished" datetime="2020-11-19T18:57:50+08:00">2020-11-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-29 10:01:42" itemprop="dateModified" datetime="2020-11-29T10:01:42+08:00">2020-11-29</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>Google File System  和  Google BigTable 中都使用Chubby 分布式锁服务，比较好奇，待完整分析</p>
+
       
     </div>
 
@@ -565,7 +641,7 @@ Merkle树还可以用来对数据进行快速对比，快速定位到不一致�
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-01 18:45:16" itemprop="dateModified" datetime="2020-12-01T18:45:16+08:00">2020-12-01</time>
+                <time title="Modified: 2021-04-07 10:55:27" itemprop="dateModified" datetime="2021-04-07T10:55:27+08:00">2021-04-07</time>
               </span>
 
           
@@ -707,10 +783,17 @@ BasicEdgeOrchestrator中 其中Hybrid策略,首先判断计算要求是否能在
 <ol>
 <li>使用idea导入libs下 本地jar包</li>
 </ol>
+<h2 id="更多了解">更多了解</h2>
+<ol>
+<li>MainApplication的loadScenarios函数负责构造多个场景，场景个数 = numOfAlgorithm * numOfArchitecture (MIN_NUM_OF_EDGE_DEVICES-MIN_NUM_OF_EDGE_DEVICES)/Step</li>
+</ol>
+<blockquote>
+<p>为了降低不必要的实验,使得 MIN_NUM_OF_EDGE_DEVICES = MIN_NUM_OF_EDGE_DEVICES</p>
+</blockquote>
 <h2 id="实验实现">实验实现</h2>
 <p>基于PureEdgeSim实现</p>
 <h3 id="根据配置确定vm的初始放置位置">根据配置确定Vm的初始放置位置</h3>
-<p>重写CustomDataCenterBroker的defaultDatacenterMapper方法,返回配置中Vm所制定的DataCenter</p>
+<p>在CustomBroker重写DatacenterBrokerSimple的defaultDatacenterMapper方法,返回配置中Vm所制定的DataCenter</p>
 <h3 id="出现问题">出现问题</h3>
 <ol>
 <li>利用率卡在50%</li>
@@ -718,9 +801,17 @@ BasicEdgeOrchestrator中 其中Hybrid策略,首先判断计算要求是否能在
 <blockquote>
 <p>由于资源分配丰富,所有的Vm都分配在同一个DataCenter,导致那个DataCenterCpu利用率100%,另外一个0%,总共卡在50%.</p>
 </blockquote>
+<ol start="2">
+<li>任务链的第一个任务一直无法完成，后续任务无法触发</li>
+</ol>
+<blockquote>
+<p>由于版本出错导致CloudletSchedulerSpaceShared无法设置currentMipsShare，使得cloudlet的预测完成时间为infinity<br>
+新建CustomCloudletSchedulerSpaceShared继承CloudletSchedulerSpaceShared，设置currentMipsShare</p>
+</blockquote>
 <h3 id="cloudlet-链">Cloudlet 链</h3>
 <ol start="2">
-<li>cloudlet链</li>
+<li>cloudlet链<br>
+在SimulationManager.java 中给每个任务添加onCloudletFinishedListener，在onCloudletFinishedListener函数中触发下一个任务</li>
 </ol>
 <blockquote>
 <p>利用其提供的CloudSim继承自Simluation的addOnEventProcessingListener的触发下一个任务(可以根据调用链的类型以及其节点确定下一个CLoudLet以及VM的位置)</p>
@@ -1168,261 +1259,6 @@ redis数据类型和应用场景<br>
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/10/工作求职/面试常见题全面分析/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/09/10/工作求职/面试常见题全面分析/" class="post-title-link" itemprop="url">面试常见题全面分析</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-09-10 14:13:31" itemprop="dateCreated datePublished" datetime="2020-09-10T14:13:31+08:00">2020-09-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-15 10:57:57" itemprop="dateModified" datetime="2021-01-15T10:57:57+08:00">2021-01-15</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="java">JAVA</h2>
-<h3 id="泛型">泛型</h3>
-<p><a href="http://www.itxm.cn/post/4185.html" target="_blank" rel="noopener">java为什么要用类型擦除实现泛型？详解</a><br>
-泛型是将类型作为参数,实现代码复用可以保证</p>
-<ul>
-<li>定义一次类,可以被各种类使用</li>
-<li>具体使用时,只保存自己定义类型,而不是object引用</li>
-</ul>
-<h4 id="c-实现">C++ 实现</h4>
-<p>利用宏定义实现代码替换,来实现模板类,在编译期对不同类型基于模板类生成不同的代码,代码冗余</p>
-<h4 id="java">JAVA</h4>
-<p>java 泛型在底层利用Object引用实现泛型,编译时做类型检查，在运行时擦除<br>
-java 泛型在对象进和出的时候强制对象类型转换为Object和目标对象,仅仅是引用的转换</p>
-<h3 id="重写的实现">重写的实现</h3>
-<p><a href="https://www.cnblogs.com/kexinxin/p/10147209.html" target="_blank" rel="noopener">参考1</a><br>
-<a href="http://zhongmingmao.me/2018/12/17/jvm-basic-invoke/" target="_blank" rel="noopener">参考2</a><br>
-字节码中包含4中对方法的调用</p>
-<ul>
-<li>invokevirtual为最常见的情况，包含virtual dispatch机制；</li>
-<li>invokerspecial是作为对private和构造方法的调用，绕过了virtual dispatch;</li>
-<li>invokeinterface的实现跟invokevirtual类似；</li>
-<li>invokestatic是对静态方法的调用</li>
-</ul>
-<p>其中invokevirtual 实现了虚分配  完成重写方法的调用<br>
-虚分配机制</p>
-<blockquote>
-<p>该机制会首先从调用对象中寻找该方法的实现,如果没有,就到父类接口寻找,直至找到或者抛出异常,并不依赖于引用的定义类型<br>
-在虚分派机制下如何调用父类被覆盖的方法?<br>
-使用virtualspecial指令,字节码在定义时会执行父类对象及其方法</p>
-</blockquote>
-<p>在JVM 中使用方法表实现虚分派机制</p>
-<blockquote>
-<p>方法表值不记录静态函数,私有函数,final,构造函数;方法表与类class相关<br>
-JVM中的一种实现是</p>
-<ul>
-<li>表中每项对应一个实例方法(方法的实际代码)的索引</li>
-<li>父类比子类先得到解析,即父类的方法放在方法表前列(根据方法名参数类型顺序构成的唯一标识,子类发现重复即覆盖索引)</li>
-<li>如果子类重写父类的方法,那么父类方法的索引将更改指向为该类的相应实例方法</li>
-<li>JVM 遇到一个方法时首先根据它在方法表中的偏移量类访问</li>
-</ul>
-</blockquote>
-<p>invokeinterface与invokevirtual的比较</p>
-<blockquote>
-<p>当使用invokeinterface来调用方法时，由于不同的类可以实现同一interface,我们无法确定在某个类中的interface中的方法处在哪个位置。于是，也就无法解释CONSTANT_interfaceMethodref-info为直接索引，而必须每次都执行一次在methodtable中的搜索了。所以，在这种实现中，通过invokeinterface访问方法比通过invokevirtual访问明显慢很多。</p>
-</blockquote>
-<h3 id="解析和分派">解析和分派</h3>
-<p>编译期符号引用会在加载时被解析成实际引用<br>
-虚方法表一般在类加载的连接阶段进行初始化，准备了类的变量初始值后，虚拟机会把该类的虚方法表也一同初始化完毕</p>
-<h3 id="基本数据类型和类">基本数据类型和类</h3>
-<p>int  Integer  atomicInteger<br>
-int 是基本数据类型,有默认值,但是编译器可能提醒需要初始化才能使用<br>
-Integer 是final class  继承Number 和compartor,包含final修饰的int变量 value,MIN,MAX; 里面包含 object 的基本方法(hashcode equals toString);Integer.valueOf()等等<br>
-integer ++ 相当于新生成了变量</p>
-<p>atomicInteger 并发场景下,利用volatile修饰int,保持变量的可见性</p>
-<h3 id="automic-分析">automic 分析</h3>
-<h2 id="jvm">JVM</h2>
-<ol>
-<li>垃圾回收 和 G1<br>
-垃圾回收的原因 对象利用<br>
-判断垃圾的方法：可达分析 和 引用计数(循环引用的问题难以解决)<br>
-垃圾回收算法：标记清除 标记整理 复制  分代收集(标记清除+复制)<br>
-垃圾回收器的分类 ：针对年轻代 和针对老年代的<br>
-分配担保以及老年代不足引起的fullgc<br>
-3色标记 黑灰白<br>
-四种引用 强软弱虚<br>
-CMS VS G1<br>
-垃圾回收的阶段初始标记 并发标记 重新标记(对象消失 浮动垃圾 写屏障) 并发清除<br>
-GC root的概念卡表 以及如何加快,和如何应对出现的伪共享问题<br>
-oopmap<br>
-参考：<br>
-<a href="https://cloud.tencent.com/developer/article/1599225" target="_blank" rel="noopener"></a></li>
-</ol>
-<h3 id="gc-优化">GC 优化</h3>
-<p>首先监控GC状态：jstat -gc<br>
-然后根据结果GC(MIRROgc/FULLGC) 时间和频率 如果频率相对高而且时间长那么需要优化<br>
-优化方法:</p>
-<ul>
-<li>代码分析</li>
-<li>增加内存</li>
-<li>更改老年代年轻代比例</li>
-</ul>
-<h2 id="mysql">MYSQL</h2>
-<h3 id="数据同步">数据同步</h3>
-<p>mysql 多副本保持数据一致性,需要同步;有两种选择多写以及复制</p>
-<ul>
-<li>多写：主收到写命令后,需要向从数据库发送写命令 根据返回结果确认是否完成该次写操作(涉及分布式事务的提交,引出二段式提交以及三段式提交) 异步 半同步  全同步</li>
-<li>复制 ：首先进行 全量复制(线下人工可靠;线上:利用工具 队列 流式数据写入) 之后进行增量复复制：读写分离
-<ul>
-<li>首先要保证master端的bnglog 和slave端的relay日志功能开启</li>
-<li>master端在执行完命令后悔记录在binlog中</li>
-<li>slave端发出IO请求到master端 要求同步指定位置之后的数据</li>
-<li>master端接收到IO请求,会返回数据以及本地同步的终点位置,可以用于下一次同步</li>
-<li>slave端接收到数据会写进自己的relay日志中,slave端检测到relay日志发生变化就会读取更新然后写进数据库</li>
-</ul>
-</li>
-</ul>
-<h3 id="索引">索引</h3>
-<p>mysql 索引</p>
-<ul>
-<li>主键索引 聚簇索引 范围查询 局部性好</li>
-<li>唯一索引的使用需要谨慎 :因为插入和更新时需要加载所有数据到缓冲池(缓冲池的概念和用处 缓冲池的淘汰策略)去,不能有效的利用写缓冲</li>
-<li>主键 建议使用 自增ID 这样在添加记录的时候不会造成页的分裂</li>
-<li>为什么不适用红黑树 b+树多路查找树可以有效降低树的高度,提高查询效率,而且非叶子交接点没有数据相同的空间可以更有效的利用索引</li>
-</ul>
-<p>mysql 双写的原因和解决方法;索引的插入导致页的分裂和合并</p>
-<blockquote></blockquote>
-<h3 id="mysql-事务">mysql 事务</h3>
-<p>mysql的四个事务隔离级别<br>
-利用MVCC 可以满足读已提交和可重复读(偏向update)的要求,配合间隙锁避免幻读<br>
-间隙所</p>
-<h3 id="举例">举例</h3>
-<h4 id="读写事务并发">读写事务并发</h4>
-<p>读写事务的顺序可以有4种</p>
-<ul>
-<li>读后写</li>
-<li>写后读</li>
-<li>读中间发生写</li>
-<li>写中间发生读</li>
-</ul>
-<p>对于前两种,不需要进行控制,后两种需要利用利用,MVCC 加以控制<br>
-innodb在行记录添加了隐藏字段 包括修改记录的事务ID字段 比如update/insert/delete 和 指向当前记录上一版本的回滚指针(利用undolog实现,可以实现未提交事务的原子性)<br>
-在可重复读的事务隔离级别下,读操作共享一个readview,readview是一个数据结构,包含创建其的事务ID,创建时活跃的事务ID列表,以及该列表的最小ID和创建时未分配的最小ID<br>
-在读时使用算法去读取行记录或者undolog中的历史链记录来实现update层次的可重复读<br>
-从当前行记录可以获得,该记录的修改写事务ID</p>
-<ul>
-<li>如果其小于readview的最小值,意味着 该写事务必然在读事务之前发生且已经结束,那么尽管读</li>
-<li>如果事务ID 等于 readview的所属事务ID ,那么是自己改的,可以读</li>
-<li>如果在readview范围内,那么要寻找该事物是否在readview的活跃列表里,如果在,那么意味着该写事务仍在进行,所以不能读未提交,需要沿着历史链继续寻找可以读的记录;如果不在,意味着该写事物在读操作发生之前已经结束,所以可以读已提交</li>
-<li>如果其大于readview的最大值,意味着 该行记录是在读事务发生后更改的,那么不能读,要沿着undolog的历史版本链去找可以读的</li>
-</ul>
-<h4 id="写写事务并发">写写事务并发</h4>
-<h4 id="幻读">幻读</h4>
-<h4 id="insert-从代码层次到数据库执行的流程">insert 从代码层次到数据库执行的流程</h4>
-<ul>
-<li>spring 事务管理:事务传播机制</li>
-<li>mybatic 动态sql</li>
-<li>mysql server
-<ul>
-<li>命令优化</li>
-<li>存储引擎 innodb
-<ul>
-<li>遵循二段锁提交协议,首先对表添加写意向锁,在没有对表添加读锁的情况可以实现</li>
-<li>如果是自增主键,那么需要自增锁生成ID,随后对主键索引添加间隙锁,insert之后对于记录添加写锁</li>
-<li>由于是对主键索引/唯一索引操作所以无法使用写缓冲,将页读入缓存,写入,然后双写刷回</li>
-<li>如果没有其他事务,就会逐一释放锁</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="checkpoint"><a href="https://blog.51cto.com/10170308/1678302" target="_blank" rel="noopener">checkpoint</a></h4>
-<h4 id="串行化">串行化</h4>
-<ol start="3">
-<li>redis<br>
-redis 数据结构及其原理<br>
-redis 主从部署 哨兵模式 选举机制 读写分离<br>
-缓存穿透/雪崩/击穿/降级/熔断<br>
-缓存击穿的解决方法</li>
-</ol>
-<ul>
-<li>在业务端利用reids SETNX 互斥的获得锁,去更新键值</li>
-<li>检查高频字段是否超时,快超时时加长过期时间</li>
-<li>使用消息队列，让流量在消息队列中囤积下，逐个消费，缓解后端压力。<br>
-redis 缓存和数据库双写一致性<br>
-redis IO多路复用<br>
-redis 分布式
-<ul>
-<li>redis 集群</li>
-<li>redis 分布式锁</li>
-</ul>
-</li>
-</ul>
-<p>redis 锁</p>
-<ul>
-<li>setnx(key,1) + expire(key,30) =set(key，1，30，NX) del(key);避免多线程操作导致删除了别人的锁,可以把threadId作为key值<br>
-分布式锁的单点故障问题:在redis集群模式下可以尝试获取大多数master 的锁,超过一般才算,避免死锁可以按照一定顺序去获得锁<br>
-zookeeper分布式锁</li>
-</ul>
-<p>发布订阅功能</p>
-<ol start="4">
-<li>并发 编程</li>
-</ol>
-<ul>
-<li>伪共享 影响并发效率</li>
-</ul>
-<p>http 请求到完成的过程</p>
-<blockquote>
-<p>DNS系统迭代查询域名对应的ip;<br>
-TCP 3次握手建立连接;发送报文请求<br>
-发送端从顶层到底层的报文封装;从底层(信道集线器)到ip层(路由器)的数据传输;接收端从底层到顶层的解封</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1494,7 +1330,7 @@ TCP 3次握手建立连接;发送报文请求<br>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">107</span>
+          <span class="site-state-item-count">108</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

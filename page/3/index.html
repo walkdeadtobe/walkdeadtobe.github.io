@@ -185,6 +185,261 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/10/工作求职/面试常见题全面分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/10/工作求职/面试常见题全面分析/" class="post-title-link" itemprop="url">面试常见题全面分析</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-09-10 14:13:31" itemprop="dateCreated datePublished" datetime="2020-09-10T14:13:31+08:00">2020-09-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-15 10:57:57" itemprop="dateModified" datetime="2021-01-15T10:57:57+08:00">2021-01-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="java">JAVA</h2>
+<h3 id="泛型">泛型</h3>
+<p><a href="http://www.itxm.cn/post/4185.html" target="_blank" rel="noopener">java为什么要用类型擦除实现泛型？详解</a><br>
+泛型是将类型作为参数,实现代码复用可以保证</p>
+<ul>
+<li>定义一次类,可以被各种类使用</li>
+<li>具体使用时,只保存自己定义类型,而不是object引用</li>
+</ul>
+<h4 id="c-实现">C++ 实现</h4>
+<p>利用宏定义实现代码替换,来实现模板类,在编译期对不同类型基于模板类生成不同的代码,代码冗余</p>
+<h4 id="java">JAVA</h4>
+<p>java 泛型在底层利用Object引用实现泛型,编译时做类型检查，在运行时擦除<br>
+java 泛型在对象进和出的时候强制对象类型转换为Object和目标对象,仅仅是引用的转换</p>
+<h3 id="重写的实现">重写的实现</h3>
+<p><a href="https://www.cnblogs.com/kexinxin/p/10147209.html" target="_blank" rel="noopener">参考1</a><br>
+<a href="http://zhongmingmao.me/2018/12/17/jvm-basic-invoke/" target="_blank" rel="noopener">参考2</a><br>
+字节码中包含4中对方法的调用</p>
+<ul>
+<li>invokevirtual为最常见的情况，包含virtual dispatch机制；</li>
+<li>invokerspecial是作为对private和构造方法的调用，绕过了virtual dispatch;</li>
+<li>invokeinterface的实现跟invokevirtual类似；</li>
+<li>invokestatic是对静态方法的调用</li>
+</ul>
+<p>其中invokevirtual 实现了虚分配  完成重写方法的调用<br>
+虚分配机制</p>
+<blockquote>
+<p>该机制会首先从调用对象中寻找该方法的实现,如果没有,就到父类接口寻找,直至找到或者抛出异常,并不依赖于引用的定义类型<br>
+在虚分派机制下如何调用父类被覆盖的方法?<br>
+使用virtualspecial指令,字节码在定义时会执行父类对象及其方法</p>
+</blockquote>
+<p>在JVM 中使用方法表实现虚分派机制</p>
+<blockquote>
+<p>方法表值不记录静态函数,私有函数,final,构造函数;方法表与类class相关<br>
+JVM中的一种实现是</p>
+<ul>
+<li>表中每项对应一个实例方法(方法的实际代码)的索引</li>
+<li>父类比子类先得到解析,即父类的方法放在方法表前列(根据方法名参数类型顺序构成的唯一标识,子类发现重复即覆盖索引)</li>
+<li>如果子类重写父类的方法,那么父类方法的索引将更改指向为该类的相应实例方法</li>
+<li>JVM 遇到一个方法时首先根据它在方法表中的偏移量类访问</li>
+</ul>
+</blockquote>
+<p>invokeinterface与invokevirtual的比较</p>
+<blockquote>
+<p>当使用invokeinterface来调用方法时，由于不同的类可以实现同一interface,我们无法确定在某个类中的interface中的方法处在哪个位置。于是，也就无法解释CONSTANT_interfaceMethodref-info为直接索引，而必须每次都执行一次在methodtable中的搜索了。所以，在这种实现中，通过invokeinterface访问方法比通过invokevirtual访问明显慢很多。</p>
+</blockquote>
+<h3 id="解析和分派">解析和分派</h3>
+<p>编译期符号引用会在加载时被解析成实际引用<br>
+虚方法表一般在类加载的连接阶段进行初始化，准备了类的变量初始值后，虚拟机会把该类的虚方法表也一同初始化完毕</p>
+<h3 id="基本数据类型和类">基本数据类型和类</h3>
+<p>int  Integer  atomicInteger<br>
+int 是基本数据类型,有默认值,但是编译器可能提醒需要初始化才能使用<br>
+Integer 是final class  继承Number 和compartor,包含final修饰的int变量 value,MIN,MAX; 里面包含 object 的基本方法(hashcode equals toString);Integer.valueOf()等等<br>
+integer ++ 相当于新生成了变量</p>
+<p>atomicInteger 并发场景下,利用volatile修饰int,保持变量的可见性</p>
+<h3 id="automic-分析">automic 分析</h3>
+<h2 id="jvm">JVM</h2>
+<ol>
+<li>垃圾回收 和 G1<br>
+垃圾回收的原因 对象利用<br>
+判断垃圾的方法：可达分析 和 引用计数(循环引用的问题难以解决)<br>
+垃圾回收算法：标记清除 标记整理 复制  分代收集(标记清除+复制)<br>
+垃圾回收器的分类 ：针对年轻代 和针对老年代的<br>
+分配担保以及老年代不足引起的fullgc<br>
+3色标记 黑灰白<br>
+四种引用 强软弱虚<br>
+CMS VS G1<br>
+垃圾回收的阶段初始标记 并发标记 重新标记(对象消失 浮动垃圾 写屏障) 并发清除<br>
+GC root的概念卡表 以及如何加快,和如何应对出现的伪共享问题<br>
+oopmap<br>
+参考：<br>
+<a href="https://cloud.tencent.com/developer/article/1599225" target="_blank" rel="noopener"></a></li>
+</ol>
+<h3 id="gc-优化">GC 优化</h3>
+<p>首先监控GC状态：jstat -gc<br>
+然后根据结果GC(MIRROgc/FULLGC) 时间和频率 如果频率相对高而且时间长那么需要优化<br>
+优化方法:</p>
+<ul>
+<li>代码分析</li>
+<li>增加内存</li>
+<li>更改老年代年轻代比例</li>
+</ul>
+<h2 id="mysql">MYSQL</h2>
+<h3 id="数据同步">数据同步</h3>
+<p>mysql 多副本保持数据一致性,需要同步;有两种选择多写以及复制</p>
+<ul>
+<li>多写：主收到写命令后,需要向从数据库发送写命令 根据返回结果确认是否完成该次写操作(涉及分布式事务的提交,引出二段式提交以及三段式提交) 异步 半同步  全同步</li>
+<li>复制 ：首先进行 全量复制(线下人工可靠;线上:利用工具 队列 流式数据写入) 之后进行增量复复制：读写分离
+<ul>
+<li>首先要保证master端的bnglog 和slave端的relay日志功能开启</li>
+<li>master端在执行完命令后悔记录在binlog中</li>
+<li>slave端发出IO请求到master端 要求同步指定位置之后的数据</li>
+<li>master端接收到IO请求,会返回数据以及本地同步的终点位置,可以用于下一次同步</li>
+<li>slave端接收到数据会写进自己的relay日志中,slave端检测到relay日志发生变化就会读取更新然后写进数据库</li>
+</ul>
+</li>
+</ul>
+<h3 id="索引">索引</h3>
+<p>mysql 索引</p>
+<ul>
+<li>主键索引 聚簇索引 范围查询 局部性好</li>
+<li>唯一索引的使用需要谨慎 :因为插入和更新时需要加载所有数据到缓冲池(缓冲池的概念和用处 缓冲池的淘汰策略)去,不能有效的利用写缓冲</li>
+<li>主键 建议使用 自增ID 这样在添加记录的时候不会造成页的分裂</li>
+<li>为什么不适用红黑树 b+树多路查找树可以有效降低树的高度,提高查询效率,而且非叶子交接点没有数据相同的空间可以更有效的利用索引</li>
+</ul>
+<p>mysql 双写的原因和解决方法;索引的插入导致页的分裂和合并</p>
+<blockquote></blockquote>
+<h3 id="mysql-事务">mysql 事务</h3>
+<p>mysql的四个事务隔离级别<br>
+利用MVCC 可以满足读已提交和可重复读(偏向update)的要求,配合间隙锁避免幻读<br>
+间隙所</p>
+<h3 id="举例">举例</h3>
+<h4 id="读写事务并发">读写事务并发</h4>
+<p>读写事务的顺序可以有4种</p>
+<ul>
+<li>读后写</li>
+<li>写后读</li>
+<li>读中间发生写</li>
+<li>写中间发生读</li>
+</ul>
+<p>对于前两种,不需要进行控制,后两种需要利用利用,MVCC 加以控制<br>
+innodb在行记录添加了隐藏字段 包括修改记录的事务ID字段 比如update/insert/delete 和 指向当前记录上一版本的回滚指针(利用undolog实现,可以实现未提交事务的原子性)<br>
+在可重复读的事务隔离级别下,读操作共享一个readview,readview是一个数据结构,包含创建其的事务ID,创建时活跃的事务ID列表,以及该列表的最小ID和创建时未分配的最小ID<br>
+在读时使用算法去读取行记录或者undolog中的历史链记录来实现update层次的可重复读<br>
+从当前行记录可以获得,该记录的修改写事务ID</p>
+<ul>
+<li>如果其小于readview的最小值,意味着 该写事务必然在读事务之前发生且已经结束,那么尽管读</li>
+<li>如果事务ID 等于 readview的所属事务ID ,那么是自己改的,可以读</li>
+<li>如果在readview范围内,那么要寻找该事物是否在readview的活跃列表里,如果在,那么意味着该写事务仍在进行,所以不能读未提交,需要沿着历史链继续寻找可以读的记录;如果不在,意味着该写事物在读操作发生之前已经结束,所以可以读已提交</li>
+<li>如果其大于readview的最大值,意味着 该行记录是在读事务发生后更改的,那么不能读,要沿着undolog的历史版本链去找可以读的</li>
+</ul>
+<h4 id="写写事务并发">写写事务并发</h4>
+<h4 id="幻读">幻读</h4>
+<h4 id="insert-从代码层次到数据库执行的流程">insert 从代码层次到数据库执行的流程</h4>
+<ul>
+<li>spring 事务管理:事务传播机制</li>
+<li>mybatic 动态sql</li>
+<li>mysql server
+<ul>
+<li>命令优化</li>
+<li>存储引擎 innodb
+<ul>
+<li>遵循二段锁提交协议,首先对表添加写意向锁,在没有对表添加读锁的情况可以实现</li>
+<li>如果是自增主键,那么需要自增锁生成ID,随后对主键索引添加间隙锁,insert之后对于记录添加写锁</li>
+<li>由于是对主键索引/唯一索引操作所以无法使用写缓冲,将页读入缓存,写入,然后双写刷回</li>
+<li>如果没有其他事务,就会逐一释放锁</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="checkpoint"><a href="https://blog.51cto.com/10170308/1678302" target="_blank" rel="noopener">checkpoint</a></h4>
+<h4 id="串行化">串行化</h4>
+<ol start="3">
+<li>redis<br>
+redis 数据结构及其原理<br>
+redis 主从部署 哨兵模式 选举机制 读写分离<br>
+缓存穿透/雪崩/击穿/降级/熔断<br>
+缓存击穿的解决方法</li>
+</ol>
+<ul>
+<li>在业务端利用reids SETNX 互斥的获得锁,去更新键值</li>
+<li>检查高频字段是否超时,快超时时加长过期时间</li>
+<li>使用消息队列，让流量在消息队列中囤积下，逐个消费，缓解后端压力。<br>
+redis 缓存和数据库双写一致性<br>
+redis IO多路复用<br>
+redis 分布式
+<ul>
+<li>redis 集群</li>
+<li>redis 分布式锁</li>
+</ul>
+</li>
+</ul>
+<p>redis 锁</p>
+<ul>
+<li>setnx(key,1) + expire(key,30) =set(key，1，30，NX) del(key);避免多线程操作导致删除了别人的锁,可以把threadId作为key值<br>
+分布式锁的单点故障问题:在redis集群模式下可以尝试获取大多数master 的锁,超过一般才算,避免死锁可以按照一定顺序去获得锁<br>
+zookeeper分布式锁</li>
+</ul>
+<p>发布订阅功能</p>
+<ol start="4">
+<li>并发 编程</li>
+</ol>
+<ul>
+<li>伪共享 影响并发效率</li>
+</ul>
+<p>http 请求到完成的过程</p>
+<blockquote>
+<p>DNS系统迭代查询域名对应的ip;<br>
+TCP 3次握手建立连接;发送报文请求<br>
+发送端从顶层到底层的报文封装;从底层(信道集线器)到ip层(路由器)的数据传输;接收端从底层到顶层的解封</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/04/工作求职/Nginx/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2653,875 +2908,6 @@ HTTPS 在内容传输的加密上使用的是对称加密，非对称加密只�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/28/工作求职/数据库/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/28/工作求职/数据库/" class="post-title-link" itemprop="url">数据库</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-08-28 18:59:47" itemprop="dateCreated datePublished" datetime="2020-08-28T18:59:47+08:00">2020-08-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-01-15 17:08:32" itemprop="dateModified" datetime="2021-01-15T17:08:32+08:00">2021-01-15</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="数据库">数据库</h1>
-<h2 id="reids">Reids</h2>
-<p><a href="http://redisbook.com/preview/dict/incremental_rehashing.html" target="_blank" rel="noopener">参考1</a><br>
-<a href="https://zhuanlan.zhihu.com/p/112944545" target="_blank" rel="noopener">参考2</a></p>
-<h3 id="基础数据类型">基础数据类型：</h3>
-<blockquote>
-<p>string，hash，list，set及有序集合（每个元素都关联一个分数，通过分数排序）</p>
-</blockquote>
-<ul>
-<li>string(len,free,char[]):用于计数</li>
-<li>list：双向链表,随机定位性能较弱，首尾插入删除性能较优</li>
-<li>hash:数组+单链表 hash扩容时使用渐进式的rehash(一个hash结构有两个hash表ht[0]ht[1] ht[1]用于渐进式rehashAB类似于GC里的两个survivor区):较小时使用ziplist 较多采用hashmap
-<ul>
-<li>在出现哈希冲突时,使用链地址法解决;处于效率考虑,新节点的加入使用头插法</li>
-<li>扩容A,首先分配rehash之后的空间结构B,其每次对于</li>
-</ul>
-</li>
-<li>set:无序集合</li>
-<li>sortset:链表(value score 的Node)+跳表(log2级索引;二分查找) 对于范围查询，跳表更加高效</li>
-</ul>
-<p>intset</p>
-<h4 id="实现原理">实现原理</h4>
-<p>dict实现原理</p>
-<blockquote>
-<p>基于哈希表的算法，采用拉链法解决冲突，并在装载因子超过预定值时自动扩展，引发重哈希</p>
-</blockquote>
-<p>SDS:Simple Dynamic String</p>
-<blockquote>
-<p>string(len,free,char[])</p>
-</blockquote>
-<p><a href="https://blog.liexing.me/2019/12/28/from-ziplist-linkedlist-to-quicklist/" target="_blank" rel="noopener">ziplist linkedList quickList</a></p>
-<ul>
-<li>ziplist充分利用空间,将list数据相邻的存储,利用数据结构实现前后节点的遍历(因为是紧挨着所以需要很多字段能够准备读后前后街店的值 对于任何一个可变字段都需要增加标记他长度的字段),但是插入删除的时间消耗比较大,所以一般用于比较少的list数据</li>
-<li>对于较长的数据使用linkedlist,删除成本低但是空间碎片多</li>
-<li>quickList把ziplist封装为其Node,然后以此为节点,构建LinkedList,综合linkedList和zilist的节约内存以及删除数据高效的特点(quickList配合有压缩和解压缩的能力,删除时进行解压缩和压缩;新插入节点也会如此判断,否则重新创建Node)</li>
-</ul>
-<p><a href="https://www.cyningsun.com/06-18-2018/skiplist.html#%E5%A6%82%E4%BD%95%E7%A1%AE%E5%AE%9A%E5%B1%82%E6%95%B0%EF%BC%9F" target="_blank" rel="noopener">skipList</a></p>
-<ul>
-<li>定义基于单链表,在Node的结构中增加Node指针的数组,其长度可以称为层数;有越Log(N)的效率</li>
-<li>层数：其范围[1-maxvalue],当每次获取的random值大于p时,层数+1,并继续,否则层数确定(这样确保了高层数的分布不会很高)</li>
-<li>插入：例如插入E,按照已有跳表查询,在查询中所有经过A-B-C-D找到F节点大于E,那么判断中间经历的所有节点ABCD的value如果小于它且其层数小于等于他,那么就需要指向它,同时他的更高层也要更新指向</li>
-<li>删除：例如删除E,同样先经过跳表查询,可以获得E每层的下一个Node,更新遍历过程中相应的节点</li>
-<li>为什么不使用红黑树
-<ol>
-<li>内存不敏感,可以通过降低P来降低内存需求</li>
-<li>可以用于范围查询</li>
-<li>容易实现(相比较于b+树等,无需负责的平衡操作就可以实现LOGN的复杂度)</li>
-</ol>
-</li>
-</ul>
-<p>hash 当容量和值比较小时使用ziplist,节省空间;增大时改用dict</p>
-<h3 id="redis持久化">Redis持久化：</h3>
-<blockquote>
-<p>持久化就是把内存的数据写到磁盘中去，防止服务宕机了内存数据丢失<br>
-两种持久化方式:RDB（Redis DataBase；默认；定期备份；把内存中数据写到磁盘以及把文件读到内存；制定的时间间隔生成数据集的快） 和AOF(Append-only file;写入保存两个步骤；WRITE：根据条件，将 aof_buf 中的缓存写入到 AOF 文件 ；SAVE：根据条件，调用 fsync 或 fdatasync 函数，将 AOF 文件保存到磁盘中。持久化记录服务器执行的所有写命令到日志文件，并在服务器重启时，重新执行这些命令来恢复数据)</p>
-<blockquote>
-<p>两种区别就是，一个是平时写操作的时候不触发写，只有手动提交save命令，或者是关闭命令时，才触发备份操作。一个是持续的用日志记录写操作，crash后利用日志恢复；<br>
-选择的标准，就是看系统是愿意牺牲一些性能，换取更高的缓存一致性（aof），还是愿意写操作频繁的时候，不启用备份来换取更高的性能，待手动运行save的时候，再做备份（rdb）。rdb这个就更有些 eventually consistent的意思了。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>快照的设置:设置redis.conf save 900 1(900秒内 1个key被修改 快照);  dbfilename dump.rdb; dir /opt/redis;  appendonly no</p>
-</blockquote>
-<h3 id="过期策略定期删除惰性删除内存淘汰机制">过期策略：定期删除+惰性删除+内存淘汰机制</h3>
-<blockquote>
-<p>定期删除：redis 默认是每隔 100ms 就随机抽取一些设置了过期时间的 key，检查其是否过期，如果过期就删除<br>
-惰性删除：当访问key时，检测key是否过期，过期则不返回<br>
-内存淘汰机制：当内存不足以写入新数据时，什么都不做，写入报错/移除随机key/移除最近最少使用的key/随机（或者选择最先过期 ）移除有过期时间的key/移除有过期的key中最近最少使用的/</p>
-</blockquote>
-<h3 id="redis的架构模式">Redis的架构模式</h3>
-<blockquote>
-<p>单机版（存储，处理有限，无法高可用）<br>
-主从复制（读写分离；更新同步；但是master写的压力存在，高可用不行）<br>
-哨兵（监控主从模式，遇到故障自动迁移；解决高可用，但master写仍存在）<br>
-集群（proxy 型）：利用哈希进行数据分布，分布到多个主从集群+哨兵<br>
-集群（直连型）：</p>
-<blockquote>
-<p>集群（直连型）:<a href="https://blog.csdn.net/z15732621582/article/details/79121213" target="_blank" rel="noopener">简介</a>  和 <a href="https://www.cnblogs.com/lpfuture/p/5796398.html" target="_blank" rel="noopener">一致性Hash算法</a><br>
-Redis集群预分好16384个桶，当需要在 Redis 集群中放置一个 key-value 时，根据 CRC16(key) mod 16384的值，决定将一个key放到哪个桶中<br>
-节点的fail是通过集群中超过半数的节点检测失效时才生效</p>
-</blockquote>
-</blockquote>
-<h3 id="相关概念">相关概念</h3>
-<h4 id="缓存雪崩">缓存雪崩</h4>
-<blockquote>
-<p>描述：大量相同过期时间的缓存，同时失效，导致大量的并发访问失败并访问磁盘；<br>
-解决：使用加锁（ 最多的解决方案）或者队列的方式保证来保证不会有大量的线程对数据库一次性进行读写</p>
-</blockquote>
-<h4 id="缓存穿透">缓存穿透</h4>
-<blockquote>
-<p>描述：用户在查询一个持久层数据库也没有的数据时，会出现缓存未命中，且访问持久层无果的情况，大量这种类型的访问会给持久层数据库带来很大压力<br>
-解决：利用布隆过滤器判断对象是否一定不存在；缓存空对象</p>
-</blockquote>
-<h4 id="缓存击穿">缓存击穿</h4>
-<blockquote>
-<p>描述；指一个key非常热点，在不停的扛着大并发，大并发集中对这一个点进行访问，当这个key在失效的瞬间，持续的大并发就穿破缓存，直接请求数据库，就像在一个屏障上凿开了一个洞<br>
-解决：定时更新;多级缓存;失效时使用互斥锁,限制对于数据库的访问</p>
-</blockquote>
-<h4 id="缓存预热">缓存预热</h4>
-<blockquote>
-<p>描述：相关的缓存数据直接加载到缓存系</p>
-</blockquote>
-<h4 id="缓存更新">缓存更新</h4>
-<blockquote>
-<p>除了缓存失效策略（定义失效时间）外，还有定时去清理过期的缓存策略（判断是否失效）以及访问时才判断是否失效</p>
-</blockquote>
-<h4 id="缓存降级">缓存降级</h4>
-<blockquote>
-<p>当访问量剧增、服务出现问题（如响应时间慢或不响应）或非核心服务影响到核心流程的性能时，仍然需要保证服务还是可用的，即使是有损服务。系统可以根据一些关键数据进行自动降级，也可以配置开关实现人工降级，保证核心服务可用</p>
-</blockquote>
-<h4 id="热点数据和冷数据">热点数据和冷数据：</h4>
-<blockquote>
-<p>频繁访问修改的数据称之为热点数据；冷数据指访问间隔很长的数据（出现只访问一次，就被挤出内存的情况）</p>
-</blockquote>
-<h4 id="单线程的redis为什么这么快">单线程的redis为什么这么快</h4>
-<blockquote>
-<p>纯内存操作<br>
-单线程操作，避免了频繁的上下文切换<br>
-采用了非阻塞I/O多路复用机制 epoll</p>
-</blockquote>
-<h4 id="redis到底是多线程还是单线程">Redis到底是多线程还是单线程</h4>
-<blockquote>
-<p>单线程指的是网络请求模块使用了一个线程（所以不需考虑并发安全性），即一个线程处理所有网络请求，其他模块仍用了多个线程,基于IO多路复用</p>
-</blockquote>
-<h4 id="redis关于线程安全问题">Redis关于线程安全问题</h4>
-<blockquote>
-<p>Redis实际上是采用了线程封闭的观念，把任务封闭在一个线程，自然避免了线程安全问题，不过对于需要依赖多个redis操作的复合操作来说，依然需要锁，而且有可能是分布式锁。</p>
-</blockquote>
-<h4 id="redis-内部实现">Redis 内部实现</h4>
-<blockquote>
-<p>内部实现采用epoll，采用了epoll+自己实现的简单的事件框架。epoll中的读、写、关闭、连接都转化成了事件，然后利用epoll的多路复用特性，绝不在io上浪费一点时间 这3个条件不是相互独立的，特别是第一条，如果请求都是耗时的，采用单线程吞吐量及性能可想而知了。应该说redis为特殊的场景选择了合适的技术方案。</p>
-</blockquote>
-<h4 id="memcache-vs-redis">Memcache VS Redis</h4>
-<blockquote>
-<p>(1)存储方式 ：Memecache把数据全部存在内存之中，断电后会挂掉，数据不能超过内存大小。 Redis有部份存在硬盘上，redis可以持久化其数据<br><br>
-(2)数据支持类型 memcached所有的值均是简单的字符串，redis作为其替代者，支持更为丰富的数据类型 ，提供list，set，zset，hash等数据结构的存储<br><br>
-(3)使用底层模型不同 它们之间底层实现方式 以及与客户端之间通信的应用协议不一样。 Redis直接自己构建了VM 机制 ，因为一般的系统调用系统函数的话，会浪费一定的时间去移动和请求。<br><br>
-(4)value 值大小不同：Redis 最大可以达到 512M；memcache 只有 1mb。<br><br>
-(5)redis的速度比memcached快很多<br><br>
-(6)Redis支持数据的备份，即master-slave模式的数据备份。<br><br>
-Redis key和value的大小限制：512MB</p>
-</blockquote>
-<h4 id="redis数据库的数据一致性">Redis数据库的数据一致性</h4>
-<blockquote>
-<p>主从同步：从服务器启动，会向主服务器发起sync命令；主服务器收到后会在后台保存快照（RDB操作），并缓存保存期间的命令；结束后，会将快照和缓存命令传递给从数据库，从数据库接收到后，会载入快照并执行缓存命令；</p>
-<p>哈希槽算法：与一致性哈希算法相似，一个节点根据其存储量，分为若干个槽<br>
-一致性哈希算法：在0-2^32-1的哈希环,将已有的机器根据ip等因素hash到某个位置,把哈希环 分割成好几块,每个机器负责一块的数据,这样机器数量的变化(宕机或者新增只会影响一部分数据),同时可以是用虚拟主机的方法,解决数据倾向存储在某一个机器的问题.<br>
-全量复制，增量复制，异步复制</p>
-</blockquote>
-<h4 id="哨兵模式"><a href="https://blog.csdn.net/sz85850597/article/details/86751215" target="_blank" rel="noopener">哨兵模式</a></h4>
-<blockquote>
-<p>主观下线-&gt;客观下线<br>
-sential leader 选举：当每一个发现redis master 的sential节点都可以向其他节点发送选举信号，每个接收到该信号的节点如果没有投票，可以投它，当达到最低票数时，正式成为sential leader；否则进行下一轮；<br>
-redis master 选举：由 sential leader 选择redis集群中的某个节点作为master</p>
-<blockquote>
-<p>a.排除故障节点</p>
-</blockquote>
-<blockquote>
-<p>b.选择节点中slave-priority最大的从节点作为主节点</p>
-</blockquote>
-<blockquote>
-<p>c.选择择复制偏移量（数据写入量的字节，记录写了多少数据。主服务器会把偏移量同步给从服务器，当主从的偏移量一致，则数据是完全同步）最大的从节点作为主节点</p>
-</blockquote>
-<blockquote>
-<p>d.选择runid（redis每次启动的时候生成随机的runid作为redis的标识）最小的从节点作为主节点</p>
-</blockquote>
-</blockquote>
-<h4 id="redis-集群选举">redis <a href="https://www.cnblogs.com/nijunyang/p/12508098.html" target="_blank" rel="noopener">集群选举</a></h4>
-<blockquote>
-<p>背景：利用hash桶算法进行数据的分隔布置到多个主从模式服务器去<br>
-选举：slave发现master Fail之后，就尝试选举</p>
-<blockquote>
-<p>a.增加currentEpoch加1，并广播FAILOVER_AUTH_REQUEST信息</p>
-</blockquote>
-<blockquote>
-<p>b.收到信息的Master节点会判断请求者的合法性，并发&gt;送FAILOVER_AUTH_ACK，对每一个epoch只发送一次ack</p>
-</blockquote>
-<blockquote>
-<p>c.尝试failover的slave收集FAILOVER_AUTH_ACK;超过半数后变成新Master;广播Pong通知其他集群节点</p>
-</blockquote>
-</blockquote>
-<h2 id="mysql">Mysql</h2>
-<h3 id="事务的基本要素">事务的基本要素</h3>
-<blockquote>
-<p>原子性（Atomicity）：事务开始后所有操作，要么全部做完，要么全部不做，不可能停滞在中间环节。<br><br>
-一致性（Consistency）：事务开始前和结束后，数据库的完整性约束没有被破坏。<br><br>
-隔离性（Isolation）：同一时间，只允许一个事务请求同一数据，不同的事务之间彼此没有任何干扰。<br><br>
-持久性（Durability）：事务完成后，事务对数据库的所有更新将被保存到数据库，不能回滚</p>
-</blockquote>
-<h3 id="事务的并发问题">事务的并发问题</h3>
-<blockquote>
-<p>脏读：事务A读取了事务B更新的数据，然后B回滚操作，那么A读取到的数据是脏数据<br><br>
-不可重复读：事务 A 多次读取同一数据，事务 B 在事务A多次读取的过程中，对数据作了更新并提交，导致事务A多次读取同一数据时，结果 不一致。<br><br>
-丢失修改：两个事务AB修改顺序颠倒,A后发先修改,A的修改被B的修改覆盖,导致修改丢失<br><br>
-幻读：系统管理员A将数据库中所有学生的成绩从具体分数改为ABCDE等级，但是系统管理员B就在这个时候插入了一条具体分数的记录，当系统管理员A改结束后发现还有一条记录没有改过来，就好像发生了幻觉一样，这就叫幻读.<br><br>
-小结：不可重复读和脏读是由于读取了未提交事务的修改的数据,一读一写;丢失修改和幻读则是修改了事务间的共同数据,双写;<br><br>
-不可重复读的和幻读很容易混淆，不可重复读侧重于修改，幻读侧重于新增或删除。<br><br>
-解决不可重复读的问题只需锁住满足条件的行，解决幻读需要锁表<br></p>
-</blockquote>
-<h3 id="事物隔离级别">事物隔离级别</h3>
-<p>| 事务隔离级别  | 脏读  | 不可重复  | 幻读 |方法<br>
-| :----- | -----: | -----: | -----: |<br>
-|   读未提交（read-uncommitted）    | 是      |  是     | 是      |<br>
-|    读已提交（read-committed）   |   否    | 是     | 是 |<br>
-|    可重复读（默认，repeatable-read）   | 否  |否 | 是 |<br>
-|    串行化（serializable）    |   否    | 否 |否 |   每个事务依次提交(SELECT变成SELECT … LOCK IN SHARE MODE)</p>
-<h3 id="存储引擎">存储引擎</h3>
-<blockquote>
-<p><a href="https://mbd.baidu.com/newspage/data/landingsuper?context=%7B%22nid%22%3A%22news_10409517059295814828%22%7D&amp;n_type=1&amp;p_from=4" target="_blank" rel="noopener">参考</a><br>
-存储引擎是数据库管理系统用来从数据库创建、读取和更新数据的软件模块<br>
-mysql5.5之后默认使用事务性存储引擎 InnoDB(这是MySQL 5.5或更高版本的默认存储引擎。它提供了事务安全(ACID兼容)表，支持外键引用完整性约束。它支持提交、回滚和紧急恢复功能来保护数据。它还支持行级锁定。当在多用户环境中使用时，它的“一致非锁定读取”提高了性能。它将数据存储在集群索引中，从而减少了基于主键的查询的I/O)</p>
-</blockquote>
-<h4 id="innodb">InnoDB</h4>
-<blockquote>
-<p>在 InnoDB 存储引擎中，所有的数据都被逻辑地存放在表空间中，表空间（tablespace）是存储引擎中最高的存储逻辑单位，在表空间的下面又包括段（segment）、区（extent）、页（page）<br><br>
-MySQL 使用 InnoDB 存储表时，会将表的定义和数据索引等信息分开存储，其中前者存储在 .frm文件中，后者存储在 .ibd 文件中<br></p>
-</blockquote>
-<h3 id="索引">索引</h3>
-<blockquote>
-<p>索引优化是对查询性能优化的最有效手段<br>
-在关系数据库中，索引是一种单独的、物理的对数据库表中一列或多列的值进行排序的一种存储结构，它是某个表中一列或若干列值的集合和相应的指向表中物理标识这些值的数据页的逻辑指针清单<br>
-InnoDB 存储引擎在绝大多数情况下使用 B+ 树建立索引，这是关系型数据库中查找最为常用和有效的索引</p>
-</blockquote>
-<blockquote>
-<p>一张表一定包含一个聚集索引构成的 B+ 树以及若干辅助索引的构成的 B+ 树（辅助索引的存在并不会影响聚集索引，因为聚集索引构成的 B+ 树是数据实际存储的形式，而辅助索引只用于加速数据的查找，所以一张表上往往有多个辅助索引以此来提升数据库的性能。）</p>
-</blockquote>
-<h4 id="mysql-索引分类">mysql 索引分类</h4>
-<p>b+树索引 hash索引</p>
-<blockquote>
-<p>主键索引：以唯一能够标识记录中某一行的属性或者属性组 作为唯一索引,不为空<br>
-唯一索引：唯一索引的值必须唯一,但允许有空值(NULL代表未知,不违反唯一性约束);对于组合索引,组合必须唯一<br>
-普通索引：普通的索引用于加快访问速度,其根节点指向主键<br>
-全文索引：某些字符串类型字段的倒排索引(映射单词和所在文档的位置)<a href="https://www.cnblogs.com/wxzhe/p/9955534.html" target="_blank" rel="noopener">全文索引的原理及定义</a></p>
-</blockquote>
-<p>主键索引 VS 唯一索引</p>
-<blockquote>
-<p>主键索引必然是唯一索引,唯一索引不一定是主键索引;<br>
-主键不允许空,唯一索引允许<br>
-主键可以作为外键存在,而唯一索引不行<br>
-对于一张表来说,主键索引只有一个,唯一索引可以有多个</p>
-</blockquote>
-<p>主键索引的插入和删除可能会造成页的分裂和合并,进而导致索引的更改,所以一般建议使用自增ID作为主键</p>
-<p>唯一索引的用处:</p>
-<blockquote>
-<p>确保属性值唯一,比如对于网站而言,利用手机号,邮箱注册账号,必然希望其唯一<br>
-唯一索引在插入时会检验是否出现重复,仍然基于B+树实现判断,但是对于NULL值特殊处理直接返回false</p>
-</blockquote>
-<h4 id="冗余索引">冗余索引</h4>
-<blockquote>
-<p>冗余索引指索引的功能相同,两者都可以被命中, 比如索引<a>与<a b> 冗余</a></a></p>
-</blockquote>
-<h4 id="聚集索引-和-辅助索引-聚簇索引-和非聚簇索引">聚集索引  和  辅助索引 /聚簇索引 和非聚簇索引</h4>
-<blockquote>
-<p>聚合索引可以理解为基于主键的索引，数据行的物理顺序与列值（一般是主键的那一列）的逻辑顺序相同，一个表中只能拥有一个聚集索引,其叶子节点是数据节点；而附注索引是对于其他键的索引，最终叶子节点内容为指向数据块的引；<br><br>
-主键(指定主键或者选择费控的合适键或者隐藏键uuid)<br>
-聚簇索引即值按照表的主键构建一颗b+树,同时叶子节点中存放的是id和表的行记录在数据页中的索引;这个特性决定了索引组织表中数据也是索引的一部分，每张表只能拥有一个聚簇索引<br>
-Innodb通过主键聚集数据，如果没有定义主键，innodb会选择非空的唯一索引代替。如果没有这样的索引，innodb会隐式的定义一个主键来作为聚簇索引<br>
-聚簇索引的优点：</p>
-</blockquote>
-<ul>
-<li>数据访问更快,因为聚簇索引将索引和数据保存在同一个B+树中</li>
-<li>聚簇索引对于主键的排序查找和范围查找速度非常快<br>
-缺点:</li>
-<li>插入速度严重依赖于插入顺序，按照主键的顺序插入是最快的方式，否则将会出现页分裂，严重影响性能。因此，对于InnoDB表，我们一般都会定义一个自增的ID列为主键</li>
-<li>更新主键的代价很高，因为将会导致被更新的行移动。因此，对于InnoDB表，我们一般定义主键为不可更新。</li>
-<li>二级索引访问需要两次索引查找，第一次找到主键值，第二次根据主键值找到行数据</li>
-</ul>
-<p>辅助索引：</p>
-<blockquote>
-<p>在聚簇索引之上创建的索引称之为辅助索引，辅助索引访问数据总是需要二次查找。辅助索引叶子节点存储的不再是行的物理位置，而是主键值</p>
-</blockquote>
-<h4 id="回表-索引覆盖-复合索引-索引下推">回表 索引覆盖 复合索引 索引下推</h4>
-<blockquote>
-<p>回表查询，先定位主键值，再定位行记录，它的性能较扫一遍索引树更低<br>
-索引覆盖:当所需要的结果都在索引上时,就可以一次查询得到结果<br>
-索引下推：index condition pushdown/IPC：在使用IPC的情况下,对于某些查询只能命中索引前部分,同时涉及后部分的判断条件时,mysql server 同时会将判断条件传递给存储引擎,然后存储引擎在检索的同时判断,返回结果(比如对于SELECT * from user where  name like ‘陈%’ and age=20 能够命中索引&lt;name,age&gt;的name 部分 使用IPC可以同时传递条件)<br>
-两个或更多个列上的索引被称作复合索引，最左匹配原则，键&gt;=2</p>
-</blockquote>
-<h3 id="数据库主从同步">数据库主从同步</h3>
-<blockquote>
-<p><a href="https://www.cnblogs.com/syncnavigator/p/10189597.html" target="_blank" rel="noopener">流程参考</a><br>
-首先必须打开master端的binlog (mysql-bin.xxxxxx)日志功能，否则无法实现mysql的主从复制。因为mysql的整个主从复制过程实际上就是：slave端从 master端获取binlog日志，然后再在自己身上完全顺序的执行该日志中所记录的各种SQL操作</p>
-<ol>
-<li>master在执行sql之后,将数据改变记录二进制log文件(bin-log)</li>
-<li>Slave 的IO进程连接上master,并请求同步指定的日志文件的指定位置之后的记录</li>
-</ol>
-<ul>
-<li>master 端接受到io请求后,负责复制的io进程会返回数据给slave的io进程,也包含binlog的位置以及本次数据其中的位置,方便下次继续</li>
-<li>slave接受到数据后会追加到slave的relay log末端,并记录master端binlog文件的路径和文件内位置记录到master_info中,已便下次可以清晰告知master从哪里开始</li>
-</ul>
-<ol start="3">
-<li>slave端 的sql进程检测到relay文件的变动会解析文件执行master端已经执行的操作</li>
-</ol>
-<blockquote>
-<p>2.slave连接master，并从master获取binlog，存于本地relay-log中，然后从上次记住的位置起执行SQL语句，一旦遇到错误则停止同步。</p>
-</blockquote>
-</blockquote>
-<h3 id="数据一致性">数据一致性</h3>
-<p><a href="https://www.jianshu.com/p/790a158d9eb3" target="_blank" rel="noopener">参考链接</a></p>
-<blockquote>
-<p>三种同步写模式：异步复制、半同步复制、全同步复制<br>
-异步复制:Mysql 默认同步模式,主库在执行完客户端提交的事物之后会直接将结果返回给客户端,不管 从库是否接收同步并成功处理,在这种情况下,主库如果crash掉,从库提升为主库,那么可能出现从库数据不完备的现象<br>
-半同步复制:在前者的基础上要求 至少一个从库同步成功,才会将保存在binlog中的操作,提交到存储引擎,返回结果给客户端<br>
-全同步复制:在异步复制的基础上,要求 所有从库 都同步成功,才真正执行事物，返回给客户端<br>
-相对于异步复制，半同步复制提高了数据的安全性，同时它也造成了一定程度的延迟，这个延迟最少是一个TCP/IP往返的时间。所以，半同步复制最好在低延时的网络中使用。<br>
-半同步复制和全同步复制 可能会出现 从库执行成功而 主库 执行失败的情况，导致 数据不一致</p>
-</blockquote>
-<h3 id="mvcc">MVCC</h3>
-<p><a href="https://blog.csdn.net/Waves___/article/details/105295060" target="_blank" rel="noopener">参考0</a><br>
-<a href="https://juejin.im/post/6847902218729816071" target="_blank" rel="noopener">参考1</a><br>
-<a href="https://blog.csdn.net/whoamiyang/article/details/51901888" target="_blank" rel="noopener">参考2</a><br>
-<a href="https://blog.csdn.net/Oooo_mumuxi/article/details/105766335" target="_blank" rel="noopener">参考3</a><br>
-<a href="https://blog.csdn.net/weixin_41835916/article/details/81633072" target="_blank" rel="noopener">参考博客1</a><br>
-基于乐观锁的思想,通过MVCC 解决了读写并发的问题的问题;<br>
-Innodb在行记录的添加了隐藏字段,其中包括</p>
-<ul>
-<li>修改记录的事务ID(DB_TRX_ID:insert/update/delete)</li>
-<li>回滚指针：指向当前记录行的undo log(DB_ROLL_PTR),多个回滚指针行程历史数据链</li>
-</ul>
-<blockquote>
-<p>Innodb 使用ReadView对象来判断事务的可见性(隔离性),Innndb在执行select 查询时创建ReadView对象,配合undo log 的版本链 查询可见数据<br>
-对于read commited ,每个快照读操作都有自己的ReadView,而对于repeated read ,ReadView与事务相关,事务中的读操作共享一个readView;<br>
-readView：trx_list(生成时正在活跃的事务列表) up_limit_id(创建时活跃的最小的事务id) low_limit_id(创建时未分配的最小的事务ID,即此时最大事物id+1) 创建readView的事务ID<br>
-当前事务尝试读取数据时,会执行一下判断算法判断记录的可见性</p>
-<ol>
-<li>把当前记录的修改事务ID赋值给变量x,用以判断是否当前记录是否可见</li>
-<li>把 x 与 活跃事务区间进行比较
-<ul>
-<li>x&lt;最小值,意味着修改的事务 在 创建readView之前已经提交,所以 可见或者x = 当前事务ID ,就是本身修改的,返回数据</li>
-<li>x&gt;最大值,说明修改的事务是在 创建readview之后发生的,所以该记录不可见,需要沿着回滚指针指向的undo log,更新x进行下一轮的比较</li>
-<li>x 在区间之间,意味着修改的事务可能仍在活跃中,即在readview的活跃列表中 或者 事务已提交 这样的话就需要二分判断该事务是否在列表中,在的话,意味着当前事务未结束,所以该记录不可见,所以同理沿着回滚指针进行下一轮比较;如果不在就意味着 事务在创建readView之前已经提交,那么可见,返回数据</li>
-</ul>
-</li>
-</ol>
-</blockquote>
-<h3 id="mysql-log">Mysql lOG</h3>
-<blockquote>
-<p>binlog:用于复制，在主从复制中，从库利用主库上的binlog进行重播，实现主从同步(用于数据库的基于时间点的还原)<br>
-undo log:为了实现事务的原子性,在innodb中与MVCC 配合实现<br>
-redo log:目标在于确保事务的持久性;对于innodb的任何修改操作都会首先在buffer pool 缓存页中进行,这样的页可以被标注为dirty然后由专门的purge线程写到磁盘,这样可以避免每次都写的随机IO,直接访问缓存降低了访问的时延,但是可能出现脏页在为写入磁盘时,系统崩溃,修改丢失,所以innodb将所有修改操作写入redo log文件(可覆盖写),在数据库启动时进行恢复操作<br>
-errorlog:错误日志记录着mysqld启动和停止,以及服务器在运行过程中发生的错误的相关信息。在默认情况下，系统记录错误日志的功能是关闭的，错误信息被输出到标准错误输出(在开启死锁日志的打印之后，所有的死锁日志都会打印在error log中)<br>
-slow query log：通过 记录执行超过一定时间的SQL语句以及没有使用索引的查询语句<br>
-general log：记录所以执行的sql,用于排查sql性能,但会增加系统负担,常短期开启分析.<br>
-relay log：用于复制中接收方复制binlog<br>
-undo log:Innodb引擎的undo日志是记录在表空间中单独的回滚段中。 当mysql做update和delete操作的时候，实际的后台都是先把旧记录“删”了，如果是update和insert再把新记录“插入”进去</p>
-</blockquote>
-<p>log buffer</p>
-<ul>
-<li>redo log buffer</li>
-<li>undo log buffer</li>
-</ul>
-<p>binlog VS redolog</p>
-<ul>
-<li>binglog是服务层的记录sql语句，不或缺,redolog是存储引擎innodb这一层的记录的是物理操作(页的变更操作),并不是所有引擎都有</li>
-<li>binlog可用于同步,redolog和binlog配合用于奔溃恢复</li>
-<li>binlog是累加的提交事务时写入磁盘,redolog是固定大小的，复写的</li>
-</ul>
-<p>binlog的刷盘时机 sync_binlog</p>
-<ul>
-<li>0:不做要求,系统判断比如缓存不足</li>
-<li>N：没N个事务就写入磁盘</li>
-</ul>
-<p><a href="https://www.cnblogs.com/hi3254014978/p/12730794.html" target="_blank" rel="noopener">快照读 vs 当前读</a></p>
-<blockquote>
-<p>快照读(snapshot read)/一致性读：MVCC实现,普通的 select 语句(不包括 select … lock in share mode, select … for update):确保事务只能读在其之前生效或者自己修改的记录<br>
-当前读(current read) ：select … lock in share mode，select … for update，insert，update，delete 语句（这些语句获取的是数据库中的最新数据,加next-key锁</p>
-</blockquote>
-<h3 id="排序二叉树-gt-平衡二叉树-gt-b-树-gt-b树">排序二叉树 -&gt; 平衡二叉树 -&gt; B-树 -&gt; B+树</h3>
-<blockquote>
-<p>排序二叉树:左节点小于根节点,而右节点大于根节点<br>
-平衡二叉树:在排序二叉树的基础上,保证左右子树的深度相差不超过1,可以降低查询的时间<br>
-B-树:多路平衡二叉树,节点上可以有多个元素,也存储数据,可以有多个子树<br>
-B+树:在B+树的基础上,仅在叶子节点上存储数据,非叶子节点存储用于比较的index,不存储数据</p>
-</blockquote>
-<h3 id="最左匹配原则">最左匹配原则</h3>
-<blockquote>
-<p>索引建立时 是按照 字段 从左到右 排序的顺序来比较和存储 节点指针的<br>
-对于 已存在的索引 (a b c) :(a) (a b) (a b c) 可以使用该索引,同时mysql 存在对于检索条件的优化,使得 (c b a) 优化为(a b c) 来索引</p>
-</blockquote>
-<h3 id="myisam与innodb">MyISAM与InnoDB</h3>
-<blockquote>
-<p>1.对事务的的支持。MyISAM强调性能,每次查询都是具有原子性,执行速度更快,但不支持事务,Innodb 具有 事务(commit) 回滚(rollback) 和 崩溃恢复功能的事物安全型表<br>
-2.对外键(表的外键是其他表的主键,跨表之间的联系)的支持<br>
-3.InnoDB是聚集索引（主索引存储数据文件，辅助索引指向主键），MyISAM 是非聚集索引（主键索引和辅助索引都指向文件指针）</p>
-<ul>
-<li>InnoDB表必须有主键（用户没有指定的话会自己找或生产一个主键）以支持聚集索引，而Myisam可以没有(所有索引都是非聚集索引,主键索引和非主键索引都是没有区别,不使用聚集索引)<br>
-4.InnoDB支持表、行(默认)级锁，而MyISAM支持表级锁<br>
-6.是否支持MVCC 应对高并发事物MVCC比锁更加高效(MVCC在读已提交和可重复读的连个隔离级别下工作)</li>
-</ul>
-</blockquote>
-<h3 id="myisam">MyISAM</h3>
-<blockquote>
-<p>不支持事务和行级锁,最大的缺陷是崩溃后无法恢复<br>
-在某些特殊场合(不介意崩溃恢复问题),myisam适合密集读</p>
-</blockquote>
-<h3 id="postgresql-vs-mysql">PostgreSQL  VS MySQL</h3>
-<blockquote>
-<p>待完善</p>
-</blockquote>
-<h2 id="mysql-锁">mysql 锁</h2>
-<p><a href="https://juejin.im/post/6844903668571963406" target="_blank" rel="noopener">全面了解mysql锁机制（InnoDB）与问题排查</a><br>
-<a href="https://blog.csdn.net/Jack__Frost/article/details/73347688" target="_blank" rel="noopener">锁机制超详细解析（锁分类、事务并发、引擎并发控制）</a></p>
-<blockquote>
-<p>背景:锁是计算机用于协调多个进程或线程访问某资源的机制;事物在操作某个数据之前需要申请对其加锁,根据锁的类型不同,事物对其有不同的控制程度,在该事物释放锁之前,阻止其他事物的操作.<br>
-分类:</p>
-<ul>
-<li>按照封锁类型可以分为 排它锁和共享锁;
-<ul>
-<li>排它锁又称写锁,X锁,阻止其他事物对于数据加锁,阻止其他事物读或写该数据;</li>
-<li>共享锁,又称读锁,S锁,事物对于数据添加共享锁之后,其他事物只能对其添加共享锁,不能添加排它锁,只能读,不能写</li>
-</ul>
-</li>
-<li>按照封锁的粒度分类：
-<ul>
-<li>行级锁: 虽然由于粒度小,发生资源争用的概率变小,可以提高并发程度,但是因为粒度小,所以获取和释放锁的工作和消耗更多;此外容易发生死锁</li>
-<li>表级锁: 虽然开销小,加锁快,不会出现死锁,但是锁定粒度大,发生冲突的概率大,并发程度低(一次性锁定事务所涉及到的表)</li>
-<li>页级锁(Mysql独有): 加锁和开锁时间以及粒度介于 行级锁和表级锁之间,可能出现死锁,并发度一般</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>死锁的条件：互斥条件(排他性占有资源) 请求和保持条件(阻塞时不释放资源) 不剥夺条件(只能自己主动释放资源) 环路等待(进程-资源请求环)</p>
-</blockquote>
-<blockquote>
-<p>举例 事物 <code>update t_goods set current_count = current_count - 1 where id = 1; update t_count set balance = balance - 2 where id = 1;</code> 和  <code>update t_goods set current_count = current_count - 1 where id = 1;update t_count set balance = balance - 2 where id = 1;</code> 分别获得了第一条记录的锁后,出现死锁</p>
-</blockquote>
-<blockquote>
-<p>mysql 如何处理死锁：</p>
-<ul>
-<li>等待，直到事物超时回滚</li>
-<li>发起死锁检测(死锁检测的原理是构建一个以事务为顶点、锁为边的有向图，判断有向图是否存在环，存在即有死锁。)，主动回滚一条事务(检测到死锁之后，选择插入更新或者删除的行数最少的事务回滚)，让其他事务继续执行</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>死锁预防策略：</p>
-<ul>
-<li>逻辑上避免交叉操作(a-b和 b-a)</li>
-<li>保持事物的轻量,减少涉及的表和资源,避免使用子查询,尽量使用主键,降低锁持有时间(不要在事物中加其他耗时操作)</li>
-<li>建立索引(索引也可能导致死锁)</li>
-</ul>
-</blockquote>
-<blockquote>
-<p>其他：select update 操作是否设计锁表?可能和执行引擎相关？ todo</p>
-</blockquote>
-<h3 id="自增锁">自增锁</h3>
-<blockquote>
-<p>是MySQL一种特殊的锁，如果表中存在自增字段，MySQL便会自动维护一个自增锁。</p>
-</blockquote>
-<p><a href="https://zhuanlan.zhihu.com/p/29150809" target="_blank" rel="noopener">参考1</a></p>
-<h3 id="行锁">行锁</h3>
-<h4 id="实现方式">实现方式</h4>
-<ol>
-<li>Innodb 通过对索引上的索引项加锁来实现(而Oracle通过对于数据行加锁来实现) =&gt; 只有通过索引条件检索数据，InnoDB 才使用行级锁，否则，InnoDB 将使用表锁</li>
-<li>不论是使用主键索引、唯一索引或普通索引，InnoDB 都会使用行锁来对数据加锁</li>
-<li>由于 MySQL 的行锁是针对索引加的锁，不是针对记录加的锁，所以虽然多个session是访问不同行的记录， 但是如果是使用相同的索引键,是会出现锁冲突的(后使用这些索引的session需要等待先使用索引的session释放锁后，才能获取锁)</li>
-</ol>
-<h3 id="间隙锁-gap-key">间隙锁 gap key</h3>
-<blockquote>
-<p>当我们用范围条件而不是相等条件检索数据，并请求共享或排他锁时，InnoDB会给符合条件的已有数据记录的索引项加锁；对于键值在条件范围内但并不存在的记录，叫做“间隙（GAP)”，InnoDB也会对这个“间隙”加锁，这种锁机制就是所谓的间隙锁（Next-Key锁）<br>
-但是间隙锁会导致对于符合条件范围的键值的插入陷入阻塞,等待锁释放;=&gt;尽量使用=而非范围<br>
-唯一索引没有间隙锁<br>
-间隙锁存在于非唯一索引中，锁定<code>开区间</code>范围内的一段间隔，它是基于临键锁实现的。(当查询的索引含有唯一属性的时候，Next-Key Lock 会进行优化，将其降级为Record Lock，即仅锁住索引本身，不是范围。)<br>
-gap锁不排他 可重入<br>
-目的</p>
-</blockquote>
-<ul>
-<li>(结合MVCC)防止幻读,满足可重复读</li>
-<li>满足恢复和复制的需要
-<ul>
-<li>mysql通过BINLOG记录事务的sql语句,按照事务提交的先后顺序来记录,实现mysql的备份和主从复制;由于按照事务提交的顺序来记录所以不允许<br>
-利用 where between and触发 间隙锁,当范围内的记录都存在时,退化为行锁</li>
-</ul>
-</li>
-</ul>
-<h4 id="实现方式">实现方式</h4>
-<blockquote>
-<p>当</p>
-</blockquote>
-<h3 id="临键锁-next-key-lock">临键锁 next-key lock</h3>
-<blockquote>
-<p>Next-Key 可以理解为一种特殊的间隙锁，也可以理解为一种特殊的算法。通过临建锁可以解决幻读的问题。 每个数据行上的非唯一索引列上都会存在一把临键锁，当某个事务持有该数据行的临键锁时，会锁住一段左开右闭区间的数据。需要强调的一点是，InnoDB 中行级锁是基于索引实现的，临键锁只与非唯一索引列有关，在唯一索引列（包括主键列）上不存在临键锁<br>
-临键锁存在于非唯一索引中，该类型的每条记录的索引上都存在这种锁，它是一种特殊的间隙锁，锁定一段<code>左开右闭</code>的索引区间</p>
-</blockquote>
-<h3 id="唯一索引-是否使用-间隙锁"><a href="https://zhuanlan.zhihu.com/p/48269420" target="_blank" rel="noopener">唯一索引 是否使用 间隙锁</a></h3>
-<p>在where between and中如果列元素 是非唯一索引那么是使用间隙锁的<br>
-如果是唯一索引,那么</p>
-<h3 id="常见加锁规则"><a href="https://www.aneasystone.com/archives/2017/12/solving-dead-locks-three.html" target="_blank" rel="noopener">常见加锁规则</a></h3>
-<p>select 语句正常情况下为快照读，不加锁；<br>
-SELECT … LOCK IN SHARE MODE 语句为当前读，加 S 锁；<br>
-ELECT … FOR UPDATE 语句为当前读，加 X 锁<br>
-常见的 DML 语句（如 INSERT、DELETE、UPDATE）为当前读，加 X 锁；<br>
-常见的 DDL 语句（如 ALTER、CREATE 等）加表级锁，且这些语句为隐式提交，不能回滚；</p>
-<p><a href="https://www.aneasystone.com/archives/2018/06/insert-locks-via-mysql-source-code.html" target="_blank" rel="noopener">insert into</a></p>
-<blockquote>
-<p>首先会获得插入意向锁,即会对插入所在记录的间隙的间隙锁,虽然它是一种间隙锁但是与gap锁冲突(不同事物对于同一间隙可重复加锁);<br>
-完成插入之后,对插入的记录添加写锁,</p>
-</blockquote>
-<p>为什么非唯一索引会加 GAP 锁，而唯一索引不用加 GAP 锁呢？</p>
-<blockquote>
-<p>原因很简单，GAP 锁的作用是为了解决幻读，防止其他事务插入相同索引值的记录，而唯一索引和主键约束都已经保证了该索引值肯定只有一条记录，所以无需加 GAP 锁。</p>
-</blockquote>
-<h3 id="意向锁">意向锁</h3>
-<p>分为意向读锁和意向写锁 属于表锁<br>
-意向读锁与预想写锁之间是兼容的(直觉是类似可重入锁),但是意向锁与读写锁之间存在互斥(意向读锁与表写锁互斥,意向写锁与表读锁互斥)</p>
-<h3 id="乐观锁-悲观锁">乐观锁 悲观锁</h3>
-<p>MySQL的并发控制有两种方式，一个是 MVCC，一个是两阶段锁协议</p>
-<blockquote>
-<p>Multi-Version Concurrency Control,翻译为中文即 多版本并发控制<br>
-VCC的实现，通过保存数据在某个时间点的快照来实现的。这意味着一个事务无论运行多长时间，在同一个事务里能够看到数据一致的视图。根据事务开始的时间不同，同时也意味着在同一个时刻不同事务看到的相同表里的数据可能是不同的<br>
-在每一行数据中额外保存两个隐藏的列：当前行创建时的版本号和删除时的版本号（可能为空，其实还有一列称为回滚指针，用于事务回滚，不在本文范畴）</p>
-</blockquote>
-<h3 id="事务的三级封锁协议">事务的三级封锁协议</h3>
-<p>2PL,两阶段加锁协议:主要用于单机事务中的一致性与隔离性。<br>
-一个事务里面，分为加锁(lock)阶段和解锁(unlock)阶段,也即所有的lock操作都在unlock操作之前<br>
-在事务中只有提交(commit)或者回滚(rollback)时才是解锁阶段，其余时间为加锁阶段。</p>
-<blockquote>
-<p>按照顺序或者并发量 一次加锁和解锁<br>
-引入2PL是为了保证事务的隔离性，保证并发调度的准确性，多个事务在并发的情况下依然是串行的。</p>
-</blockquote>
-<h3 id="三级封锁协议">三级封锁协议</h3>
-<p>封锁协议：<br>
-运用X锁和S锁对数据对象进行加锁时约定的规则就是封锁协议。</p>
-<p>目的是在不同程序上保证数据的一致性。</p>
-<p>一级封锁：修改数据加x锁直到事务结束才释放。在此协议中，仅仅是读数据是不需要加锁的，所以只能解决丢失修改问题，不能解决脏读和不可重复读。<br>
-二级封锁：在一级封锁的基础上，加了一条：T事务在读取数据R之前必须先对其加上S锁，读完释放S锁。可以解决丢失修改和脏读（加了读锁就可以防止在读的期间其他事务进行修改，但是读完之后，事务结束之前，依然可能会其他事务进行修改，导致不可重复读）。<br>
-三级封锁协议：一级封锁协议加上事务T在读取数据R之前必须先对其加S锁，直到事务结束才释放。：解决了丢失修改、脏读和不可重复读的问题。</p>
-<h2 id="mysql-优化">mysql 优化</h2>
-<ul>
-<li>分表</li>
-<li>存储过程和存储函数</li>
-</ul>
-<h3 id="数据库范式">数据库范式</h3>
-<p>数据库设计对数据的存储性能，还有开发人员对数据的操作都有莫大的关系。所以建立科学的，规范的的数据库是需要满足一些规范的来优化数据数据存储方式。在关系型数据库中这些规范就可以称为范式。</p>
-<p>第一范式：当关系模式R的所有属性都不能在分解为更基本的数据单位时，称R是满足第一范式的，简记为1NF。满足第一范式是关系模式规范化的最低要：</p>
-<ul>
-<li>字段不可分<br>
-第二范式：如果关系模式R满足第一范式，并且R得所有非主属性都完全依赖于R的每一个候选关键属性，称R满足第二范式，简记为2NF。</li>
-<li>有主键，非主键字段完全依赖主键而非主键的一部分<br>
-第三范式：满足第二范式;设R是一个满足第一范式条件的关系模式，X是R的任意属性集，如果X非传递依赖于R的任意一个候选关键字，称R满足第三范式，简记为3NF.</li>
-<li>非主键字段不能相互依赖;</li>
-</ul>
-<h3 id="数据库连接池-和-事物">数据库连接池 和 事物</h3>
-<h4 id="数据库连接池">数据库连接池</h4>
-<p>1、连接池是创建和管理一个连接的缓冲池的技术，这些连接准备好被任何需要它们的线程使用。<br>
-　　作用：避免频繁地创建与消毁，给服务器减压力。<br>
-2、数据库的弊端：<br>
-　　1.当用户群体少服务器可以支撑，如果群体比较大万级别服务器直接死机。数据库默认的并发访问50.<br>
-　　2.每一个用完数据库之后直接关闭，不能重复利用太浪费资源。<br>
-3、设计连接池：<br>
-　　1.在池子中创建出多个连接供使用。<br>
-　　2.当用户需要操作数据库时直接从池子中获取连接即可。<br>
-　　3.当用户使用完毕之后把连接归还给连接池，可以达到重复使用。<br>
-　　4.可以设定池子的最大容器。比如50个连接，当第51个人访问的时候，需要等待。<br>
-　　5.其它用户释放资源的时候，可以使用。</p>
-<h4 id="事物">事物</h4>
-<p>事务是指一组操作，里面包含许多单一的逻辑。只要一个逻辑没有执行成功，那么就算失败。所有的数据都回归到最初的状态（回滚）<br>
-A: 要么都发生,要么都不<br>
-C: 事物发生前后保持一致性状态<br>
-I: 隔离性,多个事物之间不相互干扰<br>
-D: 发生之手产生持久性影响</p>
-<h4 id="数据库连接池与事物-并非一一对应">数据库连接池与事物 并非一一对应</h4>
-<ul>
-<li>一个连接里可以启动多次事务，比如连接池，就是最明显的连接重用。</li>
-<li>一个事务里，可以涉及到2个甚至多个连接，也就是XA的驱动，甚至跨不同数据库的事务。</li>
-</ul>
-<h4 id="其他-redis">其他 redis</h4>
-<p>scan keys</p>
-<h4 id="sql操作">sql操作</h4>
-<blockquote>
-<p>groupby having<br>
-联合查询</p>
-</blockquote>
-<h4 id="mysql索引要使用b树而不是b树红黑树"><a href="https://segmentfault.com/a/1190000021488885" target="_blank" rel="noopener">mysql索引要使用B+树，而不是B树，红黑树</a></h4>
-<ol>
-<li>B+ vs hash</li>
-</ol>
-<blockquote>
-<p>内存消耗,B+树的索引可以不一次性加载;而map需要</p>
-</blockquote>
-<ol start="2">
-<li>B  VS B+</li>
-</ol>
-<blockquote>
-<p>相对于B树仅在叶子节点存储数据,所以同样的内存空间可以容纳更多的节点元素,查询的io次数更少;<br>
-其次主键索引的叶子节点的数据是相邻的,所以空间局部性会更好,方便范围查询<br>
-稳定查询,每次都必须查询到叶子节点,而b树可能中间就可以了</p>
-</blockquote>
-<ol start="3">
-<li>B+ VS 红黑树/二叉排序树</li>
-</ol>
-<blockquote>
-<p>查询时间与树的高度相关,多路搜索树可以降低树的高度</p>
-</blockquote>
-<ol start="4">
-<li>既然增加树的路数可以降低树的高度，那么无限增加树的路数是不是可以有最优的查找效率？</li>
-</ol>
-<blockquote>
-<p>无线增加数的高度会导致最终形成一个一层的有序数组,数据量过大无法从一次性加载 而B+树可以以较小的内存代价降低高度;</p>
-</blockquote>
-<ol start="5">
-<li>在内存中，红黑树比B树更优，但是涉及到磁盘操作B树就更优了，那么你能讲讲B+树吗？</li>
-</ol>
-<blockquote></blockquote>
-<ol start="6">
-<li>为什么B+树要这样设计？</li>
-</ol>
-<blockquote>
-<p>这个跟它的使用场景有关，B+树在数据库的索引中用得比较多，数据库中select数据，不一定只选一条，很多时候会选中多条，比如按照id进行排序后选100条。如果是多条的话，B树需要做局部的中序遍历，可能要跨层访问。而B+树由于所有数据都在叶子结点不用跨层，同时由于有链表结构，只需要找到首尾，通过链表就能把所有数据取出来了。</p>
-</blockquote>
-<p><a href="https://segmentfault.com/a/1190000019619667" target="_blank" rel="noopener">MySQL重要知识点/面试题总结</a></p>
-<p>mysql 执行一条指令的过程 存储引擎 <a href="https://cloud.tencent.com/developer/article/1418795" target="_blank" rel="noopener">MySQL命令执行过程和存储引擎概述</a></p>
-<ol>
-<li>连接管理。 主要是负责连接的建立与信息的认证
-<ul>
-<li>利用数据库连接池去管理连接实现高效复用(epoll?NIO?)</li>
-</ul>
-</li>
-<li>解析与优化。 这一部分分为三个步骤处理：
-<ul>
-<li>查询缓存：对于相同的命令,会优先返回缓存中 的数据,此外缓存系统会监控缓存涉及的表,有变更的话,缓存失效</li>
-<li>语法解析：对于查询文本做分析，判断请求的语法是否正确，然后从文本中要查询的表、各种查询条件都提取出来</li>
-<li>查询优化：使用索引 外连接转内连接 子查询转连接 表达式简化</li>
-</ul>
-</li>
-<li>存储引擎:它的功能就是接收上层传下来的指令，然后对表中的数据进行提取或写入操作
-<ul>
-<li>读操作：涉及读缓存池,预读策略,LRU淘汰 - 双写;</li>
-<li>写操作：涉及写缓存(唯一索引);</li>
-</ul>
-</li>
-</ol>
-<p>视图 VIEW</p>
-<blockquote>
-<p>虚标：从一个表或者多个表联合导出的虚拟的表,具有普通表的结构,但不实际存储数据</p>
-</blockquote>
-<ul>
-<li>单表视图：可以用于查询,也可以用于修改</li>
-<li>多表视图：一般用于查询,一般不会修改<br>
-优点</li>
-<li>逻辑独立：建立在表上的逻辑独立,隔离了实际表的影响</li>
-<li>简化操作,可以定义常用操作为视图</li>
-<li>安全性：首先是视图本身的虚拟性,与表结构不直接相关,可以向外暴露视图,保证数据安全</li>
-</ul>
-<p>缺点:</p>
-<ul>
-<li>修改限制</li>
-<li>多表查询性能差</li>
-</ul>
-<p>存储过程 PROCEDURE</p>
-<blockquote>
-<p>程序化的sql语句组合; 一般是用来完成特定的数据操作（比如修改、插入数据库表或执行某些DDL语句等等)<br>
-经过编译优化,相对于sql语句可以加快执行速度<br>
-可以有参数</p>
-</blockquote>
-<p>函数 FUNCTION</p>
-<blockquote>
-<p>一般情况下是用来计算并返回一个计算结果;可以编译好使用</p>
-</blockquote>
-<p>函数 VS 存储过程</p>
-<blockquote>
-<p>是否可以独立运行,函数一般需要在配合查询操作使用<br>
-存储过程一般可以入口参数以及返回值比函数更丰富,存储过程可以返回参数,记录集等,函数只能返回变量或者表对象<br>
-存储过程一般适合复杂操作,修改等;</p>
-</blockquote>
-<p>光标（游标）</p>
-<blockquote>
-<p>查询语句可能查询出多条记录，在存储过程和函数中使用光标标来逐条读取查询结果集中的记录</p>
-</blockquote>
-<p>二级索引使用B+树,所以当他找到第一个符合要求的叶子节点之后,可以向后遍历判断索引是否相同,如果相同添加进返回列表,并继续下午,不同则停止遍历.</p>
-<h4 id="mysql-innodb-3大特性-写缓冲-双写-自适应hash">mysql innodb 3大特性 写缓冲 双写 自适应hash</h4>
-<h5 id="自适应hash">自适应hash</h5>
-<p><a href="https://blog.csdn.net/qq_36431213/article/details/86512359" target="_blank" rel="noopener">自适应hash</a></p>
-<blockquote>
-<p>背景：哈希索引始终基于现有的二级索引构建,在索引树的任意长度的前缀上构建索引树(自适应:最近连续被访问三次的数据)<br>
-由于哈希索引根据经常访问的索引构建,如此可以加速二级索引的访问速度,但是只使用于 = 和 in 操作,对于like 和joins操作 操作无能为力,此外 由于hash索引必然涉及锁的竞争(可能更新涉及索引的变更),高并发场景也可能会有消耗</p>
-</blockquote>
-<h5 id="缓冲池读请求">缓冲池：读请求</h5>
-<p><a href="https://juejin.im/post/6844904051012796424" target="_blank" rel="noopener">参考1</a><br>
-<a href="https://juejin.im/post/6844903874172551181" target="_blank" rel="noopener">参考2</a></p>
-<blockquote>
-<p>缓冲可以用于存储常访问的数据,mysql对应的有缓冲池的概念,增加了读请求的速度<br>
-缓冲什么？缓冲池缓冲索引,和表数据(把磁盘数据加载到缓冲池),避免频繁的IO访问;</p>
-</blockquote>
-<p>如何管理和淘汰缓冲池？</p>
-<blockquote>
-<p>预读:出于局部性原理,mysql会提前预读一部分未读的数据,以期待未来访问不需要IO操作,但不命中时需要考虑淘汰策略<br>
-<a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-performance-read_ahead.html" target="_blank" rel="noopener">预读策略</a>：<br>
-磁盘中的数据数据存储是以页为单位的一般4k,缓冲池是以extent为单位,包含64页,一般256K,需要满足预定条件出发异步预读</p>
-</blockquote>
-<ul>
-<li>线性预读：缓冲池中当前的extent的被顺序读取的page数目&gt;=innodb_read_ahead_threshold(默认56)时会触发,对于下一个extent的异步预读</li>
-<li>随机预读：缓缓池当前extent的数量大于13,那么该extent的其他页数据也会被预读,可以控制是否关闭该功能</li>
-</ul>
-<p>缓冲池中的页大小默认为 16KB(之所以不等于4K是为了提高数据的顺序读取性能,但降低了随机读取性能)</p>
-<p><a href="https://juejin.im/post/6844904051012796424" target="_blank" rel="noopener">刷新策略</a></p>
-<blockquote>
-<p>通过策略将缓冲刷新磁盘保证数据的持久性,当数据库崩溃是可以通过redo log 操作</p>
-</blockquote>
-<ul>
-<li>普通模式，当缓存池中的脏页比例超过innodb_max_dirty_pages_pct_lwm(低水平线默认为25%)时，启动普通模式将脏页刷新到磁盘中</li>
-<li>aggressively flushes,当缓存池中的脏页比例超过innodb_max_dirty_pages_pct(默认为75%)时，启动更快的刷新模式，尽快的将脏页刷新到磁盘当中</li>
-</ul>
-<p><a href="https://juejin.im/post/6844904051012796424" target="_blank" rel="noopener">缓存池淘汰算法LRU</a></p>
-<blockquote>
-<p>基于LRU算法改进,避免了LRU列表被污染(避免出现只访问一次在不访问的情况,以及预读出现的缓存的污染)<br>
-其他的算法还包括 FIFO LFU</p>
-</blockquote>
-<p>LRU算法</p>
-<blockquote>
-<p>维护一个链表,将刚出现的页查到链表头(如果已经在队列则改变位置),随着链表的长度增长达到总长度,链表尾的数据长期未被访问而被淘汰(但是会出现污染的情况,使得命中率下降)</p>
-</blockquote>
-<p>LRU-K</p>
-<blockquote>
-<p>其核心思想是将“最近使用过1次”的判断标准扩展为“最近使用过K次”。也就是说没有到达K次访问的数据并不会被缓存，这也意味着需要对于缓存数据的访问次数进行计数，并且访问记录不能无限记录，也需要使用替换算法进行替换。当需要淘汰数据时，LRU-K会淘汰第K次访问时间距当前时间最大的数据</p>
-</blockquote>
-<p>使用算法:LRU变种</p>
-<blockquote>
-<p>利用midpoint将LRU队列分为两部分 NEW(最近被访问) OLD,默认5:3 双方各自维护head tail<br>
-成为OLD:用户读取的页面或者预读的页面首先插入OLD的head<br>
-成为NEW：用户读取的页面在OLD中,则将其转移到NEW的head<br>
-随着NEW和OLD的逐渐增加,页会被慢慢淘汰</p>
-</blockquote>
-<h5 id="写缓冲写请求">写缓冲:写请求</h5>
-<blockquote>
-<p>背景:insert buffer 只对insert操作有效,5.6后,改为change buffer 对于insert update操作有效<br>
-目的:应用于非唯一索引页(唯一索引必须加载全部索引然后判断是否唯一)不在缓冲池时对于页进行写操作,仅仅记录变更,等未来数据被读取时,再讲数据变更合并到缓冲区,目的在于降低读磁盘IO的开销(之所以读是因为避免频繁写需要频繁的IO,在内存中写快多了);</p>
-</blockquote>
-<p>触发写缓冲合并的操操作：</p>
-<ul>
-<li>写缓冲涉及的页被访问</li>
-<li>数据库空闲或者关闭时</li>
-<li>数据库缓冲池不够,需要更新缓冲</li>
-<li>redo log 写满(基本不会发生)</li>
-</ul>
-<p>什么业务场景，适合开启InnoDB的写缓冲机制</p>
-<ul>
-<li>大部分索引是唯一索引</li>
-<li>业务写多读少或者写完之后不会立刻读(流水账)</li>
-</ul>
-<p>参数配置：</p>
-<ul>
-<li>innodb_change_buffer_max_size：配置写缓冲的大小，占整个缓冲池的比例，默认值是25%，最大值是50%</li>
-<li>innodb_change_buffering：配置哪些写操作启用写缓冲，可以设置成all/none/inserts/deletes</li>
-</ul>
-<h5 id="双写">双写</h5>
-<p><a href="https://dbaplus.cn/news-11-1170-1.html" target="_blank" rel="noopener">参考1</a></p>
-<blockquote>
-<p>由于cache pageSize一般不是4k那么意味着对于cahce块对于磁盘的写入分为4部分,可能部分成功(比如说断电),出现 partial page write,这时 即使借助redo日志也不能恢复数据,所以需要借助双写机制 实现副本 备份<br>
-双写的额外存储：</p>
-</blockquote>
-<ul>
-<li>double write buffer：2M =128 cache page的空间= 2簇的大小</li>
-<li>共享表空间：磁盘上对应的2M的连续空间(128页= 120批量写脏页+8由用户发起的单个写脏页)<br>
-双写过程：</li>
-<li>LRU缓冲队列中淘汰的脏页复制到dwb</li>
-<li>将dwb同步到磁盘存储备份(由于是顺序整体写,所以速度不会慢)(分两次写到共享表空间,1次1M)</li>
-<li>开始将dwb中数据分页写回磁盘(在此可以通过把相邻近的页相邻的写回磁盘加快速度)</li>
-</ul>
-<p>varchar VS  char<br>
-<a href="https://www.cnblogs.com/zhuyeshen/p/11642211.html" target="_blank" rel="noopener">参考1</a></p>
-<ul>
-<li>长度
-<ul>
-<li>CHAR 固定长度 最多28−1个字符，28−1个字节</li>
-<li>VARCHAR 不定长度 最多216−1个字符，216−1个字节(前面保留1-2字节存储实际长度)</li>
-</ul>
-</li>
-<li>空格处理
-<ul>
-<li>char 保留末尾空格和长度</li>
-<li>varchar 删除末尾空格并根据真实长度存储</li>
-</ul>
-</li>
-<li>碎片角度
-<ul>
-<li>varchar 可能导致存储碎片</li>
-</ul>
-</li>
-<li>内存
-<ul>
-<li>查询varchar的表时为了保存数据结果转化为char,会按照其定义的大小分配空间,而非按照实际 长度</li>
-</ul>
-</li>
-</ul>
-<h4 id="mysql-的插入删除和更新插入删除和更新索引">mysql 的插入删除和更新<a href="https://www.cnblogs.com/qianxingmu/p/10746837.html" target="_blank" rel="noopener">插入删除和更新索引</a></h4>
-<p>对于数据的操作实际上都是涉及对于索引的锁<br>
-mysql的删除仅仅是标记数据行,没有实际的删除,删除的数据行位置可以被新插入的行记录复用<br>
-mysql的删除和更新操作可能会使得空间占比低于MERGE_THRESHOLD (行数据 所占据页的空间比,一般为50%) ,导致当前页尝试与相邻页(如果也低于50%)进行合并<br>
-mysql的插入和更新涉及页的分裂</p>
-<blockquote>
-<p>当按序插入时,只会在有空间的页中添加或者新占用一页;但是如果是在中间插入,那么可能出现该记录的前后记录所在的页都是满页,这时会出现页的分裂,会将前面记录所在的满页的1-MERGE_THRESHOLD复制到新页,然后该记录插在新页。频繁的也分裂可能造成数据也空洞<br>
-可以通过降低 MERGE_THRESHOLD值去降低页合并的可能性;但是过小也可能造成数据页空洞,大量文件零散分布<br>
-可以通过查看页的分裂数然后利用  optimize table t 重建表,但是耗时而且锁住索引<br>
-这个命令的原理就是重建表，就是建立一个临时表 B，然后把表 A（存在数据空洞的表） 中的所有数据查询出来，接着把数据全部重新插入到临时表 B 中，最后再用临时表 B 替换表 A 即可，这就是重建表的过程。顺序插入的过程,可以避免页的分裂</p>
-</blockquote>
-<p>引发慢查询的情况有三种：</p>
-<ul>
-<li>索引没有设计好:可以建立索引解决</li>
-<li>SQL 语句没有写好：优化语句</li>
-<li>MYSQL 选错了索引 添加 <code>force index</code>强制使用索引</li>
-</ul>
-<p>expires字典会保存所有设置了过期时间的key的过期时间数据，其中，key是指向键空间中的某个键的指针，value是该键的毫秒精度的UNIX时间戳表示的过期时间。键空间是指该Redis集群中保存的所有键</p>
-<p>索引建立原则 区分度<br>
-查询语句中同时出现where 和group 怎么走索引，索引能走多个吗</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -3593,7 +2979,7 @@ mysql的插入和更新涉及页的分裂</p>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">107</span>
+          <span class="site-state-item-count">108</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>

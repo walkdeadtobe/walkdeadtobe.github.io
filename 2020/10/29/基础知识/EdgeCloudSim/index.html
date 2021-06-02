@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="知行合一">
 <meta property="og:description" content="首先EdgeCloudSim基于CloudSim 因为应当先分析 CloudSim 着重参考 [相关论文](Microservices Scheduling Model Over Heterogeneous Cloud-Edge Environments As Support for IoT Applications) CloudSim 官网 CloudSim Github CloudSim Co">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-01T10:45:16.839Z">
+<meta property="og:updated_time" content="2021-04-07T02:55:27.852Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="EdgeCloudSim 模拟">
 <meta name="twitter:description" content="首先EdgeCloudSim基于CloudSim 因为应当先分析 CloudSim 着重参考 [相关论文](Microservices Scheduling Model Over Heterogeneous Cloud-Edge Environments As Support for IoT Applications) CloudSim 官网 CloudSim Github CloudSim Co">
@@ -221,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-12-01 18:45:16" itemprop="dateModified" datetime="2020-12-01T18:45:16+08:00">2020-12-01</time>
+                <time title="Modified: 2021-04-07 10:55:27" itemprop="dateModified" datetime="2021-04-07T10:55:27+08:00">2021-04-07</time>
               </span>
 
           
@@ -363,10 +363,17 @@ BasicEdgeOrchestrator中 其中Hybrid策略,首先判断计算要求是否能在
 <ol>
 <li>使用idea导入libs下 本地jar包</li>
 </ol>
+<h2 id="更多了解">更多了解</h2>
+<ol>
+<li>MainApplication的loadScenarios函数负责构造多个场景，场景个数 = numOfAlgorithm * numOfArchitecture (MIN_NUM_OF_EDGE_DEVICES-MIN_NUM_OF_EDGE_DEVICES)/Step</li>
+</ol>
+<blockquote>
+<p>为了降低不必要的实验,使得 MIN_NUM_OF_EDGE_DEVICES = MIN_NUM_OF_EDGE_DEVICES</p>
+</blockquote>
 <h2 id="实验实现">实验实现</h2>
 <p>基于PureEdgeSim实现</p>
 <h3 id="根据配置确定vm的初始放置位置">根据配置确定Vm的初始放置位置</h3>
-<p>重写CustomDataCenterBroker的defaultDatacenterMapper方法,返回配置中Vm所制定的DataCenter</p>
+<p>在CustomBroker重写DatacenterBrokerSimple的defaultDatacenterMapper方法,返回配置中Vm所制定的DataCenter</p>
 <h3 id="出现问题">出现问题</h3>
 <ol>
 <li>利用率卡在50%</li>
@@ -374,9 +381,17 @@ BasicEdgeOrchestrator中 其中Hybrid策略,首先判断计算要求是否能在
 <blockquote>
 <p>由于资源分配丰富,所有的Vm都分配在同一个DataCenter,导致那个DataCenterCpu利用率100%,另外一个0%,总共卡在50%.</p>
 </blockquote>
+<ol start="2">
+<li>任务链的第一个任务一直无法完成，后续任务无法触发</li>
+</ol>
+<blockquote>
+<p>由于版本出错导致CloudletSchedulerSpaceShared无法设置currentMipsShare，使得cloudlet的预测完成时间为infinity<br>
+新建CustomCloudletSchedulerSpaceShared继承CloudletSchedulerSpaceShared，设置currentMipsShare</p>
+</blockquote>
 <h3 id="cloudlet-链">Cloudlet 链</h3>
 <ol start="2">
-<li>cloudlet链</li>
+<li>cloudlet链<br>
+在SimulationManager.java 中给每个任务添加onCloudletFinishedListener，在onCloudletFinishedListener函数中触发下一个任务</li>
 </ol>
 <blockquote>
 <p>利用其提供的CloudSim继承自Simluation的addOnEventProcessingListener的触发下一个任务(可以根据调用链的类型以及其节点确定下一个CLoudLet以及VM的位置)</p>
@@ -486,7 +501,7 @@ receptionTime:作业到达可以执行的时间.<br>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cloudsim"><span class="nav-number">1.</span> <span class="nav-text">CloudSim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#javasim"><span class="nav-number">1.1.</span> <span class="nav-text">JavaSim</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#edgecloudsim"><span class="nav-number">2.</span> <span class="nav-text">EdgeCloudSim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#simsetting"><span class="nav-number">2.1.</span> <span class="nav-text">SimSetting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#network-模块"><span class="nav-number">2.2.</span> <span class="nav-text">network 模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#workflowsim"><span class="nav-number">3.</span> <span class="nav-text">WorkflowSim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#multirecloudsim"><span class="nav-number">4.</span> <span class="nav-text">MultiRECloudSim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cloudsimplus"><span class="nav-number">5.</span> <span class="nav-text">CloudSimPlus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pureedgesim"><span class="nav-number">6.</span> <span class="nav-text">PureEdgeSim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用事项"><span class="nav-number">6.1.</span> <span class="nav-text">使用事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验实现"><span class="nav-number">6.2.</span> <span class="nav-text">实验实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据配置确定vm的初始放置位置"><span class="nav-number">6.2.1.</span> <span class="nav-text">根据配置确定Vm的初始放置位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出现问题"><span class="nav-number">6.2.2.</span> <span class="nav-text">出现问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cloudlet-链"><span class="nav-number">6.2.3.</span> <span class="nav-text">Cloudlet 链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">6.2.4.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序设计"><span class="nav-number">6.3.</span> <span class="nav-text">程序设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#task时间问题"><span class="nav-number">6.4.</span> <span class="nav-text">Task时间问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#data"><span class="nav-number">7.</span> <span class="nav-text">Data</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cloudsim"><span class="nav-number">1.</span> <span class="nav-text">CloudSim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#javasim"><span class="nav-number">1.1.</span> <span class="nav-text">JavaSim</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#edgecloudsim"><span class="nav-number">2.</span> <span class="nav-text">EdgeCloudSim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#simsetting"><span class="nav-number">2.1.</span> <span class="nav-text">SimSetting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#network-模块"><span class="nav-number">2.2.</span> <span class="nav-text">network 模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#workflowsim"><span class="nav-number">3.</span> <span class="nav-text">WorkflowSim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#multirecloudsim"><span class="nav-number">4.</span> <span class="nav-text">MultiRECloudSim</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cloudsimplus"><span class="nav-number">5.</span> <span class="nav-text">CloudSimPlus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#pureedgesim"><span class="nav-number">6.</span> <span class="nav-text">PureEdgeSim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用事项"><span class="nav-number">6.1.</span> <span class="nav-text">使用事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多了解"><span class="nav-number">6.2.</span> <span class="nav-text">更多了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验实现"><span class="nav-number">6.3.</span> <span class="nav-text">实验实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据配置确定vm的初始放置位置"><span class="nav-number">6.3.1.</span> <span class="nav-text">根据配置确定Vm的初始放置位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#出现问题"><span class="nav-number">6.3.2.</span> <span class="nav-text">出现问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cloudlet-链"><span class="nav-number">6.3.3.</span> <span class="nav-text">Cloudlet 链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null"><span class="nav-number">6.3.4.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#程序设计"><span class="nav-number">6.4.</span> <span class="nav-text">程序设计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#task时间问题"><span class="nav-number">6.5.</span> <span class="nav-text">Task时间问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#data"><span class="nav-number">7.</span> <span class="nav-text">Data</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -502,7 +517,7 @@ receptionTime:作业到达可以执行的时间.<br>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">107</span>
+          <span class="site-state-item-count">108</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
