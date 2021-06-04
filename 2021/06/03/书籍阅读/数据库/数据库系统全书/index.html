@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","width":250,"display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="《数据库系统全书》 读书摘要">
+<meta name="keywords" content="书籍">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库系统全书">
+<meta property="og:url" content="http://yoursite.com/2021/06/03/书籍阅读/数据库/数据库系统全书/index.html">
+<meta property="og:site_name" content="知行合一">
+<meta property="og:description" content="《数据库系统全书》 读书摘要">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2021-06-03T08:37:53.581Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库系统全书">
+<meta name="twitter:description" content="《数据库系统全书》 读书摘要">
+
+<link rel="canonical" href="http://yoursite.com/2021/06/03/书籍阅读/数据库/数据库系统全书/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>数据库系统全书 | 知行合一</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">知行合一</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/03/书籍阅读/数据库/数据库系统全书/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据库系统全书
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2021-06-03 08:40:50 / Modified: 16:37:53" itemprop="dateCreated datePublished" datetime="2021-06-03T08:40:50+08:00">2021-06-03</time>
+            </span>
+
+          
+            <div class="post-description">《数据库系统全书》 读书摘要</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="背景">背景</h2>
+<h3 id="作者和译者">作者和译者</h3>
+<h3 id="相关定义">相关定义</h3>
+<h2 id="文章内容">文章内容</h2>
+<h3 id="第1章-数据库系统世">第1章 数据库系统世</h3>
+<h4 id="11-数据库管理系统的发展">1.1 数据库管理系统的发展</h4>
+<h4 id="12-数据库管理系统概述">1.2 数据库管理系统概述</h4>
+<h4 id="13-数据库系统研究概述">1.3 数据库系统研究概述</h4>
+<h3 id="第2章-实体-联系数据模型">第2章 实体-联系数据模型</h3>
+<h4 id="21-er模型的要素">2.1 E/R模型的要素</h4>
+<h4 id="22-设计原则">2.2 设计原则</h4>
+<h4 id="23-约束的建模">2.3 约束的建模</h4>
+<h4 id="24-弱实体集">2.4 弱实体集</h4>
+<h3 id="第3章-关系数据模型">第3章 关系数据模型</h3>
+<h4 id="31-关系模型的基础">3.1 关系模型的基础</h4>
+<h4 id="32-从er图到关系设计">3.2 从E/R图到关系设计</h4>
+<h4 id="33-子类结构到关系的转化">3.3 子类结构到关系的转化</h4>
+<h4 id="34-函数依赖">3.4 函数依赖</h4>
+<h4 id="35-函数依赖的规则">3.5 函数依赖的规则</h4>
+<h4 id="36-关系数据库设计模式">3.6 关系数据库设计模式</h4>
+<h4 id="37-多值依赖">3.7 多值依赖</h4>
+<h3 id="第4章-其他数据模型">第4章 其他数据模型</h3>
+<h4 id="41-面向对象概念的复习">4.1 面向对象概念的复习</h4>
+<h4 id="42-odl简介">4.2 ODL简介</h4>
+<h4 id="43-odl中的其他概念">4.3 ODL中的其他概念</h4>
+<h4 id="44-从odl设计到关系设计">4.4 从ODL设计到关系设计</h4>
+<h4 id="45-对象关系模型">4.5 对象关系模型</h4>
+<h4 id="46-半结构化数据">4.6 半结构化数据</h4>
+<h4 id="47-xml及其数据模型">4.7 XML及其数据模型</h4>
+<h3 id="第5章-关系代数">第5章 关系代数</h3>
+<h4 id="51-一个数据库模式的例子">5.1 一个数据库模式的例子</h4>
+<h4 id="52-关系代数操作">5.2 关系代数操作</h4>
+<h4 id="53-包上的关系操作">5.3 包上的关系操作</h4>
+<h4 id="54-关系代数的扩展操作">5.4 关系代数的扩展操作</h4>
+<h4 id="55-关系的约束">5.5 关系的约束</h4>
+<h3 id="第6章-数据库语言sql">第6章 数据库语言SQL</h3>
+<h4 id="61-sql中的检查查询">6.1 SQL中的检查查询</h4>
+<h4 id="62-多个关系上的查询">6.2 多个关系上的查询</h4>
+<h4 id="63-子查询">6.3 子查询</h4>
+<h4 id="64-全关系操作">6.4 全关系操作</h4>
+<h4 id="65-数据库更新">6.5 数据库更新</h4>
+<h4 id="66-sql中的关系模式定义">6.6 SQL中的关系模式定义</h4>
+<h4 id="67-视图定义">6.7 视图定义</h4>
+<h3 id="第7章-约束与触发器">第7章 约束与触发器</h3>
+<h4 id="71-键与外键">7.1 键与外键</h4>
+<h4 id="72-属性与元组上的约束">7.2 属性与元组上的约束</h4>
+<h4 id="73-修改约束">7.3 修改约束</h4>
+<h4 id="74-模式层的约束和触发器">7.4 模式层的约束和触发器</h4>
+<h3 id="第8章-sql的系统特征">第8章 SQL的系统特征</h3>
+<h4 id="81-编程环境下的sql">8.1 编程环境下的SQL</h4>
+<h4 id="82-模式中的存储过程">8.2 模式中的存储过程</h4>
+<h4 id="83-sql环境">8.3 SQL环境</h4>
+<h4 id="84-使用调用层接口">8.4 使用调用层接口</h4>
+<h4 id="85-java数据库连接">8.5 Java数据库连接</h4>
+<h4 id="86-sql中的事务">8.6 SQL中的事务</h4>
+<h4 id="87-sql中的安全机制和用户认证">8.7 SQL中的安全机制和用户认证</h4>
+<h3 id="第9章-面向对象查询语言">第9章 面向对象查询语言</h3>
+<h4 id="91-oql简介">9.1 OQL简介</h4>
+<h4 id="92-oql表达式和其他格式">9.2 OQL表达式和其他格式</h4>
+<h4 id="93-oql中对象的赋值和创建">9.3 OQL中对象的赋值和创建</h4>
+<h4 id="94-sql中的用户定义类型">9.4 SQL中的用户定义类型</h4>
+<h4 id="95-对象关系数据上的操作">9.5 对象关系数据上的操作</h4>
+<h3 id="第10章-逻辑查询语言">第10章 逻辑查询语言</h3>
+<h4 id="101-一种关系逻辑">10.1 一种关系逻辑</h4>
+<h4 id="102-从关系代数到datalog">10.2 从关系代数到DataLog</h4>
+<h4 id="103-datalog的递归编程">10.3 DataLog的递归编程</h4>
+<h4 id="104-sql中的递归">10.4 SQL中的递归</h4>
+<h3 id="第11章-数据存储">第11章 数据存储</h3>
+<h4 id="111-megatron2002数据库系统">11.1 Megatron2002数据库系统</h4>
+<h4 id="112-存储器层次">11.2 存储器层次</h4>
+<h4 id="113-磁盘">11.3 磁盘</h4>
+<h4 id="114-有效使用二级存储器">11.4 有效使用二级存储器</h4>
+<h4 id="115-加速二级存储的访问">11.5 加速二级存储的访问</h4>
+<h4 id="116-磁盘故障">11.6 磁盘故障</h4>
+<h4 id="117-从磁盘崩溃中恢复">11.7 从磁盘崩溃中恢复</h4>
+<h3 id="第12章-数据元素的表示">第12章 数据元素的表示</h3>
+<h4 id="121-数据元素和字段">12.1 数据元素和字段</h4>
+<h4 id="122-记录">12.2 记录</h4>
+<h4 id="123-块和记录地址的表示">12.3 块和记录地址的表示</h4>
+<h4 id="124-变长数据和记录">12.4 变长数据和记录</h4>
+<h4 id="125-记录的修改">12.5 记录的修改</h4>
+<h3 id="第13章-索引结构">第13章 索引结构</h3>
+<h4 id="131-顺序文件上索引">13.1 顺序文件上索引</h4>
+<h4 id="132-辅助索引">13.2 辅助索引</h4>
+<h4 id="133-b树">13.3 B树</h4>
+<h4 id="134-散列表">13.4 散列表</h4>
+<h3 id="第14章-多维索引和位图索引">第14章 多维索引和位图索引</h3>
+<h4 id="141-需要多维的应用">14.1 需要多维的应用</h4>
+<h4 id="142-多维数据的类散列结构">14.2 多维数据的类散列结构</h4>
+<h4 id="143-多维数据的树型结构">14.3 多维数据的树型结构</h4>
+<h4 id="144-位图索引">14.4 位图索引</h4>
+<h3 id="第15章-查询操作">第15章 查询操作</h3>
+<h4 id="151-物理查询计划操作符介绍">15.1 物理查询计划操作符介绍</h4>
+<h4 id="152-数据库操作的一趟算法">15.2 数据库操作的一趟算法</h4>
+<h4 id="153-嵌套循环连接">15.3 嵌套循环连接</h4>
+<h4 id="154-基于排序的两趟算法">15.4 基于排序的两趟算法</h4>
+<h4 id="155-基于散列的两趟算法">15.5 基于散列的两趟算法</h4>
+<h4 id="156-基于索引的算法">15.6 基于索引的算法</h4>
+<h4 id="157-缓冲区管理">15.7 缓冲区管理</h4>
+<h4 id="158-使用超过两趟的算法">15.8 使用超过两趟的算法</h4>
+<h4 id="159-关系操作的并行算法">15.9 关系操作的并行算法</h4>
+<h3 id="第16章-查询编译器">第16章 查询编译器</h3>
+<h4 id="161-语法分析">16.1 语法分析</h4>
+<h4 id="162-用于改进查询计划的代数定律">16.2 用于改进查询计划的代数定律</h4>
+<h4 id="163-从语法分析到逻辑查询计划">16.3 从语法分析到逻辑查询计划</h4>
+<h4 id="164-操作代价的估计">16.4 操作代价的估计</h4>
+<h4 id="165-基于代价的计划选择介绍">16.5 基于代价的计划选择介绍</h4>
+<h4 id="166-连接顺序的选择">16.6 连接顺序的选择</h4>
+<h4 id="167-物理查询计划选择的完成">16.7 物理查询计划选择的完成</h4>
+<h3 id="第17章-系统故障应对">第17章 系统故障应对</h3>
+<h4 id="171-可回复操作的问题和模型">17.1 可回复操作的问题和模型</h4>
+<h4 id="172-undo日志">17.2 undo日志</h4>
+<h4 id="173-redo日志">17.3 redo日志</h4>
+<h4 id="174-undoredo日志">17.4 undo/redo日志</h4>
+<h4 id="175-防备介质故障">17.5 防备介质故障</h4>
+<h3 id="第18章-并发控制">第18章 并发控制</h3>
+<h4 id="181-串行调度和可串行化调度">18.1 串行调度和可串行化调度</h4>
+<h4 id="182-冲突可串行化">18.2 冲突可串行化</h4>
+<h4 id="183-使用锁的可串行化实现">18.3 使用锁的可串行化实现</h4>
+<h4 id="184-用多种锁方式的封锁系统">18.4 用多种锁方式的封锁系统</h4>
+<h4 id="185-封锁调度器的一种体系结构">18.5 封锁调度器的一种体系结构</h4>
+<h4 id="186-数据库元素层次的管理">18.6 数据库元素层次的管理</h4>
+<h4 id="187-树协议">18.7 树协议</h4>
+<h4 id="188-使用时间戳的并发控制">18.8 使用时间戳的并发控制</h4>
+<h4 id="189-使用有效性确认的并发控制">18.9 使用有效性确认的并发控制</h4>
+<h3 id="第19章-再论事务管理">第19章 再论事务管理</h3>
+<h4 id="191-读未提交数据的事务">19.1 读未提交数据的事务</h4>
+<h4 id="192-视图可串行化">19.2 视图可串行化</h4>
+<h4 id="193-死锁处理">19.3 死锁处理</h4>
+<h4 id="194-分布式数据库">19.4 分布式数据库</h4>
+<h4 id="195-分布式提交">19.5 分布式提交</h4>
+<h4 id="196-分布式封锁">19.6 分布式封锁</h4>
+<h4 id="197-长事务">19.7 长事务</h4>
+<h3 id="第20章-信息集成">第20章 信息集成</h3>
+<h4 id="201-信息集成的方式">20.1 信息集成的方式</h4>
+<h4 id="202-基于协调器系统的包装器">20.2 基于协调器系统的包装器</h4>
+<h4 id="203-协调器基于能力的优化">20.3 协调器基于能力的优化</h4>
+<h4 id="204-联机分析处理">20.4 联机分析处理</h4>
+<h4 id="205-数据立方体">20.5 数据立方体</h4>
+<h4 id="206-数据挖掘">20.6 数据挖掘</h4>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/书籍/" rel="tag"># 书籍</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/01/工作求职/智力题/" rel="prev" title="面试脑筋急转弯">
+      <i class="fa fa-chevron-left"></i> 面试脑筋急转弯
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/03/书籍阅读/数据库/设计数据密集型应用/" rel="next" title="设计数据密集型应用">
+      设计数据密集型应用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作者和译者"><span class="nav-number">1.1.</span> <span class="nav-text">作者和译者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关定义"><span class="nav-number">1.2.</span> <span class="nav-text">相关定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章内容"><span class="nav-number">2.</span> <span class="nav-text">文章内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第1章-数据库系统世"><span class="nav-number">2.1.</span> <span class="nav-text">第1章 数据库系统世</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#11-数据库管理系统的发展"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1 数据库管理系统的发展</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-数据库管理系统概述"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2 数据库管理系统概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-数据库系统研究概述"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3 数据库系统研究概述</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2章-实体-联系数据模型"><span class="nav-number">2.2.</span> <span class="nav-text">第2章 实体-联系数据模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#21-er模型的要素"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 E/R模型的要素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#22-设计原则"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 设计原则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#23-约束的建模"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 约束的建模</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#24-弱实体集"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.4 弱实体集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第3章-关系数据模型"><span class="nav-number">2.3.</span> <span class="nav-text">第3章 关系数据模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#31-关系模型的基础"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1 关系模型的基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32-从er图到关系设计"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.2 从E/R图到关系设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#33-子类结构到关系的转化"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.3 子类结构到关系的转化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#34-函数依赖"><span class="nav-number">2.3.4.</span> <span class="nav-text">3.4 函数依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#35-函数依赖的规则"><span class="nav-number">2.3.5.</span> <span class="nav-text">3.5 函数依赖的规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#36-关系数据库设计模式"><span class="nav-number">2.3.6.</span> <span class="nav-text">3.6 关系数据库设计模式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#37-多值依赖"><span class="nav-number">2.3.7.</span> <span class="nav-text">3.7 多值依赖</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第4章-其他数据模型"><span class="nav-number">2.4.</span> <span class="nav-text">第4章 其他数据模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#41-面向对象概念的复习"><span class="nav-number">2.4.1.</span> <span class="nav-text">4.1 面向对象概念的复习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#42-odl简介"><span class="nav-number">2.4.2.</span> <span class="nav-text">4.2 ODL简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#43-odl中的其他概念"><span class="nav-number">2.4.3.</span> <span class="nav-text">4.3 ODL中的其他概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#44-从odl设计到关系设计"><span class="nav-number">2.4.4.</span> <span class="nav-text">4.4 从ODL设计到关系设计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#45-对象关系模型"><span class="nav-number">2.4.5.</span> <span class="nav-text">4.5 对象关系模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#46-半结构化数据"><span class="nav-number">2.4.6.</span> <span class="nav-text">4.6 半结构化数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#47-xml及其数据模型"><span class="nav-number">2.4.7.</span> <span class="nav-text">4.7 XML及其数据模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第5章-关系代数"><span class="nav-number">2.5.</span> <span class="nav-text">第5章 关系代数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#51-一个数据库模式的例子"><span class="nav-number">2.5.1.</span> <span class="nav-text">5.1 一个数据库模式的例子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#52-关系代数操作"><span class="nav-number">2.5.2.</span> <span class="nav-text">5.2 关系代数操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#53-包上的关系操作"><span class="nav-number">2.5.3.</span> <span class="nav-text">5.3 包上的关系操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#54-关系代数的扩展操作"><span class="nav-number">2.5.4.</span> <span class="nav-text">5.4 关系代数的扩展操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#55-关系的约束"><span class="nav-number">2.5.5.</span> <span class="nav-text">5.5 关系的约束</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第6章-数据库语言sql"><span class="nav-number">2.6.</span> <span class="nav-text">第6章 数据库语言SQL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#61-sql中的检查查询"><span class="nav-number">2.6.1.</span> <span class="nav-text">6.1 SQL中的检查查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#62-多个关系上的查询"><span class="nav-number">2.6.2.</span> <span class="nav-text">6.2 多个关系上的查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#63-子查询"><span class="nav-number">2.6.3.</span> <span class="nav-text">6.3 子查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#64-全关系操作"><span class="nav-number">2.6.4.</span> <span class="nav-text">6.4 全关系操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#65-数据库更新"><span class="nav-number">2.6.5.</span> <span class="nav-text">6.5 数据库更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#66-sql中的关系模式定义"><span class="nav-number">2.6.6.</span> <span class="nav-text">6.6 SQL中的关系模式定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#67-视图定义"><span class="nav-number">2.6.7.</span> <span class="nav-text">6.7 视图定义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第7章-约束与触发器"><span class="nav-number">2.7.</span> <span class="nav-text">第7章 约束与触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#71-键与外键"><span class="nav-number">2.7.1.</span> <span class="nav-text">7.1 键与外键</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#72-属性与元组上的约束"><span class="nav-number">2.7.2.</span> <span class="nav-text">7.2 属性与元组上的约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#73-修改约束"><span class="nav-number">2.7.3.</span> <span class="nav-text">7.3 修改约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#74-模式层的约束和触发器"><span class="nav-number">2.7.4.</span> <span class="nav-text">7.4 模式层的约束和触发器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第8章-sql的系统特征"><span class="nav-number">2.8.</span> <span class="nav-text">第8章 SQL的系统特征</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#81-编程环境下的sql"><span class="nav-number">2.8.1.</span> <span class="nav-text">8.1 编程环境下的SQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#82-模式中的存储过程"><span class="nav-number">2.8.2.</span> <span class="nav-text">8.2 模式中的存储过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#83-sql环境"><span class="nav-number">2.8.3.</span> <span class="nav-text">8.3 SQL环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#84-使用调用层接口"><span class="nav-number">2.8.4.</span> <span class="nav-text">8.4 使用调用层接口</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#85-java数据库连接"><span class="nav-number">2.8.5.</span> <span class="nav-text">8.5 Java数据库连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#86-sql中的事务"><span class="nav-number">2.8.6.</span> <span class="nav-text">8.6 SQL中的事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#87-sql中的安全机制和用户认证"><span class="nav-number">2.8.7.</span> <span class="nav-text">8.7 SQL中的安全机制和用户认证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第9章-面向对象查询语言"><span class="nav-number">2.9.</span> <span class="nav-text">第9章 面向对象查询语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#91-oql简介"><span class="nav-number">2.9.1.</span> <span class="nav-text">9.1 OQL简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#92-oql表达式和其他格式"><span class="nav-number">2.9.2.</span> <span class="nav-text">9.2 OQL表达式和其他格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#93-oql中对象的赋值和创建"><span class="nav-number">2.9.3.</span> <span class="nav-text">9.3 OQL中对象的赋值和创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#94-sql中的用户定义类型"><span class="nav-number">2.9.4.</span> <span class="nav-text">9.4 SQL中的用户定义类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#95-对象关系数据上的操作"><span class="nav-number">2.9.5.</span> <span class="nav-text">9.5 对象关系数据上的操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第10章-逻辑查询语言"><span class="nav-number">2.10.</span> <span class="nav-text">第10章 逻辑查询语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#101-一种关系逻辑"><span class="nav-number">2.10.1.</span> <span class="nav-text">10.1 一种关系逻辑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#102-从关系代数到datalog"><span class="nav-number">2.10.2.</span> <span class="nav-text">10.2 从关系代数到DataLog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#103-datalog的递归编程"><span class="nav-number">2.10.3.</span> <span class="nav-text">10.3 DataLog的递归编程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#104-sql中的递归"><span class="nav-number">2.10.4.</span> <span class="nav-text">10.4 SQL中的递归</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第11章-数据存储"><span class="nav-number">2.11.</span> <span class="nav-text">第11章 数据存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#111-megatron2002数据库系统"><span class="nav-number">2.11.1.</span> <span class="nav-text">11.1 Megatron2002数据库系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#112-存储器层次"><span class="nav-number">2.11.2.</span> <span class="nav-text">11.2 存储器层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#113-磁盘"><span class="nav-number">2.11.3.</span> <span class="nav-text">11.3 磁盘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#114-有效使用二级存储器"><span class="nav-number">2.11.4.</span> <span class="nav-text">11.4 有效使用二级存储器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#115-加速二级存储的访问"><span class="nav-number">2.11.5.</span> <span class="nav-text">11.5 加速二级存储的访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#116-磁盘故障"><span class="nav-number">2.11.6.</span> <span class="nav-text">11.6 磁盘故障</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#117-从磁盘崩溃中恢复"><span class="nav-number">2.11.7.</span> <span class="nav-text">11.7 从磁盘崩溃中恢复</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第12章-数据元素的表示"><span class="nav-number">2.12.</span> <span class="nav-text">第12章 数据元素的表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#121-数据元素和字段"><span class="nav-number">2.12.1.</span> <span class="nav-text">12.1 数据元素和字段</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#122-记录"><span class="nav-number">2.12.2.</span> <span class="nav-text">12.2 记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#123-块和记录地址的表示"><span class="nav-number">2.12.3.</span> <span class="nav-text">12.3 块和记录地址的表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#124-变长数据和记录"><span class="nav-number">2.12.4.</span> <span class="nav-text">12.4 变长数据和记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#125-记录的修改"><span class="nav-number">2.12.5.</span> <span class="nav-text">12.5 记录的修改</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第13章-索引结构"><span class="nav-number">2.13.</span> <span class="nav-text">第13章 索引结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#131-顺序文件上索引"><span class="nav-number">2.13.1.</span> <span class="nav-text">13.1 顺序文件上索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#132-辅助索引"><span class="nav-number">2.13.2.</span> <span class="nav-text">13.2 辅助索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#133-b树"><span class="nav-number">2.13.3.</span> <span class="nav-text">13.3 B树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#134-散列表"><span class="nav-number">2.13.4.</span> <span class="nav-text">13.4 散列表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第14章-多维索引和位图索引"><span class="nav-number">2.14.</span> <span class="nav-text">第14章 多维索引和位图索引</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#141-需要多维的应用"><span class="nav-number">2.14.1.</span> <span class="nav-text">14.1 需要多维的应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#142-多维数据的类散列结构"><span class="nav-number">2.14.2.</span> <span class="nav-text">14.2 多维数据的类散列结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#143-多维数据的树型结构"><span class="nav-number">2.14.3.</span> <span class="nav-text">14.3 多维数据的树型结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#144-位图索引"><span class="nav-number">2.14.4.</span> <span class="nav-text">14.4 位图索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第15章-查询操作"><span class="nav-number">2.15.</span> <span class="nav-text">第15章 查询操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#151-物理查询计划操作符介绍"><span class="nav-number">2.15.1.</span> <span class="nav-text">15.1 物理查询计划操作符介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#152-数据库操作的一趟算法"><span class="nav-number">2.15.2.</span> <span class="nav-text">15.2 数据库操作的一趟算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#153-嵌套循环连接"><span class="nav-number">2.15.3.</span> <span class="nav-text">15.3 嵌套循环连接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#154-基于排序的两趟算法"><span class="nav-number">2.15.4.</span> <span class="nav-text">15.4 基于排序的两趟算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#155-基于散列的两趟算法"><span class="nav-number">2.15.5.</span> <span class="nav-text">15.5 基于散列的两趟算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#156-基于索引的算法"><span class="nav-number">2.15.6.</span> <span class="nav-text">15.6 基于索引的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#157-缓冲区管理"><span class="nav-number">2.15.7.</span> <span class="nav-text">15.7 缓冲区管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#158-使用超过两趟的算法"><span class="nav-number">2.15.8.</span> <span class="nav-text">15.8 使用超过两趟的算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#159-关系操作的并行算法"><span class="nav-number">2.15.9.</span> <span class="nav-text">15.9 关系操作的并行算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第16章-查询编译器"><span class="nav-number">2.16.</span> <span class="nav-text">第16章 查询编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#161-语法分析"><span class="nav-number">2.16.1.</span> <span class="nav-text">16.1 语法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#162-用于改进查询计划的代数定律"><span class="nav-number">2.16.2.</span> <span class="nav-text">16.2 用于改进查询计划的代数定律</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#163-从语法分析到逻辑查询计划"><span class="nav-number">2.16.3.</span> <span class="nav-text">16.3 从语法分析到逻辑查询计划</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#164-操作代价的估计"><span class="nav-number">2.16.4.</span> <span class="nav-text">16.4 操作代价的估计</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#165-基于代价的计划选择介绍"><span class="nav-number">2.16.5.</span> <span class="nav-text">16.5 基于代价的计划选择介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#166-连接顺序的选择"><span class="nav-number">2.16.6.</span> <span class="nav-text">16.6 连接顺序的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#167-物理查询计划选择的完成"><span class="nav-number">2.16.7.</span> <span class="nav-text">16.7 物理查询计划选择的完成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第17章-系统故障应对"><span class="nav-number">2.17.</span> <span class="nav-text">第17章 系统故障应对</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#171-可回复操作的问题和模型"><span class="nav-number">2.17.1.</span> <span class="nav-text">17.1 可回复操作的问题和模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#172-undo日志"><span class="nav-number">2.17.2.</span> <span class="nav-text">17.2 undo日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#173-redo日志"><span class="nav-number">2.17.3.</span> <span class="nav-text">17.3 redo日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#174-undoredo日志"><span class="nav-number">2.17.4.</span> <span class="nav-text">17.4 undo/redo日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#175-防备介质故障"><span class="nav-number">2.17.5.</span> <span class="nav-text">17.5 防备介质故障</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第18章-并发控制"><span class="nav-number">2.18.</span> <span class="nav-text">第18章 并发控制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#181-串行调度和可串行化调度"><span class="nav-number">2.18.1.</span> <span class="nav-text">18.1 串行调度和可串行化调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#182-冲突可串行化"><span class="nav-number">2.18.2.</span> <span class="nav-text">18.2 冲突可串行化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#183-使用锁的可串行化实现"><span class="nav-number">2.18.3.</span> <span class="nav-text">18.3 使用锁的可串行化实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#184-用多种锁方式的封锁系统"><span class="nav-number">2.18.4.</span> <span class="nav-text">18.4 用多种锁方式的封锁系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#185-封锁调度器的一种体系结构"><span class="nav-number">2.18.5.</span> <span class="nav-text">18.5 封锁调度器的一种体系结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#186-数据库元素层次的管理"><span class="nav-number">2.18.6.</span> <span class="nav-text">18.6 数据库元素层次的管理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#187-树协议"><span class="nav-number">2.18.7.</span> <span class="nav-text">18.7 树协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#188-使用时间戳的并发控制"><span class="nav-number">2.18.8.</span> <span class="nav-text">18.8 使用时间戳的并发控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#189-使用有效性确认的并发控制"><span class="nav-number">2.18.9.</span> <span class="nav-text">18.9 使用有效性确认的并发控制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第19章-再论事务管理"><span class="nav-number">2.19.</span> <span class="nav-text">第19章 再论事务管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#191-读未提交数据的事务"><span class="nav-number">2.19.1.</span> <span class="nav-text">19.1 读未提交数据的事务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#192-视图可串行化"><span class="nav-number">2.19.2.</span> <span class="nav-text">19.2 视图可串行化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#193-死锁处理"><span class="nav-number">2.19.3.</span> <span class="nav-text">19.3 死锁处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#194-分布式数据库"><span class="nav-number">2.19.4.</span> <span class="nav-text">19.4 分布式数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#195-分布式提交"><span class="nav-number">2.19.5.</span> <span class="nav-text">19.5 分布式提交</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#196-分布式封锁"><span class="nav-number">2.19.6.</span> <span class="nav-text">19.6 分布式封锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#197-长事务"><span class="nav-number">2.19.7.</span> <span class="nav-text">19.7 长事务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第20章-信息集成"><span class="nav-number">2.20.</span> <span class="nav-text">第20章 信息集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#201-信息集成的方式"><span class="nav-number">2.20.1.</span> <span class="nav-text">20.1 信息集成的方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#202-基于协调器系统的包装器"><span class="nav-number">2.20.2.</span> <span class="nav-text">20.2 基于协调器系统的包装器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#203-协调器基于能力的优化"><span class="nav-number">2.20.3.</span> <span class="nav-text">20.3 协调器基于能力的优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#204-联机分析处理"><span class="nav-number">2.20.4.</span> <span class="nav-text">20.4 联机分析处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#205-数据立方体"><span class="nav-number">2.20.5.</span> <span class="nav-text">20.5 数据立方体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#206-数据挖掘"><span class="nav-number">2.20.6.</span> <span class="nav-text">20.6 数据挖掘</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="夸父"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">夸父</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/walkdeadtobe" title="GitHub → https://github.com/walkdeadtobe" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+  <div class="beian"><a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">京ICP备2020045262号 </a>
+      <img src="/images/gongan.png" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802033764" rel="noopener" target="_blank">京公网安备 11010802033764 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">chengr</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

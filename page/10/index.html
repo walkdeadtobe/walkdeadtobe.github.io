@@ -185,6 +185,324 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/基础知识/数据结构/manacher/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/基础知识/数据结构/manacher/" class="post-title-link" itemprop="url">manacher</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-22 21:08:04" itemprop="dateCreated datePublished" datetime="2019-04-22T21:08:04+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:24:29" itemprop="dateModified" datetime="2020-08-30T13:24:29+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>马拉车算法，解决最大回文串问题，有点意思，感觉有点像KMP算法</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/基础知识/代理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/22/基础知识/代理/" class="post-title-link" itemprop="url">代理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-22 19:12:45" itemprop="dateCreated datePublished" datetime="2019-04-22T19:12:45+08:00">2019-04-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-02 14:20:35" itemprop="dateModified" datetime="2021-06-02T14:20:35+08:00">2021-06-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>代理给通信带来更多的功能</p>
+<ul>
+<li>拦截：代理可以选择性拦截传输的网络流量，比如一些公司限制员工在上班的时候不能访问某些游戏或者电商网站，再比如把我们和世界隔离开来的 GFW，还有在数据中心中拒绝恶意访问的网关。</li>
+<li>统计：既然所有的流量都经过代理，那么代理也可以用来统计网络中的数据信息，比如了解哪些人在访问哪些网站，通信的应答延迟等。</li>
+<li>缓存：如果通信双方比较”远“，访问比较慢，那么代理可以把最近访问的数据缓存在本地，后面的访问不用访问后端来做到加速。CDN 就是这个功能的典型场景。</li>
+<li>分发(负载均衡)：如果某个通信方有多个服务器后端，代理可以根据某些规则来选择如何把流量发送给多个服务器，也就是我们常说的负载均衡功能，比如著名的 Nginx 软件。</li>
+<li>跳板：如果 A、B 双方因为某些原因不能直接访问，而代理可以和双方通信，那么通过代理，双方可以绕过原来的限制进行通信。VPN，内网穿透。</li>
+<li>注入：既然代理可以看到流量，那么它也可以修改网络流量，可以自动在收到的流量中添加一些数据，比如有些宽带提供商的弹窗广告。</li>
+</ul>
+<p>ssr速度不行安装v2ray<br>
+参考<a href="https://www.stackcc.com/2019/04/02/v2raysetup/" target="_blank" rel="noopener">网站1</a><a href="https://tlanyan.me/v2ray-tutorial/" target="_blank" rel="noopener">网站2</a><br>
+<a href="https://www.hijk.pw/v2rayn-config-tutorial/" target="_blank" rel="noopener">网站3</a></p>
+<p><a href="https://www.v2rayssr.com/v2raynginx.html" target="_blank" rel="noopener">V2RAY+Nginx+Ws+Tls+Host+Path</a></p>
+<ol>
+<li>域名购买：<a href="https://dcc.godaddy.com/" target="_blank" rel="noopener">狗爹</a><br>
+[godaddy 域名解析]DOMAIN_NAME</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">yum install -y socat</span><br><span class="line">curl  https://get.acme.sh | sh</span><br><span class="line">source ~/.bashrc</span><br><span class="line">export CF_Token=&quot;****&quot;</span><br><span class="line"></span><br><span class="line">acme.sh --issue --dns dns_cf -d DOMAIN_NAME -d www.DOMAIN_NAME -k ec-256</span><br><span class="line">cat ~/.acme.sh/DOMAIN_NAME_ecc/fullchain.cer &gt; /etc/nginx/ssl/DOMAIN_NAME.crt</span><br><span class="line">cat ~/.acme.sh/DOMAIN_NAME_ecc/DOMAIN_NAME.key &gt; /etc/nginx/ssl/DOMAIN_NAME.key</span><br><span class="line">systemctl start nginx</span><br><span class="line">acme.sh --installcert -d DOMAIN_NAME -d www.DOMAIN_NAME --fullchainpath /etc/nginx/ssl/DOMAIN_NAME.crt --keypath /etc/nginx/ssl/DOMAIN_NAME.key --ecc --reloadcmd &quot;systemctl reload nginx&quot;</span><br></pre></td></tr></table></figure>
+<p>更换vltur服务器,重新安装遇到的问题</p>
+<ol>
+<li>域名解析失败,523</li>
+</ol>
+<blockquote>
+<p>新服务器防火墙屏蔽了一些端口</p>
+</blockquote>
+<ol start="2">
+<li>直接使用ip/TCP成功,使用websocket/域名伪装失败</li>
+</ol>
+<blockquote>
+<p>初步定为在nginx问题,尝试过很多方法,未能精确定位错误原因,可能是ws伪装仍然发出http请求,而nginx未配置http强转https导致无法命中</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/20/工作求职/注解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/04/20/工作求职/注解/" class="post-title-link" itemprop="url">注解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-04-20 19:17:38" itemprop="dateCreated datePublished" datetime="2019-04-20T19:17:38+08:00">2019-04-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-01-15 10:57:43" itemprop="dateModified" datetime="2021-01-15T10:57:43+08:00">2021-01-15</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="元注解">元注解</h2>
+<blockquote>
+<p>可以用于修饰注解的注解,称之为元注解</p>
+</blockquote>
+<p>@Retention(RetentionPolicy.VALUE)</p>
+<blockquote>
+<p>确定所修饰注解的生命周期范围</p>
+</blockquote>
+<ul>
+<li>@Retention(RetentionPolicy.CLASS)修饰的注解，表示注解的信息被保留在class文件(字节码文件)中当程序编译时，但不会被虚拟机读取在运行的时候；</li>
+<li>@Retention(RetentionPolicy.SOURCE )修饰的注解,表示注解的信息会被编译器抛弃，不会留在class文件中，注解的信息只会留在源文件中；</li>
+<li>@Retention(RetentionPolicy.RUNTIME )修饰的注解，表示注解的信息被保留在class文件(字节码文件)中当程序编译时，会被虚拟机保留在运行时，所以他们可以用反射的方式读取。RetentionPolicy.RUNTIME 可以让你从JVM中读取Annotation注解的信息，以便在分析程序的时候使用.</li>
+</ul>
+<p>@Traget({ElementType.VALUE,… })</p>
+<blockquote>
+<p>确定所修饰的注解 修饰的对象范围</p>
+</blockquote>
+<ul>
+<li>ElementType.CONSTRUCTOR:用于描述构造器</li>
+<li>ElementType.FIELD:用于描述域</li>
+<li>ElementType.LOCAL_VARIABLE:用于描述局部变量</li>
+<li>ElementType.METHOD:用于描述方法</li>
+<li>ElementType.PACKAGE:用于描述包</li>
+<li>ElementType.PARAMETER:用于描述参数</li>
+<li>ElementType.TYPE:用于描述类、接口(包括注解类型) 或enum声明</li>
+</ul>
+<p>@Bean<br>
+(@Set @Get)</p>
+<p>@AutoWire<br>
+public class cla/public void set(class cla)</p>
+<ul>
+<li>自动装配即是，让spring自动满足bean依赖的一种方法，在满足依赖的过程中，会在spring的上下文中匹配某个bean需要的bean;@AutoWire可以注解方法或者变量</li>
+</ul>
+<p>@Component(“name”)</p>
+<ul>
+<li>目前的了解是，加上该注解，就无需告知spring为该类创建Bean;如果有括号，并将该Bean ID标识（命名）为里面的字符串</li>
+</ul>
+<p>@Name</p>
+<ul>
+<li>spring 支持其代替 @Component ，唔，但不了解</li>
+</ul>
+<p>@ComponentScan<br>
+@ComponentScan(“name”)<br>
+@ComponentScan(basePackages=“name”/{“name”,“name1”})</p>
+<ol>
+<li>注解:在spring里开启组件扫描，默认扫描与配置类相同的包，扫描所在包以及子包中所有带有@Component注解的类</li>
+<li>注解:指明基础包，可以指明多个基础包</li>
+</ol>
+<p>@ContextConfiguration(classes=*.class)</p>
+<ul>
+<li>从指明的class里加载配置</li>
+</ul>
+<p>@interface</p>
+<blockquote>
+<p>@interface Annotation{ } 定义一个注解 @Annotation，一个注解是一个类</p>
+</blockquote>
+<p>@Pointcut(表达式)</p>
+<blockquote>
+<p>Pointcut表示式(expression)和Pointcut签名(signature),signature 可用于 需要的注解找到该pointcut<br>
+//Pointcut表示式<br>
+@Pointcut(“execution(* com.savage.aop.MessageSender.*(…))”)<br>
+//Point签名<br>
+private void log(){}</p>
+</blockquote>
+<p>Pointcut 表达式</p>
+<ul>
+<li>execution：用于匹配方法执行的连接点；</li>
+<li>within：用于匹配指定类型内的方法执行；</li>
+<li>this：用于匹配当前AOP代理对象类型的执行方法；注意是AOP代理对象的类型匹配，这样就可能包括引入接口也类型匹配；</li>
+<li>target：用于匹配当前目标对象类型的执行方法；注意是目标对象的类型匹配，这样就不包括引入接口也类型匹配；</li>
+<li>args：用于匹配当前执行的方法传入的参数为指定类型的执行方法；</li>
+<li>@within：用于匹配所以持有指定注解类型内的方法；</li>
+<li>@target：用于匹配当前目标对象类型的执行方法，其中目标对象持有指定的注解；</li>
+<li>@args：用于匹配当前执行的方法传入的参数持有指定注解的执行；</li>
+<li>@annotation：用于匹配当前执行方法持有指定注解的方法；</li>
+</ul>
+<blockquote>
+<p>execution 表达式<br>
+@Pointcut(execution(modifiers-pattern? ret-type-pattern declaring-type-pattern? name-pattern(param-pattern)throws-pattern?) )</p>
+</blockquote>
+<ul>
+<li>修饰符匹配（modifier-pattern?）:public/private</li>
+<li>返回值匹配（ret-type-pattern）可以为*表示任何返回值,全路径的类名等</li>
+<li>类路径匹配（declaring-type-pattern?）</li>
+<li>方法名匹配（name-pattern）可以指定方法名 或者 <em>代表所有, set</em> 代表以set开头的所有方法</li>
+<li>参数匹配（(param-pattern)）可以指定具体的参数类型，多个参数间用“,”隔开，各个参数也可以用“<em>”来表示匹配任意类型的参数，如(String)表示匹配一个String参数的方法；(</em>,String) 表示匹配有两个参数的方法，第一个参数可以是任意类型，而第二个参数是String类型；可以用(…)表示零个或多个任意参数</li>
+<li>异常类型匹配（throws-pattern?）</li>
+<li>其中后面跟着“?”的是可选项</li>
+</ul>
+<p>2019-6-27 更新<br>
+今天在给spring 添加新restful接口时，发现无法访问；最后发现，接口如果不设置访问方法。默认访问方式是GET，奇怪的是，如果设置为POST方式，那么将无法访问，重定位回登录页面？？</p>
+<p>在学习微服务构建时，需要看java代码，看到注解 时十分迷惑，暂时没有自己的见解<br>
+但是 这边博客说的不错<br>
+<a href="https://blog.csdn.net/briblue/article/details/73824058" target="_blank" rel="noopener">https://blog.csdn.net/briblue/article/details/73824058</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/15/基础知识/stack-queue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -732,288 +1050,10 @@ filebeat 两台服务器 上各配置一个，指向在10.1.1.46 上的 logstash
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/26/基础知识/kong/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/26/基础知识/kong/" class="post-title-link" itemprop="url">Kong</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-03-26 19:13:22" itemprop="dateCreated datePublished" datetime="2019-03-26T19:13:22+08:00">2019-03-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:19:28" itemprop="dateModified" datetime="2020-08-30T13:19:28+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="kong">Kong</h2>
-<p><a href="https://konghq.com/" target="_blank" rel="noopener">官网</a></p>
-<h2 id="相关概念">相关概念</h2>
-<p>consumer</p>
-<blockquote></blockquote>
-<p>service</p>
-<blockquote></blockquote>
-<p>route</p>
-<blockquote></blockquote>
-<p>upstream</p>
-<blockquote></blockquote>
-<p>plugin</p>
-<blockquote>
-<p><a href="https://docs.konghq.com/hub/" target="_blank" rel="noopener">官网</a> 包含 官方插件以及第三方插件<br>
-<a href="https://github.com/walkdeadtobe/my_kong_plugin" target="_blank" rel="noopener">个人自定义插件</a></p>
-</blockquote>
-<h2 id="相关操作">相关操作</h2>
-<p>创造 consumers</p>
-<blockquote>
-<p>curl -i -X POST  --url <a href="http://localhost:8001/consumers" target="_blank" rel="noopener">http://localhost:8001/consumers</a> --data “username=dzk”<br>
-给相应consumer 添加 basic-auth<br>
-curl -i -X POST  --url <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/basic-auth</a> --data “username=dzk” --data “password=dzk”<br>
-添加 ACL<br>
-curl -X POST <a href="http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls" target="_blank" rel="noopener">http://localhost:8001/consumers/e2dacbf6-117d-404f-8c40-58c305e4e669/acls</a> --data “group=group2”</p>
-</blockquote>
-<p>给相应服务添加 basic-auth ACL</p>
-<blockquote>
-<p>curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> --data “name=basic-auth” --data “config.hide_credentials=true”<br>
-curl -X POST <a href="http://localhost:8001/services/ddj/plugins" target="_blank" rel="noopener">http://localhost:8001/services/ddj/plugins</a> --data “name=acl” --data “config.whitelist=group1” --data “config.hide_groups_header=true”</p>
-</blockquote>
-<p>为kong添加 访问 admin 的外部服务</p>
-<blockquote>
-<p><a href="https://docs.gelato.io/guides/advanced-kong-integration" target="_blank" rel="noopener">https://docs.gelato.io/guides/advanced-kong-integration</a><br>
-curl -i -X POST  --url <a href="http://localhost:8001/services/" target="_blank" rel="noopener">http://localhost:8001/services/</a>  --data ‘name=admin’ --data ‘url=http://localhost:8001’<br>
-curl -i -X POST   --url <a href="http://localhost:8001/services/admin/routes" target="_blank" rel="noopener">http://localhost:8001/services/admin/routes</a>  --data ‘paths=/admin’ --data ‘strip_path=true’</p>
-</blockquote>
-<p>kong发送的信息不含用户consumer信息，使用datadog的log功能进行统计</p>
-<p>datadog-agent 相关命令</p>
-<blockquote>
-<p>/etc/init.d/datadog-agent restart、stop<br>
-sudo datadog-agent check kong/status<br>
-systemctl start datadog-agent</p>
-</blockquote>
-<p>kong 数据库操作</p>
-<blockquote>
-<p>su - postgres<br>
-pslq<br>
-\c kong 切换数据库kong<br>
-select * from pg_tables 查看当前数据库所有的表</p>
-</blockquote>
-<p>更新 2019-4-18<br>
-给服务ACL 服务whitelist 添加 多个 group<br>
-出现问题，提交bug，kong开发大佬解决 ，附链接 <a href="https://github.com/Kong/kong/issues/4523" target="_blank" rel="noopener">https://github.com/Kong/kong/issues/4523</a><br>
-给插件 CORS 添加多个header<br>
-curl -X PATCH <a href="http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1" target="_blank" rel="noopener">http://localhost:8001/plugins/8f407ede-33d2-43c3-b528-cb1f8a4ebec1</a> <br>
-–data “config.headers=Origin” <br>
-–data “config.headers=X-Requested-With” <br>
-–data “config.headers=Content-Type” <br>
-–data “config.headers=Authorization” <br>
-–data “config.headers=Accept” <br>
-–data “config.headers=Accept-Version” <br>
-–data “config.headers=Content-Length” <br>
-–data “config.headers=Content-MD5” <br>
-–data “config.headers=Date” <br>
-–data “config.headers=X-Auth-Token”</p>
-<p>更新 2019-6-22<br>
-在查询kong的服务数目时，发现postgresql数据库的services数目与 curl <a href="http://localhost:8001/services" target="_blank" rel="noopener">http://localhost:8001/services</a> 数目不同，最后在github源码中发现 在api中设置最大返回值为100;唔在考虑从源码编译修改，但是安装会很蛋疼</p>
-<h2 id="插件使用">插件使用</h2>
-<p>kong_datadog_agent</p>
-<blockquote>
-<p>更爱配置文件后出现</p>
-</blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2019/03/27 22:48:13 config.load While parsing config: yaml: line 291: did not find expected key</span><br><span class="line">Cannot setup config, exiting: unable to load Datadog config file: While parsing config: yaml: line 291: did not find expected key</span><br><span class="line">Error: unable to load Datadog config file: While parsing config: yaml: line 291: did not find expected key</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>最终发现是因为 更改配置时，没有对齐行开始（坑爹）</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/23/基础知识/bp-rbf-lstm/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/23/基础知识/bp-rbf-lstm/" class="post-title-link" itemprop="url">bp+rbf+lstm</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-03-23 12:30:07" itemprop="dateCreated datePublished" datetime="2019-03-23T12:30:07+08:00">2019-03-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:21:09" itemprop="dateModified" datetime="2020-08-30T13:21:09+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>fisher +感知器  属于   线性分类器</p>
-<p>人工神经网络（DP）  对比    径向基函数（RBF：神经元不只是感知器）<br>
-LSTM<br>
-模式识别 思考题 5000男+5000女 特征 分类</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/基础知识/ABAC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/03/20/基础知识/ABAC/" class="post-title-link" itemprop="url">ABAC</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-03-20 21:04:17" itemprop="dateCreated datePublished" datetime="2019-03-20T21:04:17+08:00">2019-03-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:21:09" itemprop="dateModified" datetime="2020-08-30T13:21:09+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>ABAC:Attribute Based Access Control<br>
-abaC 介绍视频： <a href="https://www.youtube.com/watch?v=cgTa7YnGfHA" target="_blank" rel="noopener">https://www.youtube.com/watch?v=cgTa7YnGfHA</a><br>
-+<br>
-<a href="https://www.youtube.com/watch?v=gskKUIa0_6A" target="_blank" rel="noopener">https://www.youtube.com/watch?v=gskKUIa0_6A</a><br>
-An Attribute Based Access Control Model for RESTful Service：一篇相关论文，其视频：<a href="https://www.youtube.com/watch?v=hDlr66-4paI" target="_blank" rel="noopener">https://www.youtube.com/watch?v=hDlr66-4paI</a></p>
-<p>相关概念延伸：XACML</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/11/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
@@ -1081,7 +1121,7 @@ An Attribute Based Access Control Model for RESTful Service：一篇相关论文
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">108</span>
+          <span class="site-state-item-count">111</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
