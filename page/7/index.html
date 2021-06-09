@@ -185,6 +185,233 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/15/Blog/markdown/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="夸父">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="知行合一">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/11/15/Blog/markdown/" class="post-title-link" itemprop="url">Learn Markdown</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2019-11-15 23:37:22" itemprop="dateCreated datePublished" datetime="2019-11-15T23:37:22+08:00">2019-11-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-08-30 13:26:23" itemprop="dateModified" datetime="2020-08-30T13:26:23+08:00">2020-08-30</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>代码引用</p>
+</blockquote>
+<p>`print(‘hello world!’)`<br>
+<code>print('hello world!')</code></p>
+<p>&lt;!–￼0–&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(&apos;hello world!&apos;)  </span><br><span class="line">printf(&quot;helloworld\n&quot;);  </span><br><span class="line">cout &lt;&lt; &quot;helloworld\n&quot;;  </span><br><span class="line">print(&quot;helloworld&quot;)  </span><br><span class="line">console.log(&quot;helloworld&quot;);  </span><br><span class="line">fmt.Printf(&quot;helloworld\n&quot;);  </span><br><span class="line">echo &quot;helloworld&quot;  </span><br><span class="line">&lt;h1&gt;helloworld&lt;h1&gt;  </span><br><span class="line">print(&quot;hello world&quot;)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>大小</p>
+</blockquote>
+<p><code># 一号字</code></p>
+<h1 id="一号字">一号字</h1>
+<p><code>## 二号字</code></p>
+<h2 id="二号字">二号字</h2>
+<p><code>### 三号字</code></p>
+<h3 id="三号字">三号字</h3>
+<p><code>#### 四号字</code></p>
+<h4 id="四号字">四号字</h4>
+<blockquote>
+<p>居中,字体,颜色</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;center&gt;&lt;font color=red size=3 face=&quot;Monospace&quot;&gt;居中&lt;/font&gt;&lt;font color=black size=5&gt;字体&lt;/font&gt;&lt;font color=blue size=6&gt;颜色&lt;/font&gt;&lt;/center&gt;</span><br></pre></td></tr></table></figure>
+<center><font color="red" size="3" face="Monospace">居中</font><font color="black" size="5">字体</font><font color="blue" size="6">颜色</font></center>
+<blockquote>
+<p>空格,列表</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&amp;ensp;</span><br><span class="line">&amp;emsp;</span><br><span class="line">&amp;ensp;&amp;emsp;</span><br></pre></td></tr></table></figure>
+<p> 一个空格<br>
+ 两个空格<br>
+  三个空格</p>
+<p>无序列表： - + *<br>
+有序列表：1. 2. 3.<br>
+可以混合使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- 一级标题  </span><br><span class="line">    + 二级标题  </span><br><span class="line">        + 二级标题  </span><br><span class="line">            * 三级标题  </span><br><span class="line">            * 三级标题  </span><br><span class="line">                1. 四级标题</span><br><span class="line">                2. 四级标题</span><br></pre></td></tr></table></figure>
+<ul>
+<li>小标题
+<ul>
+<li>二级标题</li>
+<li>二级标题
+<ul>
+<li>三级标题</li>
+<li>三级标题
+<ol>
+<li>四级标题</li>
+<li>四级标题</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>链接,图片</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[链接](链接地址)</span><br></pre></td></tr></table></figure>
+<p><a href="https://walkdeadtobe.github.io/" target="_blank" rel="noopener">我的链接</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![用来描述图片的关键词](https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=702257389,1274025419&amp;fm=27&amp;gp=0.jpg &quot;我是可有可无的标题,划过图片可见)</span><br></pre></td></tr></table></figure>
+<p><img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=702257389,1274025419&amp;fm=27&amp;gp=0.jpg" alt="用来描述图片的关键词" title="我是可有可无的标题,划过图片可见"></p>
+<blockquote>
+<p>加粗,倾斜,斜体加粗,删除</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">**这是加粗的文字**  </span><br><span class="line">*这是倾斜的文字*  </span><br><span class="line">***这是斜体加粗的文字***  </span><br><span class="line">~~这是加删除线的文字~~</span><br></pre></td></tr></table></figure>
+<p><strong>这是加粗的文字</strong><br>
+<em>这是倾斜的文字</em><br>
+<em><strong>这是斜体加粗的文字</strong></em><br>
+<s>这是加删除线的文字</s></p>
+<blockquote>
+<p>引用</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;这是引用的内容  </span><br><span class="line">&gt;&gt;这是引用的内容  </span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;这是引用的内容</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<p>这是引用的内容</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>这是引用的内容</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>分割线</p>
+</blockquote>
+<p>三个或者三个以上的*或者-</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">---</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">----</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">***</span><br></pre></td></tr></table></figure>
+<hr>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*****</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p>表格</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">表头1|表头2|表头3</span><br><span class="line">---|:--:|---:</span><br><span class="line">内容|内容|内容</span><br><span class="line">内容|内容|内容</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>表头1</th>
+<th style="text-align:center">表头2</th>
+<th style="text-align:right">表头3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内容</td>
+<td style="text-align:center">内容</td>
+<td style="text-align:right">内容</td>
+</tr>
+<tr>
+<td>内容</td>
+<td style="text-align:center">内容</td>
+<td style="text-align:right">内容</td>
+</tr>
+</tbody>
+</table>
+<p>第二行分割表头和内容。</p>
+<ul>
+<li>有一个就行，为了对齐，多加了几个<br>
+文字默认居左<br>
+-两边加：表示文字居中<br>
+-右边加：表示文字居右<br>
+注：原生的语法两边都要用 | 包起来.</li>
+</ul>
+<blockquote>
+<p>注释</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--哈哈我是注释，不会在浏览器中显示。--&gt;</span><br><span class="line">[comment]: &lt;&gt; (哈哈我是注释，不会在浏览器中显示。)</span><br><span class="line">[comment]: &lt;&gt; (哈哈我是注释，不会在浏览器中显示。)</span><br><span class="line">[comment]: &lt;&gt; (哈哈我是注释，不会在浏览器中显示。)</span><br><span class="line">[//]: &lt;&gt; (哈哈我是注释，不会在浏览器中显示。)</span><br><span class="line">[//]: # (哈哈我是注释，不会在浏览器中显示。)</span><br><span class="line">[^_^]: # (哈哈我是注释，不会在浏览器中显示。)</span><br></pre></td></tr></table></figure>
+<!--哈哈我是注释，不会在浏览器中显示。-->
+<blockquote>
+<p>流程图</p>
+</blockquote>
+<p><a href="https://support.typora.io/Draw-Diagrams-With-Markdown/" target="_blank" rel="noopener">markdown 教程</a></p>
+<p>&lt;!–￼15–&gt;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">st=&gt;start: Start</span><br><span class="line">op=&gt;operation: Your Operation</span><br><span class="line">cond=&gt;condition: Yes or No?</span><br><span class="line">e=&gt;end</span><br><span class="line"></span><br><span class="line">st-&gt;op-&gt;cond</span><br><span class="line">cond(yes)-&gt;e</span><br><span class="line">cond(no)-&gt;op</span><br><span class="line">​</span><br></pre></td></tr></table></figure>
+<pre><code>
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+&gt;在不支持latex的md中插入公式
+
+暂时的方法是使用在线latex网站生成公式的图片，然后复制图片链接展示
+[在线latex编辑网站](http://latex.codecogs.com/eqneditor/samples/example1.php)
+
+&gt;页面内跳转
+
+[我在这里](#id1)
+
+&lt;span id='id1'&gt;我要跳转
+&lt;a href='#id1'&gt;我要跳转</code></pre>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/09/基础知识/迁移/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1104,121 +1331,6 @@ tag: 根据我查看的文件结构与commit相同,但引用博客中说没有�
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/基础知识/dp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="夸父">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="知行合一">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2019/07/10/基础知识/dp/" class="post-title-link" itemprop="url">动态规划学习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2019-07-10 20:20:19" itemprop="dateCreated datePublished" datetime="2019-07-10T20:20:19+08:00">2019-07-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-08-30 13:25:00" itemprop="dateModified" datetime="2020-08-30T13:25:00+08:00">2020-08-30</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>参考资料：</p>
-<ul>
-<li><a href="https://wenku.baidu.com/view/cd5dc88ef80f76c66137ee06eff9aef8951e4854.html" target="_blank" rel="noopener">百度文库资料</a></li>
-<li><a href="https://www.cnblogs.com/Renyi-Fan/p/9285495.html" target="_blank" rel="noopener">博客</a></li>
-</ul>
-<p>动态规划(dynamic programming)<br>
-条件：</p>
-<ol>
-<li>最优子问题结构</li>
-<li>子问题重叠性质</li>
-<li>无后效性</li>
-</ol>
-<p>动态规划分类</p>
-<ul>
-<li>线性型
-<ul>
-<li>简介：在线性空间上的递推dp</li>
-<li>思路：</li>
-<li>例子：最长上升子序列(LIS)、最长公共子序列(LCS)、最大子序列和</li>
-</ul>
-</li>
-<li>区间型
-<ul>
-<li>简介：区间dp就是在区间上进行动态规划，求解一段区间上的最优解。可以是二维的也可以是三维的，一般情况下为二维；</li>
-<li>思路：主要是通过合并小区间的 最优解进而得出整个大区间上最优解的dp算法</li>
-<li>例子：</li>
-</ul>
-</li>
-<li>背包型
-<ul>
-<li>简介：</li>
-<li>思路：</li>
-<li>例子：0-1背包、完全背包、分组背包、多重背包</li>
-</ul>
-</li>
-<li>树型
-<ul>
-<li>简介：建立在树这种数据结构上的dp</li>
-<li>思路：一般可以通过dfs维护从根到叶子或从叶子到根的状态转移</li>
-</ul>
-</li>
-<li>其他
-<ul>
-<li>矩阵型</li>
-<li>序列型</li>
-<li>双序列型</li>
-<li>划分型</li>
-<li>状态压缩型</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1290,14 +1402,14 @@ tag: 根据我查看的文件结构与commit相同,但引用博客中说没有�
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">112</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>

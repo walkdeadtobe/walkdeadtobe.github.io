@@ -29,7 +29,7 @@
 <meta property="og:site_name" content="知行合一">
 <meta property="og:description" content="《设计数据密集型应用》 读书摘要">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-06-03T08:09:33.553Z">
+<meta property="og:updated_time" content="2021-06-09T15:03:47.595Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计数据密集型应用">
 <meta name="twitter:description" content="《设计数据密集型应用》 读书摘要">
@@ -213,10 +213,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2021-06-03 08:40:50 / Modified: 16:09:33" itemprop="dateCreated datePublished" datetime="2021-06-03T08:40:50+08:00">2021-06-03</time>
+              <time title="Created: 2021-06-03 08:40:50" itemprop="dateCreated datePublished" datetime="2021-06-03T08:40:50+08:00">2021-06-03</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-06-09 23:03:47" itemprop="dateModified" datetime="2021-06-09T23:03:47+08:00">2021-06-09</time>
+              </span>
 
           
             <div class="post-description">《设计数据密集型应用》 读书摘要</div>
@@ -235,17 +241,82 @@
 <h3 id="相关定义">相关定义</h3>
 <h2 id="文章内容">文章内容</h2>
 <h3 id="第一部分-数据系统基础">第一部分 数据系统基础</h3>
+<p>讨论有关增强数据密集型应用系统所需的若干基本原则。在第一章讨论了可靠性、可扩展性和可维护性目标以及如何达成，在第2组比较了多种不同的数据模型和查询语言，讨论各自的适用场景，第三章针对存储引擎(数据库是如何安排磁盘结构)如何提高检索效率，第四章转向数据编码(序列化)方面，包括常见模式的演化历程。</p>
 <h3 id="第1章-可靠性可扩展性和可维持的应用">第1章 可靠性，可扩展性和可维持的应用</h3>
+<p>介绍相关术语和方法。<br>
+可靠性(Reliability)</p>
+<blockquote>
+<p>当出现意外情况如硬件、软件故障、人为失误等，系统应可以继续正常运转；虽然性能有可能降低，但确保功能正确。</p>
+</blockquote>
+<p>可扩展性</p>
+<blockquote>
+<p>随着规模的增长，例如数据量、流量或复杂性，系统应当以合理的方式来匹配这种增长。</p>
+</blockquote>
+<p>可维护性</p>
+<blockquote>
+<p>随着时间的推移，许多新的人员参与到系统开发与维护，以维护现有功能或适配新场景。</p>
+</blockquote>
+<h4 id="可靠性">可靠性</h4>
+<p>需要保证系统即使发生某些错误，仍能够正常运作。</p>
+<blockquote>
+<p>可能出错的事情称为错误或者故障，系统可应对的错误称为容错或者弹性。<br>
+故障与失效不一致，故障通常被定义为组件偏离其正常路径，而失效意味着系统作为一个整体无法向用户提供所需的服务。</p>
+</blockquote>
+<h5 id="硬件故障">硬件故障</h5>
+<p>硬盘崩溃，内存故障，电网停机，网线误拔</p>
+<p>使用<strong>硬件冗余</strong>方案可以满足大多数应用场景的可靠性需求。<br>
+而随着数据量和计算需求的增加，更多的应用运行在大规模机器上，硬件故障率也线性增长，<strong>软件容错</strong>成为容忍多机失效的新手段，成为<strong>硬件容错</strong>的有力补充。</p>
+<h5 id="软件错误">软件错误</h5>
+<p>硬件错误大多是相互独立的，一般不会出现大量硬件组件同时失效；而软件故障不仅难以事先预料而且由于节点间的软件是相互关联的，往往会导致更多的系统故障。</p>
+<h5 id="人为失误">人为失误</h5>
+<p>众所周知，单个人或许是可靠的，但人类是不可靠的。<br>
+解决方法</p>
+<ul>
+<li>以最小出错的方式设计系统(简单明了)</li>
+<li>分理出容易出错的部分，单独管理</li>
+<li>充分的测试</li>
+<li>针对人为失误，提供快速恢复机制。</li>
+<li>设置详细而清晰的监控子系统，包括性能指标和错误率。</li>
+<li>推行管理流程并加以培训。</li>
+</ul>
+<h5 id="可靠性的重要性">可靠性的重要性</h5>
+<p>影响用户体验和企业声誉。</p>
+<h4 id="可扩展性">可扩展性</h4>
+<p>可扩展性是用来描述系统应对负载增加能力的术语。</p>
+<h5 id="描述负载">描述负载</h5>
+<p>负载一般用若干负载参数描述，例如Web服务器的每秒请求处理次数，数据库写入的比例，聊天室的同时在线用户数，缓存命中率等。</p>
+<p>大多数时候，平均值能较好的反应负载，但有时系统瓶颈来自于少数峰值。</p>
+<p>书本举了个有趣的例子，Twitter的读和写操作，如何让用户的写操作被所有关注者度读到。</p>
+<ol>
+<li>利用全局Twitter时间线表，需要的时候查询即可；尽管写入简单，但是全局表的读负载压力与日俱增，优化难度较高</li>
+<li>为每个用户维护单独的时间线缓存，在用户发布Twitter后仅写入到关注者缓存中，由于时间线浏览的请求比发布Twitter的请求高出两个数量级，因而可以很好的平衡压力；但是对于动辄数千万关注者的用户的Twitter发布需要在短时间内写入数千万次，难度很大。</li>
+</ol>
+<p>最终解决方法是采用混合方案，大部分补充用户用方法2，拥有超多关注者的用户使用方法1。</p>
+<h5 id="描述性能">描述性能</h5>
+<p>批处理系统例如Hadoop关注吞吐量(每秒可处理的记录条数)<br>
+在线系统更看重服务的响应时间，即客户端发送请求到接收响应之间的间隔(延迟和响应时间之间的区别)；通常使用平均相应时间或其他百分位点(中位数)。采用较高的响应时间百分位可以有效衡量尾部延迟/长尾效用,避免影响用户的总体服务体验。</p>
+<p>排队延迟对于高百分数响应时间中影响较大。</p>
+<h5 id="应对负载增加的方法">应对负载增加的方法</h5>
+<p>横向扩展(机器间扩展)和纵向扩展(单机类资源增加)</p>
+<h4 id="可维护性">可维护性</h4>
 <h3 id="第2章-数据模型和查询语言">第2章 数据模型和查询语言</h3>
+<p>对比多种不同的数据模型与查询语言，讨论不同模型的具体适用场景。</p>
 <h3 id="第3章-存储和数据检索">第3章 存储和数据检索</h3>
+<p>深入数据库系统内部的核心存储引擎，详细解析数据库如何设计磁盘布局。针对不用的工作负载如何优化其引擎，而正确的设计选型对系统会产生巨大的影响。</p>
 <h3 id="第4章-编码和演变发展">第4章 编码和演变发展</h3>
+<p>对比不同的数据编码格式和序列化技术，当上层应用需求多变而模型也需要灵活调整时，该如何最佳使用这些技术。</p>
 <h3 id="第二部分-分布式数据">第二部分 分布式数据</h3>
+<p>书籍从单机的数据存储转向跨机器的分布式系统，实现了扩展性，也带来了诸多挑战，第二部分依次讨论了数据远程复制、数据分区和事务，后续讨论了分布式系统的更多细节以及分布式环境如何达成一致性和共识。</p>
 <h3 id="第5章-副本">第5章 副本</h3>
 <h3 id="第6章-分区">第6章 分区</h3>
 <h3 id="第7章-事务">第7章 事务</h3>
 <h3 id="第8章-分布式系统的问题">第8章 分布式系统的问题</h3>
 <h3 id="第9章-一致性和协商">第9章 一致性和协商</h3>
 <h3 id="第三部分-派生数据">第三部分 派生数据</h3>
+<p>第三部分主要针对产生派生数据的系统</p>
+<blockquote>
+<p>派生数据:在异构系统中，如果无法用一个数据源解决所有问题，那么自然的方式是集成多个不同的数据库、缓存模块以及索引模块。首先介绍批处理的方式处理派生数据，后面介绍流式处理，最后总结之前介绍的技术，并分析讨论未来构建可靠、可扩展性和可维护应用系统的新方向或方法。</p>
+</blockquote>
 <h3 id="第10章-批处理">第10章 批处理</h3>
 <h3 id="第11章-流处理">第11章 流处理</h3>
 <h3 id="第12章-数据系统的未来">第12章 数据系统的未来</h3>
@@ -267,12 +338,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/06/03/书籍阅读/数据库/数据库系统全书/" rel="prev" title="数据库系统全书">
-      <i class="fa fa-chevron-left"></i> 数据库系统全书
+    <a href="/2021/06/03/书籍阅读/心理学/习得性无助/" rel="prev" title="习得性无助">
+      <i class="fa fa-chevron-left"></i> 习得性无助
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/06/03/书籍阅读/其他/深度工作/" rel="next" title="深度工作">
-      深度工作 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/06/03/书籍阅读/数据库/数据库系统全书/" rel="next" title="数据库系统全书">
+      数据库系统全书 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -332,7 +403,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作者和译者"><span class="nav-number">1.1.</span> <span class="nav-text">作者和译者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关定义"><span class="nav-number">1.2.</span> <span class="nav-text">相关定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章内容"><span class="nav-number">2.</span> <span class="nav-text">文章内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一部分-数据系统基础"><span class="nav-number">2.1.</span> <span class="nav-text">第一部分 数据系统基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第1章-可靠性可扩展性和可维持的应用"><span class="nav-number">2.2.</span> <span class="nav-text">第1章 可靠性，可扩展性和可维持的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2章-数据模型和查询语言"><span class="nav-number">2.3.</span> <span class="nav-text">第2章 数据模型和查询语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第3章-存储和数据检索"><span class="nav-number">2.4.</span> <span class="nav-text">第3章 存储和数据检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第4章-编码和演变发展"><span class="nav-number">2.5.</span> <span class="nav-text">第4章 编码和演变发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二部分-分布式数据"><span class="nav-number">2.6.</span> <span class="nav-text">第二部分 分布式数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第5章-副本"><span class="nav-number">2.7.</span> <span class="nav-text">第5章 副本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第6章-分区"><span class="nav-number">2.8.</span> <span class="nav-text">第6章 分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第7章-事务"><span class="nav-number">2.9.</span> <span class="nav-text">第7章 事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第8章-分布式系统的问题"><span class="nav-number">2.10.</span> <span class="nav-text">第8章 分布式系统的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第9章-一致性和协商"><span class="nav-number">2.11.</span> <span class="nav-text">第9章 一致性和协商</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三部分-派生数据"><span class="nav-number">2.12.</span> <span class="nav-text">第三部分 派生数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第10章-批处理"><span class="nav-number">2.13.</span> <span class="nav-text">第10章 批处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第11章-流处理"><span class="nav-number">2.14.</span> <span class="nav-text">第11章 流处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第12章-数据系统的未来"><span class="nav-number">2.15.</span> <span class="nav-text">第12章 数据系统的未来</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#作者和译者"><span class="nav-number">1.1.</span> <span class="nav-text">作者和译者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关定义"><span class="nav-number">1.2.</span> <span class="nav-text">相关定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文章内容"><span class="nav-number">2.</span> <span class="nav-text">文章内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一部分-数据系统基础"><span class="nav-number">2.1.</span> <span class="nav-text">第一部分 数据系统基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第1章-可靠性可扩展性和可维持的应用"><span class="nav-number">2.2.</span> <span class="nav-text">第1章 可靠性，可扩展性和可维持的应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#可靠性"><span class="nav-number">2.2.1.</span> <span class="nav-text">可靠性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#硬件故障"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">硬件故障</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#软件错误"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">软件错误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#人为失误"><span class="nav-number">2.2.1.3.</span> <span class="nav-text">人为失误</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可靠性的重要性"><span class="nav-number">2.2.1.4.</span> <span class="nav-text">可靠性的重要性</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可扩展性"><span class="nav-number">2.2.2.</span> <span class="nav-text">可扩展性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#描述负载"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">描述负载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#描述性能"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">描述性能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应对负载增加的方法"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">应对负载增加的方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#可维护性"><span class="nav-number">2.2.3.</span> <span class="nav-text">可维护性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第2章-数据模型和查询语言"><span class="nav-number">2.3.</span> <span class="nav-text">第2章 数据模型和查询语言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第3章-存储和数据检索"><span class="nav-number">2.4.</span> <span class="nav-text">第3章 存储和数据检索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第4章-编码和演变发展"><span class="nav-number">2.5.</span> <span class="nav-text">第4章 编码和演变发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二部分-分布式数据"><span class="nav-number">2.6.</span> <span class="nav-text">第二部分 分布式数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第5章-副本"><span class="nav-number">2.7.</span> <span class="nav-text">第5章 副本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第6章-分区"><span class="nav-number">2.8.</span> <span class="nav-text">第6章 分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第7章-事务"><span class="nav-number">2.9.</span> <span class="nav-text">第7章 事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第8章-分布式系统的问题"><span class="nav-number">2.10.</span> <span class="nav-text">第8章 分布式系统的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第9章-一致性和协商"><span class="nav-number">2.11.</span> <span class="nav-text">第9章 一致性和协商</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三部分-派生数据"><span class="nav-number">2.12.</span> <span class="nav-text">第三部分 派生数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第10章-批处理"><span class="nav-number">2.13.</span> <span class="nav-text">第10章 批处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第11章-流处理"><span class="nav-number">2.14.</span> <span class="nav-text">第11章 流处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第12章-数据系统的未来"><span class="nav-number">2.15.</span> <span class="nav-text">第12章 数据系统的未来</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -348,14 +419,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">111</span>
+          <span class="site-state-item-count">112</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">59</span>
+        <span class="site-state-item-count">60</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
